@@ -1,6 +1,9 @@
 package main
 
-import "github.com/spf13/cobra"
+import (
+	"github.com/gregorychen3/espresso-controller/cmd/espresso/log"
+	"github.com/spf13/cobra"
+)
 
 func newRootCmd() *cobra.Command {
 	cmd := cobra.Command{
@@ -9,8 +12,9 @@ func newRootCmd() *cobra.Command {
 		Long:  "Control and monitor an espresso machine",
 		Run: func(cmd *cobra.Command, args []string) {
 			if err := cmd.Help(); err != nil {
-				println("Failed to output help for command")
+				log.Fatal("Failed to output help for command")
 			}
+			log.Info("\nFind more information at https://github.com/gregorychen3/espresso-controller")
 		},
 	}
 
@@ -19,7 +23,6 @@ func newRootCmd() *cobra.Command {
 
 func main() {
 	if err := newRootCmd().Execute(); err != nil {
-		println(err)
+		log.Fatal(err.Error())
 	}
-	println("hello world")
 }
