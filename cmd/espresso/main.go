@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gregorychen3/espresso-controller/cmd/espresso/appliance"
 	"github.com/gregorychen3/espresso-controller/cmd/espresso/log"
 	"github.com/spf13/cobra"
 )
@@ -17,6 +18,10 @@ func newRootCmd() *cobra.Command {
 			log.Info("\nFind more information at https://github.com/gregorychen3/espresso-controller")
 		},
 	}
+
+	cmd.AddCommand(
+		appliance.NewApplianceCmd(),
+	)
 
 	return &cmd
 }
