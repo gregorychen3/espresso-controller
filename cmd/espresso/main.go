@@ -2,30 +2,10 @@ package main
 
 import (
 	"github.com/gregorychen3/espresso-controller/cmd/espresso/appliance"
+	"github.com/gregorychen3/espresso-controller/cmd/espresso/cmdutil"
 	"github.com/gregorychen3/espresso-controller/cmd/espresso/log"
 	"github.com/spf13/cobra"
 )
-
-var logo =`
-     ╓▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-    █▀─╓▄         ┌▄▄┌         ▄▄ ╙█
-    █ ╫█╠█ ╔▓▓  ▄█▀╟█╙█▄  ╔▓▓ █▌╟█ ██▓▄
-    █  ╙╙       █  ╘▀  █▄      ╙╙  █─▐█
-    █ ╔█▀█ ╓▄▄  █▌    ▄█  ╓▄▄ ▓██▌ █▄██
-    █  ▀▀▀       ╙▀▀▀▀╙       ╙▀▀└ █╨
-    ╙▀██▓▓▓▓▓▓██▓▓▓▓▓▓▓▓██▓██▓▓▓██▀╙
- ╔▓▓▓▓██▓▓▓▓▓▓█▌        ▐▌ ▐█▓▓▓██▓▓▓▄
- ╫█▄▄▄▄▄▄▄▄▄▄▄██▄▄▄▄▄▄▄▄██      ▐█ ▄██▄
-      ╫▌          █▌▄█          ▐█ █▌▐█
-      ╫▌           └└─          ▐█ █▄▐█
-      ╫▌      ╒▓▓▓▓▓▓▓▓▓▓▓▓▓▄   ▐█ ╙╙╙└
-      ╫▌      ▐█▄▄▄▄▄▄▄▄██  █▌  ▐█
-      ╫▌      ╘█        █▀▀▀▀   ▐█
-      █▌       ╠█▓▄┌ ▄▄█▌       ▐█
-    █▀╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙█
-    █                              █─
-    ╙▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-`
 
 func newRootCmd() *cobra.Command {
 	cmd := cobra.Command{
@@ -48,7 +28,7 @@ func newRootCmd() *cobra.Command {
 }
 
 func main() {
-	log.Info(logo)
+	log.Info(cmdutil.Logo)
 	if err := newRootCmd().Execute(); err != nil {
 		log.Fatal(err.Error())
 	}
