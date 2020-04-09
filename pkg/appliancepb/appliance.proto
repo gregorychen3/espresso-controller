@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+service Appliance {
+  rpc GetCurrentTemperature (GetCurrentTemperatureRequest) returns (GetCurrentTemperatureResponse) {}
+  rpc GetTargetTemperature (GetTargetTemperatureRequest) returns (GetTargetTemperatureResponse) {}
+  rpc SetTargetTemperature (SetTargetTemperatureRequest) returns (SetTargetTemperatureResponse) {}
+}
+
+message GetCurrentTemperatureRequest {}
+message GetCurrentTemperatureResponse {
+    temperature float = 1;
+}
+
+message GetTargetTemperatureRequest {}
+message GetTargetTemperatureResponse {
+    temperature float = 1;
+}
+
+message SetTargetTemperatureRequest {
+    temperature float = 1;
+}
+message SetTargetTemperatureResponse {}
