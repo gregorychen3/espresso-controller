@@ -17,6 +17,4 @@ PID control and monitoring for espresso machines.
 
 ## Credits
 
-Logo icon made by [catkuro](https://www.flaticon.com/authors/catkuro) from [flaticon.com](https://www.flaticon.com).
-
-Logo icon converted to ASCII art using [asciiart.club](https://asciiart.club).
+Logo icon made by [catkuro](https://www.flaticon.com/authors/catkuro) from [flaticon.com](https://www.flaticon.com) and converted to ASCII art using [asciiart.club](https://asciiart.club).
