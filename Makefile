@@ -6,4 +6,8 @@ build:
 install:
 	go install ./cmd/espresso
 
+proto:
+	protoc -I pkg/appliancepb/ pkg/appliancepb/appliance.proto --go_out=plugins=grpc:pkg/appliancepb
+
 .PHONY: build install
+
