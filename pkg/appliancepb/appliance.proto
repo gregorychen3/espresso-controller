@@ -8,15 +8,15 @@ service Appliance {
 
 message GetCurrentTemperatureRequest {}
 message GetCurrentTemperatureResponse {
-    temperature float = 1;
+    float temperature = 1;
 }
 
 message GetTargetTemperatureRequest {}
 message GetTargetTemperatureResponse {
-    temperature float = 1;
+    float temperature = 1;
 }
 
 message SetTargetTemperatureRequest {
-    temperature float = 1;
+    float temperature = 1;
 }
 message SetTargetTemperatureResponse {}
