@@ -6,8 +6,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import MenuIcon from "@material-ui/icons/Menu";
 import React from "react";
+import EspressoIcon from "../common/EspressoIcon";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,7 +35,7 @@ export default () => {
           color="inherit"
           aria-label="menu"
         >
-          <MenuIcon />
+          <EspressoIcon />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
           Espresso Controller
