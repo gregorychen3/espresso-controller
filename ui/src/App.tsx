@@ -14,9 +14,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import clsx from "clsx";
 import React from "react";
-import Chart from "./components/Chart";
-import Deposits from "./components/Deposits";
-import Orders from "./components/Orders";
+import Chart from "./components/TemperatureChart";
+import Deposits from "./components/TargetTemp";
+import Orders from "./components/RecentActions";
 
 function Copyright() {
   return (
