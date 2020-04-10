@@ -10,9 +10,14 @@ import { applianceClient, createUnaryGrpcThunk } from "./helpers";
 
 export const targetTempSlice = createSlice({
   name: "targetTemp",
-  initialState: { targetTemp: undefined, isFetching: false } as {
+  initialState: {
+    targetTemp: undefined,
+    isFetching: false,
+    isSetting: false,
+  } as {
     targetTemp?: number;
     isFetching: boolean;
+    isSetting: boolean;
   },
   reducers: {
     // GetTargetTemperature
@@ -27,6 +32,7 @@ export const targetTempSlice = createSlice({
       action: PayloadAction<GetTargetTemperatureResponse>
     ) => {
       state = {
+        ...state,
         targetTemp: action.payload.getTemperature(),
         isFetching: false,
       };
@@ -38,7 +44,11 @@ export const targetTempSlice = createSlice({
         err: ServiceError;
       }>
     ) => {
-      state = { targetTemp: undefined, isFetching: false };
+      state = {
+        ...state,
+        targetTemp: undefined,
+        isFetching: false,
+      };
     },
 
     // SetTargetTemperature
@@ -46,15 +56,16 @@ export const targetTempSlice = createSlice({
       state,
       action: PayloadAction<SetTargetTemperatureRequest>
     ) => {
-      state = { ...state, isFetching: true };
+      state = { ...state, isSetting: true };
     },
     setTargetTemperatureResponse: (
       state,
       action: PayloadAction<SetTargetTemperatureResponse>
     ) => {
       state = {
+        ...state,
         targetTemp: action.payload.getTemperature(),
-        isFetching: false,
+        isSetting: false,
       };
     },
     setTargetTemperatureFailure: (
@@ -64,10 +75,11 @@ export const targetTempSlice = createSlice({
         err: ServiceError;
       }>
     ) => {
-      state = { ...state, isFetching: false };
+      state = { ...state, isSetting: false };
     },
   },
 });
+
 export const getTargetTemperature = (req: GetTargetTemperatureRequest) => (
   dispatch: Dispatch
 ) =>
