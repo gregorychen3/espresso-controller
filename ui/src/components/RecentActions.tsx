@@ -24,7 +24,7 @@ const rows = [
     0,
     "16 Mar, 2019",
     "Set Target Temp",
-    "{temperature: 90}",
+    '{"temperature": 90}',
     "Gregory Chen",
     "Succeeded"
   ),
@@ -32,7 +32,7 @@ const rows = [
     1,
     "16 Mar, 2019",
     "Set Target Temp",
-    "{temperature: 91}",
+    '{"temperature": 90}',
     "Gregory Chen",
     "Succeeded"
   ),
@@ -40,7 +40,7 @@ const rows = [
     2,
     "16 Mar, 2019",
     "Set Target Temp",
-    "{temperature: 92}",
+    '{"temperature": 90}',
     "Gregory Chen",
     "Succeeded"
   ),
@@ -48,7 +48,7 @@ const rows = [
     3,
     "16 Mar, 2019",
     "Set Target Temp",
-    "{temperature: 93}",
+    '{"temperature": 90}',
     "Gregory Chen",
     "Succeeded"
   ),
@@ -56,7 +56,7 @@ const rows = [
     4,
     "15 Mar, 2019",
     "Set Target Temp",
-    "{temperature: 94}",
+    '{"temperature": 90}',
     "Gregory Chen",
     "Succeeded"
   ),
