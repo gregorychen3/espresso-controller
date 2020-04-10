@@ -1,6 +1,6 @@
 # Espresso Controller
 
-PID control and monitoring for espresso machines.
+PID control and monitoring for an espresso machine.
 
 ## Requirements
 
