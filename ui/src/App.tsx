@@ -86,7 +86,7 @@ export default function Dashboard() {
             aria-label="open drawer"
             className={clsx(classes.menuButton)}
           >
-            <TimelineIcon />
+            <TimelineIcon fontSize="large" />
           </IconButton>
           <Typography
             component="h1"
