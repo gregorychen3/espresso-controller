@@ -13,7 +13,7 @@ proto:
 	protoc -I pkg/appliancepb/ pkg/appliancepb/appliance.proto --go_out=plugins=grpc:pkg/appliancepb
 	protoc --plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
 		--js_out="import_style=commonjs,binary:${PROTOC_JS_TS_OUT_DIR}" \
-		--ts_out="${PROTOC_JS_TS_OUT_DIR}" \
+		--ts_out="service=grpc-web:${PROTOC_JS_TS_OUT_DIR}" \
 		pkg/appliancepb/appliance.proto
 
 build-ui:
