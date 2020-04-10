@@ -22,14 +22,18 @@ func New(c Configuration) (*Server, error) {
 }
 
 func (s *Server) Run() error {
+	return s.serveTCP()
+}
+
+func (s *Server) serveTCP() error {
+	grpcController := newGrpcController(s.c)
+	grpcServer := grpc.NewServer( /*TODO: logging interceptors*/ )
+	appliancepb.RegisterApplianceServer(grpcServer, grpcController)
+
 	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", s.c.Port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-
-	grpcServer := grpc.NewServer()
-	grpcController := newGrpcController(s.c)
-	appliancepb.RegisterApplianceServer(grpcServer, grpcController)
 
 	return grpcServer.Serve(listener)
 }
