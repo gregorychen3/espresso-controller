@@ -32,7 +32,7 @@ export default function Chart() {
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>Temperature Over Time</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -50,7 +50,7 @@ export default function Chart() {
               position="left"
               style={{ textAnchor: "middle", fill: theme.palette.text.primary }}
             >
-              Sales ($)
+              Temperature (°C)
             </Label>
           </YAxis>
           <Line
