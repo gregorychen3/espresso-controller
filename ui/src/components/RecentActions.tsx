@@ -23,7 +23,7 @@ const rows = [
   createData(
     0,
     "16 Mar, 2019",
-    "Set Target Temp",
+    "SetTargetTemperature",
     '{"temperature": 90}',
     "Gregory Chen",
     "Succeeded"
@@ -31,7 +31,7 @@ const rows = [
   createData(
     1,
     "16 Mar, 2019",
-    "Set Target Temp",
+    "SetTargetTemperature",
     '{"temperature": 90}',
     "Gregory Chen",
     "Succeeded"
@@ -39,7 +39,7 @@ const rows = [
   createData(
     2,
     "16 Mar, 2019",
-    "Set Target Temp",
+    "SetTargetTemperature",
     '{"temperature": 90}',
     "Gregory Chen",
     "Succeeded"
@@ -47,7 +47,7 @@ const rows = [
   createData(
     3,
     "16 Mar, 2019",
-    "Set Target Temp",
+    "SetTargetTemperature",
     '{"temperature": 90}',
     "Gregory Chen",
     "Succeeded"
@@ -55,7 +55,7 @@ const rows = [
   createData(
     4,
     "15 Mar, 2019",
-    "Set Target Temp",
+    "SetTargetTemperature",
     '{"temperature": 90}',
     "Gregory Chen",
     "Succeeded"
@@ -70,6 +70,9 @@ const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
   },
+  monospaceCell: {
+    fontFamily: "Monospace",
+  },
 }));
 
 export default () => {
@@ -82,9 +85,9 @@ export default () => {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
+            <TableCell>User</TableCell>
             <TableCell>Action</TableCell>
             <TableCell>Payload</TableCell>
-            <TableCell>User</TableCell>
             <TableCell align="right">Status</TableCell>
           </TableRow>
         </TableHead>
@@ -92,9 +95,13 @@ export default () => {
           {rows.map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.date}</TableCell>
-              <TableCell>{row.action}</TableCell>
-              <TableCell>{row.payload}</TableCell>
               <TableCell>{row.user}</TableCell>
+              <TableCell className={classes.monospaceCell}>
+                {row.action}
+              </TableCell>
+              <TableCell className={classes.monospaceCell}>
+                {row.payload}
+              </TableCell>
               <TableCell align="right">{row.status}</TableCell>
             </TableRow>
           ))}
