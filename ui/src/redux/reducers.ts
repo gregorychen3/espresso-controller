@@ -1,5 +1,18 @@
-import { ActionCreatorWithPayload, Dispatch } from "@reduxjs/toolkit";
+import {
+  ActionCreatorWithPayload,
+  createSlice,
+  Dispatch,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 import { Message } from "google-protobuf";
+import {
+  GetCurrentTemperatureRequest,
+  GetCurrentTemperatureResponse,
+  GetTargetTemperatureRequest,
+  GetTargetTemperatureResponse,
+  SetTargetTemperatureRequest,
+  SetTargetTemperatureResponse,
+} from "../proto/pkg/appliancepb/appliance_pb";
 import {
   ApplianceClient,
   ServiceError,
@@ -39,3 +52,102 @@ const createUnaryGrpcThunk = (
     }
   });
 };
+
+//
+// Current temperature slice
+// -------------------------
+export const curTempSlice = createSlice({
+  name: "curTemp",
+  initialState: { curTemp: undefined, isFetching: false } as {
+    curTemp?: number;
+    isFetching: boolean;
+  },
+  reducers: {
+    // GetCurrentTemperature
+    getCurrentTemperatureRequest: (
+      state,
+      action: PayloadAction<GetCurrentTemperatureRequest>
+    ) => {
+      state = { ...state, isFetching: true };
+    },
+    getCurrentTemperatureResponse: (
+      state,
+      action: PayloadAction<GetCurrentTemperatureResponse>
+    ) => {
+      state = { curTemp: action.payload.getTemperature(), isFetching: false };
+    },
+    getCurrentTemperatureFailure: (
+      state,
+      action: PayloadAction<{
+        req: GetCurrentTemperatureRequest;
+        err: ServiceError;
+      }>
+    ) => {
+      state = { curTemp: undefined, isFetching: false };
+    },
+  },
+});
+
+//
+// Target temperature slice
+// -------------------------
+export const targetTempSlice = createSlice({
+  name: "targetTemp",
+  initialState: { targetTemp: undefined, isFetching: false } as {
+    targetTemp?: number;
+    isFetching: boolean;
+  },
+  reducers: {
+    // GetTargetTemperature
+    getTargetTemperatureRequest: (
+      state,
+      action: PayloadAction<GetTargetTemperatureRequest>
+    ) => {
+      state = { ...state, isFetching: true };
+    },
+    getTargetTemperatureResponse: (
+      state,
+      action: PayloadAction<GetTargetTemperatureResponse>
+    ) => {
+      state = {
+        targetTemp: action.payload.getTemperature(),
+        isFetching: false,
+      };
+    },
+    getTargetTemperatureFailure: (
+      state,
+      action: PayloadAction<{
+        req: GetTargetTemperatureRequest;
+        err: ServiceError;
+      }>
+    ) => {
+      state = { targetTemp: undefined, isFetching: false };
+    },
+
+    // SetTargetTemperature
+    setTargetTemperatureRequest: (
+      state,
+      action: PayloadAction<SetTargetTemperatureRequest>
+    ) => {
+      state = { ...state, isFetching: true };
+    },
+    setTargetTemperatureResponse: (
+      state,
+      action: PayloadAction<SetTargetTemperatureResponse>
+    ) => {
+      state = {
+        targetTemp: action.payload.getTemperature(),
+        isFetching: false,
+      };
+    },
+    setTargetTemperatureFailure: (
+      state,
+      action: PayloadAction<{
+        req: SetTargetTemperatureRequest;
+        err: ServiceError;
+      }>
+    ) => {
+      state = { ...state, isFetching: false };
+    },
+  },
+});
