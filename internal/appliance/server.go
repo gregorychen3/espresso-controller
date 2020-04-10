@@ -63,7 +63,7 @@ func (s *Server) serveGRPC(listener net.Listener, grpcServer *grpc.Server) error
 }
 
 func (s *Server) serveHTTP1(listener net.Listener, grpcServer *grpc.Server) error {
-	log.Info("Initializing http1 web server", zap.Int("port", s.c.Port))
+	log.Info("Initializing gRPC web server", zap.Int("port", s.c.Port))
 	// TODO
 	return nil
 }
