@@ -4,7 +4,6 @@ import {
   Dispatch,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { Message } from "google-protobuf";
 import {
   GetCurrentTemperatureRequest,
   GetCurrentTemperatureResponse,
@@ -22,11 +21,11 @@ const applianceClient = new ApplianceClient("");
 
 // Interface grouping together the actions creators for an async unary grpc
 interface UnaryGrpcActionCreators {
-  req: ActionCreatorWithPayload<Message, string>;
-  resp: ActionCreatorWithPayload<Message, string>;
+  req: ActionCreatorWithPayload<any, string>;
+  resp: ActionCreatorWithPayload<any, string>;
   failure: ActionCreatorWithPayload<
     {
-      req: Message; // the original request message
+      req: any; // the original request message
       err: ServiceError;
     },
     string
@@ -35,14 +34,14 @@ interface UnaryGrpcActionCreators {
 
 const createUnaryGrpcThunk = (
   apiCall: (...args: any[]) => any,
-  reqMsg: Message,
+  reqMsg: any,
   actionCreators: UnaryGrpcActionCreators,
   dispatch: Dispatch
 ) => {
   const { req, resp, failure } = actionCreators;
 
   dispatch(req(reqMsg));
-  apiCall(reqMsg, (err: ServiceError, respMsg: Message) => {
+  apiCall(reqMsg, (err: ServiceError, respMsg: any) => {
     if (err) {
       console.error(err);
       dispatch(failure({ req: reqMsg, err }));
@@ -87,6 +86,19 @@ export const curTempSlice = createSlice({
     },
   },
 });
+export const getCurrentTemperature = (req: GetCurrentTemperatureRequest) => (
+  dispatch: Dispatch
+) =>
+  createUnaryGrpcThunk(
+    applianceClient.getCurrentTemperature,
+    req,
+    {
+      req: curTempSlice.actions.getCurrentTemperatureRequest,
+      resp: curTempSlice.actions.getCurrentTemperatureResponse,
+      failure: curTempSlice.actions.getCurrentTemperatureFailure,
+    },
+    dispatch
+  );
 
 //
 // Target temperature slice
@@ -151,3 +163,30 @@ export const targetTempSlice = createSlice({
     },
   },
 });
+export const getTargetTemperature = (req: GetTargetTemperatureRequest) => (
+  dispatch: Dispatch
+) =>
+  createUnaryGrpcThunk(
+    applianceClient.getTargetTemperature,
+    req,
+    {
+      req: targetTempSlice.actions.getTargetTemperatureRequest,
+      resp: targetTempSlice.actions.getTargetTemperatureResponse,
+      failure: targetTempSlice.actions.getTargetTemperatureFailure,
+    },
+    dispatch
+  );
+
+export const setTargetTemperature = (req: GetTargetTemperatureRequest) => (
+  dispatch: Dispatch
+) =>
+  createUnaryGrpcThunk(
+    applianceClient.setTargetTemperature,
+    req,
+    {
+      req: targetTempSlice.actions.setTargetTemperatureRequest,
+      resp: targetTempSlice.actions.setTargetTemperatureResponse,
+      failure: targetTempSlice.actions.setTargetTemperatureFailure,
+    },
+    dispatch
+  );
