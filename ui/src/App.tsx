@@ -10,13 +10,13 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import TimelineIcon from "@material-ui/icons/Timeline";
 import clsx from "clsx";
 import React from "react";
-import Chart from "./components/TemperatureOverTime";
-import Deposits from "./components/Temperature";
 import RecentActions from "./components/RecentActions";
+import Deposits from "./components/Temperature";
+import Chart from "./components/TemperatureOverTime";
 
 function Copyright() {
   return (
@@ -86,7 +86,7 @@ export default function Dashboard() {
             aria-label="open drawer"
             className={clsx(classes.menuButton)}
           >
-            <MenuIcon />
+            <TimelineIcon />
           </IconButton>
           <Typography
             component="h1"
