@@ -1,5 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { curTempSlice, targetTempSlice } from "./reducers";
+import { curTempSlice } from "./curTempSlice";
+import { targetTempSlice } from "./targetTempSlice";
 
 const rootReducer = combineReducers({
   curTempSlice: curTempSlice.reducer,
