@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
 import React from "react";
-import AppBar from "./components/AppBar";
+import AppBar from "./components/layout/AppBar";
 import RecentActions from "./components/RecentActions";
 import Temperature from "./components/Temperature";
 import TemperatureOverTime from "./components/TemperatureOverTime";
