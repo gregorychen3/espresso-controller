@@ -16,18 +16,19 @@ const useStyles = makeStyles({
 
 export default function Deposits() {
   const classes = useStyles();
+
   return (
     <React.Fragment>
-      <Title>Recent Deposits</Title>
+      <Title>Target Temperature</Title>
       <Typography component="p" variant="h4">
-        $3,024.00
+        93 °C
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        on 15 March, 2019
+        set at 2:34pm 15 March, 2019
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
+          Set new target temperature
         </Link>
       </div>
     </React.Fragment>
