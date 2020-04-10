@@ -8,6 +8,14 @@ import (
 	"github.com/gregorychen3/espresso-controller/internal/helpers"
 )
 
+const (
+	KeyLogVerbose        = "Log.Verbose"
+	KeyLogFilePath       = "Log.File.Path"
+	KeyLogFileMaxSize    = "Log.File.MaxSize"
+	KeyLogFileMaxAge     = "Log.File.MaxAge"
+	KeyLogFileMaxBackups = "Log.File.MaxBackups"
+)
+
 func FormatFlag(key string) string {
 	return strings.Join(helpers.MapStrings(strings.Split(key, "."), helpers.ToKebabCase), "-")
 }

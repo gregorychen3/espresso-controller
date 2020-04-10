@@ -4,6 +4,7 @@ import (
 	"github.com/gregorychen3/espresso-controller/cmd/espresso/config"
 	"github.com/gregorychen3/espresso-controller/cmd/espresso/log"
 	"github.com/gregorychen3/espresso-controller/internal/appliance"
+	serverLogger "github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -26,6 +27,17 @@ func NewApplianceStartCmd() *cobra.Command {
 			}
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
+			if verbose := viper.GetBool(config.KeyLogVerbose); verbose {
+				serverLogger.UseDevLogger()
+			} else {
+				serverLogger.UseProdLogger(
+					viper.GetString(config.KeyLogFilePath),
+					viper.GetInt(config.KeyLogFileMaxSize),
+					viper.GetInt(config.KeyLogFileMaxAge),
+					viper.GetInt(config.KeyLogFileMaxBackups),
+				)
+			}
+
 			c := appliance.Configuration{}
 			if err := viper.Unmarshal(&c); err != nil {
 				log.Fatal("Unmarshalling configuration: %s\n", err.Error())
