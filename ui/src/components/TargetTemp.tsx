@@ -19,6 +19,13 @@ export default function Deposits() {
 
   return (
     <React.Fragment>
+      <Title>Current Temperature</Title>
+      <Typography component="p" variant="h4">
+        90 °C
+      </Typography>
+      <Typography color="textSecondary" className={classes.depositContext}>
+        at 2:34pm 15 March, 2019
+      </Typography>
       <Title>Target Temperature</Title>
       <Typography component="p" variant="h4">
         93 °C
