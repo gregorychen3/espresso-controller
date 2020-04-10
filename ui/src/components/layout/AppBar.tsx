@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import AppBar from "@material-ui/core/AppBar";
 import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
@@ -52,9 +53,7 @@ export default () => {
           Espresso Controller
         </Typography>
         <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <NotificationsIcon />
-          </Badge>
+          <GitHubIcon />
         </IconButton>
       </Toolbar>
     </AppBar>
