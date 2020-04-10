@@ -29,7 +29,7 @@ export default () => {
     <div>
       <div className={classes.button}>
         <Button
-          variant="contained"
+          variant="outlined"
           color="primary"
           size="small"
           onClick={handleClickOpen}
