@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import Title from "./Title";
+import SetTemperatureModal from "./SetTemperatureModal";
 
 function preventDefault(event: any) {
   event.preventDefault();
@@ -34,9 +35,7 @@ export default () => {
         set at 2:34pm 15 March, 2019
       </Typography>
       <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          Set new target temperature
-        </Link>
+        <SetTemperatureModal />
       </div>
     </React.Fragment>
   );
