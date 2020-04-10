@@ -8,7 +8,6 @@ import TableRow from "@material-ui/core/TableRow";
 import React from "react";
 import Title from "./Title";
 
-// Generate Order Data
 function createData(
   id: number,
   date: string,

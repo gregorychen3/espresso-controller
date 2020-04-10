@@ -15,8 +15,8 @@ import TimelineIcon from "@material-ui/icons/Timeline";
 import clsx from "clsx";
 import React from "react";
 import RecentActions from "./components/RecentActions";
-import Deposits from "./components/Temperature";
-import Chart from "./components/TemperatureOverTime";
+import Temperature from "./components/Temperature";
+import TemperatureOverTime from "./components/TemperatureOverTime";
 
 function Copyright() {
   return (
@@ -110,12 +110,12 @@ export default function Dashboard() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                <Chart />
+                <TemperatureOverTime />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Deposits />
+                <Temperature />
               </Paper>
             </Grid>
             <Grid item xs={12}>
