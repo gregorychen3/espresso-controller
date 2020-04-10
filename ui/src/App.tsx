@@ -14,7 +14,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import clsx from "clsx";
 import React from "react";
-import Chart from "./components/TemperatureChart";
+import Chart from "./components/TemperatureOverTime";
 import Deposits from "./components/Temperature";
 import RecentActions from "./components/RecentActions";
 
