@@ -21,4 +21,6 @@ message GetTargetTemperatureResponse {
 message SetTargetTemperatureRequest {
     float temperature = 1;
 }
-message SetTargetTemperatureResponse {}
+message SetTargetTemperatureResponse {
+    float temperature = 1;
+}
