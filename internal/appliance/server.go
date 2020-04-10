@@ -41,17 +41,16 @@ func (s *Server) serveTCP() error {
 
 	mux := cmux.New(listener)
 	grpcListener := mux.MatchWithWriters(cmux.HTTP2MatchHeaderFieldPrefixSendSettings("content-type", "application/grpc"))
-	//http1Listener := mux.Match(cmux.HTTP1())
+	http1Listener := mux.Match(cmux.HTTP1())
 
 	eg := errgroup.Group{}
 	eg.Go(func() error { return s.serveGRPC(grpcListener, grpcServer) })
-	//eg.Go(func() error { return s.serveHTTP1(http1Listener, grpcServer) })
+	eg.Go(func() error { return s.serveHTTP1(http1Listener, grpcServer) })
 	eg.Go(func() error { return mux.Serve() })
 	if err := eg.Wait(); err != nil {
 		return err
 	}
 	return nil
-	//	return grpcServer.Serve(listener)
 }
 
 func (s *Server) serveGRPC(listener net.Listener, grpcServer *grpc.Server) error {
