@@ -1,7 +1,7 @@
-import React from "react";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import React from "react";
 import Title from "./Title";
 
 function preventDefault(event: any) {
@@ -9,12 +9,12 @@ function preventDefault(event: any) {
 }
 
 const useStyles = makeStyles({
-  depositContext: {
+  temperatureContext: {
     flex: 1,
   },
 });
 
-export default function Deposits() {
+export default () => {
   const classes = useStyles();
 
   return (
@@ -23,14 +23,14 @@ export default function Deposits() {
       <Typography component="p" variant="h4">
         90 °C
       </Typography>
-      <Typography color="textSecondary" className={classes.depositContext}>
+      <Typography color="textSecondary" className={classes.temperatureContext}>
         at 2:34pm 15 March, 2019
       </Typography>
       <Title>Target Temperature</Title>
       <Typography component="p" variant="h4">
         93 °C
       </Typography>
-      <Typography color="textSecondary" className={classes.depositContext}>
+      <Typography color="textSecondary" className={classes.temperatureContext}>
         set at 2:34pm 15 March, 2019
       </Typography>
       <div>
@@ -40,4 +40,4 @@ export default function Deposits() {
       </div>
     </React.Fragment>
   );
-}
+};

@@ -73,8 +73,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Orders() {
+export default () => {
   const classes = useStyles();
+
   return (
     <React.Fragment>
       <Title>Recent Actions</Title>
@@ -107,4 +108,4 @@ export default function Orders() {
       </div>
     </React.Fragment>
   );
-}
+};

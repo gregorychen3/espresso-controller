@@ -15,8 +15,8 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import clsx from "clsx";
 import React from "react";
 import Chart from "./components/TemperatureChart";
-import Deposits from "./components/TargetTemp";
-import Orders from "./components/RecentActions";
+import Deposits from "./components/Temperature";
+import RecentActions from "./components/RecentActions";
 
 function Copyright() {
   return (
@@ -113,16 +113,14 @@ export default function Dashboard() {
                 <Chart />
               </Paper>
             </Grid>
-            {/* Recent Deposits */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <Deposits />
               </Paper>
             </Grid>
-            {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Orders />
+                <RecentActions />
               </Paper>
             </Grid>
           </Grid>
