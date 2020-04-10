@@ -15,7 +15,7 @@ export default (props: any) => {
 
   return (
     <Icon {...props} classes={{ root: classes.iconRoot }}>
-      <img className={`${classes.imageIcon}`} src="logo.svg" />
+      <img className={`${classes.imageIcon}`} src="logo_inverted.svg" />
     </Icon>
   );
 };
