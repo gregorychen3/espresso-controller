@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -6,60 +5,61 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import React from "react";
 import Title from "./Title";
 
 // Generate Order Data
 function createData(
   id: number,
   date: string,
-  name: string,
-  shipTo: string,
-  paymentMethod: string,
-  amount: number
+  action: string,
+  payload: string,
+  user: string,
+  status: string
 ) {
-  return { id, date, name, shipTo, paymentMethod, amount };
+  return { id, date, action, payload, user, status };
 }
 
 const rows = [
   createData(
     0,
     "16 Mar, 2019",
-    "Elvis Presley",
-    "Tupelo, MS",
-    "VISA ⠀•••• 3719",
-    312.44
+    "Set Target Temp",
+    "{temperature: 90}",
+    "Gregory Chen",
+    "Succeeded"
   ),
   createData(
     1,
     "16 Mar, 2019",
-    "Paul McCartney",
-    "London, UK",
-    "VISA ⠀•••• 2574",
-    866.99
+    "Set Target Temp",
+    "{temperature: 91}",
+    "Gregory Chen",
+    "Succeeded"
   ),
   createData(
     2,
     "16 Mar, 2019",
-    "Tom Scholz",
-    "Boston, MA",
-    "MC ⠀•••• 1253",
-    100.81
+    "Set Target Temp",
+    "{temperature: 92}",
+    "Gregory Chen",
+    "Succeeded"
   ),
   createData(
     3,
     "16 Mar, 2019",
-    "Michael Jackson",
-    "Gary, IN",
-    "AMEX ⠀•••• 2000",
-    654.39
+    "Set Target Temp",
+    "{temperature: 93}",
+    "Gregory Chen",
+    "Succeeded"
   ),
   createData(
     4,
     "15 Mar, 2019",
-    "Bruce Springsteen",
-    "Long Branch, NJ",
-    "VISA ⠀•••• 5919",
-    212.79
+    "Set Target Temp",
+    "{temperature: 94}",
+    "Gregory Chen",
+    "Succeeded"
   ),
 ];
 
@@ -82,20 +82,20 @@ export default function Orders() {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>Action</TableCell>
+            <TableCell>Payload</TableCell>
+            <TableCell>User</TableCell>
+            <TableCell align="right">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+              <TableCell>{row.action}</TableCell>
+              <TableCell>{row.payload}</TableCell>
+              <TableCell>{row.user}</TableCell>
+              <TableCell align="right">{row.status}</TableCell>
             </TableRow>
           ))}
         </TableBody>
