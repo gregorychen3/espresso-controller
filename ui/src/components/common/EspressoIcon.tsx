@@ -14,7 +14,7 @@ export default (props: any) => {
   const classes = useStyles();
 
   return (
-    <Icon {...props} classes={{ root: classes.iconRoot }}>
+    <Icon fontSize="large" {...props} classes={{ root: classes.iconRoot }}>
       <img className={`${classes.imageIcon}`} src="logo_inverted.svg" />
     </Icon>
   );
