@@ -1,9 +1,8 @@
-import { Tooltip, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import React from "react";
 import {
-  CartesianGrid,
-  Legend,
+  Label,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -11,84 +10,59 @@ import {
   YAxis,
 } from "recharts";
 
+// Generate Sales Data
+function createData(time: any, amount: any) {
+  return { time, amount };
+}
+
 const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
+  createData("00:00", 0),
+  createData("03:00", 300),
+  createData("06:00", 600),
+  createData("09:00", 800),
+  createData("12:00", 1500),
+  createData("15:00", 2000),
+  createData("18:00", 2400),
+  createData("21:00", 2400),
+  createData("24:00", undefined),
 ];
 
 export default function Chart() {
   const theme = useTheme();
 
   return (
-    <>
+    <React.Fragment>
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
         Temperature Over Time
       </Typography>
       <ResponsiveContainer>
         <LineChart
-          width={500}
-          height={300}
           data={data}
           margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
+            top: 16,
+            right: 16,
+            bottom: 0,
+            left: 24,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Legend />
+          <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
+          <YAxis stroke={theme.palette.text.secondary}>
+            <Label
+              angle={270}
+              position="left"
+              style={{ textAnchor: "middle", fill: theme.palette.text.primary }}
+            >
+              Sales ($)
+            </Label>
+          </YAxis>
           <Line
             type="monotone"
-            dataKey="pv"
-            stroke="#8884d8"
-            activeDot={{ r: 8 }}
+            dataKey="amount"
+            stroke={theme.palette.primary.main}
+            dot={false}
           />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>
-    </>
+    </React.Fragment>
   );
 }
