@@ -768,7 +768,7 @@ proto.appliancepb.SetTargetTemperatureResponse.prototype.toObject = function(opt
  */
 proto.appliancepb.SetTargetTemperatureResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    temperature: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0)
   };
 
   if (includeInstance) {
@@ -805,6 +805,10 @@ proto.appliancepb.SetTargetTemperatureResponse.deserializeBinaryFromReader = fun
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setTemperature(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -834,6 +838,31 @@ proto.appliancepb.SetTargetTemperatureResponse.prototype.serializeBinary = funct
  */
 proto.appliancepb.SetTargetTemperatureResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getTemperature();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional float temperature = 1;
+ * @return {number}
+ */
+proto.appliancepb.SetTargetTemperatureResponse.prototype.getTemperature = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 1, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.appliancepb.SetTargetTemperatureResponse} returns this
+ */
+proto.appliancepb.SetTargetTemperatureResponse.prototype.setTemperature = function(value) {
+  return jspb.Message.setProto3FloatField(this, 1, value);
 };
 
 

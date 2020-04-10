@@ -96,6 +96,9 @@ export namespace SetTargetTemperatureRequest {
 }
 
 export class SetTargetTemperatureResponse extends jspb.Message {
+  getTemperature(): number;
+  setTemperature(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SetTargetTemperatureResponse.AsObject;
   static toObject(includeInstance: boolean, msg: SetTargetTemperatureResponse): SetTargetTemperatureResponse.AsObject;
@@ -108,6 +111,7 @@ export class SetTargetTemperatureResponse extends jspb.Message {
 
 export namespace SetTargetTemperatureResponse {
   export type AsObject = {
+    temperature: number,
   }
 }
 
