@@ -30,7 +30,11 @@ func (s *Server) Run() error {
 }
 
 func (s *Server) serveTCP() error {
-	grpcController := newGrpcController(s.c)
+	grpcController, err := newGrpcController(s.c)
+	if err != nil {
+		return err
+	}
+
 	grpcServer := grpc.NewServer( /*TODO: logging interceptors*/ )
 	appliancepb.RegisterApplianceServer(grpcServer, grpcController)
 
