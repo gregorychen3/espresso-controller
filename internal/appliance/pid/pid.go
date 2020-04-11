@@ -11,8 +11,8 @@ type SetPoint struct {
 }
 
 type TemperatureSample struct {
-	Temperature float32
-	ObservedAt  time.Time
+	Value      float32
+	ObservedAt time.Time
 }
 
 type PID struct {
@@ -36,7 +36,7 @@ func (p *PID) GetCurrentTemperature() TemperatureSample {
 	var min float32 = 80.0
 	var max float32 = 100.0
 	randTemp := min + rand.Float32()*(max-min)
-	return TemperatureSample{Temperature: randTemp, ObservedAt: time.Now()}
+	return TemperatureSample{Value: randTemp, ObservedAt: time.Now()}
 }
 
 func (p *PID) GetSetPoint() SetPoint {

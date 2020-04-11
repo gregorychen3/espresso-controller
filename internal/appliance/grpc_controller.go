@@ -35,7 +35,7 @@ func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.Get
 	}
 
 	return &appliancepb.GetCurrentTemperatureResponse{
-		Temperature: sample.Temperature,
+		Temperature: sample.Value,
 		ObservedAt:  pbTime,
 	}, nil
 }
