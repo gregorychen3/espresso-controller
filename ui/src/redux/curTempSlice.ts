@@ -3,14 +3,12 @@ import moment from "moment";
 import {
   GetCurrentTemperatureRequest,
   GetCurrentTemperatureResponse,
+  GetTemperatureHistoryRequest,
+  GetTemperatureHistoryResponse,
 } from "../proto/pkg/appliancepb/appliance_pb";
 import { ServiceError } from "../proto/pkg/appliancepb/appliance_pb_service";
+import { TemperatureSample } from "../types";
 import { applianceClient, createUnaryGrpcThunk } from "./helpers";
-
-interface TemperatureSample {
-  value: number;
-  observedAt: moment.Moment;
-}
 
 export const curTempSlice = createSlice({
   name: "curTemp",
@@ -19,6 +17,46 @@ export const curTempSlice = createSlice({
     isFetching: boolean;
   },
   reducers: {
+    // GetTemperatureHistory
+    getTemperatureHistoryRequest: (
+      state,
+      action: PayloadAction<GetTemperatureHistoryRequest>
+    ) => {
+      state.isFetching = true;
+    },
+    getTemperatureHistoryResponse: (
+      state,
+      action: PayloadAction<GetTemperatureHistoryResponse>
+    ) => {
+      const temperatureHistory = action.payload
+        .getSamplesList()
+        .reduce((acc: TemperatureSample[], curSample) => {
+          const observedAt = curSample.getObservedAt();
+          return observedAt
+            ? [
+                ...acc,
+                {
+                  value: curSample.getValue(),
+                  observedAt: moment(observedAt.toDate()),
+                },
+              ]
+            : acc;
+        }, [])
+        .filter((s) => s !== null);
+
+      state.temperatureHistory = temperatureHistory;
+      state.isFetching = false;
+    },
+    getTemperatureHistoryFailure: (
+      state,
+      action: PayloadAction<{
+        req: GetTemperatureHistoryRequest;
+        err: ServiceError;
+      }>
+    ) => {
+      state.isFetching = false;
+    },
+
     // GetCurrentTemperature
     getCurrentTemperatureRequest: (
       state,
