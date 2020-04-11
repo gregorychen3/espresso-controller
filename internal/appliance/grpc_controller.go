@@ -15,13 +15,19 @@ func newGrpcController(c Configuration) *grpcController {
 }
 
 func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.GetCurrentTemperatureRequest) (*appliancepb.GetCurrentTemperatureResponse, error) {
-	return &appliancepb.GetCurrentTemperatureResponse{}, nil
+	return &appliancepb.GetCurrentTemperatureResponse{
+		Temperature: 21.5,
+	}, nil
 }
 
 func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetTargetTemperatureRequest) (*appliancepb.GetTargetTemperatureResponse, error) {
-	return &appliancepb.GetTargetTemperatureResponse{}, nil
+	return &appliancepb.GetTargetTemperatureResponse{
+		Temperature: 93,
+	}, nil
 }
 
-func (c *grpcController) SetTargetTemperature(context.Context, *appliancepb.SetTargetTemperatureRequest) (*appliancepb.SetTargetTemperatureResponse, error) {
-	return &appliancepb.SetTargetTemperatureResponse{}, nil
+func (c *grpcController) SetTargetTemperature(ctx context.Context, req *appliancepb.SetTargetTemperatureRequest) (*appliancepb.SetTargetTemperatureResponse, error) {
+	return &appliancepb.SetTargetTemperatureResponse{
+		Temperature: req.Temperature,
+	}, nil
 }
