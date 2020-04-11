@@ -54,7 +54,7 @@ export default () => {
             size="small"
             onClick={handleSetTargetTempButtonClicked}
           >
-            Set target temperature
+            SET NEW TARGET
           </Button>
         </div>
       </div>
