@@ -11,7 +11,7 @@ import { TemperatureSample } from "../types";
 import { applianceClient, createUnaryGrpcThunk } from "./helpers";
 
 export const temperatureSlice = createSlice({
-  name: "curTemp",
+  name: "temperature",
   initialState: { temperatureHistory: [], isFetching: false } as {
     temperatureHistory: TemperatureSample[];
     isFetching: boolean;
