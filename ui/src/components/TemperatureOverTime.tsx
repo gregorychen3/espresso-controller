@@ -30,7 +30,7 @@ export default () => {
   const theme = useTheme();
 
   return (
-    <React.Fragment>
+    <>
       <Title>Temperature Over Time</Title>
       <ResponsiveContainer>
         <LineChart
@@ -60,6 +60,6 @@ export default () => {
           />
         </LineChart>
       </ResponsiveContainer>
-    </React.Fragment>
+    </>
   );
 };

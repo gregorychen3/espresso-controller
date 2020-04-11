@@ -26,7 +26,7 @@ export default () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Title>Current Temperature</Title>
       <Typography component="p" variant="h4">
         {curTemp} °C
@@ -53,6 +53,6 @@ export default () => {
           </Button>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };

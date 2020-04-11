@@ -79,7 +79,7 @@ export default () => {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <>
       <Title>Recent Actions</Title>
       <Table size="small">
         <TableHead>
@@ -112,6 +112,6 @@ export default () => {
           See more actions
         </Link>
       </div>
-    </React.Fragment>
+    </>
   );
 };
