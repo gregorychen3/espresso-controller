@@ -93,8 +93,8 @@ export const getTargetTemperature = (req: GetTargetTemperatureRequest) => (
     applianceClient.getTargetTemperature,
     req,
     {
-      req: targetTempSlice.actions.getTargetTemperatureRequest,
-      resp: targetTempSlice.actions.getTargetTemperatureResponse,
+      request: targetTempSlice.actions.getTargetTemperatureRequest,
+      response: targetTempSlice.actions.getTargetTemperatureResponse,
       failure: targetTempSlice.actions.getTargetTemperatureFailure,
     },
     dispatch
@@ -107,8 +107,8 @@ export const setTargetTemperature = (req: GetTargetTemperatureRequest) => (
     applianceClient.setTargetTemperature,
     req,
     {
-      req: targetTempSlice.actions.setTargetTemperatureRequest,
-      resp: targetTempSlice.actions.setTargetTemperatureResponse,
+      request: targetTempSlice.actions.setTargetTemperatureRequest,
+      response: targetTempSlice.actions.setTargetTemperatureResponse,
       failure: targetTempSlice.actions.setTargetTemperatureFailure,
     },
     dispatch

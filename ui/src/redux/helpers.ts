@@ -1,4 +1,5 @@
 import { ActionCreatorWithPayload, Dispatch } from "@reduxjs/toolkit";
+import { Message } from "google-protobuf";
 import { toast } from "react-toastify";
 import {
   ApplianceClient,
@@ -7,13 +8,13 @@ import {
 
 export const applianceClient = new ApplianceClient("");
 
-// Interface grouping together the actions creators for an async unary grpc
-export interface UnaryGrpcActionCreators {
-  req: ActionCreatorWithPayload<any, string>;
-  resp: ActionCreatorWithPayload<any, string>;
+// Interface grouping together the action creators for an async unary grpc
+interface UnaryGrpcActionCreators {
+  request: ActionCreatorWithPayload<Message, string>;
+  response: ActionCreatorWithPayload<Message, string>;
   failure: ActionCreatorWithPayload<
     {
-      req: any; // the original request message
+      req: Message; // failure action payload includes the original request msg
       err: ServiceError;
     },
     string
@@ -22,20 +23,22 @@ export interface UnaryGrpcActionCreators {
 
 export const createUnaryGrpcThunk = (
   apiCall: (...args: any[]) => any,
-  reqMsg: any,
+  requestMsg: Message,
   actionCreators: UnaryGrpcActionCreators,
   dispatch: Dispatch
 ) => {
-  const { req, resp, failure } = actionCreators;
-
-  dispatch(req(reqMsg));
-  apiCall.bind(applianceClient)(reqMsg, (err: ServiceError, respMsg: any) => {
-    if (err) {
-      console.error(err);
-      dispatch(failure({ req: reqMsg, err }));
-      toast.error(`Error: ${err.message}`);
-    } else {
-      dispatch(resp(respMsg));
+  const { request, response, failure } = actionCreators;
+  dispatch(request(requestMsg));
+  apiCall.bind(applianceClient)(
+    requestMsg,
+    (err: ServiceError, responseMsg: Message) => {
+      if (err) {
+        console.error(err);
+        dispatch(failure({ req: requestMsg, err }));
+        toast.error(`Error: ${err.message}`);
+      } else {
+        dispatch(response(responseMsg));
+      }
     }
-  });
+  );
 };

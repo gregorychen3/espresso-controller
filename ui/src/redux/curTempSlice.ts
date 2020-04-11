@@ -46,8 +46,8 @@ export const getCurrentTemperature = (req: GetCurrentTemperatureRequest) => (
     applianceClient.getCurrentTemperature,
     req,
     {
-      req: curTempSlice.actions.getCurrentTemperatureRequest,
-      resp: curTempSlice.actions.getCurrentTemperatureResponse,
+      request: curTempSlice.actions.getCurrentTemperatureRequest,
+      response: curTempSlice.actions.getCurrentTemperatureResponse,
       failure: curTempSlice.actions.getCurrentTemperatureFailure,
     },
     dispatch
