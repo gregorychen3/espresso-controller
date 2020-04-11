@@ -11,8 +11,12 @@ import TemperatureOverTime from "../components/TemperatureOverTime";
 import {
   GetCurrentTemperatureRequest,
   GetTargetTemperatureRequest,
+  GetTemperatureHistoryRequest,
 } from "../proto/pkg/appliancepb/appliance_pb";
-import { getCurrentTemperature } from "../redux/curTempSlice";
+import {
+  getCurrentTemperature,
+  getTemperatureHistory,
+} from "../redux/curTempSlice";
 import { showTargetTempModal } from "../redux/selectors";
 import { getTargetTemperature } from "../redux/targetTempSlice";
 
@@ -36,9 +40,8 @@ export default () => {
 
   const dispatch = useDispatch();
 
-  // get current temperature every 5s
   useEffect(() => {
-    dispatch(getCurrentTemperature(new GetCurrentTemperatureRequest()));
+    dispatch(getTemperatureHistory(new GetTemperatureHistoryRequest()));
     const interval = setInterval(() => {
       dispatch(getCurrentTemperature(new GetCurrentTemperatureRequest()));
     }, 5000);

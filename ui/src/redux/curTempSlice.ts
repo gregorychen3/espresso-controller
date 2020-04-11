@@ -95,6 +95,7 @@ export const curTempSlice = createSlice({
     },
   },
 });
+
 export const getCurrentTemperature = (req: GetCurrentTemperatureRequest) => (
   dispatch: Dispatch
 ) =>
@@ -105,6 +106,20 @@ export const getCurrentTemperature = (req: GetCurrentTemperatureRequest) => (
       request: curTempSlice.actions.getCurrentTemperatureRequest,
       response: curTempSlice.actions.getCurrentTemperatureResponse,
       failure: curTempSlice.actions.getCurrentTemperatureFailure,
+    },
+    dispatch
+  );
+
+export const getTemperatureHistory = (req: GetTemperatureHistoryRequest) => (
+  dispatch: Dispatch
+) =>
+  createUnaryGrpcThunk(
+    applianceClient.getTemperatureHistory,
+    req,
+    {
+      request: curTempSlice.actions.getTemperatureHistoryRequest,
+      response: curTempSlice.actions.getTemperatureHistoryResponse,
+      failure: curTempSlice.actions.getTemperatureHistoryFailure,
     },
     dispatch
   );
