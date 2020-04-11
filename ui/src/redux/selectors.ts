@@ -9,3 +9,6 @@ export const isFetchingTargetTemp = (state: State) =>
   state.targetTempSlice.isFetching;
 export const isSettingTargetTemp = (state: State) =>
   state.targetTempSlice.isSetting;
+
+export const showTargetTempModal = (state: State) =>
+  state.uiSlice.targetTempModalVisibility;
