@@ -15,6 +15,12 @@ proto:
 		--js_out="import_style=commonjs,binary:${PROTOC_JS_TS_OUT_DIR}" \
 		--ts_out="service=grpc-web:${PROTOC_JS_TS_OUT_DIR}" \
 		pkg/appliancepb/appliance.proto
+	for file in `find ui/src/proto -name '*.js'`; do \
+		line=$$(sed -n '1p' $$file); \
+		if [ "$$line" != "/* eslint-disable */" ]; then \
+				echo '/* eslint-disable */' | cat - "$$file" > temp && mv temp "$$file"; \
+		fi \
+	done
 
 build-ui:
 	(cd ui && npm i && npm run build)

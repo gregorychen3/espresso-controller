@@ -1,3 +1,4 @@
+/* eslint-disable */
 // package: appliancepb
 // file: pkg/appliancepb/appliance.proto
 

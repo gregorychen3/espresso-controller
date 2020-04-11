@@ -1,3 +1,4 @@
+/* eslint-disable */
 // source: pkg/appliancepb/appliance.proto
 /**
  * @fileoverview
