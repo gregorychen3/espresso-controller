@@ -30,6 +30,44 @@ export namespace TemperatureSample {
   }
 }
 
+export class GetTemperatureHistoryRequest extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetTemperatureHistoryRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetTemperatureHistoryRequest): GetTemperatureHistoryRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetTemperatureHistoryRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetTemperatureHistoryRequest;
+  static deserializeBinaryFromReader(message: GetTemperatureHistoryRequest, reader: jspb.BinaryReader): GetTemperatureHistoryRequest;
+}
+
+export namespace GetTemperatureHistoryRequest {
+  export type AsObject = {
+  }
+}
+
+export class GetTemperatureHistoryResponse extends jspb.Message {
+  clearSamplesList(): void;
+  getSamplesList(): Array<TemperatureSample>;
+  setSamplesList(value: Array<TemperatureSample>): void;
+  addSamples(value?: TemperatureSample, index?: number): TemperatureSample;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetTemperatureHistoryResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetTemperatureHistoryResponse): GetTemperatureHistoryResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetTemperatureHistoryResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetTemperatureHistoryResponse;
+  static deserializeBinaryFromReader(message: GetTemperatureHistoryResponse, reader: jspb.BinaryReader): GetTemperatureHistoryResponse;
+}
+
+export namespace GetTemperatureHistoryResponse {
+  export type AsObject = {
+    samplesList: Array<TemperatureSample.AsObject>,
+  }
+}
+
 export class GetCurrentTemperatureRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetCurrentTemperatureRequest.AsObject;
