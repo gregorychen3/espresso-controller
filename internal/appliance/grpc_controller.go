@@ -3,6 +3,7 @@ package appliance
 import (
 	"context"
 
+	"github.com/golang/protobuf/ptypes"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/pid"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
 )
@@ -25,11 +26,29 @@ func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.Get
 }
 
 func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetTargetTemperatureRequest) (*appliancepb.GetTargetTemperatureResponse, error) {
-	targetTemp := c.pidController.GetTargetTemperature()
-	return &appliancepb.GetTargetTemperatureResponse{Temperature: targetTemp}, nil
+	setPoint := c.pidController.GetSetPoint()
+
+	pbTime, err := ptypes.TimestampProto(setPoint.SetAt)
+	if err != nil {
+		return nil, err
+	}
+
+	return &appliancepb.GetTargetTemperatureResponse{
+		Temperature: setPoint.Temperature,
+		SetAt:       pbTime,
+	}, nil
 }
 
 func (c *grpcController) SetTargetTemperature(ctx context.Context, req *appliancepb.SetTargetTemperatureRequest) (*appliancepb.SetTargetTemperatureResponse, error) {
-	c.pidController.SetTargetTemperature(req.Temperature)
-	return &appliancepb.SetTargetTemperatureResponse{Temperature: req.Temperature}, nil
+	setPoint := c.pidController.SetSetPoint(req.Temperature)
+
+	pbTime, err := ptypes.TimestampProto(setPoint.SetAt)
+	if err != nil {
+		return nil, err
+	}
+
+	return &appliancepb.SetTargetTemperatureResponse{
+		Temperature: setPoint.Temperature,
+		SetAt:       pbTime,
+	}, nil
 }

@@ -1,21 +1,38 @@
 package pid
 
+import "time"
+
+type SetPoint struct {
+	Temperature float32
+	SetAt       time.Time
+}
+
 type PID struct {
-	targetTemp float32
+	setPoints []SetPoint
 }
 
 func NewPID() *PID {
-	return &PID{}
+	return &PID{
+		setPoints: []SetPoint{{
+			Temperature: 93,
+			SetAt:       time.Now(),
+		}},
+	}
 }
 
 func (p *PID) GetCurrentTemperature() float32 {
 	return 21.5
 }
 
-func (p *PID) GetTargetTemperature() float32 {
-	return p.targetTemp
+func (p *PID) GetSetPoint() SetPoint {
+	return p.setPoints[len(p.setPoints)-1]
 }
 
-func (p *PID) SetTargetTemperature(target float32) {
-	p.targetTemp = target
+func (p *PID) SetSetPoint(temperature float32) SetPoint {
+	setPoint := SetPoint{
+		Temperature: temperature,
+		SetAt:       time.Now(),
+	}
+	p.setPoints = append(p.setPoints, setPoint)
+	return setPoint
 }
