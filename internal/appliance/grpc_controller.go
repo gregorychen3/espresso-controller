@@ -43,7 +43,24 @@ func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.Get
 }
 
 func (c *grpcController) GetTemperatureHistory(context.Context, *appliancepb.GetTemperatureHistoryRequest) (*appliancepb.GetTemperatureHistoryResponse, error) {
-	return &appliancepb.GetTemperatureHistoryResponse{}, nil
+	samples := c.pidController.GetTemperatureHistory()
+
+	var pbSamples []*appliancepb.TemperatureSample
+	for _, s := range samples {
+		pbTime, err := ptypes.TimestampProto(s.ObservedAt)
+		if err != nil {
+			return nil, err
+		}
+		pbSample := appliancepb.TemperatureSample{
+			Value:      s.Value,
+			ObservedAt: pbTime,
+		}
+		pbSamples = append(pbSamples, &pbSample)
+	}
+
+	return &appliancepb.GetTemperatureHistoryResponse{
+		Samples: pbSamples,
+	}, nil
 }
 
 func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetTargetTemperatureRequest) (*appliancepb.GetTargetTemperatureResponse, error) {

@@ -61,6 +61,13 @@ func (p *PID) GetCurrentTemperature() TemperatureSample {
 	return p.temperatureHistory[len(p.temperatureHistory)-1]
 }
 
+func (p *PID) GetTemperatureHistory() []TemperatureSample {
+	p.temperatureHistoryMu.RLock()
+	defer p.temperatureHistoryMu.RUnlock()
+
+	return p.temperatureHistory
+}
+
 func (p *PID) GetSetPoint() SetPoint {
 	return p.setPoints[len(p.setPoints)-1]
 }
