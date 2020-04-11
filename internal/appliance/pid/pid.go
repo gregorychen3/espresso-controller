@@ -28,6 +28,10 @@ func NewPID() *PID {
 	}
 }
 
+func (p *PID) Run() error {
+	return nil
+}
+
 func (p *PID) GetCurrentTemperature() TemperatureSample {
 	var min float32 = 80.0
 	var max float32 = 100.0
