@@ -1,4 +1,4 @@
-import { combineReducers } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { curTempSlice } from "./curTempSlice";
 import { targetTempSlice } from "./targetTempSlice";
 
@@ -10,3 +10,7 @@ const rootReducer = combineReducers({
 export default rootReducer;
 
 export type State = ReturnType<typeof rootReducer>;
+
+export const store = configureStore({
+  reducer: rootReducer,
+});
