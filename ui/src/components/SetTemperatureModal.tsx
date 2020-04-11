@@ -38,43 +38,41 @@ export default () => {
   };
 
   return (
-    <div>
-      <Dialog
-        open={true}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Set Target Temperature</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            The specified temperature will become the new setpoint of the PID
-            controller.
-          </DialogContentText>
-          <TextField
-            onChange={handleTargetTempChanged}
-            autoFocus
-            margin="dense"
-            id="temperature"
-            label="Temperature"
-            type="number"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">°C</InputAdornment>,
-            }}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button
-            disabled={!targetTempInput}
-            onClick={handleSubmit}
-            color="primary"
-          >
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <Dialog
+      open={true}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+    >
+      <DialogTitle id="form-dialog-title">Set Target Temperature</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          The specified temperature will become the new setpoint of the PID
+          controller.
+        </DialogContentText>
+        <TextField
+          onChange={handleTargetTempChanged}
+          autoFocus
+          margin="dense"
+          id="temperature"
+          label="Temperature"
+          type="number"
+          InputProps={{
+            endAdornment: <InputAdornment position="end">°C</InputAdornment>,
+          }}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary">
+          Cancel
+        </Button>
+        <Button
+          disabled={!targetTempInput}
+          onClick={handleSubmit}
+          color="primary"
+        >
+          Submit
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
