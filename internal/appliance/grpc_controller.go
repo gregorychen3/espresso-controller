@@ -21,8 +21,17 @@ func newGrpcController(c Configuration) *grpcController {
 }
 
 func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.GetCurrentTemperatureRequest) (*appliancepb.GetCurrentTemperatureResponse, error) {
-	curTemp := c.pidController.GetCurrentTemperature()
-	return &appliancepb.GetCurrentTemperatureResponse{Temperature: curTemp}, nil
+	sample := c.pidController.GetCurrentTemperature()
+
+	pbTime, err := ptypes.TimestampProto(sample.ObservedAt)
+	if err != nil {
+		return nil, err
+	}
+
+	return &appliancepb.GetCurrentTemperatureResponse{
+		Temperature: sample.Temperature,
+		ObservedAt:  pbTime,
+	}, nil
 }
 
 func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetTargetTemperatureRequest) (*appliancepb.GetTargetTemperatureResponse, error) {

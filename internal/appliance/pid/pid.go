@@ -7,6 +7,11 @@ type SetPoint struct {
 	SetAt       time.Time
 }
 
+type TemperatureSample struct {
+	Temperature float32
+	ObservedAt  time.Time
+}
+
 type PID struct {
 	setPoints []SetPoint
 }
@@ -20,8 +25,8 @@ func NewPID() *PID {
 	}
 }
 
-func (p *PID) GetCurrentTemperature() float32 {
-	return 21.5
+func (p *PID) GetCurrentTemperature() TemperatureSample {
+	return TemperatureSample{Temperature: 21.5, ObservedAt: time.Now()}
 }
 
 func (p *PID) GetSetPoint() SetPoint {
