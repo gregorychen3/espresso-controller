@@ -6,16 +6,24 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { SetTargetTemperatureRequest } from "../proto/pkg/appliancepb/appliance_pb";
+import { setTargetTemperature } from "../redux/targetTempSlice";
 
 const useStyles = makeStyles({
   button: { textAlign: "center" },
 });
 
 export default () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
+
+  const [targetTempInput, setTargetTempInput] = useState<number | undefined>(
+    undefined
+  );
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -23,6 +31,21 @@ export default () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleTargetTempChanged = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    setTargetTempInput(parseInt(e.target.value, 10));
+  };
+
+  const handleSubmit = () => {
+    if (!targetTempInput) {
+      return;
+    }
+
+    const req = new SetTargetTemperatureRequest();
+    req.setTemperature(targetTempInput);
+    dispatch(setTargetTemperature(req));
   };
 
   return (
@@ -49,6 +72,7 @@ export default () => {
             controller.
           </DialogContentText>
           <TextField
+            onChange={handleTargetTempChanged}
             autoFocus
             margin="dense"
             id="temperature"
@@ -63,7 +87,7 @@ export default () => {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleSubmit} color="primary">
             Submit
           </Button>
         </DialogActions>
