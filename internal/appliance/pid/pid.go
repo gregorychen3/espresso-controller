@@ -1,6 +1,9 @@
 package pid
 
-import "time"
+import (
+	"math/rand"
+	"time"
+)
 
 type SetPoint struct {
 	Temperature float32
@@ -26,7 +29,10 @@ func NewPID() *PID {
 }
 
 func (p *PID) GetCurrentTemperature() TemperatureSample {
-	return TemperatureSample{Temperature: 21.5, ObservedAt: time.Now()}
+	var min float32 = 80.0
+	var max float32 = 100.0
+	randTemp := min + rand.Float32()*(max-min)
+	return TemperatureSample{Temperature: randTemp, ObservedAt: time.Now()}
 }
 
 func (p *PID) GetSetPoint() SetPoint {

@@ -35,7 +35,10 @@ export default () => {
           }}
         >
           <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
-          <YAxis stroke={theme.palette.text.secondary}>
+          <YAxis
+            domain={["auto", "auto"]}
+            stroke={theme.palette.text.secondary}
+          >
             <Label
               angle={270}
               position="left"
