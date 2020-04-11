@@ -8,7 +8,7 @@ import { ServiceError } from "../proto/pkg/appliancepb/appliance_pb_service";
 import { applianceClient, createUnaryGrpcThunk } from "./helpers";
 
 interface TemperatureSample {
-  temperature: number;
+  value: number;
   observedAt: moment.Moment;
 }
 
@@ -41,7 +41,7 @@ export const curTempSlice = createSlice({
       }
 
       state.temperatureHistory.push({
-        temperature: sample.getValue(),
+        value: sample.getValue(),
         observedAt: moment(observedAt.toDate()),
       });
       state.isFetching = false;

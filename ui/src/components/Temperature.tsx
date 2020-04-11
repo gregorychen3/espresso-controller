@@ -29,7 +29,7 @@ export default () => {
     <>
       <Title>Current Temperature</Title>
       <Typography component="p" variant="h4">
-        {curTemp?.temperature.toFixed(1) ?? "--"} °C
+        {curTemp?.value.toFixed(1) ?? "--"} °C
       </Typography>
       {curTemp && (
         <Typography

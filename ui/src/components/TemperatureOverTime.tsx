@@ -18,7 +18,7 @@ export default () => {
   const samples = useSelector(getTempHistory);
   const data = samples.map((s) => ({
     time: s.observedAt.format("h:m:ssa"),
-    temp: s.temperature,
+    temp: s.value,
   }));
 
   return (
