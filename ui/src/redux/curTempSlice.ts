@@ -30,13 +30,18 @@ export const curTempSlice = createSlice({
       state,
       action: PayloadAction<GetCurrentTemperatureResponse>
     ) => {
-      const observedAt = action.payload.getObservedAt();
+      const sample = action.payload.getSample();
+      if (!sample) {
+        return;
+      }
+
+      const observedAt = sample.getObservedAt();
       if (!observedAt) {
         return;
       }
 
       state.tempHistory.push({
-        temperature: action.payload.getTemperature(),
+        temperature: sample.getValue(),
         observedAt: moment(observedAt.toDate()),
       });
       state.isFetching = false;
