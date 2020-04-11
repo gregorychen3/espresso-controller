@@ -36,8 +36,16 @@ export default () => {
 
   const dispatch = useDispatch();
 
+  // get current temperature every 5s
   useEffect(() => {
     dispatch(getCurrentTemperature(new GetCurrentTemperatureRequest()));
+    const interval = setInterval(() => {
+      dispatch(getCurrentTemperature(new GetCurrentTemperatureRequest()));
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, [dispatch]);
 
   useEffect(() => {
