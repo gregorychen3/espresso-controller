@@ -28,7 +28,7 @@ export const createUnaryGrpcThunk = (
   const { req, resp, failure } = actionCreators;
 
   dispatch(req(reqMsg));
-  apiCall(reqMsg, (err: ServiceError, respMsg: any) => {
+  apiCall.bind(applianceClient)(reqMsg, (err: ServiceError, respMsg: any) => {
     if (err) {
       console.error(err);
       dispatch(failure({ req: reqMsg, err }));
