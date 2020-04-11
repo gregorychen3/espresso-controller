@@ -7,8 +7,12 @@ import { useDispatch } from "react-redux";
 import RecentActions from "../components/RecentActions";
 import Temperature from "../components/Temperature";
 import TemperatureOverTime from "../components/TemperatureOverTime";
-import { GetCurrentTemperatureRequest } from "../proto/pkg/appliancepb/appliance_pb";
+import {
+  GetCurrentTemperatureRequest,
+  GetTargetTemperatureRequest,
+} from "../proto/pkg/appliancepb/appliance_pb";
 import { getCurrentTemperature } from "../redux/curTempSlice";
+import { getTargetTemperature } from "../redux/targetTempSlice";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -30,6 +34,10 @@ export default () => {
 
   useEffect(() => {
     dispatch(getCurrentTemperature(new GetCurrentTemperatureRequest()));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getTargetTemperature(new GetTargetTemperatureRequest()));
   }, [dispatch]);
 
   return (

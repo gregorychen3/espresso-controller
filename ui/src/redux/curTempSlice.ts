@@ -18,13 +18,14 @@ export const curTempSlice = createSlice({
       state,
       action: PayloadAction<GetCurrentTemperatureRequest>
     ) => {
-      state = { ...state, isFetching: true };
+      state.isFetching = true;
     },
     getCurrentTemperatureResponse: (
       state,
       action: PayloadAction<GetCurrentTemperatureResponse>
     ) => {
-      state = { curTemp: action.payload.getTemperature(), isFetching: false };
+      state.curTemp = action.payload.getTemperature();
+      state.isFetching = false;
     },
     getCurrentTemperatureFailure: (
       state,
@@ -33,7 +34,8 @@ export const curTempSlice = createSlice({
         err: ServiceError;
       }>
     ) => {
-      state = { curTemp: undefined, isFetching: false };
+      state.curTemp = undefined;
+      state.isFetching = false;
     },
   },
 });

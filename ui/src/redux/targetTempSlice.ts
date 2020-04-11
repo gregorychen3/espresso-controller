@@ -25,17 +25,14 @@ export const targetTempSlice = createSlice({
       state,
       action: PayloadAction<GetTargetTemperatureRequest>
     ) => {
-      state = { ...state, isFetching: true };
+      state.isFetching = true;
     },
     getTargetTemperatureResponse: (
       state,
       action: PayloadAction<GetTargetTemperatureResponse>
     ) => {
-      state = {
-        ...state,
-        targetTemp: action.payload.getTemperature(),
-        isFetching: false,
-      };
+      state.targetTemp = action.payload.getTemperature();
+      state.isFetching = false;
     },
     getTargetTemperatureFailure: (
       state,
@@ -44,11 +41,8 @@ export const targetTempSlice = createSlice({
         err: ServiceError;
       }>
     ) => {
-      state = {
-        ...state,
-        targetTemp: undefined,
-        isFetching: false,
-      };
+      state.targetTemp = undefined;
+      state.isFetching = false;
     },
 
     // SetTargetTemperature
@@ -56,17 +50,14 @@ export const targetTempSlice = createSlice({
       state,
       action: PayloadAction<SetTargetTemperatureRequest>
     ) => {
-      state = { ...state, isSetting: true };
+      state.isSetting = true;
     },
     setTargetTemperatureResponse: (
       state,
       action: PayloadAction<SetTargetTemperatureResponse>
     ) => {
-      state = {
-        ...state,
-        targetTemp: action.payload.getTemperature(),
-        isSetting: false,
-      };
+      state.targetTemp = action.payload.getTemperature();
+      state.isSetting = false;
     },
     setTargetTemperatureFailure: (
       state,
@@ -75,7 +66,7 @@ export const targetTempSlice = createSlice({
         err: ServiceError;
       }>
     ) => {
-      state = { ...state, isSetting: false };
+      state.isSetting = false;
     },
   },
 });
