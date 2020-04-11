@@ -1,4 +1,5 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
+import moment from "moment";
 import {
   GetTargetTemperatureRequest,
   GetTargetTemperatureResponse,
@@ -15,7 +16,7 @@ export const targetTempSlice = createSlice({
     isFetching: false,
     isSetting: false,
   } as {
-    targetTemp?: number;
+    targetTemp?: { value: number; setAt: moment.Moment };
     isFetching: boolean;
     isSetting: boolean;
   },
@@ -31,7 +32,14 @@ export const targetTempSlice = createSlice({
       state,
       action: PayloadAction<GetTargetTemperatureResponse>
     ) => {
-      state.targetTemp = action.payload.getTemperature();
+      const value = action.payload.getTemperature();
+      const setAt = action.payload.getSetAt()?.toDate();
+      if (!setAt) {
+        console.log("Target temperature response missing setAt time");
+        return;
+      }
+
+      state.targetTemp = { value, setAt: moment(setAt) };
       state.isFetching = false;
     },
     getTargetTemperatureFailure: (
@@ -56,7 +64,14 @@ export const targetTempSlice = createSlice({
       state,
       action: PayloadAction<SetTargetTemperatureResponse>
     ) => {
-      state.targetTemp = action.payload.getTemperature();
+      const value = action.payload.getTemperature();
+      const setAt = action.payload.getSetAt()?.toDate();
+      if (!setAt) {
+        console.log("Target temperature response missing setAt time");
+        return;
+      }
+
+      state.targetTemp = { value, setAt: moment(setAt) };
       state.isSetting = false;
     },
     setTargetTemperatureFailure: (

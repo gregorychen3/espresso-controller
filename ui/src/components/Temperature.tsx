@@ -36,10 +36,10 @@ export default () => {
       </Typography>
       <Title>Target Temperature</Title>
       <Typography component="p" variant="h4">
-        {targetTemp} °C
+        {targetTemp?.value} °C
       </Typography>
       <Typography color="textSecondary" className={classes.temperatureContext}>
-        set at 2:34pm 15 March, 2019
+        set {targetTemp?.setAt.fromNow()}
       </Typography>
       <div>
         <div className={classes.setTargetTempButton}>
