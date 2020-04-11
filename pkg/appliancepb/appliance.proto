@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package appliancepb;
 
+import "google/protobuf/timestamp.proto";
+
 service Appliance {
   rpc GetCurrentTemperature (GetCurrentTemperatureRequest) returns (GetCurrentTemperatureResponse) {}
   rpc GetTargetTemperature (GetTargetTemperatureRequest) returns (GetTargetTemperatureResponse) {}
@@ -16,6 +18,7 @@ message GetCurrentTemperatureResponse {
 message GetTargetTemperatureRequest {}
 message GetTargetTemperatureResponse {
     float temperature = 1;
+    google.protobuf.Timestamp set_at = 2;
 }
 
 message SetTargetTemperatureRequest {
@@ -23,4 +26,5 @@ message SetTargetTemperatureRequest {
 }
 message SetTargetTemperatureResponse {
     float temperature = 1;
+    google.protobuf.Timestamp set_at = 2;
 }
