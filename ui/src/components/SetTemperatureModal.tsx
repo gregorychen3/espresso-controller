@@ -46,7 +46,7 @@ export default () => {
       <DialogTitle id="form-dialog-title">Set Target Temperature</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          The specified temperature will become the new setpoint of the PID
+          The specified temperature will become the new set point of the PID
           controller.
         </DialogContentText>
         <TextField
