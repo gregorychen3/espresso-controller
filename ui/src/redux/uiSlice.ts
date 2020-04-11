@@ -9,3 +9,5 @@ export const uiSlice = createSlice({
     },
   },
 });
+
+export const { setTargetTempModalVisibility } = uiSlice.actions;
