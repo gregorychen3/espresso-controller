@@ -13,6 +13,8 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
+var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
+goog.object.extend(proto, google_protobuf_timestamp_pb);
 goog.exportSymbol('proto.appliancepb.GetCurrentTemperatureRequest', null, global);
 goog.exportSymbol('proto.appliancepb.GetCurrentTemperatureResponse', null, global);
 goog.exportSymbol('proto.appliancepb.GetTargetTemperatureRequest', null, global);
@@ -509,7 +511,8 @@ proto.appliancepb.GetTargetTemperatureResponse.prototype.toObject = function(opt
  */
 proto.appliancepb.GetTargetTemperatureResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    temperature: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0)
+    temperature: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
+    setAt: (f = msg.getSetAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -550,6 +553,11 @@ proto.appliancepb.GetTargetTemperatureResponse.deserializeBinaryFromReader = fun
       var value = /** @type {number} */ (reader.readFloat());
       msg.setTemperature(value);
       break;
+    case 2:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setSetAt(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -586,6 +594,14 @@ proto.appliancepb.GetTargetTemperatureResponse.serializeBinaryToWriter = functio
       f
     );
   }
+  f = message.getSetAt();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+    );
+  }
 };
 
 
@@ -604,6 +620,43 @@ proto.appliancepb.GetTargetTemperatureResponse.prototype.getTemperature = functi
  */
 proto.appliancepb.GetTargetTemperatureResponse.prototype.setTemperature = function(value) {
   return jspb.Message.setProto3FloatField(this, 1, value);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp set_at = 2;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.appliancepb.GetTargetTemperatureResponse.prototype.getSetAt = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 2));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.appliancepb.GetTargetTemperatureResponse} returns this
+*/
+proto.appliancepb.GetTargetTemperatureResponse.prototype.setSetAt = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.appliancepb.GetTargetTemperatureResponse} returns this
+ */
+proto.appliancepb.GetTargetTemperatureResponse.prototype.clearSetAt = function() {
+  return this.setSetAt(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.appliancepb.GetTargetTemperatureResponse.prototype.hasSetAt = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
@@ -769,7 +822,8 @@ proto.appliancepb.SetTargetTemperatureResponse.prototype.toObject = function(opt
  */
 proto.appliancepb.SetTargetTemperatureResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    temperature: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0)
+    temperature: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
+    setAt: (f = msg.getSetAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -810,6 +864,11 @@ proto.appliancepb.SetTargetTemperatureResponse.deserializeBinaryFromReader = fun
       var value = /** @type {number} */ (reader.readFloat());
       msg.setTemperature(value);
       break;
+    case 2:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setSetAt(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -846,6 +905,14 @@ proto.appliancepb.SetTargetTemperatureResponse.serializeBinaryToWriter = functio
       f
     );
   }
+  f = message.getSetAt();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+    );
+  }
 };
 
 
@@ -864,6 +931,43 @@ proto.appliancepb.SetTargetTemperatureResponse.prototype.getTemperature = functi
  */
 proto.appliancepb.SetTargetTemperatureResponse.prototype.setTemperature = function(value) {
   return jspb.Message.setProto3FloatField(this, 1, value);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp set_at = 2;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.appliancepb.SetTargetTemperatureResponse.prototype.getSetAt = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 2));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.appliancepb.SetTargetTemperatureResponse} returns this
+*/
+proto.appliancepb.SetTargetTemperatureResponse.prototype.setSetAt = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.appliancepb.SetTargetTemperatureResponse} returns this
+ */
+proto.appliancepb.SetTargetTemperatureResponse.prototype.clearSetAt = function() {
+  return this.setSetAt(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.appliancepb.SetTargetTemperatureResponse.prototype.hasSetAt = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 

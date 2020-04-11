@@ -2,6 +2,7 @@
 // file: pkg/appliancepb/appliance.proto
 
 import * as jspb from "google-protobuf";
+import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 
 export class GetCurrentTemperatureRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
@@ -59,6 +60,11 @@ export class GetTargetTemperatureResponse extends jspb.Message {
   getTemperature(): number;
   setTemperature(value: number): void;
 
+  hasSetAt(): boolean;
+  clearSetAt(): void;
+  getSetAt(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setSetAt(value?: google_protobuf_timestamp_pb.Timestamp): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetTargetTemperatureResponse.AsObject;
   static toObject(includeInstance: boolean, msg: GetTargetTemperatureResponse): GetTargetTemperatureResponse.AsObject;
@@ -72,6 +78,7 @@ export class GetTargetTemperatureResponse extends jspb.Message {
 export namespace GetTargetTemperatureResponse {
   export type AsObject = {
     temperature: number,
+    setAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
   }
 }
 
@@ -99,6 +106,11 @@ export class SetTargetTemperatureResponse extends jspb.Message {
   getTemperature(): number;
   setTemperature(value: number): void;
 
+  hasSetAt(): boolean;
+  clearSetAt(): void;
+  getSetAt(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setSetAt(value?: google_protobuf_timestamp_pb.Timestamp): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SetTargetTemperatureResponse.AsObject;
   static toObject(includeInstance: boolean, msg: SetTargetTemperatureResponse): SetTargetTemperatureResponse.AsObject;
@@ -112,6 +124,7 @@ export class SetTargetTemperatureResponse extends jspb.Message {
 export namespace SetTargetTemperatureResponse {
   export type AsObject = {
     temperature: number,
+    setAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
   }
 }
 
