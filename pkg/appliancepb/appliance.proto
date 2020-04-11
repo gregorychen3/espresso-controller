@@ -10,10 +10,14 @@ service Appliance {
   rpc SetTargetTemperature (SetTargetTemperatureRequest) returns (SetTargetTemperatureResponse) {}
 }
 
+message TemperatureSample {
+    float value = 1;
+    google.protobuf.Timestamp observed_at = 2;
+}
+
 message GetCurrentTemperatureRequest {}
 message GetCurrentTemperatureResponse {
-    float temperature = 1;
-    google.protobuf.Timestamp observed_at = 2;
+    TemperatureSample sample = 1;
 }
 
 message GetTargetTemperatureRequest {}
