@@ -1,4 +1,4 @@
-import { InputAdornment, makeStyles } from "@material-ui/core";
+import { InputAdornment } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -10,27 +10,17 @@ import React, { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { SetTargetTemperatureRequest } from "../proto/pkg/appliancepb/appliance_pb";
 import { setTargetTemperature } from "../redux/targetTempSlice";
-
-const useStyles = makeStyles({
-  button: { textAlign: "center" },
-});
+import { setTargetTempModalVisibility } from "../redux/uiSlice";
 
 export default () => {
   const dispatch = useDispatch();
-  const classes = useStyles();
-
-  const [open, setOpen] = useState(false);
 
   const [targetTempInput, setTargetTempInput] = useState<number | undefined>(
     undefined
   );
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
-    setOpen(false);
+    dispatch(setTargetTempModalVisibility(false));
   };
 
   const handleTargetTempChanged = (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,18 +39,8 @@ export default () => {
 
   return (
     <div>
-      <div className={classes.button}>
-        <Button
-          variant="outlined"
-          color="primary"
-          size="small"
-          onClick={handleClickOpen}
-        >
-          Set target temperature
-        </Button>
-      </div>
       <Dialog
-        open={open}
+        open={true}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
