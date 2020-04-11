@@ -13,6 +13,7 @@ service Appliance {
 message GetCurrentTemperatureRequest {}
 message GetCurrentTemperatureResponse {
     float temperature = 1;
+    google.protobuf.Timestamp observed_at = 2;
 }
 
 message GetTargetTemperatureRequest {}

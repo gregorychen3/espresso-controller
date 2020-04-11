@@ -24,6 +24,11 @@ export class GetCurrentTemperatureResponse extends jspb.Message {
   getTemperature(): number;
   setTemperature(value: number): void;
 
+  hasObservedAt(): boolean;
+  clearObservedAt(): void;
+  getObservedAt(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setObservedAt(value?: google_protobuf_timestamp_pb.Timestamp): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetCurrentTemperatureResponse.AsObject;
   static toObject(includeInstance: boolean, msg: GetCurrentTemperatureResponse): GetCurrentTemperatureResponse.AsObject;
@@ -37,6 +42,7 @@ export class GetCurrentTemperatureResponse extends jspb.Message {
 export namespace GetCurrentTemperatureResponse {
   export type AsObject = {
     temperature: number,
+    observedAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
   }
 }
 

@@ -280,7 +280,8 @@ proto.appliancepb.GetCurrentTemperatureResponse.prototype.toObject = function(op
  */
 proto.appliancepb.GetCurrentTemperatureResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    temperature: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0)
+    temperature: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
+    observedAt: (f = msg.getObservedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -321,6 +322,11 @@ proto.appliancepb.GetCurrentTemperatureResponse.deserializeBinaryFromReader = fu
       var value = /** @type {number} */ (reader.readFloat());
       msg.setTemperature(value);
       break;
+    case 2:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setObservedAt(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -357,6 +363,14 @@ proto.appliancepb.GetCurrentTemperatureResponse.serializeBinaryToWriter = functi
       f
     );
   }
+  f = message.getObservedAt();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+    );
+  }
 };
 
 
@@ -375,6 +389,43 @@ proto.appliancepb.GetCurrentTemperatureResponse.prototype.getTemperature = funct
  */
 proto.appliancepb.GetCurrentTemperatureResponse.prototype.setTemperature = function(value) {
   return jspb.Message.setProto3FloatField(this, 1, value);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp observed_at = 2;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.appliancepb.GetCurrentTemperatureResponse.prototype.getObservedAt = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 2));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.appliancepb.GetCurrentTemperatureResponse} returns this
+*/
+proto.appliancepb.GetCurrentTemperatureResponse.prototype.setObservedAt = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.appliancepb.GetCurrentTemperatureResponse} returns this
+ */
+proto.appliancepb.GetCurrentTemperatureResponse.prototype.clearObservedAt = function() {
+  return this.setObservedAt(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.appliancepb.GetCurrentTemperatureResponse.prototype.hasObservedAt = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
