@@ -16,9 +16,9 @@ import {
 import {
   getCurrentTemperature,
   getTemperatureHistory,
-} from "../redux/curTempSlice";
+} from "../redux/temperatureSlice";
 import { showTargetTempModal } from "../redux/selectors";
-import { getTargetTemperature } from "../redux/targetTempSlice";
+import { getTargetTemperature } from "../redux/targetTemperatureSlice";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

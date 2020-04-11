@@ -9,7 +9,7 @@ import TextField from "@material-ui/core/TextField";
 import React, { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { SetTargetTemperatureRequest } from "../proto/pkg/appliancepb/appliance_pb";
-import { setTargetTemperature } from "../redux/targetTempSlice";
+import { setTargetTemperature } from "../redux/targetTemperatureSlice";
 import { setTargetTempModalVisibility } from "../redux/uiSlice";
 
 export default () => {

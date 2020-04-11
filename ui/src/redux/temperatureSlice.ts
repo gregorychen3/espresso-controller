@@ -10,7 +10,7 @@ import { ServiceError } from "../proto/pkg/appliancepb/appliance_pb_service";
 import { TemperatureSample } from "../types";
 import { applianceClient, createUnaryGrpcThunk } from "./helpers";
 
-export const curTempSlice = createSlice({
+export const temperatureSlice = createSlice({
   name: "curTemp",
   initialState: { temperatureHistory: [], isFetching: false } as {
     temperatureHistory: TemperatureSample[];
@@ -103,9 +103,9 @@ export const getCurrentTemperature = (req: GetCurrentTemperatureRequest) => (
     applianceClient.getCurrentTemperature,
     req,
     {
-      request: curTempSlice.actions.getCurrentTemperatureRequest,
-      response: curTempSlice.actions.getCurrentTemperatureResponse,
-      failure: curTempSlice.actions.getCurrentTemperatureFailure,
+      request: temperatureSlice.actions.getCurrentTemperatureRequest,
+      response: temperatureSlice.actions.getCurrentTemperatureResponse,
+      failure: temperatureSlice.actions.getCurrentTemperatureFailure,
     },
     dispatch
   );
@@ -117,9 +117,9 @@ export const getTemperatureHistory = (req: GetTemperatureHistoryRequest) => (
     applianceClient.getTemperatureHistory,
     req,
     {
-      request: curTempSlice.actions.getTemperatureHistoryRequest,
-      response: curTempSlice.actions.getTemperatureHistoryResponse,
-      failure: curTempSlice.actions.getTemperatureHistoryFailure,
+      request: temperatureSlice.actions.getTemperatureHistoryRequest,
+      response: temperatureSlice.actions.getTemperatureHistoryResponse,
+      failure: temperatureSlice.actions.getTemperatureHistoryFailure,
     },
     dispatch
   );

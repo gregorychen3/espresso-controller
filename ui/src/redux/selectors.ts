@@ -2,17 +2,18 @@ import { State } from ".";
 import _ from "lodash";
 
 export const getCurTemp = (state: State) =>
-  _.last(state.curTempSlice.temperatureHistory);
+  _.last(state.temperatureSlice.temperatureHistory);
 export const getTempHistory = (state: State) =>
-  state.curTempSlice.temperatureHistory;
+  state.temperatureSlice.temperatureHistory;
 export const isFetchingCurTemp = (state: State) =>
-  state.curTempSlice.isFetching;
+  state.temperatureSlice.isFetching;
 
-export const getTargetTemp = (state: State) => state.targetTempSlice.targetTemp;
+export const getTargetTemp = (state: State) =>
+  state.targetTemperatureSlice.targetTemp;
 export const isFetchingTargetTemp = (state: State) =>
-  state.targetTempSlice.isFetching;
+  state.targetTemperatureSlice.isFetching;
 export const isSettingTargetTemp = (state: State) =>
-  state.targetTempSlice.isSetting;
+  state.targetTemperatureSlice.isSetting;
 
 export const showTargetTempModal = (state: State) =>
   state.uiSlice.targetTempModalVisibility;

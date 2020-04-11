@@ -9,7 +9,7 @@ import {
 import { ServiceError } from "../proto/pkg/appliancepb/appliance_pb_service";
 import { applianceClient, createUnaryGrpcThunk } from "./helpers";
 
-export const targetTempSlice = createSlice({
+export const targetTemperatureSlice = createSlice({
   name: "targetTemp",
   initialState: {
     targetTemp: undefined,
@@ -93,9 +93,9 @@ export const getTargetTemperature = (req: GetTargetTemperatureRequest) => (
     applianceClient.getTargetTemperature,
     req,
     {
-      request: targetTempSlice.actions.getTargetTemperatureRequest,
-      response: targetTempSlice.actions.getTargetTemperatureResponse,
-      failure: targetTempSlice.actions.getTargetTemperatureFailure,
+      request: targetTemperatureSlice.actions.getTargetTemperatureRequest,
+      response: targetTemperatureSlice.actions.getTargetTemperatureResponse,
+      failure: targetTemperatureSlice.actions.getTargetTemperatureFailure,
     },
     dispatch
   );
@@ -107,9 +107,9 @@ export const setTargetTemperature = (req: SetTargetTemperatureRequest) => (
     applianceClient.setTargetTemperature,
     req,
     {
-      request: targetTempSlice.actions.setTargetTemperatureRequest,
-      response: targetTempSlice.actions.setTargetTemperatureResponse,
-      failure: targetTempSlice.actions.setTargetTemperatureFailure,
+      request: targetTemperatureSlice.actions.setTargetTemperatureRequest,
+      response: targetTemperatureSlice.actions.setTargetTemperatureResponse,
+      failure: targetTemperatureSlice.actions.setTargetTemperatureFailure,
     },
     dispatch
   );
