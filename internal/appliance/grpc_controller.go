@@ -42,6 +42,10 @@ func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.Get
 	}, nil
 }
 
+func (c *grpcController) GetTemperatureHistory(context.Context, *appliancepb.GetTemperatureHistoryRequest) (*appliancepb.GetTemperatureHistoryResponse, error) {
+	return &appliancepb.GetTemperatureHistoryResponse{}, nil
+}
+
 func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetTargetTemperatureRequest) (*appliancepb.GetTargetTemperatureResponse, error) {
 	setPoint := c.pidController.GetSetPoint()
 
