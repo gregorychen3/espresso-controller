@@ -8,30 +8,31 @@ import {
 
 export const applianceClient = new ApplianceClient("");
 
-// Interface grouping together the action creators for an async unary grpc
-interface UnaryGrpcActionCreators {
-  request: ActionCreatorWithPayload<Message, string>;
-  response: ActionCreatorWithPayload<Message, string>;
-  failure: ActionCreatorWithPayload<
-    {
-      req: Message; // failure action payload includes the original request msg
-      err: ServiceError;
-    },
-    string
-  >;
-}
-
-export const createUnaryGrpcThunk = (
+/**
+ * Creates a thunk action for a unary grpc with request jspb.Message of type T1
+ * and response jspb.Message of type T2.
+ */
+export const createUnaryGrpcThunk = <T1 extends Message, T2 extends Message>(
   apiCall: (...args: any[]) => any,
-  requestMsg: Message,
-  actionCreators: UnaryGrpcActionCreators,
+  requestMsg: T1,
+  actionCreators: {
+    request: ActionCreatorWithPayload<T1, string>;
+    response: ActionCreatorWithPayload<T2, string>;
+    failure: ActionCreatorWithPayload<
+      {
+        req: T1; // failure action payload includes the original request msg
+        err: ServiceError;
+      },
+      string
+    >;
+  },
   dispatch: Dispatch
 ) => {
   const { request, response, failure } = actionCreators;
   dispatch(request(requestMsg));
   apiCall.bind(applianceClient)(
     requestMsg,
-    (err: ServiceError, responseMsg: Message) => {
+    (err: ServiceError, responseMsg: T2) => {
       if (err) {
         console.error(err);
         dispatch(failure({ req: requestMsg, err }));

@@ -100,7 +100,7 @@ export const getTargetTemperature = (req: GetTargetTemperatureRequest) => (
     dispatch
   );
 
-export const setTargetTemperature = (req: GetTargetTemperatureRequest) => (
+export const setTargetTemperature = (req: SetTargetTemperatureRequest) => (
   dispatch: Dispatch
 ) =>
   createUnaryGrpcThunk(
