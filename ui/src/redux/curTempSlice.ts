@@ -1,4 +1,5 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
+import moment from "moment";
 import {
   GetCurrentTemperatureRequest,
   GetCurrentTemperatureResponse,
@@ -6,10 +7,15 @@ import {
 import { ServiceError } from "../proto/pkg/appliancepb/appliance_pb_service";
 import { applianceClient, createUnaryGrpcThunk } from "./helpers";
 
+interface TemperatureSample {
+  temperature: number;
+  observedAt: moment.Moment;
+}
+
 export const curTempSlice = createSlice({
   name: "curTemp",
-  initialState: { curTemp: undefined, isFetching: false } as {
-    curTemp?: number;
+  initialState: { tempHistory: [], isFetching: false } as {
+    tempHistory: TemperatureSample[];
     isFetching: boolean;
   },
   reducers: {
@@ -24,7 +30,15 @@ export const curTempSlice = createSlice({
       state,
       action: PayloadAction<GetCurrentTemperatureResponse>
     ) => {
-      state.curTemp = action.payload.getTemperature();
+      const observedAt = action.payload.getObservedAt();
+      if (!observedAt) {
+        return;
+      }
+
+      state.tempHistory.push({
+        temperature: action.payload.getTemperature(),
+        observedAt: moment(observedAt.toDate()),
+      });
       state.isFetching = false;
     },
     getCurrentTemperatureFailure: (
@@ -34,7 +48,6 @@ export const curTempSlice = createSlice({
         err: ServiceError;
       }>
     ) => {
-      state.curTemp = undefined;
       state.isFetching = false;
     },
   },

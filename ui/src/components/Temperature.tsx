@@ -29,11 +29,16 @@ export default () => {
     <>
       <Title>Current Temperature</Title>
       <Typography component="p" variant="h4">
-        {curTemp} °C
+        {curTemp?.temperature ?? "--"} °C
       </Typography>
-      <Typography color="textSecondary" className={classes.temperatureContext}>
-        at 2:34pm 15 March, 2019
-      </Typography>
+      {curTemp && (
+        <Typography
+          color="textSecondary"
+          className={classes.temperatureContext}
+        >
+          as of {curTemp.observedAt.format("h:mm:ssa")} Eastern Time
+        </Typography>
+      )}
       <Title>Target Temperature</Title>
       <Typography component="p" variant="h4">
         {targetTemp?.value} °C
