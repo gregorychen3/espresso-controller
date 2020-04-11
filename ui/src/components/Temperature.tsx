@@ -49,7 +49,7 @@ export default () => {
       <div>
         <div className={classes.setTargetTempButton}>
           <Button
-            variant="outlined"
+            variant="contained"
             color="primary"
             size="small"
             onClick={handleSetTargetTempButtonClicked}
