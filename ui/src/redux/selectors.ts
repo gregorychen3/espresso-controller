@@ -2,8 +2,9 @@ import { State } from ".";
 import _ from "lodash";
 
 export const getCurTemp = (state: State) =>
-  _.last(state.curTempSlice.tempHistory);
-export const getTempHistory = (state: State) => state.curTempSlice.tempHistory;
+  _.last(state.curTempSlice.temperatureHistory);
+export const getTempHistory = (state: State) =>
+  state.curTempSlice.temperatureHistory;
 export const isFetchingCurTemp = (state: State) =>
   state.curTempSlice.isFetching;
 

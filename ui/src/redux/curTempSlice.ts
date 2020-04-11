@@ -14,8 +14,8 @@ interface TemperatureSample {
 
 export const curTempSlice = createSlice({
   name: "curTemp",
-  initialState: { tempHistory: [], isFetching: false } as {
-    tempHistory: TemperatureSample[];
+  initialState: { temperatureHistory: [], isFetching: false } as {
+    temperatureHistory: TemperatureSample[];
     isFetching: boolean;
   },
   reducers: {
@@ -40,7 +40,7 @@ export const curTempSlice = createSlice({
         return;
       }
 
-      state.tempHistory.push({
+      state.temperatureHistory.push({
         temperature: sample.getValue(),
         observedAt: moment(observedAt.toDate()),
       });
