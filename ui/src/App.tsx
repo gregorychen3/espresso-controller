@@ -2,6 +2,8 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Copyright from "./components/Copyright";
 import AppBar from "./components/layout/AppBar";
 import DashboardPage from "./pages/DashboardPage";
@@ -36,6 +38,7 @@ export default function Dashboard() {
           <Copyright />
         </Container>
       </main>
+      <ToastContainer />
     </div>
   );
 }

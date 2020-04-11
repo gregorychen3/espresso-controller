@@ -1,4 +1,5 @@
 import { ActionCreatorWithPayload, Dispatch } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import {
   ApplianceClient,
   ServiceError,
@@ -32,7 +33,7 @@ export const createUnaryGrpcThunk = (
     if (err) {
       console.error(err);
       dispatch(failure({ req: reqMsg, err }));
-      // toast.error(`Error: ${err.message}`);
+      toast.error(`Error: ${err.message}`);
     } else {
       dispatch(resp(respMsg));
     }
