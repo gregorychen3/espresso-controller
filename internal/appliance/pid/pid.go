@@ -83,6 +83,6 @@ func (p *PID) SetSetPoint(temperature float32) SetPoint {
 
 func (p *PID) sampleTemperature() TemperatureSample {
 	randTemp := min + rand.Float32()*(max-min)
-	log.Debug("Sampled temperature", zap.Float32("temperature", randTemp))
+	log.Debug("Temperature sampled", zap.Float32("temperature", randTemp))
 	return TemperatureSample{Value: randTemp, ObservedAt: time.Now()}
 }
