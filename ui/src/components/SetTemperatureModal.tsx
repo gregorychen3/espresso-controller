@@ -34,7 +34,6 @@ export default () => {
   };
 
   const handleTargetTempChanged = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setTargetTempInput(parseInt(e.target.value, 10));
   };
 
