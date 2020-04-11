@@ -9,6 +9,7 @@ import (
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/pkg/errors"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 
@@ -79,6 +80,10 @@ func (s *GRPCWebServer) Listen(listener net.Listener, enableDevLogger bool) erro
 	router.Get("/test", func(writer http.ResponseWriter, req *http.Request) {
 		writer.WriteHeader(200)
 		writer.Write([]byte("Ok"))
+	})
+
+	router.Get("/metrics", func(writer http.ResponseWriter, req *http.Request) {
+		promhttp.Handler().ServeHTTP(writer, req)
 	})
 
 	box := packr.New("ui", "../../ui/build")
