@@ -15,6 +15,8 @@ const (
 	max float32 = 100.0
 )
 
+// BangBang is a temperature controller that implements bang-bang control.
+// https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control
 type BangBang struct {
 	setPoints []control.SetPoint
 
