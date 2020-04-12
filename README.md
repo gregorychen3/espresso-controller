@@ -15,7 +15,7 @@ PID control and monitoring for an espresso machine.
 - Water level monitoring
 - Application timer
 
-## System Block Diagram
+## Block Diagram
 ![System Block Diagram](ui/public/system_block_diagram.png)
 
 ## Credits
