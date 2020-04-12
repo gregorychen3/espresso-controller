@@ -22,7 +22,7 @@ type BangBang struct {
 	temperatureHistory   []control.TemperatureSample
 }
 
-func NewPID() *BangBang {
+func NewBangBang() *BangBang {
 	return &BangBang{
 		setPoints: []control.SetPoint{{
 			Temperature: 93,
