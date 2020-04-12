@@ -15,7 +15,8 @@ const (
 	max float32 = 100.0
 )
 
-// Bangbang is a temperature controller that implements bang-bang control.
+// Bangbang is a temperature controller that implements bang-bang control. It
+// satisfies the control.Strategy interface.
 // https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control
 type Bangbang struct {
 	targetTemperature control.TargetTemperature
