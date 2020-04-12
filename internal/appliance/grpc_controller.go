@@ -73,7 +73,7 @@ func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetT
 	}
 
 	return &appliancepb.GetTargetTemperatureResponse{
-		Temperature: setPoint.Temperature,
+		Temperature: setPoint.Value,
 		SetAt:       pbTime,
 	}, nil
 }
@@ -87,7 +87,7 @@ func (c *grpcController) SetTargetTemperature(ctx context.Context, req *applianc
 	}
 
 	return &appliancepb.SetTargetTemperatureResponse{
-		Temperature: setPoint.Temperature,
+		Temperature: setPoint.Value,
 		SetAt:       pbTime,
 	}, nil
 }

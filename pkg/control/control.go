@@ -5,13 +5,13 @@ import "time"
 type Strategy interface {
 	GetCurrentTemperature() TemperatureSample
 	GetTemperatureHistory() []TemperatureSample
-	GetSetPoint() Setpoint
-	SetSetPoint(temperature float32) Setpoint
+	GetSetPoint() TargetTemperature
+	SetSetPoint(temperature float32) TargetTemperature
 }
 
-type Setpoint struct {
-	Temperature float32
-	SetAt       time.Time
+type TargetTemperature struct {
+	Value float32
+	SetAt time.Time
 }
 
 type TemperatureSample struct {

@@ -18,7 +18,7 @@ const (
 // Bangbang is a temperature controller that implements bang-bang control.
 // https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control
 type Bangbang struct {
-	setPoints []control.Setpoint
+	setPoints []control.TargetTemperature
 
 	temperatureHistoryMu sync.RWMutex
 	temperatureHistory   []control.TemperatureSample
@@ -26,9 +26,9 @@ type Bangbang struct {
 
 func NewBangbang() *Bangbang {
 	return &Bangbang{
-		setPoints: []control.Setpoint{{
-			Temperature: 93,
-			SetAt:       time.Now(),
+		setPoints: []control.TargetTemperature{{
+			Value: 93,
+			SetAt: time.Now(),
 		}},
 	}
 }
@@ -41,12 +41,12 @@ func (p *Bangbang) Run() error {
 			p.temperatureHistory = append(p.temperatureHistory, sample)
 			p.temperatureHistoryMu.Unlock()
 
-			if sample.Value < p.GetSetPoint().Temperature {
-				log.Info("Switching heating element on", zap.String("curTemperature", sample.Value), zap.String("setPoint", p.GetSetPoint().Value))
+			if sample.Value < p.GetSetPoint().Value {
+				log.Info("Switching heating element on", zap.Float32("curTemperature", sample.Value), zap.Float32("setPoint", p.GetSetPoint().Value))
 				// TODO
 			}
-			if sample.Value > p.GetSetPoint().Temperature+1 {
-				log.Info("Switching heating element off", zap.String("curTemperature", sample.Value), zap.String("setPoint", p.GetSetPoint().Value))
+			if sample.Value > p.GetSetPoint().Value+1 {
+				log.Info("Switching heating element off", zap.Float32("curTemperature", sample.Value), zap.Float32("setPoint", p.GetSetPoint().Value))
 				// TODO
 			}
 
@@ -71,14 +71,14 @@ func (p *Bangbang) GetTemperatureHistory() []control.TemperatureSample {
 	return p.temperatureHistory
 }
 
-func (p *Bangbang) GetSetPoint() control.Setpoint {
+func (p *Bangbang) GetSetPoint() control.TargetTemperature {
 	return p.setPoints[len(p.setPoints)-1]
 }
 
-func (p *Bangbang) SetSetPoint(temperature float32) control.Setpoint {
-	setPoint := control.Setpoint{
-		Temperature: temperature,
-		SetAt:       time.Now(),
+func (p *Bangbang) SetSetPoint(temperature float32) control.TargetTemperature {
+	setPoint := control.TargetTemperature{
+		Value: temperature,
+		SetAt: time.Now(),
 	}
 	p.setPoints = append(p.setPoints, setPoint)
 	return setPoint
