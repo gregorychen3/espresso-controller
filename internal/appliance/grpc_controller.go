@@ -6,12 +6,13 @@ import (
 	"github.com/golang/protobuf/ptypes"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/pid"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
+	"github.com/gregorychen3/espresso-controller/pkg/control"
 	"github.com/pkg/errors"
 )
 
 type grpcController struct {
 	c               Configuration
-	temperatureCtrl *pid.PID
+	temperatureCtrl control.Strategy
 }
 
 func newGrpcController(c Configuration) (*grpcController, error) {

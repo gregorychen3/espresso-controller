@@ -2,7 +2,7 @@ package control
 
 import "time"
 
-type ControlStrategy interface {
+type Strategy interface {
 	GetCurrentTemperature() TemperatureSample
 	GetTemperatureHistory() []TemperatureSample
 	GetSetPoint() SetPoint
