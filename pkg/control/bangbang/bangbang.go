@@ -15,15 +15,15 @@ const (
 	max float32 = 100.0
 )
 
-type PID struct {
+type BangBang struct {
 	setPoints []control.SetPoint
 
 	temperatureHistoryMu sync.RWMutex
 	temperatureHistory   []control.TemperatureSample
 }
 
-func NewPID() *PID {
-	return &PID{
+func NewPID() *BangBang {
+	return &BangBang{
 		setPoints: []control.SetPoint{{
 			Temperature: 93,
 			SetAt:       time.Now(),
@@ -31,7 +31,7 @@ func NewPID() *PID {
 	}
 }
 
-func (p *PID) Run() error {
+func (p *BangBang) Run() error {
 	go func() {
 		for {
 			sample := p.sampleTemperature()
@@ -45,25 +45,25 @@ func (p *PID) Run() error {
 	return nil
 }
 
-func (p *PID) GetCurrentTemperature() control.TemperatureSample {
+func (p *BangBang) GetCurrentTemperature() control.TemperatureSample {
 	p.temperatureHistoryMu.RLock()
 	defer p.temperatureHistoryMu.RUnlock()
 
 	return p.temperatureHistory[len(p.temperatureHistory)-1]
 }
 
-func (p *PID) GetTemperatureHistory() []control.TemperatureSample {
+func (p *BangBang) GetTemperatureHistory() []control.TemperatureSample {
 	p.temperatureHistoryMu.RLock()
 	defer p.temperatureHistoryMu.RUnlock()
 
 	return p.temperatureHistory
 }
 
-func (p *PID) GetSetPoint() control.SetPoint {
+func (p *BangBang) GetSetPoint() control.SetPoint {
 	return p.setPoints[len(p.setPoints)-1]
 }
 
-func (p *PID) SetSetPoint(temperature float32) control.SetPoint {
+func (p *BangBang) SetSetPoint(temperature float32) control.SetPoint {
 	setPoint := control.SetPoint{
 		Temperature: temperature,
 		SetAt:       time.Now(),
@@ -72,7 +72,7 @@ func (p *PID) SetSetPoint(temperature float32) control.SetPoint {
 	return setPoint
 }
 
-func (p *PID) sampleTemperature() control.TemperatureSample {
+func (p *BangBang) sampleTemperature() control.TemperatureSample {
 	randTemp := min + rand.Float32()*(max-min)
 	log.Debug("Temperature sampled", zap.Float32("temperature", randTemp))
 	return control.TemperatureSample{Value: randTemp, ObservedAt: time.Now()}
