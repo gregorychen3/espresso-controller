@@ -15,17 +15,17 @@ const (
 	max float32 = 100.0
 )
 
-// BangBang is a temperature controller that implements bang-bang control.
+// Bangbang is a temperature controller that implements bang-bang control.
 // https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control
-type BangBang struct {
+type Bangbang struct {
 	setPoints []control.SetPoint
 
 	temperatureHistoryMu sync.RWMutex
 	temperatureHistory   []control.TemperatureSample
 }
 
-func NewBangBang() *BangBang {
-	return &BangBang{
+func NewBangbang() *Bangbang {
+	return &Bangbang{
 		setPoints: []control.SetPoint{{
 			Temperature: 93,
 			SetAt:       time.Now(),
@@ -33,7 +33,7 @@ func NewBangBang() *BangBang {
 	}
 }
 
-func (p *BangBang) Run() error {
+func (p *Bangbang) Run() error {
 	go func() {
 		for {
 			sample := p.sampleTemperature()
@@ -47,25 +47,25 @@ func (p *BangBang) Run() error {
 	return nil
 }
 
-func (p *BangBang) GetCurrentTemperature() control.TemperatureSample {
+func (p *Bangbang) GetCurrentTemperature() control.TemperatureSample {
 	p.temperatureHistoryMu.RLock()
 	defer p.temperatureHistoryMu.RUnlock()
 
 	return p.temperatureHistory[len(p.temperatureHistory)-1]
 }
 
-func (p *BangBang) GetTemperatureHistory() []control.TemperatureSample {
+func (p *Bangbang) GetTemperatureHistory() []control.TemperatureSample {
 	p.temperatureHistoryMu.RLock()
 	defer p.temperatureHistoryMu.RUnlock()
 
 	return p.temperatureHistory
 }
 
-func (p *BangBang) GetSetPoint() control.SetPoint {
+func (p *Bangbang) GetSetPoint() control.SetPoint {
 	return p.setPoints[len(p.setPoints)-1]
 }
 
-func (p *BangBang) SetSetPoint(temperature float32) control.SetPoint {
+func (p *Bangbang) SetSetPoint(temperature float32) control.SetPoint {
 	setPoint := control.SetPoint{
 		Temperature: temperature,
 		SetAt:       time.Now(),
@@ -74,7 +74,7 @@ func (p *BangBang) SetSetPoint(temperature float32) control.SetPoint {
 	return setPoint
 }
 
-func (p *BangBang) sampleTemperature() control.TemperatureSample {
+func (p *Bangbang) sampleTemperature() control.TemperatureSample {
 	randTemp := min + rand.Float32()*(max-min)
 	log.Debug("Temperature sampled", zap.Float32("temperature", randTemp))
 	return control.TemperatureSample{Value: randTemp, ObservedAt: time.Now()}
