@@ -43,12 +43,12 @@ func (p *Bangbang) Run() error {
 			p.temperatureHistoryMu.Unlock()
 
 			if sample.Value < p.GetTargetTemperature().Value {
-				log.Info("Switching heating element on", zap.Float32("curTemperature", sample.Value), zap.Float32("setPoint", p.GetTargetTemperature().Value))
+				log.Info("Switching heating element on", zap.Float32("curTemperature", sample.Value), zap.Float32("targetTemperature", p.GetTargetTemperature().Value))
 				// TODO
 			}
 
 			if sample.Value > p.GetTargetTemperature().Value+1 {
-				log.Info("Switching heating element off", zap.Float32("curTemperature", sample.Value), zap.Float32("setPoint", p.GetTargetTemperature().Value))
+				log.Info("Switching heating element off", zap.Float32("curTemperature", sample.Value), zap.Float32("targetTemperature", p.GetTargetTemperature().Value))
 				// TODO
 			}
 
