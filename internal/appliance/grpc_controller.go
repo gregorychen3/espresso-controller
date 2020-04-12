@@ -4,9 +4,9 @@ import (
 	"context"
 
 	"github.com/golang/protobuf/ptypes"
-	"github.com/gregorychen3/espresso-controller/internal/appliance/pid"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
 	"github.com/gregorychen3/espresso-controller/pkg/control"
+	"github.com/gregorychen3/espresso-controller/pkg/control/bangbang"
 	"github.com/pkg/errors"
 )
 
@@ -16,14 +16,14 @@ type grpcController struct {
 }
 
 func newGrpcController(c Configuration) (*grpcController, error) {
-	pid := pid.NewPID()
-	if err := pid.Run(); err != nil {
+	temperatureCtrl := bangbang.NewPID()
+	if err := temperatureCtrl.Run(); err != nil {
 		return nil, errors.Wrap(err, "Failed to start temperature controller")
 	}
 
 	return &grpcController{
 		c:               c,
-		temperatureCtrl: pid,
+		temperatureCtrl: temperatureCtrl,
 	}, nil
 }
 

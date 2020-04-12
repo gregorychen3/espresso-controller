@@ -1,4 +1,4 @@
-package pid
+package bangbang
 
 import (
 	"math/rand"
