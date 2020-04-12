@@ -10,24 +10,24 @@ import (
 )
 
 type grpcController struct {
-	c             Configuration
-	pidController *pid.PID
+	c               Configuration
+	temperatureCtrl *pid.PID
 }
 
 func newGrpcController(c Configuration) (*grpcController, error) {
 	pid := pid.NewPID()
 	if err := pid.Run(); err != nil {
-		return nil, errors.Wrap(err, "Failed to start pid controller")
+		return nil, errors.Wrap(err, "Failed to start temperature controller")
 	}
 
 	return &grpcController{
-		c:             c,
-		pidController: pid,
+		c:               c,
+		temperatureCtrl: pid,
 	}, nil
 }
 
 func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.GetCurrentTemperatureRequest) (*appliancepb.GetCurrentTemperatureResponse, error) {
-	sample := c.pidController.GetCurrentTemperature()
+	sample := c.temperatureCtrl.GetCurrentTemperature()
 
 	pbTime, err := ptypes.TimestampProto(sample.ObservedAt)
 	if err != nil {
@@ -43,7 +43,7 @@ func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.Get
 }
 
 func (c *grpcController) GetTemperatureHistory(context.Context, *appliancepb.GetTemperatureHistoryRequest) (*appliancepb.GetTemperatureHistoryResponse, error) {
-	samples := c.pidController.GetTemperatureHistory()
+	samples := c.temperatureCtrl.GetTemperatureHistory()
 
 	var pbSamples []*appliancepb.TemperatureSample
 	for _, s := range samples {
@@ -64,7 +64,7 @@ func (c *grpcController) GetTemperatureHistory(context.Context, *appliancepb.Get
 }
 
 func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetTargetTemperatureRequest) (*appliancepb.GetTargetTemperatureResponse, error) {
-	setPoint := c.pidController.GetSetPoint()
+	setPoint := c.temperatureCtrl.GetSetPoint()
 
 	pbTime, err := ptypes.TimestampProto(setPoint.SetAt)
 	if err != nil {
@@ -78,7 +78,7 @@ func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetT
 }
 
 func (c *grpcController) SetTargetTemperature(ctx context.Context, req *appliancepb.SetTargetTemperatureRequest) (*appliancepb.SetTargetTemperatureResponse, error) {
-	setPoint := c.pidController.SetSetPoint(req.Temperature)
+	setPoint := c.temperatureCtrl.SetSetPoint(req.Temperature)
 
 	pbTime, err := ptypes.TimestampProto(setPoint.SetAt)
 	if err != nil {
