@@ -18,7 +18,7 @@ const (
 // Bangbang is a temperature controller that implements bang-bang control.
 // https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control
 type Bangbang struct {
-	setPoints []control.TargetTemperature
+	targetTemperature control.TargetTemperature
 
 	temperatureHistoryMu sync.RWMutex
 	temperatureHistory   []control.TemperatureSample
@@ -26,10 +26,10 @@ type Bangbang struct {
 
 func NewBangbang() *Bangbang {
 	return &Bangbang{
-		setPoints: []control.TargetTemperature{{
+		targetTemperature: control.TargetTemperature{
 			Value: 93,
 			SetAt: time.Now(),
-		}},
+		},
 	}
 }
 
@@ -73,16 +73,16 @@ func (p *Bangbang) GetTemperatureHistory() []control.TemperatureSample {
 }
 
 func (p *Bangbang) GetTargetTemperature() control.TargetTemperature {
-	return p.setPoints[len(p.setPoints)-1]
+	return p.targetTemperature
 }
 
 func (p *Bangbang) SetTargetTemperature(temperature float32) control.TargetTemperature {
-	setPoint := control.TargetTemperature{
+	targetTemperature := control.TargetTemperature{
 		Value: temperature,
 		SetAt: time.Now(),
 	}
-	p.setPoints = append(p.setPoints, setPoint)
-	return setPoint
+	p.targetTemperature = targetTemperature
+	return targetTemperature
 }
 
 func (p *Bangbang) sampleTemperature() control.TemperatureSample {
