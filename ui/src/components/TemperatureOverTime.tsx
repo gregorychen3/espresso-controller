@@ -48,6 +48,7 @@ export default () => {
             </Label>
           </YAxis>
           <Line
+            isAnimationActive={false}
             type="monotone"
             dataKey="temp"
             stroke={theme.palette.primary.main}
