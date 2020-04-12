@@ -16,7 +16,7 @@ PID control and monitoring for an espresso machine.
 - Application timer
 
 ## Block Diagram
-![System Block Diagram](ui/public/system_block_diagram.png)
+![System Block Diagram](ui/public/system_block_diagram.svg)
 
 ## Credits
 
