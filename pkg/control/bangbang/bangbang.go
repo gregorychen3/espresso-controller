@@ -41,12 +41,13 @@ func (p *Bangbang) Run() error {
 			p.temperatureHistory = append(p.temperatureHistory, sample)
 			p.temperatureHistoryMu.Unlock()
 
-			if sample.Value < p.GetSetPoint().Value {
-				log.Info("Switching heating element on", zap.Float32("curTemperature", sample.Value), zap.Float32("setPoint", p.GetSetPoint().Value))
+			if sample.Value < p.GetTargetTemperature().Value {
+				log.Info("Switching heating element on", zap.Float32("curTemperature", sample.Value), zap.Float32("setPoint", p.GetTargetTemperature().Value))
 				// TODO
 			}
-			if sample.Value > p.GetSetPoint().Value+1 {
-				log.Info("Switching heating element off", zap.Float32("curTemperature", sample.Value), zap.Float32("setPoint", p.GetSetPoint().Value))
+
+			if sample.Value > p.GetTargetTemperature().Value+1 {
+				log.Info("Switching heating element off", zap.Float32("curTemperature", sample.Value), zap.Float32("setPoint", p.GetTargetTemperature().Value))
 				// TODO
 			}
 
@@ -71,11 +72,11 @@ func (p *Bangbang) GetTemperatureHistory() []control.TemperatureSample {
 	return p.temperatureHistory
 }
 
-func (p *Bangbang) GetSetPoint() control.TargetTemperature {
+func (p *Bangbang) GetTargetTemperature() control.TargetTemperature {
 	return p.setPoints[len(p.setPoints)-1]
 }
 
-func (p *Bangbang) SetSetPoint(temperature float32) control.TargetTemperature {
+func (p *Bangbang) SetTargetTemperature(temperature float32) control.TargetTemperature {
 	setPoint := control.TargetTemperature{
 		Value: temperature,
 		SetAt: time.Now(),

@@ -65,7 +65,7 @@ func (c *grpcController) GetTemperatureHistory(context.Context, *appliancepb.Get
 }
 
 func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetTargetTemperatureRequest) (*appliancepb.GetTargetTemperatureResponse, error) {
-	setPoint := c.temperatureCtrl.GetSetPoint()
+	setPoint := c.temperatureCtrl.GetTargetTemperature()
 
 	pbTime, err := ptypes.TimestampProto(setPoint.SetAt)
 	if err != nil {
@@ -79,7 +79,7 @@ func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetT
 }
 
 func (c *grpcController) SetTargetTemperature(ctx context.Context, req *appliancepb.SetTargetTemperatureRequest) (*appliancepb.SetTargetTemperatureResponse, error) {
-	setPoint := c.temperatureCtrl.SetSetPoint(req.Temperature)
+	setPoint := c.temperatureCtrl.SetTargetTemperature(req.Temperature)
 
 	pbTime, err := ptypes.TimestampProto(setPoint.SetAt)
 	if err != nil {
