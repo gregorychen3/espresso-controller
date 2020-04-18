@@ -1,8 +1,10 @@
 package metrics
 
 import (
+	"io/ioutil"
 	"os/exec"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/armon/go-metrics"
@@ -17,6 +19,7 @@ var (
 	metricKeyMemUtilizationRatio = []string{"raspi_mem_utilization_ratio"}
 	metricKeyCPUUtilizationRatio = []string{"raspi_cpu_utilization_ratio"}
 	metricKeyRaspiGPUTemperature = []string{"raspi_gpu_temperature"}
+	metricKeyRaspiCPUTemperature = []string{"raspi_cpu_temperature"}
 )
 
 // InitMetrics creates a prometheus sink
@@ -54,9 +57,16 @@ func CollectSystemMetrics() {
 
 	gpuTemperature, err := sampleRaspiGPUTemperature()
 	if err != nil {
-		log.Error("Failed to sample raspi gpu temperature", zap.Error(err))
+		log.Error("Failed to sample gpu temperature", zap.Error(err))
 	} else {
-		metrics.SetGauge(metricKeyCPUUtilizationRatio, gpuTemperature)
+		metrics.SetGauge(metricKeyRaspiGPUTemperature, gpuTemperature)
+	}
+
+	cpuTemperature, err := sampleRaspiCPUTemperature()
+	if err != nil {
+		log.Error("Failed to sample cpu temperature", zap.Error(err))
+	} else {
+		metrics.SetGauge(metricKeyRaspiCPUTemperature, cpuTemperature)
 	}
 }
 
@@ -67,6 +77,20 @@ func sampleRaspiGPUTemperature() (float32, error) {
 	}
 
 	temperature64, err := strconv.ParseFloat(string(outBytes), 32)
+	if err != nil {
+		return 0, err
+	}
+
+	return float32(temperature64), nil
+}
+
+func sampleRaspiCPUTemperature() (float32, error) {
+	fileBytes, err := ioutil.ReadFile("/sys/class/thermal/thermal_zone0/temp")
+	if err != nil {
+		return 0, err
+	}
+
+	temperature64, err := strconv.ParseFloat(strings.TrimSpace(string(fileBytes)), 64)
 	if err != nil {
 		return 0, err
 	}
