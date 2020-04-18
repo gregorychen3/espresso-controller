@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/gregorychen3/espresso-controller/internal/log"
+	"github.com/gregorychen3/espresso-controller/internal/metrics"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -82,9 +83,10 @@ func (s *GRPCWebServer) Listen(listener net.Listener, enableDevLogger bool) erro
 		writer.Write([]byte("Ok"))
 	})
 
-	router.Get("/metrics", func(writer http.ResponseWriter, req *http.Request) {
-		promhttp.Handler().ServeHTTP(writer, req)
-	})
+	router.Handle("/metrics", http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+		metrics.CollectSystemMetrics()
+		promhttp.Handler().ServeHTTP(w, req)
+	}))
 
 	box := packr.New("ui", "../../ui/build")
 	indexBytes, err := box.Find("index.html")
