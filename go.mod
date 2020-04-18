@@ -21,6 +21,7 @@ require (
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.4.0
+	github.com/yryz/ds18b20 v0.0.0-20180211073435-3cf383a40624
 	go.uber.org/zap v1.10.0
 	golang.org/x/crypto v0.0.0-20200406173513-056763e48d71 // indirect
 	golang.org/x/net v0.0.0-20200324143707-d3edc9973b7e // indirect

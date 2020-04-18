@@ -5,8 +5,11 @@ import (
 	"sync"
 	"time"
 
+	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
+	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature/ds18b20"
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/pkg/control"
+	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
 
@@ -21,16 +24,20 @@ const (
 type Bangbang struct {
 	targetTemperature control.TargetTemperature
 
+	temperatureSampler temperature.TemperatureSampler
+
 	temperatureHistoryMu sync.RWMutex
 	temperatureHistory   []control.TemperatureSample
 }
 
 func NewBangbang() *Bangbang {
+	sampler, err := ds18b20.NewDS18B20()
+	if err != nil {
+		errors.Wrap(err, "failed to initialize temperature sampler")
+	}
 	return &Bangbang{
-		targetTemperature: control.TargetTemperature{
-			Value: 93,
-			SetAt: time.Now(),
-		},
+		temperatureSampler: sampler,
+		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},
 	}
 }
 
