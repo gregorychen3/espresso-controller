@@ -45,20 +45,25 @@ func CollectSystemMetrics() {
 	if err != nil {
 		log.Error("Failed to collect system memory utilization metrics", zap.Error(err))
 	} else {
-		metrics.SetGauge(metricKeyMemUtilizationRatio, float32(memStats.UsedPercent/100))
+		memUtilizationRatio := float32(memStats.UsedPercent / 100)
+		log.Info("Sampled system memory utilization", zap.Float32("memUtilizationRatio", memUtilizationRatio))
+		metrics.SetGauge(metricKeyMemUtilizationRatio, memUtilizationRatio)
 	}
 
 	cpuStats, err := cpu.Percent(0, false)
 	if err != nil {
 		log.Error("Failed to collect system cpu utilization metrics", zap.Error(err))
 	} else {
-		metrics.SetGauge(metricKeyCPUUtilizationRatio, float32(cpuStats[0]/100))
+		cpuUtilizationRatio := float32(cpuStats[0] / 100)
+		log.Info("Sampled system cpu utilization", zap.Float32("cpuUtilizationRatio", cpuUtilizationRatio))
+		metrics.SetGauge(metricKeyCPUUtilizationRatio, cpuUtilizationRatio)
 	}
 
 	gpuTemperature, err := sampleRaspiGPUTemperature()
 	if err != nil {
 		log.Error("Failed to sample gpu temperature", zap.Error(err))
 	} else {
+		log.Info("Sampled gpu temperature", zap.Float32("gpuTemperature", gpuTemperature))
 		metrics.SetGauge(metricKeyRaspiGPUTemperature, gpuTemperature)
 	}
 
@@ -66,6 +71,7 @@ func CollectSystemMetrics() {
 	if err != nil {
 		log.Error("Failed to sample cpu temperature", zap.Error(err))
 	} else {
+		log.Info("Sampled cpu temperature", zap.Float32("cpuTemperature", cpuTemperature))
 		metrics.SetGauge(metricKeyRaspiCPUTemperature, cpuTemperature)
 	}
 }
