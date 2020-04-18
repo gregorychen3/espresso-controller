@@ -46,7 +46,7 @@ func (p *Bangbang) Run() error {
 			sample, err := p.sampleTemperature()
 			if err != nil {
 				log.Error("Failed to sample temperature", zap.Error(err))
-				time.Sleep(5 * time.Second)
+				time.Sleep(2 * time.Second)
 				continue
 			}
 
@@ -64,7 +64,7 @@ func (p *Bangbang) Run() error {
 				// TODO
 			}
 
-			time.Sleep(5 * time.Second)
+			time.Sleep(2 * time.Second)
 		}
 	}()
 

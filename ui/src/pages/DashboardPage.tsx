@@ -44,7 +44,7 @@ export default () => {
     dispatch(getTemperatureHistory(new GetTemperatureHistoryRequest()));
     const interval = setInterval(() => {
       dispatch(getCurrentTemperature(new GetCurrentTemperatureRequest()));
-    }, 5000);
+    }, 2000);
 
     return () => {
       clearInterval(interval);
