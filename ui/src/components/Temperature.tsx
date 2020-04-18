@@ -36,7 +36,7 @@ export default () => {
           color="textSecondary"
           className={classes.temperatureContext}
         >
-          as of {curTemp.observedAt.format("h:mm:ssa")} Eastern Time
+          as of {curTemp.observedAt.format("HH:mm:ss")} Eastern Time
         </Typography>
       )}
       <Title>Target Temperature</Title>
