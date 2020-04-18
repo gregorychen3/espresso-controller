@@ -4,12 +4,9 @@ go 1.14
 
 require (
 	github.com/armon/go-metrics v0.3.3
-	github.com/crewjam/saml v0.4.0
 	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
 	github.com/go-chi/chi v4.1.0+incompatible
 	github.com/go-chi/cors v1.0.1
-	github.com/gobuffalo/envy v1.9.0 // indirect
-	github.com/gobuffalo/packr v1.30.1 // indirect
 	github.com/gobuffalo/packr/v2 v2.8.0
 	github.com/golang/protobuf v1.3.5
 	github.com/grpc-ecosystem/go-grpc-middleware v1.0.0
@@ -31,8 +28,7 @@ require (
 	golang.org/x/sync v0.0.0-20200317015054-43a5402ce75a
 	golang.org/x/sys v0.0.0-20200409092240-59c9f1ba88fa // indirect
 	golang.org/x/text v0.3.2 // indirect
-	golang.org/x/tools v0.0.0-20200410194907-79a7a3126eef // indirect
 	google.golang.org/genproto v0.0.0-20200409111301-baae70f3302d // indirect
-	google.golang.org/grpc v1.28.1
+	google.golang.org/grpc v1.27.0
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 )
