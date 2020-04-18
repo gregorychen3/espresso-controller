@@ -14,8 +14,8 @@ import (
 )
 
 const (
-	min float32 = 80.0
-	max float32 = 100.0
+	min float64 = 80.0
+	max float64 = 100.0
 )
 
 // Bangbang is a temperature controller that implements bang-bang control. It
@@ -50,12 +50,12 @@ func (p *Bangbang) Run() error {
 			p.temperatureHistoryMu.Unlock()
 
 			if sample.Value < p.GetTargetTemperature().Value {
-				log.Info("Switching heating element on", zap.Float32("curTemperature", sample.Value), zap.Float32("targetTemperature", p.GetTargetTemperature().Value))
+				log.Info("Switching heating element on", zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
 				// TODO
 			}
 
 			if sample.Value > p.GetTargetTemperature().Value+1 {
-				log.Info("Switching heating element off", zap.Float32("curTemperature", sample.Value), zap.Float32("targetTemperature", p.GetTargetTemperature().Value))
+				log.Info("Switching heating element off", zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
 				// TODO
 			}
 
@@ -84,7 +84,7 @@ func (p *Bangbang) GetTargetTemperature() control.TargetTemperature {
 	return p.targetTemperature
 }
 
-func (p *Bangbang) SetTargetTemperature(temperature float32) control.TargetTemperature {
+func (p *Bangbang) SetTargetTemperature(temperature float64) control.TargetTemperature {
 	targetTemperature := control.TargetTemperature{
 		Value: temperature,
 		SetAt: time.Now(),
@@ -94,7 +94,7 @@ func (p *Bangbang) SetTargetTemperature(temperature float32) control.TargetTempe
 }
 
 func (p *Bangbang) sampleTemperature() control.TemperatureSample {
-	randTemp := min + rand.Float32()*(max-min)
-	log.Debug("Temperature sampled", zap.Float32("temperature", randTemp))
+	randTemp := min + rand.Float64()*(max-min)
+	log.Debug("Temperature sampled", zap.Float64("temperature", randTemp))
 	return control.TemperatureSample{Value: randTemp, ObservedAt: time.Now()}
 }

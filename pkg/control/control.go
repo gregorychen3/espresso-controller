@@ -7,15 +7,15 @@ type Strategy interface {
 	GetTemperatureHistory() []*TemperatureSample
 
 	GetTargetTemperature() TargetTemperature
-	SetTargetTemperature(temperature float32) TargetTemperature
+	SetTargetTemperature(temperature float64) TargetTemperature
 }
 
 type TargetTemperature struct {
-	Value float32
+	Value float64
 	SetAt time.Time
 }
 
 type TemperatureSample struct {
-	Value      float32
+	Value      float64
 	ObservedAt time.Time
 }
