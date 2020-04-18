@@ -16,7 +16,11 @@ type grpcController struct {
 }
 
 func newGrpcController(c Configuration) (*grpcController, error) {
-	temperatureCtrlr := bangbang.NewBangbang()
+	temperatureCtrlr, err := bangbang.NewBangbang()
+	if err != nil {
+		return nil, err
+	}
+
 	if err := temperatureCtrlr.Run(); err != nil {
 		return nil, errors.Wrap(err, "Failed to start temperature controller")
 	}

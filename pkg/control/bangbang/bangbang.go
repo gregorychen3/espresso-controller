@@ -29,15 +29,15 @@ type Bangbang struct {
 	temperatureHistory   []*control.TemperatureSample
 }
 
-func NewBangbang() *Bangbang {
+func NewBangbang() (*Bangbang, error) {
 	sampler, err := ds18b20.NewDS18B20()
 	if err != nil {
-		errors.Wrap(err, "failed to initialize temperature sampler")
+		return nil, errors.Wrap(err, "failed to initialize temperature sampler")
 	}
 	return &Bangbang{
 		temperatureSampler: sampler,
 		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},
-	}
+	}, nil
 }
 
 func (p *Bangbang) Run() error {
@@ -104,6 +104,6 @@ func (p *Bangbang) sampleTemperature() (*control.TemperatureSample, error) {
 		return nil, err
 	}
 
-	log.Debug("Temperature sampled", zap.Float64("temperature", temperature))
+	log.Info("Temperature sampled", zap.Float64("temperature", temperature))
 	return &control.TemperatureSample{Value: temperature, ObservedAt: time.Now()}, nil
 }
