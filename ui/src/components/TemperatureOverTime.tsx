@@ -12,7 +12,10 @@ import {
 import { getTempHistory } from "../redux/selectors";
 import Title from "./Title";
 
-export default () => {
+interface Props {
+  title: string;
+}
+export default ({ title }: Props) => {
   const theme = useTheme();
 
   const samples = useSelector(getTempHistory);
@@ -23,7 +26,7 @@ export default () => {
 
   return (
     <>
-      <Title>Temperature Over Time</Title>
+      <Title>{title}</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
