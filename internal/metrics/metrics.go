@@ -76,7 +76,7 @@ func sampleRaspiGPUTemperature() (float32, error) {
 		return 0, nil
 	}
 
-	temperature64, err := strconv.ParseFloat(string(outBytes), 32)
+	temperature64, err := strconv.ParseFloat(string(outBytes)[5:9], 32)
 	if err != nil {
 		return 0, err
 	}
