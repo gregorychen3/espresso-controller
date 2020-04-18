@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RecentActions from "../components/RecentActions";
 import SetTemperatureModal from "../components/SetTemperatureModal";
 import Temperature from "../components/Temperature";
-import TemperatureOverTime from "../components/TemperatureOverTime";
+import TemperatureChart from "../components/TemperatureChart";
 import {
   GetCurrentTemperatureRequest,
   GetTargetTemperatureRequest,
@@ -61,7 +61,7 @@ export default () => {
       <Grid container spacing={3}>
         <Grid item xs={12} md={8} lg={9}>
           <Paper className={fixedHeightPaper}>
-            <TemperatureOverTime title="Boiler Temperature" />
+            <TemperatureChart title="Boiler Temperature" />
           </Paper>
         </Grid>
         <Grid item xs={12} md={4} lg={3}>
