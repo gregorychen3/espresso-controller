@@ -11,6 +11,7 @@ require (
 	github.com/gobuffalo/packr v1.30.1 // indirect
 	github.com/gobuffalo/packr/v2 v2.8.0
 	github.com/golang/protobuf v1.3.5
+	github.com/grpc-ecosystem/go-grpc-middleware v1.0.0
 	github.com/improbable-eng/grpc-web v0.12.0
 	github.com/karrick/godirwalk v1.15.6 // indirect
 	github.com/pkg/errors v0.8.1

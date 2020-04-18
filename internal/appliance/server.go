@@ -6,6 +6,9 @@ import (
 
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
+	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
+	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
+	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
 	"github.com/pkg/errors"
 	"github.com/soheilhy/cmux"
 	"go.uber.org/zap"
@@ -35,7 +38,11 @@ func (s *Server) serveTCP() error {
 		return err
 	}
 
-	grpcServer := grpc.NewServer( /*TODO: logging interceptors*/ )
+	grpcServer := grpc.NewServer(
+		grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
+			grpc_ctxtags.UnaryServerInterceptor(),
+			grpc_zap.UnaryServerInterceptor(log.Logger),
+		)))
 	appliancepb.RegisterApplianceServer(grpcServer, grpcController)
 
 	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", s.c.Port))
