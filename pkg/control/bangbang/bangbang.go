@@ -47,7 +47,7 @@ func (p *Bangbang) Run() error {
 			if err != nil {
 				log.Error("Failed to sample temperature", zap.Error(err))
 				time.Sleep(5 * time.Second)
-				return
+				continue
 			}
 
 			p.temperatureHistoryMu.Lock()
