@@ -90,10 +90,10 @@ func sampleRaspiCPUTemperature() (float32, error) {
 		return 0, err
 	}
 
-	temperature64, err := strconv.ParseFloat(strings.TrimSpace(string(fileBytes)), 64)
+	temperaturef64, err := strconv.ParseFloat(strings.TrimSpace(string(fileBytes)), 64)
 	if err != nil {
 		return 0, err
 	}
 
-	return float32(temperature64), nil
+	return float32(temperaturef64 / 1000), nil
 }
