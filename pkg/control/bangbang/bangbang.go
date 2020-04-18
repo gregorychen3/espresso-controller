@@ -1,7 +1,6 @@
 package bangbang
 
 import (
-	"math/rand"
 	"sync"
 	"time"
 
@@ -44,9 +43,15 @@ func NewBangbang() *Bangbang {
 func (p *Bangbang) Run() error {
 	go func() {
 		for {
-			sample := p.sampleTemperature()
+			sample, err := p.sampleTemperature()
+			if err != nil {
+				log.Error("Failed to sample temperature", zap.Error(err))
+				time.Sleep(5 * time.Second)
+				return
+			}
+
 			p.temperatureHistoryMu.Lock()
-			p.temperatureHistory = append(p.temperatureHistory, &sample)
+			p.temperatureHistory = append(p.temperatureHistory, sample)
 			p.temperatureHistoryMu.Unlock()
 
 			if sample.Value < p.GetTargetTemperature().Value {
@@ -93,8 +98,12 @@ func (p *Bangbang) SetTargetTemperature(temperature float64) control.TargetTempe
 	return targetTemperature
 }
 
-func (p *Bangbang) sampleTemperature() control.TemperatureSample {
-	randTemp := min + rand.Float64()*(max-min)
-	log.Debug("Temperature sampled", zap.Float64("temperature", randTemp))
-	return control.TemperatureSample{Value: randTemp, ObservedAt: time.Now()}
+func (p *Bangbang) sampleTemperature() (*control.TemperatureSample, error) {
+	temperature, err := p.temperatureSampler.Sample()
+	if err != nil {
+		return nil, err
+	}
+
+	log.Debug("Temperature sampled", zap.Float64("temperature", temperature))
+	return &control.TemperatureSample{Value: temperature, ObservedAt: time.Now()}, nil
 }
