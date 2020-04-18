@@ -284,7 +284,7 @@ proto.appliancepb.TemperatureSample.deserializeBinaryFromReader = function(msg, 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readFloat());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setValue(value);
       break;
     case 2:
@@ -323,7 +323,7 @@ proto.appliancepb.TemperatureSample.serializeBinaryToWriter = function(message, 
   var f = undefined;
   f = message.getValue();
   if (f !== 0.0) {
-    writer.writeFloat(
+    writer.writeDouble(
       1,
       f
     );
@@ -340,7 +340,7 @@ proto.appliancepb.TemperatureSample.serializeBinaryToWriter = function(message, 
 
 
 /**
- * optional float value = 1;
+ * optional double value = 1;
  * @return {number}
  */
 proto.appliancepb.TemperatureSample.prototype.getValue = function() {
@@ -1079,7 +1079,7 @@ proto.appliancepb.GetTargetTemperatureResponse.deserializeBinaryFromReader = fun
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readFloat());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setTemperature(value);
       break;
     case 2:
@@ -1118,7 +1118,7 @@ proto.appliancepb.GetTargetTemperatureResponse.serializeBinaryToWriter = functio
   var f = undefined;
   f = message.getTemperature();
   if (f !== 0.0) {
-    writer.writeFloat(
+    writer.writeDouble(
       1,
       f
     );
@@ -1135,7 +1135,7 @@ proto.appliancepb.GetTargetTemperatureResponse.serializeBinaryToWriter = functio
 
 
 /**
- * optional float temperature = 1;
+ * optional double temperature = 1;
  * @return {number}
  */
 proto.appliancepb.GetTargetTemperatureResponse.prototype.getTemperature = function() {
@@ -1259,7 +1259,7 @@ proto.appliancepb.SetTargetTemperatureRequest.deserializeBinaryFromReader = func
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readFloat());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setTemperature(value);
       break;
     default:
@@ -1293,7 +1293,7 @@ proto.appliancepb.SetTargetTemperatureRequest.serializeBinaryToWriter = function
   var f = undefined;
   f = message.getTemperature();
   if (f !== 0.0) {
-    writer.writeFloat(
+    writer.writeDouble(
       1,
       f
     );
@@ -1302,7 +1302,7 @@ proto.appliancepb.SetTargetTemperatureRequest.serializeBinaryToWriter = function
 
 
 /**
- * optional float temperature = 1;
+ * optional double temperature = 1;
  * @return {number}
  */
 proto.appliancepb.SetTargetTemperatureRequest.prototype.getTemperature = function() {
@@ -1390,7 +1390,7 @@ proto.appliancepb.SetTargetTemperatureResponse.deserializeBinaryFromReader = fun
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readFloat());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setTemperature(value);
       break;
     case 2:
@@ -1429,7 +1429,7 @@ proto.appliancepb.SetTargetTemperatureResponse.serializeBinaryToWriter = functio
   var f = undefined;
   f = message.getTemperature();
   if (f !== 0.0) {
-    writer.writeFloat(
+    writer.writeDouble(
       1,
       f
     );
@@ -1446,7 +1446,7 @@ proto.appliancepb.SetTargetTemperatureResponse.serializeBinaryToWriter = functio
 
 
 /**
- * optional float temperature = 1;
+ * optional double temperature = 1;
  * @return {number}
  */
 proto.appliancepb.SetTargetTemperatureResponse.prototype.getTemperature = function() {

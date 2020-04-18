@@ -12,7 +12,7 @@ service Appliance {
 }
 
 message TemperatureSample {
-    float value = 1;
+    double value = 1;
     google.protobuf.Timestamp observed_at = 2;
 }
 
@@ -28,14 +28,14 @@ message GetTemperatureHistoryResponse {
 
 message GetTargetTemperatureRequest {}
 message GetTargetTemperatureResponse {
-    float temperature = 1;
+    double temperature = 1;
     google.protobuf.Timestamp set_at = 2;
 }
 
 message SetTargetTemperatureRequest {
-    float temperature = 1;
+    double temperature = 1;
 }
 message SetTargetTemperatureResponse {
-    float temperature = 1;
+    double temperature = 1;
     google.protobuf.Timestamp set_at = 2;
 }
