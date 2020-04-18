@@ -11,24 +11,24 @@ import (
 )
 
 type grpcController struct {
-	c               Configuration
-	temperatureCtrl control.Strategy
+	c                Configuration
+	temperatureCtrlr control.Strategy
 }
 
 func newGrpcController(c Configuration) (*grpcController, error) {
-	temperatureCtrl := bangbang.NewBangbang()
-	if err := temperatureCtrl.Run(); err != nil {
+	temperatureCtrlr := bangbang.NewBangbang()
+	if err := temperatureCtrlr.Run(); err != nil {
 		return nil, errors.Wrap(err, "Failed to start temperature controller")
 	}
 
 	return &grpcController{
-		c:               c,
-		temperatureCtrl: temperatureCtrl,
+		c:                c,
+		temperatureCtrlr: temperatureCtrlr,
 	}, nil
 }
 
 func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.GetCurrentTemperatureRequest) (*appliancepb.GetCurrentTemperatureResponse, error) {
-	sample := c.temperatureCtrl.GetCurrentTemperature()
+	sample := c.temperatureCtrlr.GetCurrentTemperature()
 
 	pbTime, err := ptypes.TimestampProto(sample.ObservedAt)
 	if err != nil {
@@ -44,7 +44,7 @@ func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.Get
 }
 
 func (c *grpcController) GetTemperatureHistory(context.Context, *appliancepb.GetTemperatureHistoryRequest) (*appliancepb.GetTemperatureHistoryResponse, error) {
-	samples := c.temperatureCtrl.GetTemperatureHistory()
+	samples := c.temperatureCtrlr.GetTemperatureHistory()
 
 	var pbSamples []*appliancepb.TemperatureSample
 	for _, s := range samples {
@@ -65,7 +65,7 @@ func (c *grpcController) GetTemperatureHistory(context.Context, *appliancepb.Get
 }
 
 func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetTargetTemperatureRequest) (*appliancepb.GetTargetTemperatureResponse, error) {
-	targetTemperature := c.temperatureCtrl.GetTargetTemperature()
+	targetTemperature := c.temperatureCtrlr.GetTargetTemperature()
 
 	pbTime, err := ptypes.TimestampProto(targetTemperature.SetAt)
 	if err != nil {
@@ -79,7 +79,7 @@ func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetT
 }
 
 func (c *grpcController) SetTargetTemperature(ctx context.Context, req *appliancepb.SetTargetTemperatureRequest) (*appliancepb.SetTargetTemperatureResponse, error) {
-	targetTemperature := c.temperatureCtrl.SetTargetTemperature(req.Temperature)
+	targetTemperature := c.temperatureCtrlr.SetTargetTemperature(req.Temperature)
 
 	pbTime, err := ptypes.TimestampProto(targetTemperature.SetAt)
 	if err != nil {
