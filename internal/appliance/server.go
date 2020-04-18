@@ -5,6 +5,7 @@ import (
 	"net"
 
 	"github.com/gregorychen3/espresso-controller/internal/log"
+	"github.com/gregorychen3/espresso-controller/internal/metrics"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
@@ -29,6 +30,10 @@ func New(c Configuration) (*Server, error) {
 }
 
 func (s *Server) Run() error {
+	if err := metrics.InitMetrics(); err != nil {
+		return errors.Wrap(err, "initializing metrics")
+	}
+
 	return s.serveTCP()
 }
 

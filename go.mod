@@ -3,6 +3,7 @@ module github.com/gregorychen3/espresso-controller
 go 1.14
 
 require (
+	github.com/armon/go-metrics v0.3.3
 	github.com/crewjam/saml v0.4.0
 	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
 	github.com/go-chi/chi v4.1.0+incompatible
@@ -15,8 +16,9 @@ require (
 	github.com/improbable-eng/grpc-web v0.12.0
 	github.com/karrick/godirwalk v1.15.6 // indirect
 	github.com/pkg/errors v0.8.1
-	github.com/prometheus/client_golang v0.9.3
+	github.com/prometheus/client_golang v1.4.0
 	github.com/rs/cors v1.7.0 // indirect
+	github.com/shirou/gopsutil v2.20.3+incompatible
 	github.com/sirupsen/logrus v1.5.0 // indirect
 	github.com/soheilhy/cmux v0.1.4
 	github.com/spf13/cobra v1.0.0
