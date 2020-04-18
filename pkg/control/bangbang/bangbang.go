@@ -27,7 +27,7 @@ type Bangbang struct {
 	temperatureSampler temperature.TemperatureSampler
 
 	temperatureHistoryMu sync.RWMutex
-	temperatureHistory   []control.TemperatureSample
+	temperatureHistory   []*control.TemperatureSample
 }
 
 func NewBangbang() *Bangbang {
@@ -46,7 +46,7 @@ func (p *Bangbang) Run() error {
 		for {
 			sample := p.sampleTemperature()
 			p.temperatureHistoryMu.Lock()
-			p.temperatureHistory = append(p.temperatureHistory, sample)
+			p.temperatureHistory = append(p.temperatureHistory, &sample)
 			p.temperatureHistoryMu.Unlock()
 
 			if sample.Value < p.GetTargetTemperature().Value {
@@ -66,14 +66,14 @@ func (p *Bangbang) Run() error {
 	return nil
 }
 
-func (p *Bangbang) GetCurrentTemperature() control.TemperatureSample {
+func (p *Bangbang) GetCurrentTemperature() *control.TemperatureSample {
 	p.temperatureHistoryMu.RLock()
 	defer p.temperatureHistoryMu.RUnlock()
 
 	return p.temperatureHistory[len(p.temperatureHistory)-1]
 }
 
-func (p *Bangbang) GetTemperatureHistory() []control.TemperatureSample {
+func (p *Bangbang) GetTemperatureHistory() []*control.TemperatureSample {
 	p.temperatureHistoryMu.RLock()
 	defer p.temperatureHistoryMu.RUnlock()
 

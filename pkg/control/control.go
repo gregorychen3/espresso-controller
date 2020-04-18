@@ -3,8 +3,8 @@ package control
 import "time"
 
 type Strategy interface {
-	GetCurrentTemperature() TemperatureSample
-	GetTemperatureHistory() []TemperatureSample
+	GetCurrentTemperature() *TemperatureSample
+	GetTemperatureHistory() []*TemperatureSample
 
 	GetTargetTemperature() TargetTemperature
 	SetTargetTemperature(temperature float32) TargetTemperature
