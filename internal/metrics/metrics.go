@@ -79,7 +79,7 @@ func CollectSystemMetrics() {
 func sampleRaspiGPUTemperature() (float32, error) {
 	outBytes, err := exec.Command("vcgencmd measure_temp").Output()
 	if err != nil {
-		return 0, nil
+		return 0, err
 	}
 
 	temperature64, err := strconv.ParseFloat(string(outBytes)[5:9], 32)
