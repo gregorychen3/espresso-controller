@@ -39,6 +39,7 @@ export default () => {
   const showSetTemperatureModal = useSelector(showTargetTempModal);
 
   const classes = useStyles();
+  const halfHeightPaper = clsx(classes.paper, classes.halfHeight);
   const tallHeightPaper = clsx(classes.paper, classes.tallHeight);
 
   const dispatch = useDispatch();
@@ -67,11 +68,26 @@ export default () => {
             <TemperatureChart title="Boiler Temperature" />
           </Paper>
         </Grid>
+
         <Grid item xs={12} md={4} lg={3}>
           <Paper className={tallHeightPaper}>
             <Temperature />
           </Paper>
         </Grid>
+
+        <Grid item xs={12} md={6} lg={3}>
+          <Paper className={halfHeightPaper}></Paper>
+        </Grid>
+        <Grid item xs={12} md={6} lg={3}>
+          <Paper className={halfHeightPaper}></Paper>
+        </Grid>
+        <Grid item xs={12} md={6} lg={3}>
+          <Paper className={halfHeightPaper}></Paper>
+        </Grid>
+        <Grid item xs={12} md={6} lg={3}>
+          <Paper className={halfHeightPaper}></Paper>
+        </Grid>
+
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <RecentActions />
