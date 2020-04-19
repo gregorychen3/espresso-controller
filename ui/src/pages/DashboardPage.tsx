@@ -12,14 +12,14 @@ import SetTemperatureModal from "../components/SetTemperatureModal";
 import TemperatureCard from "../components/TemperatureCard";
 import TemperatureChart from "../components/TemperatureChart";
 import {
-  GetCurrentTemperatureRequest,
+  GetCurrentBoilerTemperatureRequest,
   GetTargetTemperatureRequest,
   GetBoilerTemperatureHistoryRequest,
 } from "../proto/pkg/appliancepb/appliance_pb";
 import { showTargetTempModal } from "../redux/selectors";
 import { getTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 import {
-  getCurrentTemperature,
+  getCurrentBoilerTemperature,
   getBoilerTemperatureHistory,
 } from "../redux/slices/temperatureSlice";
 
@@ -57,7 +57,9 @@ export default () => {
       getBoilerTemperatureHistory(new GetBoilerTemperatureHistoryRequest())
     );
     const interval = setInterval(() => {
-      dispatch(getCurrentTemperature(new GetCurrentTemperatureRequest()));
+      dispatch(
+        getCurrentBoilerTemperature(new GetCurrentBoilerTemperatureRequest())
+      );
     }, boilerTemperatureRefreshIntervalMillis);
     return () => {
       clearInterval(interval);

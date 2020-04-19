@@ -1,8 +1,8 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
 import {
-  GetCurrentTemperatureRequest,
-  GetCurrentTemperatureResponse,
+  GetCurrentBoilerTemperatureRequest,
+  GetCurrentBoilerTemperatureResponse,
   GetBoilerTemperatureHistoryRequest,
   GetBoilerTemperatureHistoryResponse,
 } from "../../proto/pkg/appliancepb/appliance_pb";
@@ -57,16 +57,16 @@ export const temperatureSlice = createSlice({
       state.isFetching = false;
     },
 
-    // GetCurrentTemperature
-    getCurrentTemperatureRequest: (
+    // GetCurrentBoilerTemperature
+    getCurrentBoilerTemperatureRequest: (
       state,
-      action: PayloadAction<GetCurrentTemperatureRequest>
+      action: PayloadAction<GetCurrentBoilerTemperatureRequest>
     ) => {
       state.isFetching = true;
     },
-    getCurrentTemperatureResponse: (
+    getCurrentBoilerTemperatureResponse: (
       state,
-      action: PayloadAction<GetCurrentTemperatureResponse>
+      action: PayloadAction<GetCurrentBoilerTemperatureResponse>
     ) => {
       const sample = action.payload.getSample();
       if (!sample) {
@@ -84,10 +84,10 @@ export const temperatureSlice = createSlice({
       });
       state.isFetching = false;
     },
-    getCurrentTemperatureFailure: (
+    getCurrentBoilerTemperatureFailure: (
       state,
       action: PayloadAction<{
-        req: GetCurrentTemperatureRequest;
+        req: GetCurrentBoilerTemperatureRequest;
         err: ServiceError;
       }>
     ) => {
@@ -96,16 +96,16 @@ export const temperatureSlice = createSlice({
   },
 });
 
-export const getCurrentTemperature = (req: GetCurrentTemperatureRequest) => (
-  dispatch: Dispatch
-) =>
+export const getCurrentBoilerTemperature = (
+  req: GetCurrentBoilerTemperatureRequest
+) => (dispatch: Dispatch) =>
   createUnaryGrpcThunk(
-    applianceClient.getCurrentTemperature,
+    applianceClient.getCurrentBoilerTemperature,
     req,
     {
-      request: temperatureSlice.actions.getCurrentTemperatureRequest,
-      response: temperatureSlice.actions.getCurrentTemperatureResponse,
-      failure: temperatureSlice.actions.getCurrentTemperatureFailure,
+      request: temperatureSlice.actions.getCurrentBoilerTemperatureRequest,
+      response: temperatureSlice.actions.getCurrentBoilerTemperatureResponse,
+      failure: temperatureSlice.actions.getCurrentBoilerTemperatureFailure,
     },
     dispatch
   );
