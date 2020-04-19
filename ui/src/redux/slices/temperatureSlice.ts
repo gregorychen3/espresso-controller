@@ -5,10 +5,10 @@ import {
   GetCurrentTemperatureResponse,
   GetTemperatureHistoryRequest,
   GetTemperatureHistoryResponse,
-} from "../proto/pkg/appliancepb/appliance_pb";
-import { ServiceError } from "../proto/pkg/appliancepb/appliance_pb_service";
-import { TemperatureSample } from "../types";
-import { applianceClient, createUnaryGrpcThunk } from "./helpers";
+} from "../../proto/pkg/appliancepb/appliance_pb";
+import { ServiceError } from "../../proto/pkg/appliancepb/appliance_pb_service";
+import { TemperatureSample } from "../../types";
+import { applianceClient, createUnaryGrpcThunk } from "../helpers";
 
 export const temperatureSlice = createSlice({
   name: "temperature",

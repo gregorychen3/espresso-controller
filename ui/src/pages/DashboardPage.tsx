@@ -15,11 +15,11 @@ import {
   GetTemperatureHistoryRequest,
 } from "../proto/pkg/appliancepb/appliance_pb";
 import { showTargetTempModal } from "../redux/selectors";
-import { getTargetTemperature } from "../redux/targetTemperatureSlice";
+import { getTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 import {
   getCurrentTemperature,
   getTemperatureHistory,
-} from "../redux/temperatureSlice";
+} from "../redux/slices/temperatureSlice";
 
 const boilerTemperatureRefreshIntervalMillis = 2000;
 const metricsRefreshIntervalMillis = 5000;

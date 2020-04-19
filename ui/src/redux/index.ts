@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { temperatureSlice } from "./temperatureSlice";
-import { targetTemperatureSlice } from "./targetTemperatureSlice";
+import { temperatureSlice } from "./slices/temperatureSlice";
+import { targetTemperatureSlice } from "./slices/targetTemperatureSlice";
 import { uiSlice } from "./uiSlice";
 
 const rootReducer = combineReducers({

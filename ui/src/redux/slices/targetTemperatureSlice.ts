@@ -5,9 +5,9 @@ import {
   GetTargetTemperatureResponse,
   SetTargetTemperatureRequest,
   SetTargetTemperatureResponse,
-} from "../proto/pkg/appliancepb/appliance_pb";
-import { ServiceError } from "../proto/pkg/appliancepb/appliance_pb_service";
-import { applianceClient, createUnaryGrpcThunk } from "./helpers";
+} from "../../proto/pkg/appliancepb/appliance_pb";
+import { ServiceError } from "../../proto/pkg/appliancepb/appliance_pb_service";
+import { applianceClient, createUnaryGrpcThunk } from "../helpers";
 
 export const targetTemperatureSlice = createSlice({
   name: "targetTemp",

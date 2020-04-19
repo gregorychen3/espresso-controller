@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { targetTemperatureSlice } from "./targetTemperatureSlice";
+import { targetTemperatureSlice } from "./slices/targetTemperatureSlice";
 
 export const uiSlice = createSlice({
   name: "ui",
