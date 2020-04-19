@@ -6,7 +6,7 @@ import "google/protobuf/timestamp.proto";
 
 service Appliance {
   rpc GetBoilerTemperatureHistory (GetBoilerTemperatureHistoryRequest) returns (GetBoilerTemperatureHistoryResponse) {}
-  rpc GetCurrentTemperature (GetCurrentTemperatureRequest) returns (GetCurrentTemperatureResponse) {}
+  rpc GetCurrentBoilerTemperature (GetCurrentBoilerTemperatureRequest) returns (GetCurrentBoilerTemperatureResponse) {}
   rpc GetTargetTemperature (GetTargetTemperatureRequest) returns (GetTargetTemperatureResponse) {}
   rpc SetTargetTemperature (SetTargetTemperatureRequest) returns (SetTargetTemperatureResponse) {}
 }
@@ -21,8 +21,8 @@ message GetBoilerTemperatureHistoryResponse {
     repeated TemperatureSample samples = 1;
 }
 
-message GetCurrentTemperatureRequest {}
-message GetCurrentTemperatureResponse {
+message GetCurrentBoilerTemperatureRequest {}
+message GetCurrentBoilerTemperatureResponse {
     TemperatureSample sample = 1;
 }
 
