@@ -1,11 +1,8 @@
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-import parsePromText, {
-  Metric,
-  MetricDataPoint,
-} from "parse-prometheus-text-format";
 import clsx from "clsx";
+import parsePromText, { Metric } from "parse-prometheus-text-format";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RecentActions from "../components/RecentActions";
@@ -17,12 +14,12 @@ import {
   GetTargetTemperatureRequest,
   GetTemperatureHistoryRequest,
 } from "../proto/pkg/appliancepb/appliance_pb";
+import { showTargetTempModal } from "../redux/selectors";
+import { getTargetTemperature } from "../redux/targetTemperatureSlice";
 import {
   getCurrentTemperature,
   getTemperatureHistory,
 } from "../redux/temperatureSlice";
-import { showTargetTempModal } from "../redux/selectors";
-import { getTargetTemperature } from "../redux/targetTemperatureSlice";
 
 const boilerTemperatureRefreshIntervalMillis = 2000;
 const metricsRefreshIntervalMillis = 5000;
