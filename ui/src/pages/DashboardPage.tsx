@@ -2,6 +2,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
+import moment from "moment";
 import parsePromText, { Metric } from "parse-prometheus-text-format";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,6 +61,9 @@ export default () => {
     };
   }, [dispatch]);
 
+  const [metricsRefreshedAt, setMetricsRefreshedAt] = useState<
+    moment.Moment | undefined
+  >();
   const [cpuUtilization, setCpuUtilization] = useState<number | undefined>();
   const [memUtilization, setMemUtilization] = useState<number | undefined>();
   const [cpuTemperature, setCpuTemperature] = useState<number | undefined>();
@@ -73,6 +77,8 @@ export default () => {
       ).reduce((acc, cur) => {
         return { ...acc, [cur.name]: cur };
       }, {});
+
+      setMetricsRefreshedAt(moment());
       setCpuUtilization(
         100 *
           parseFloat(
