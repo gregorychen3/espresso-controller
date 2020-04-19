@@ -47,7 +47,7 @@ func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.Get
 	}, nil
 }
 
-func (c *grpcController) GetTemperatureHistory(context.Context, *appliancepb.GetTemperatureHistoryRequest) (*appliancepb.GetTemperatureHistoryResponse, error) {
+func (c *grpcController) GetBoilerTemperatureHistory(context.Context, *appliancepb.GetBoilerTemperatureHistoryRequest) (*appliancepb.GetBoilerTemperatureHistoryResponse, error) {
 	samples := c.temperatureCtrlr.GetTemperatureHistory()
 
 	var pbSamples []*appliancepb.TemperatureSample
@@ -63,7 +63,7 @@ func (c *grpcController) GetTemperatureHistory(context.Context, *appliancepb.Get
 		pbSamples = append(pbSamples, &pbSample)
 	}
 
-	return &appliancepb.GetTemperatureHistoryResponse{
+	return &appliancepb.GetBoilerTemperatureHistoryResponse{
 		Samples: pbSamples,
 	}, nil
 }
