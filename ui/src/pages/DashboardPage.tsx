@@ -118,7 +118,7 @@ export default () => {
           </Paper>
         </Grid>
 
-        <Grid item xs={12} md={6} lg={3}>
+        <Grid item xs={12} md={3} lg={3}>
           <Paper className={halfHeightPaper}>
             <MetricCard
               name="CPU Usage"
@@ -127,7 +127,7 @@ export default () => {
             />
           </Paper>
         </Grid>
-        <Grid item xs={12} md={6} lg={3}>
+        <Grid item xs={12} md={3} lg={3}>
           <Paper className={halfHeightPaper}>
             <MetricCard
               name="Memory Usage"
@@ -136,7 +136,7 @@ export default () => {
             />
           </Paper>
         </Grid>
-        <Grid item xs={12} md={6} lg={3}>
+        <Grid item xs={12} md={3} lg={3}>
           <Paper className={halfHeightPaper}>
             <MetricCard
               name="CPU Temperature"
@@ -145,7 +145,7 @@ export default () => {
             />
           </Paper>
         </Grid>
-        <Grid item xs={12} md={6} lg={3}>
+        <Grid item xs={12} md={3} lg={3}>
           <Paper className={halfHeightPaper}>
             <MetricCard
               name="GPU Temperature"

@@ -28,7 +28,7 @@ export default () => {
   return (
     <>
       <Title>Current Temperature</Title>
-      <Typography component="p" variant="h4">
+      <Typography component="p" variant="h3">
         {curTemp?.value.toFixed(1) ?? "--"} °C
       </Typography>
       {curTemp && (
@@ -40,7 +40,7 @@ export default () => {
         </Typography>
       )}
       <Title>Target Temperature</Title>
-      <Typography component="p" variant="h4">
+      <Typography component="p" variant="h3">
         {targetTemp?.value} °C
       </Typography>
       <Typography color="textSecondary" className={classes.temperatureContext}>

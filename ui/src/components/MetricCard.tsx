@@ -11,7 +11,7 @@ export default ({ name, value, unitLabel }: Props) => {
   return (
     <>
       <Title>{name}</Title>
-      <Typography component="p" variant="h4">
+      <Typography component="p" variant="h3">
         {value} {unitLabel}
       </Typography>
     </>
