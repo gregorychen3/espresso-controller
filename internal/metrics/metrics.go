@@ -77,7 +77,7 @@ func CollectSystemMetrics() {
 }
 
 func sampleRaspiGPUTemperature() (float32, error) {
-	outBytes, err := exec.Command("vcgencmd measure_temp").Output()
+	outBytes, err := exec.Command("/usr/bin/vcgencmd measure_temp").Output()
 	if err != nil {
 		return 0, err
 	}
