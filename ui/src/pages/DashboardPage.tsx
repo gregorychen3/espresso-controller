@@ -3,7 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import parsePromText, { Metric } from "parse-prometheus-text-format";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RecentActions from "../components/RecentActions";
 import SetTemperatureModal from "../components/SetTemperatureModal";
@@ -59,6 +59,10 @@ export default () => {
     };
   }, [dispatch]);
 
+  const [cpuUtilization, setCpuUtilization] = useState<Metric | undefined>();
+  const [memUtilization, setMemUtilization] = useState<Metric | undefined>();
+  const [cpuTemperature, setCpuTemperature] = useState<Metric | undefined>();
+  const [gpuTemperature, setGpuTemperature] = useState<Metric | undefined>();
   useEffect(() => {
     const interval = setInterval(async () => {
       const metricsResp = await fetch("/metrics");
@@ -68,6 +72,11 @@ export default () => {
       ).reduce((acc, cur) => {
         return { ...acc, [cur.name]: cur };
       }, {});
+      setCpuUtilization(metricsMap.espresso_raspi_cpu_utilization_ratio);
+      setMemUtilization(metricsMap.espresso_raspi_mem_utilization_ratio);
+      setCpuTemperature(metricsMap.espresso_raspi_cpu_temperature);
+      setGpuTemperature(metricsMap.espresso_raspi_gpu_temperature);
+
       console.log(metricsMap);
     }, metricsRefreshIntervalMillis);
 
