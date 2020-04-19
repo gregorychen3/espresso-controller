@@ -5,6 +5,7 @@ import clsx from "clsx";
 import parsePromText, { Metric } from "parse-prometheus-text-format";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import MetricCard from "../components/MetricCard";
 import RecentActions from "../components/RecentActions";
 import SetTemperatureModal from "../components/SetTemperatureModal";
 import TemperatureCard from "../components/TemperatureCard";
@@ -59,10 +60,10 @@ export default () => {
     };
   }, [dispatch]);
 
-  const [cpuUtilization, setCpuUtilization] = useState<Metric | undefined>();
-  const [memUtilization, setMemUtilization] = useState<Metric | undefined>();
-  const [cpuTemperature, setCpuTemperature] = useState<Metric | undefined>();
-  const [gpuTemperature, setGpuTemperature] = useState<Metric | undefined>();
+  const [cpuUtilization, setCpuUtilization] = useState<number | undefined>();
+  const [memUtilization, setMemUtilization] = useState<number | undefined>();
+  const [cpuTemperature, setCpuTemperature] = useState<number | undefined>();
+  const [gpuTemperature, setGpuTemperature] = useState<number | undefined>();
   useEffect(() => {
     const interval = setInterval(async () => {
       const metricsResp = await fetch("/metrics");
@@ -72,12 +73,24 @@ export default () => {
       ).reduce((acc, cur) => {
         return { ...acc, [cur.name]: cur };
       }, {});
-      setCpuUtilization(metricsMap.espresso_raspi_cpu_utilization_ratio);
-      setMemUtilization(metricsMap.espresso_raspi_mem_utilization_ratio);
-      setCpuTemperature(metricsMap.espresso_raspi_cpu_temperature);
-      setGpuTemperature(metricsMap.espresso_raspi_gpu_temperature);
-
-      console.log(metricsMap);
+      setCpuUtilization(
+        100 *
+          parseFloat(
+            metricsMap.espresso_raspi_cpu_utilization_ratio.metrics[0].value
+          )
+      );
+      setMemUtilization(
+        100 *
+          parseFloat(
+            metricsMap.espresso_raspi_mem_utilization_ratio.metrics[0].value
+          )
+      );
+      setCpuTemperature(
+        parseFloat(metricsMap.espresso_raspi_cpu_temperature.metrics[0].value)
+      );
+      setGpuTemperature(
+        parseFloat(metricsMap.espresso_raspi_gpu_temperature.metrics[0].value)
+      );
     }, metricsRefreshIntervalMillis);
 
     return () => {
@@ -106,16 +119,40 @@ export default () => {
         </Grid>
 
         <Grid item xs={12} md={6} lg={3}>
-          <Paper className={halfHeightPaper}></Paper>
+          <Paper className={halfHeightPaper}>
+            <MetricCard
+              name="CPU Usage"
+              value={cpuUtilization?.toFixed(2) ?? "--"}
+              unitLabel="%"
+            />
+          </Paper>
         </Grid>
         <Grid item xs={12} md={6} lg={3}>
-          <Paper className={halfHeightPaper}></Paper>
+          <Paper className={halfHeightPaper}>
+            <MetricCard
+              name="Memory Usage"
+              value={memUtilization?.toFixed(2) ?? "--"}
+              unitLabel="%"
+            />
+          </Paper>
         </Grid>
         <Grid item xs={12} md={6} lg={3}>
-          <Paper className={halfHeightPaper}></Paper>
+          <Paper className={halfHeightPaper}>
+            <MetricCard
+              name="CPU Temperature"
+              value={cpuTemperature?.toFixed(2) ?? "--"}
+              unitLabel="°C"
+            />
+          </Paper>
         </Grid>
         <Grid item xs={12} md={6} lg={3}>
-          <Paper className={halfHeightPaper}></Paper>
+          <Paper className={halfHeightPaper}>
+            <MetricCard
+              name="GPU Temperature"
+              value={gpuTemperature?.toFixed(2) ?? "--"}
+              unitLabel="°C"
+            />
+          </Paper>
         </Grid>
 
         <Grid item xs={12}>
