@@ -130,6 +130,7 @@ export default () => {
               name="CPU Usage"
               value={cpuUtilization?.toFixed(2) ?? "--"}
               unitLabel="%"
+              asOf={metricsRefreshedAt}
             />
           </Paper>
         </Grid>
@@ -139,6 +140,7 @@ export default () => {
               name="Memory Usage"
               value={memUtilization?.toFixed(2) ?? "--"}
               unitLabel="%"
+              asOf={metricsRefreshedAt}
             />
           </Paper>
         </Grid>
@@ -148,6 +150,7 @@ export default () => {
               name="CPU Temperature"
               value={cpuTemperature?.toFixed(2) ?? "--"}
               unitLabel="°C"
+              asOf={metricsRefreshedAt}
             />
           </Paper>
         </Grid>
@@ -157,6 +160,7 @@ export default () => {
               name="GPU Temperature"
               value={gpuTemperature?.toFixed(2) ?? "--"}
               unitLabel="°C"
+              asOf={metricsRefreshedAt}
             />
           </Paper>
         </Grid>
