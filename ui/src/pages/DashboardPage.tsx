@@ -1,6 +1,10 @@
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
+import parsePromText, {
+  Metric,
+  MetricDataPoint,
+} from "parse-prometheus-text-format";
 import clsx from "clsx";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,6 +58,23 @@ export default () => {
       clearInterval(interval);
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const metricsResp = await fetch("/metrics");
+      const metricsRaw = await metricsResp.text();
+      const metricsMap: { [key: string]: Metric } = parsePromText(
+        metricsRaw
+      ).reduce((acc, cur) => {
+        return { ...acc, [cur.name]: cur };
+      }, {});
+      console.log(metricsMap);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   useEffect(() => {
     dispatch(getTargetTemperature(new GetTargetTemperatureRequest()));

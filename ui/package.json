@@ -2,7 +2,7 @@
   "name": "ui",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "http://192.168.1.124:8080",
   "dependencies": {
     "@improbable-eng/grpc-web": "^0.12.0",
     "@material-ui/core": "^4.9.9",
@@ -23,6 +23,7 @@
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "parse-prometheus-text-format": "^1.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
