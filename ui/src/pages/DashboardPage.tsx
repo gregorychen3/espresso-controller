@@ -24,6 +24,9 @@ import {
 import { showTargetTempModal } from "../redux/selectors";
 import { getTargetTemperature } from "../redux/targetTemperatureSlice";
 
+const boilerTemperatureRefreshIntervalMillis = 2000;
+const metricsRefreshIntervalMillis = 5000;
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
@@ -52,7 +55,7 @@ export default () => {
     dispatch(getTemperatureHistory(new GetTemperatureHistoryRequest()));
     const interval = setInterval(() => {
       dispatch(getCurrentTemperature(new GetCurrentTemperatureRequest()));
-    }, 2000);
+    }, boilerTemperatureRefreshIntervalMillis);
 
     return () => {
       clearInterval(interval);
@@ -69,7 +72,7 @@ export default () => {
         return { ...acc, [cur.name]: cur };
       }, {});
       console.log(metricsMap);
-    }, 5000);
+    }, metricsRefreshIntervalMillis);
 
     return () => {
       clearInterval(interval);
