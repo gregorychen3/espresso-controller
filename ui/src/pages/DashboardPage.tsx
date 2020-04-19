@@ -50,17 +50,22 @@ export default () => {
 
   const dispatch = useDispatch();
 
+  //
+  // Boiler temperature
+  // ------------------
   useEffect(() => {
     dispatch(getTemperatureHistory(new GetTemperatureHistoryRequest()));
     const interval = setInterval(() => {
       dispatch(getCurrentTemperature(new GetCurrentTemperatureRequest()));
     }, boilerTemperatureRefreshIntervalMillis);
-
     return () => {
       clearInterval(interval);
     };
   }, [dispatch]);
 
+  //
+  // System metrics
+  // --------------
   const [metricsRefreshedAt, setMetricsRefreshedAt] = useState<
     moment.Moment | undefined
   >();
@@ -68,37 +73,38 @@ export default () => {
   const [memUtilization, setMemUtilization] = useState<number | undefined>();
   const [cpuTemperature, setCpuTemperature] = useState<number | undefined>();
   const [gpuTemperature, setGpuTemperature] = useState<number | undefined>();
+  const refreshMetrics = async () => {
+    const metricsResp = await fetch("/metrics");
+    const metricsRaw = await metricsResp.text();
+    const metricsMap: { [key: string]: Metric } = parsePromText(
+      metricsRaw
+    ).reduce((acc, cur) => {
+      return { ...acc, [cur.name]: cur };
+    }, {});
+
+    setMetricsRefreshedAt(moment());
+    setCpuUtilization(
+      100 *
+        parseFloat(
+          metricsMap.espresso_raspi_cpu_utilization_ratio.metrics[0].value
+        )
+    );
+    setMemUtilization(
+      100 *
+        parseFloat(
+          metricsMap.espresso_raspi_mem_utilization_ratio.metrics[0].value
+        )
+    );
+    setCpuTemperature(
+      parseFloat(metricsMap.espresso_raspi_cpu_temperature.metrics[0].value)
+    );
+    setGpuTemperature(
+      parseFloat(metricsMap.espresso_raspi_gpu_temperature.metrics[0].value)
+    );
+  };
   useEffect(() => {
-    const interval = setInterval(async () => {
-      const metricsResp = await fetch("/metrics");
-      const metricsRaw = await metricsResp.text();
-      const metricsMap: { [key: string]: Metric } = parsePromText(
-        metricsRaw
-      ).reduce((acc, cur) => {
-        return { ...acc, [cur.name]: cur };
-      }, {});
-
-      setMetricsRefreshedAt(moment());
-      setCpuUtilization(
-        100 *
-          parseFloat(
-            metricsMap.espresso_raspi_cpu_utilization_ratio.metrics[0].value
-          )
-      );
-      setMemUtilization(
-        100 *
-          parseFloat(
-            metricsMap.espresso_raspi_mem_utilization_ratio.metrics[0].value
-          )
-      );
-      setCpuTemperature(
-        parseFloat(metricsMap.espresso_raspi_cpu_temperature.metrics[0].value)
-      );
-      setGpuTemperature(
-        parseFloat(metricsMap.espresso_raspi_gpu_temperature.metrics[0].value)
-      );
-    }, metricsRefreshIntervalMillis);
-
+    refreshMetrics();
+    const interval = setInterval(refreshMetrics, metricsRefreshIntervalMillis);
     return () => {
       clearInterval(interval);
     };
