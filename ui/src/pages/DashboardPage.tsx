@@ -45,7 +45,6 @@ export default () => {
   const showSetTemperatureModal = useSelector(showTargetTempModal);
 
   const classes = useStyles();
-  const halfHeightPaper = clsx(classes.paper, classes.halfHeight);
   const tallHeightPaper = clsx(classes.paper, classes.tallHeight);
 
   const dispatch = useDispatch();
@@ -131,7 +130,7 @@ export default () => {
         </Grid>
 
         <Grid item xs={12} md={3} lg={3}>
-          <Paper className={halfHeightPaper}>
+          <Paper className={classes.paper}>
             <MetricCard
               name="CPU Usage"
               value={cpuUtilization?.toFixed(2) ?? "--"}
@@ -141,7 +140,7 @@ export default () => {
           </Paper>
         </Grid>
         <Grid item xs={12} md={3} lg={3}>
-          <Paper className={halfHeightPaper}>
+          <Paper className={classes.paper}>
             <MetricCard
               name="Memory Usage"
               value={memUtilization?.toFixed(2) ?? "--"}
@@ -151,7 +150,7 @@ export default () => {
           </Paper>
         </Grid>
         <Grid item xs={12} md={3} lg={3}>
-          <Paper className={halfHeightPaper}>
+          <Paper className={classes.paper}>
             <MetricCard
               name="CPU Temperature"
               value={cpuTemperature?.toFixed(2) ?? "--"}
@@ -161,7 +160,7 @@ export default () => {
           </Paper>
         </Grid>
         <Grid item xs={12} md={3} lg={3}>
-          <Paper className={halfHeightPaper}>
+          <Paper className={classes.paper}>
             <MetricCard
               name="GPU Temperature"
               value={gpuTemperature?.toFixed(2) ?? "--"}
