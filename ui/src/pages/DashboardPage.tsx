@@ -14,13 +14,13 @@ import TemperatureChart from "../components/TemperatureChart";
 import {
   GetCurrentTemperatureRequest,
   GetTargetTemperatureRequest,
-  GetTemperatureHistoryRequest,
+  GetBoilerTemperatureHistoryRequest,
 } from "../proto/pkg/appliancepb/appliance_pb";
 import { showTargetTempModal } from "../redux/selectors";
 import { getTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 import {
   getCurrentTemperature,
-  getTemperatureHistory,
+  getBoilerTemperatureHistory,
 } from "../redux/slices/temperatureSlice";
 
 const boilerTemperatureRefreshIntervalMillis = 2000;
@@ -53,7 +53,9 @@ export default () => {
   // Boiler temperature
   // ------------------
   useEffect(() => {
-    dispatch(getTemperatureHistory(new GetTemperatureHistoryRequest()));
+    dispatch(
+      getBoilerTemperatureHistory(new GetBoilerTemperatureHistoryRequest())
+    );
     const interval = setInterval(() => {
       dispatch(getCurrentTemperature(new GetCurrentTemperatureRequest()));
     }, boilerTemperatureRefreshIntervalMillis);

@@ -3,8 +3,8 @@ import moment from "moment";
 import {
   GetCurrentTemperatureRequest,
   GetCurrentTemperatureResponse,
-  GetTemperatureHistoryRequest,
-  GetTemperatureHistoryResponse,
+  GetBoilerTemperatureHistoryRequest,
+  GetBoilerTemperatureHistoryResponse,
 } from "../../proto/pkg/appliancepb/appliance_pb";
 import { ServiceError } from "../../proto/pkg/appliancepb/appliance_pb_service";
 import { TemperatureSample } from "../../types";
@@ -17,16 +17,16 @@ export const temperatureSlice = createSlice({
     isFetching: boolean;
   },
   reducers: {
-    // GetTemperatureHistory
-    getTemperatureHistoryRequest: (
+    // GetBoilerTemperatureHistory
+    getBoilerTemperatureHistoryRequest: (
       state,
-      action: PayloadAction<GetTemperatureHistoryRequest>
+      action: PayloadAction<GetBoilerTemperatureHistoryRequest>
     ) => {
       state.isFetching = true;
     },
-    getTemperatureHistoryResponse: (
+    getBoilerTemperatureHistoryResponse: (
       state,
-      action: PayloadAction<GetTemperatureHistoryResponse>
+      action: PayloadAction<GetBoilerTemperatureHistoryResponse>
     ) => {
       const temperatureHistory = action.payload
         .getSamplesList()
@@ -47,10 +47,10 @@ export const temperatureSlice = createSlice({
       state.temperatureHistory = temperatureHistory;
       state.isFetching = false;
     },
-    getTemperatureHistoryFailure: (
+    getBoilerTemperatureHistoryFailure: (
       state,
       action: PayloadAction<{
-        req: GetTemperatureHistoryRequest;
+        req: GetBoilerTemperatureHistoryRequest;
         err: ServiceError;
       }>
     ) => {
@@ -110,16 +110,16 @@ export const getCurrentTemperature = (req: GetCurrentTemperatureRequest) => (
     dispatch
   );
 
-export const getTemperatureHistory = (req: GetTemperatureHistoryRequest) => (
-  dispatch: Dispatch
-) =>
+export const getBoilerTemperatureHistory = (
+  req: GetBoilerTemperatureHistoryRequest
+) => (dispatch: Dispatch) =>
   createUnaryGrpcThunk(
-    applianceClient.getTemperatureHistory,
+    applianceClient.getBoilerTemperatureHistory,
     req,
     {
-      request: temperatureSlice.actions.getTemperatureHistoryRequest,
-      response: temperatureSlice.actions.getTemperatureHistoryResponse,
-      failure: temperatureSlice.actions.getTemperatureHistoryFailure,
+      request: temperatureSlice.actions.getBoilerTemperatureHistoryRequest,
+      response: temperatureSlice.actions.getBoilerTemperatureHistoryResponse,
+      failure: temperatureSlice.actions.getBoilerTemperatureHistoryFailure,
     },
     dispatch
   );
