@@ -34,6 +34,7 @@ func NewBangbang() (*Bangbang, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to initialize temperature sampler")
 	}
+
 	return &Bangbang{
 		temperatureSampler: sampler,
 		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},
@@ -41,6 +42,7 @@ func NewBangbang() (*Bangbang, error) {
 }
 
 func (p *Bangbang) Run() error {
+	// sample temperature on interval
 	go func() {
 		for {
 			sample, err := p.sampleTemperature()
@@ -65,6 +67,23 @@ func (p *Bangbang) Run() error {
 			}
 
 			time.Sleep(2 * time.Second)
+		}
+	}()
+
+	// prune temperature history on interval
+	go func() {
+		for {
+			p.temperatureHistoryMu.Lock()
+			for i, sample := range p.temperatureHistory {
+				if time.Since(sample.ObservedAt) > time.Minute*1 { // keep 1hr of history TODO
+					p.temperatureHistory = p.temperatureHistory[i+1:]
+					log.Debug("Pruned temperature history", zap.Int("numPruned", i))
+					break
+				}
+			}
+			p.temperatureHistoryMu.Unlock()
+
+			time.Sleep(1 * time.Minute)
 		}
 	}()
 
