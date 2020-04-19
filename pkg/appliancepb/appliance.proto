@@ -16,14 +16,14 @@ message TemperatureSample {
     google.protobuf.Timestamp observed_at = 2;
 }
 
-message GetCurrentTemperatureRequest {}
-message GetCurrentTemperatureResponse {
-    TemperatureSample sample = 1;
-}
-
 message GetTemperatureHistoryRequest {}
 message GetTemperatureHistoryResponse {
     repeated TemperatureSample samples = 1;
+}
+
+message GetCurrentTemperatureRequest {}
+message GetCurrentTemperatureResponse {
+    TemperatureSample sample = 1;
 }
 
 message GetTargetTemperatureRequest {}
