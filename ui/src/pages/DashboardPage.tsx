@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RecentActions from "../components/RecentActions";
 import SetTemperatureModal from "../components/SetTemperatureModal";
-import Temperature from "../components/Temperature";
+import TemperatureCard from "../components/TemperatureCard";
 import TemperatureChart from "../components/TemperatureChart";
 import {
   GetCurrentTemperatureRequest,
@@ -101,7 +101,7 @@ export default () => {
 
         <Grid item xs={12} md={4} lg={3}>
           <Paper className={tallHeightPaper}>
-            <Temperature />
+            <TemperatureCard />
           </Paper>
         </Grid>
 
