@@ -104,6 +104,6 @@ func (p *Bangbang) sampleTemperature() (*control.TemperatureSample, error) {
 		return nil, err
 	}
 
-	log.Info("Temperature sampled", zap.Float64("temperature", temperature))
+	log.Debug("Sampled boiler temperature", zap.Float64("temperature", temperature))
 	return &control.TemperatureSample{Value: temperature, ObservedAt: time.Now()}, nil
 }
