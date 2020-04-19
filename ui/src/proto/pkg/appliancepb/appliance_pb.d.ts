@@ -30,39 +30,39 @@ export namespace TemperatureSample {
   }
 }
 
-export class GetTemperatureHistoryRequest extends jspb.Message {
+export class GetBoilerTemperatureHistoryRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetTemperatureHistoryRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetTemperatureHistoryRequest): GetTemperatureHistoryRequest.AsObject;
+  toObject(includeInstance?: boolean): GetBoilerTemperatureHistoryRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetBoilerTemperatureHistoryRequest): GetBoilerTemperatureHistoryRequest.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: GetTemperatureHistoryRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetTemperatureHistoryRequest;
-  static deserializeBinaryFromReader(message: GetTemperatureHistoryRequest, reader: jspb.BinaryReader): GetTemperatureHistoryRequest;
+  static serializeBinaryToWriter(message: GetBoilerTemperatureHistoryRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetBoilerTemperatureHistoryRequest;
+  static deserializeBinaryFromReader(message: GetBoilerTemperatureHistoryRequest, reader: jspb.BinaryReader): GetBoilerTemperatureHistoryRequest;
 }
 
-export namespace GetTemperatureHistoryRequest {
+export namespace GetBoilerTemperatureHistoryRequest {
   export type AsObject = {
   }
 }
 
-export class GetTemperatureHistoryResponse extends jspb.Message {
+export class GetBoilerTemperatureHistoryResponse extends jspb.Message {
   clearSamplesList(): void;
   getSamplesList(): Array<TemperatureSample>;
   setSamplesList(value: Array<TemperatureSample>): void;
   addSamples(value?: TemperatureSample, index?: number): TemperatureSample;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetTemperatureHistoryResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetTemperatureHistoryResponse): GetTemperatureHistoryResponse.AsObject;
+  toObject(includeInstance?: boolean): GetBoilerTemperatureHistoryResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetBoilerTemperatureHistoryResponse): GetBoilerTemperatureHistoryResponse.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: GetTemperatureHistoryResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetTemperatureHistoryResponse;
-  static deserializeBinaryFromReader(message: GetTemperatureHistoryResponse, reader: jspb.BinaryReader): GetTemperatureHistoryResponse;
+  static serializeBinaryToWriter(message: GetBoilerTemperatureHistoryResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetBoilerTemperatureHistoryResponse;
+  static deserializeBinaryFromReader(message: GetBoilerTemperatureHistoryResponse, reader: jspb.BinaryReader): GetBoilerTemperatureHistoryResponse;
 }
 
-export namespace GetTemperatureHistoryResponse {
+export namespace GetBoilerTemperatureHistoryResponse {
   export type AsObject = {
     samplesList: Array<TemperatureSample.AsObject>,
   }

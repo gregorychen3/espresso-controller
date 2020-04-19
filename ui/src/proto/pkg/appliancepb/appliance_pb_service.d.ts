@@ -4,13 +4,13 @@
 import * as pkg_appliancepb_appliance_pb from "../../pkg/appliancepb/appliance_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
-type ApplianceGetTemperatureHistory = {
+type ApplianceGetBoilerTemperatureHistory = {
   readonly methodName: string;
   readonly service: typeof Appliance;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof pkg_appliancepb_appliance_pb.GetTemperatureHistoryRequest;
-  readonly responseType: typeof pkg_appliancepb_appliance_pb.GetTemperatureHistoryResponse;
+  readonly requestType: typeof pkg_appliancepb_appliance_pb.GetBoilerTemperatureHistoryRequest;
+  readonly responseType: typeof pkg_appliancepb_appliance_pb.GetBoilerTemperatureHistoryResponse;
 };
 
 type ApplianceGetCurrentTemperature = {
@@ -42,7 +42,7 @@ type ApplianceSetTargetTemperature = {
 
 export class Appliance {
   static readonly serviceName: string;
-  static readonly GetTemperatureHistory: ApplianceGetTemperatureHistory;
+  static readonly GetBoilerTemperatureHistory: ApplianceGetBoilerTemperatureHistory;
   static readonly GetCurrentTemperature: ApplianceGetCurrentTemperature;
   static readonly GetTargetTemperature: ApplianceGetTargetTemperature;
   static readonly SetTargetTemperature: ApplianceSetTargetTemperature;
@@ -80,14 +80,14 @@ export class ApplianceClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
-  getTemperatureHistory(
-    requestMessage: pkg_appliancepb_appliance_pb.GetTemperatureHistoryRequest,
+  getBoilerTemperatureHistory(
+    requestMessage: pkg_appliancepb_appliance_pb.GetBoilerTemperatureHistoryRequest,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: pkg_appliancepb_appliance_pb.GetTemperatureHistoryResponse|null) => void
+    callback: (error: ServiceError|null, responseMessage: pkg_appliancepb_appliance_pb.GetBoilerTemperatureHistoryResponse|null) => void
   ): UnaryResponse;
-  getTemperatureHistory(
-    requestMessage: pkg_appliancepb_appliance_pb.GetTemperatureHistoryRequest,
-    callback: (error: ServiceError|null, responseMessage: pkg_appliancepb_appliance_pb.GetTemperatureHistoryResponse|null) => void
+  getBoilerTemperatureHistory(
+    requestMessage: pkg_appliancepb_appliance_pb.GetBoilerTemperatureHistoryRequest,
+    callback: (error: ServiceError|null, responseMessage: pkg_appliancepb_appliance_pb.GetBoilerTemperatureHistoryResponse|null) => void
   ): UnaryResponse;
   getCurrentTemperature(
     requestMessage: pkg_appliancepb_appliance_pb.GetCurrentTemperatureRequest,
