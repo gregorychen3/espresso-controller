@@ -142,70 +142,70 @@ func (m *GetBoilerTemperatureHistoryResponse) GetSamples() []*TemperatureSample 
 	return nil
 }
 
-type GetCurrentTemperatureRequest struct {
+type GetCurrentBoilerTemperatureRequest struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *GetCurrentTemperatureRequest) Reset()         { *m = GetCurrentTemperatureRequest{} }
-func (m *GetCurrentTemperatureRequest) String() string { return proto.CompactTextString(m) }
-func (*GetCurrentTemperatureRequest) ProtoMessage()    {}
-func (*GetCurrentTemperatureRequest) Descriptor() ([]byte, []int) {
+func (m *GetCurrentBoilerTemperatureRequest) Reset()         { *m = GetCurrentBoilerTemperatureRequest{} }
+func (m *GetCurrentBoilerTemperatureRequest) String() string { return proto.CompactTextString(m) }
+func (*GetCurrentBoilerTemperatureRequest) ProtoMessage()    {}
+func (*GetCurrentBoilerTemperatureRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_cb8bec84a49a6ea7, []int{3}
 }
 
-func (m *GetCurrentTemperatureRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_GetCurrentTemperatureRequest.Unmarshal(m, b)
+func (m *GetCurrentBoilerTemperatureRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetCurrentBoilerTemperatureRequest.Unmarshal(m, b)
 }
-func (m *GetCurrentTemperatureRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_GetCurrentTemperatureRequest.Marshal(b, m, deterministic)
+func (m *GetCurrentBoilerTemperatureRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetCurrentBoilerTemperatureRequest.Marshal(b, m, deterministic)
 }
-func (m *GetCurrentTemperatureRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetCurrentTemperatureRequest.Merge(m, src)
+func (m *GetCurrentBoilerTemperatureRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetCurrentBoilerTemperatureRequest.Merge(m, src)
 }
-func (m *GetCurrentTemperatureRequest) XXX_Size() int {
-	return xxx_messageInfo_GetCurrentTemperatureRequest.Size(m)
+func (m *GetCurrentBoilerTemperatureRequest) XXX_Size() int {
+	return xxx_messageInfo_GetCurrentBoilerTemperatureRequest.Size(m)
 }
-func (m *GetCurrentTemperatureRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetCurrentTemperatureRequest.DiscardUnknown(m)
+func (m *GetCurrentBoilerTemperatureRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetCurrentBoilerTemperatureRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_GetCurrentTemperatureRequest proto.InternalMessageInfo
+var xxx_messageInfo_GetCurrentBoilerTemperatureRequest proto.InternalMessageInfo
 
-type GetCurrentTemperatureResponse struct {
+type GetCurrentBoilerTemperatureResponse struct {
 	Sample               *TemperatureSample `protobuf:"bytes,1,opt,name=sample,proto3" json:"sample,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
 	XXX_unrecognized     []byte             `json:"-"`
 	XXX_sizecache        int32              `json:"-"`
 }
 
-func (m *GetCurrentTemperatureResponse) Reset()         { *m = GetCurrentTemperatureResponse{} }
-func (m *GetCurrentTemperatureResponse) String() string { return proto.CompactTextString(m) }
-func (*GetCurrentTemperatureResponse) ProtoMessage()    {}
-func (*GetCurrentTemperatureResponse) Descriptor() ([]byte, []int) {
+func (m *GetCurrentBoilerTemperatureResponse) Reset()         { *m = GetCurrentBoilerTemperatureResponse{} }
+func (m *GetCurrentBoilerTemperatureResponse) String() string { return proto.CompactTextString(m) }
+func (*GetCurrentBoilerTemperatureResponse) ProtoMessage()    {}
+func (*GetCurrentBoilerTemperatureResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_cb8bec84a49a6ea7, []int{4}
 }
 
-func (m *GetCurrentTemperatureResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_GetCurrentTemperatureResponse.Unmarshal(m, b)
+func (m *GetCurrentBoilerTemperatureResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetCurrentBoilerTemperatureResponse.Unmarshal(m, b)
 }
-func (m *GetCurrentTemperatureResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_GetCurrentTemperatureResponse.Marshal(b, m, deterministic)
+func (m *GetCurrentBoilerTemperatureResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetCurrentBoilerTemperatureResponse.Marshal(b, m, deterministic)
 }
-func (m *GetCurrentTemperatureResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetCurrentTemperatureResponse.Merge(m, src)
+func (m *GetCurrentBoilerTemperatureResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetCurrentBoilerTemperatureResponse.Merge(m, src)
 }
-func (m *GetCurrentTemperatureResponse) XXX_Size() int {
-	return xxx_messageInfo_GetCurrentTemperatureResponse.Size(m)
+func (m *GetCurrentBoilerTemperatureResponse) XXX_Size() int {
+	return xxx_messageInfo_GetCurrentBoilerTemperatureResponse.Size(m)
 }
-func (m *GetCurrentTemperatureResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetCurrentTemperatureResponse.DiscardUnknown(m)
+func (m *GetCurrentBoilerTemperatureResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetCurrentBoilerTemperatureResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_GetCurrentTemperatureResponse proto.InternalMessageInfo
+var xxx_messageInfo_GetCurrentBoilerTemperatureResponse proto.InternalMessageInfo
 
-func (m *GetCurrentTemperatureResponse) GetSample() *TemperatureSample {
+func (m *GetCurrentBoilerTemperatureResponse) GetSample() *TemperatureSample {
 	if m != nil {
 		return m.Sample
 	}
@@ -380,8 +380,8 @@ func init() {
 	proto.RegisterType((*TemperatureSample)(nil), "appliancepb.TemperatureSample")
 	proto.RegisterType((*GetBoilerTemperatureHistoryRequest)(nil), "appliancepb.GetBoilerTemperatureHistoryRequest")
 	proto.RegisterType((*GetBoilerTemperatureHistoryResponse)(nil), "appliancepb.GetBoilerTemperatureHistoryResponse")
-	proto.RegisterType((*GetCurrentTemperatureRequest)(nil), "appliancepb.GetCurrentTemperatureRequest")
-	proto.RegisterType((*GetCurrentTemperatureResponse)(nil), "appliancepb.GetCurrentTemperatureResponse")
+	proto.RegisterType((*GetCurrentBoilerTemperatureRequest)(nil), "appliancepb.GetCurrentBoilerTemperatureRequest")
+	proto.RegisterType((*GetCurrentBoilerTemperatureResponse)(nil), "appliancepb.GetCurrentBoilerTemperatureResponse")
 	proto.RegisterType((*GetTargetTemperatureRequest)(nil), "appliancepb.GetTargetTemperatureRequest")
 	proto.RegisterType((*GetTargetTemperatureResponse)(nil), "appliancepb.GetTargetTemperatureResponse")
 	proto.RegisterType((*SetTargetTemperatureRequest)(nil), "appliancepb.SetTargetTemperatureRequest")
@@ -393,32 +393,31 @@ func init() {
 }
 
 var fileDescriptor_cb8bec84a49a6ea7 = []byte{
-	// 387 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x92, 0xcf, 0xab, 0xd3, 0x40,
-	0x10, 0xc7, 0x8d, 0xa5, 0x15, 0x27, 0x07, 0x71, 0xa9, 0x50, 0x52, 0x5b, 0xc3, 0xea, 0x21, 0xf5,
-	0x90, 0x6a, 0x05, 0x11, 0x3c, 0x48, 0xf5, 0x50, 0xcf, 0x49, 0xc1, 0x63, 0xd9, 0xe8, 0xb4, 0x04,
-	0x92, 0xee, 0xba, 0x3b, 0x29, 0x78, 0xf5, 0x2f, 0xf5, 0x4f, 0x91, 0x97, 0x1f, 0x7d, 0x79, 0x7d,
-	0x49, 0x93, 0xd3, 0x3b, 0x66, 0xe7, 0x9b, 0xf9, 0x7c, 0x67, 0xe6, 0x0b, 0xcf, 0x84, 0x52, 0x49,
-	0x2c, 0x8e, 0x3f, 0xd1, 0x57, 0x5a, 0x92, 0x64, 0xf6, 0xf9, 0x41, 0x45, 0xce, 0xab, 0x83, 0x94,
-	0x87, 0x04, 0x97, 0x79, 0x29, 0xca, 0xf6, 0x4b, 0x8a, 0x53, 0x34, 0x24, 0x52, 0x55, 0xa8, 0xf9,
-	0x1e, 0x9e, 0x6f, 0x31, 0x55, 0xa8, 0x05, 0x65, 0x1a, 0x43, 0x91, 0xaa, 0x04, 0xd9, 0x18, 0x86,
-	0x27, 0x91, 0x64, 0x38, 0xb1, 0x5c, 0xcb, 0xb3, 0x82, 0xe2, 0x83, 0x7d, 0x06, 0x5b, 0x46, 0x06,
-	0xf5, 0x09, 0x7f, 0xed, 0x04, 0x4d, 0x1e, 0xbb, 0x96, 0x67, 0xaf, 0x1c, 0xbf, 0x20, 0xf8, 0x15,
-	0xc1, 0xdf, 0x56, 0x84, 0x00, 0x2a, 0xf9, 0x9a, 0xf8, 0x1b, 0xe0, 0x1b, 0xa4, 0xaf, 0x32, 0x4e,
-	0x50, 0xd7, 0x80, 0xdf, 0x63, 0x43, 0x52, 0xff, 0x09, 0xf0, 0x77, 0x86, 0x86, 0xf8, 0x0e, 0x5e,
-	0x5f, 0x55, 0x19, 0x25, 0x8f, 0x06, 0xd9, 0x27, 0x78, 0x62, 0x72, 0xa7, 0x66, 0x62, 0xb9, 0x03,
-	0xcf, 0x5e, 0xcd, 0xfd, 0xda, 0xd0, 0xfe, 0xbd, 0x81, 0x82, 0x4a, 0xce, 0xe7, 0xf0, 0x72, 0x83,
-	0xf4, 0x2d, 0xd3, 0x1a, 0x8f, 0x54, 0xd3, 0x55, 0x06, 0x7e, 0xc0, 0xac, 0xa5, 0x5e, 0xa2, 0x3f,
-	0xc2, 0xa8, 0xe8, 0x95, 0xef, 0xa6, 0x9b, 0x5c, 0xaa, 0xf9, 0x0c, 0xa6, 0x1b, 0xa4, 0xad, 0xd0,
-	0x07, 0x6c, 0xe2, 0x9a, 0xdc, 0x57, 0x43, 0xb9, 0xc4, 0xba, 0x60, 0xd3, 0xed, 0x73, 0x79, 0x97,
-	0xfa, 0x13, 0x7b, 0x0f, 0x23, 0x83, 0xd4, 0xef, 0x30, 0x43, 0x83, 0xb4, 0x26, 0xfe, 0x05, 0xa6,
-	0x61, 0xbb, 0xa7, 0x6e, 0xe6, 0x8d, 0xeb, 0xf0, 0xa1, 0x5d, 0xaf, 0xfe, 0x0d, 0xe0, 0xe9, 0xba,
-	0xda, 0x39, 0xfb, 0x6b, 0xe5, 0x8b, 0x6d, 0x8b, 0x0c, 0x5b, 0xde, 0xb9, 0x4f, 0x77, 0x04, 0x9d,
-	0x77, 0xfd, 0x7f, 0x28, 0xa6, 0xe4, 0x8f, 0x98, 0x82, 0x17, 0x8d, 0xa9, 0x61, 0x8b, 0xcb, 0x66,
-	0xad, 0xc9, 0x73, 0xde, 0xf6, 0x91, 0x9e, 0x89, 0x29, 0x8c, 0x9b, 0xf2, 0xc2, 0xbc, 0xcb, 0x2e,
-	0x6d, 0xd7, 0x75, 0x16, 0x3d, 0x94, 0x75, 0x5c, 0xd8, 0x8d, 0x0b, 0x7b, 0xe3, 0xc2, 0xab, 0xb8,
-	0x68, 0x94, 0x5f, 0xff, 0xc3, 0xff, 0x00, 0x00, 0x00, 0xff, 0xff, 0x3c, 0x08, 0x0b, 0x3d, 0xdc,
-	0x04, 0x00, 0x00,
+	// 380 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x92, 0x3d, 0x4f, 0xeb, 0x30,
+	0x14, 0x86, 0x9b, 0x5b, 0xb5, 0x57, 0xf7, 0x64, 0xb8, 0xc2, 0xea, 0x50, 0xa5, 0x7c, 0x44, 0x86,
+	0x21, 0x2c, 0x29, 0x14, 0x09, 0x21, 0x31, 0xa0, 0xc2, 0x50, 0xe6, 0xa4, 0x2b, 0xaa, 0x1c, 0x38,
+	0xad, 0x22, 0x25, 0xb5, 0xb1, 0x9d, 0x4a, 0xac, 0xfc, 0x65, 0xfe, 0x00, 0x22, 0x1f, 0x10, 0x48,
+	0xd3, 0x64, 0x62, 0x8c, 0xfd, 0xc6, 0xcf, 0x63, 0x9f, 0x17, 0xfe, 0x33, 0x21, 0xa2, 0x90, 0xad,
+	0x1f, 0xd1, 0x15, 0x92, 0x6b, 0x4e, 0xcc, 0xcf, 0x05, 0x11, 0x58, 0x47, 0x2b, 0xce, 0x57, 0x11,
+	0x8e, 0xd3, 0xad, 0x20, 0x59, 0x8e, 0x75, 0x18, 0xa3, 0xd2, 0x2c, 0x16, 0x59, 0x9a, 0x2e, 0x61,
+	0x6f, 0x8e, 0xb1, 0x40, 0xc9, 0x74, 0x22, 0xd1, 0x67, 0xb1, 0x88, 0x90, 0x0c, 0xa0, 0xb7, 0x61,
+	0x51, 0x82, 0x43, 0xc3, 0x36, 0x1c, 0xc3, 0xcb, 0x3e, 0xc8, 0x35, 0x98, 0x3c, 0x50, 0x28, 0x37,
+	0xf8, 0xb4, 0x60, 0x7a, 0xf8, 0xc7, 0x36, 0x1c, 0x73, 0x62, 0xb9, 0x19, 0xc1, 0x2d, 0x08, 0xee,
+	0xbc, 0x20, 0x78, 0x50, 0xc4, 0xa7, 0x9a, 0x9e, 0x00, 0x9d, 0xa1, 0xbe, 0xe5, 0x61, 0x84, 0xb2,
+	0x04, 0xbc, 0x0f, 0x95, 0xe6, 0xf2, 0xc5, 0xc3, 0xe7, 0x04, 0x95, 0xa6, 0x0b, 0x38, 0xde, 0x99,
+	0x52, 0x82, 0xaf, 0x15, 0x92, 0x2b, 0xf8, 0xab, 0x52, 0x53, 0x35, 0x34, 0xec, 0xae, 0x63, 0x4e,
+	0x0e, 0xdd, 0xd2, 0xa5, 0xdd, 0xca, 0x85, 0xbc, 0x22, 0x9e, 0x6b, 0xdc, 0x25, 0x52, 0xe2, 0xba,
+	0xca, 0x29, 0x34, 0x1e, 0x52, 0x8d, 0xfa, 0x54, 0xae, 0x71, 0x09, 0xfd, 0xec, 0xdc, 0xf4, 0x9d,
+	0x9a, 0x2d, 0xf2, 0x34, 0x3d, 0x80, 0xd1, 0x0c, 0xf5, 0x9c, 0xc9, 0x15, 0xea, 0x2d, 0x74, 0x05,
+	0xfb, 0xdb, 0xb7, 0x73, 0xac, 0x0d, 0xa6, 0xfe, 0x5a, 0xce, 0x67, 0x54, 0x5e, 0x22, 0xe7, 0xd0,
+	0x57, 0xa8, 0xdb, 0x0d, 0xa9, 0xa7, 0x50, 0x4f, 0x35, 0xbd, 0x81, 0x91, 0x5f, 0xef, 0xd4, 0xcc,
+	0xfc, 0xb0, 0xf6, 0x7f, 0xdb, 0x7a, 0xf2, 0xd6, 0x85, 0x7f, 0xd3, 0xe2, 0xcd, 0xc9, 0xab, 0x91,
+	0x3e, 0x6c, 0x5d, 0x7d, 0xc8, 0xf8, 0xdb, 0x7c, 0x9a, 0xeb, 0x68, 0x9d, 0xb5, 0xff, 0x21, 0xbb,
+	0x25, 0xed, 0x14, 0x12, 0x75, 0xe5, 0xa9, 0x4a, 0x34, 0x94, 0xb1, 0x2a, 0xd1, 0xd4, 0x4b, 0xda,
+	0x21, 0x31, 0x0c, 0xb6, 0x55, 0x88, 0x38, 0x3f, 0xcf, 0xaa, 0x1b, 0xb8, 0x75, 0xda, 0x22, 0x59,
+	0xc6, 0xf9, 0xcd, 0x38, 0xbf, 0x35, 0xce, 0xdf, 0x89, 0x0b, 0xfa, 0x69, 0x21, 0x2e, 0xde, 0x03,
+	0x00, 0x00, 0xff, 0xff, 0x65, 0xd9, 0x66, 0xca, 0xfb, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -434,7 +433,7 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ApplianceClient interface {
 	GetBoilerTemperatureHistory(ctx context.Context, in *GetBoilerTemperatureHistoryRequest, opts ...grpc.CallOption) (*GetBoilerTemperatureHistoryResponse, error)
-	GetCurrentTemperature(ctx context.Context, in *GetCurrentTemperatureRequest, opts ...grpc.CallOption) (*GetCurrentTemperatureResponse, error)
+	GetCurrentBoilerTemperature(ctx context.Context, in *GetCurrentBoilerTemperatureRequest, opts ...grpc.CallOption) (*GetCurrentBoilerTemperatureResponse, error)
 	GetTargetTemperature(ctx context.Context, in *GetTargetTemperatureRequest, opts ...grpc.CallOption) (*GetTargetTemperatureResponse, error)
 	SetTargetTemperature(ctx context.Context, in *SetTargetTemperatureRequest, opts ...grpc.CallOption) (*SetTargetTemperatureResponse, error)
 }
@@ -456,9 +455,9 @@ func (c *applianceClient) GetBoilerTemperatureHistory(ctx context.Context, in *G
 	return out, nil
 }
 
-func (c *applianceClient) GetCurrentTemperature(ctx context.Context, in *GetCurrentTemperatureRequest, opts ...grpc.CallOption) (*GetCurrentTemperatureResponse, error) {
-	out := new(GetCurrentTemperatureResponse)
-	err := c.cc.Invoke(ctx, "/appliancepb.Appliance/GetCurrentTemperature", in, out, opts...)
+func (c *applianceClient) GetCurrentBoilerTemperature(ctx context.Context, in *GetCurrentBoilerTemperatureRequest, opts ...grpc.CallOption) (*GetCurrentBoilerTemperatureResponse, error) {
+	out := new(GetCurrentBoilerTemperatureResponse)
+	err := c.cc.Invoke(ctx, "/appliancepb.Appliance/GetCurrentBoilerTemperature", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -486,7 +485,7 @@ func (c *applianceClient) SetTargetTemperature(ctx context.Context, in *SetTarge
 // ApplianceServer is the server API for Appliance service.
 type ApplianceServer interface {
 	GetBoilerTemperatureHistory(context.Context, *GetBoilerTemperatureHistoryRequest) (*GetBoilerTemperatureHistoryResponse, error)
-	GetCurrentTemperature(context.Context, *GetCurrentTemperatureRequest) (*GetCurrentTemperatureResponse, error)
+	GetCurrentBoilerTemperature(context.Context, *GetCurrentBoilerTemperatureRequest) (*GetCurrentBoilerTemperatureResponse, error)
 	GetTargetTemperature(context.Context, *GetTargetTemperatureRequest) (*GetTargetTemperatureResponse, error)
 	SetTargetTemperature(context.Context, *SetTargetTemperatureRequest) (*SetTargetTemperatureResponse, error)
 }
@@ -498,8 +497,8 @@ type UnimplementedApplianceServer struct {
 func (*UnimplementedApplianceServer) GetBoilerTemperatureHistory(ctx context.Context, req *GetBoilerTemperatureHistoryRequest) (*GetBoilerTemperatureHistoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBoilerTemperatureHistory not implemented")
 }
-func (*UnimplementedApplianceServer) GetCurrentTemperature(ctx context.Context, req *GetCurrentTemperatureRequest) (*GetCurrentTemperatureResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentTemperature not implemented")
+func (*UnimplementedApplianceServer) GetCurrentBoilerTemperature(ctx context.Context, req *GetCurrentBoilerTemperatureRequest) (*GetCurrentBoilerTemperatureResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentBoilerTemperature not implemented")
 }
 func (*UnimplementedApplianceServer) GetTargetTemperature(ctx context.Context, req *GetTargetTemperatureRequest) (*GetTargetTemperatureResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTargetTemperature not implemented")
@@ -530,20 +529,20 @@ func _Appliance_GetBoilerTemperatureHistory_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Appliance_GetCurrentTemperature_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCurrentTemperatureRequest)
+func _Appliance_GetCurrentBoilerTemperature_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCurrentBoilerTemperatureRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApplianceServer).GetCurrentTemperature(ctx, in)
+		return srv.(ApplianceServer).GetCurrentBoilerTemperature(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/appliancepb.Appliance/GetCurrentTemperature",
+		FullMethod: "/appliancepb.Appliance/GetCurrentBoilerTemperature",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApplianceServer).GetCurrentTemperature(ctx, req.(*GetCurrentTemperatureRequest))
+		return srv.(ApplianceServer).GetCurrentBoilerTemperature(ctx, req.(*GetCurrentBoilerTemperatureRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -593,8 +592,8 @@ var _Appliance_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Appliance_GetBoilerTemperatureHistory_Handler,
 		},
 		{
-			MethodName: "GetCurrentTemperature",
-			Handler:    _Appliance_GetCurrentTemperature_Handler,
+			MethodName: "GetCurrentBoilerTemperature",
+			Handler:    _Appliance_GetCurrentBoilerTemperature_Handler,
 		},
 		{
 			MethodName: "GetTargetTemperature",

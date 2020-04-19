@@ -20,13 +20,13 @@ Appliance.GetBoilerTemperatureHistory = {
   responseType: pkg_appliancepb_appliance_pb.GetBoilerTemperatureHistoryResponse
 };
 
-Appliance.GetCurrentTemperature = {
-  methodName: "GetCurrentTemperature",
+Appliance.GetCurrentBoilerTemperature = {
+  methodName: "GetCurrentBoilerTemperature",
   service: Appliance,
   requestStream: false,
   responseStream: false,
-  requestType: pkg_appliancepb_appliance_pb.GetCurrentTemperatureRequest,
-  responseType: pkg_appliancepb_appliance_pb.GetCurrentTemperatureResponse
+  requestType: pkg_appliancepb_appliance_pb.GetCurrentBoilerTemperatureRequest,
+  responseType: pkg_appliancepb_appliance_pb.GetCurrentBoilerTemperatureResponse
 };
 
 Appliance.GetTargetTemperature = {
@@ -85,11 +85,11 @@ ApplianceClient.prototype.getBoilerTemperatureHistory = function getBoilerTemper
   };
 };
 
-ApplianceClient.prototype.getCurrentTemperature = function getCurrentTemperature(requestMessage, metadata, callback) {
+ApplianceClient.prototype.getCurrentBoilerTemperature = function getCurrentBoilerTemperature(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(Appliance.GetCurrentTemperature, {
+  var client = grpc.unary(Appliance.GetCurrentBoilerTemperature, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
