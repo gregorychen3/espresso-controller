@@ -11,8 +11,8 @@ import (
 )
 
 type grpcController struct {
-	c                Configuration
-	temperatureCtrlr control.Strategy
+	c                      Configuration
+	boilerTemperatureCtrlr control.Strategy
 }
 
 func newGrpcController(c Configuration) (*grpcController, error) {
@@ -26,13 +26,13 @@ func newGrpcController(c Configuration) (*grpcController, error) {
 	}
 
 	return &grpcController{
-		c:                c,
-		temperatureCtrlr: temperatureCtrlr,
+		c:                      c,
+		boilerTemperatureCtrlr: temperatureCtrlr,
 	}, nil
 }
 
 func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.GetCurrentTemperatureRequest) (*appliancepb.GetCurrentTemperatureResponse, error) {
-	sample := c.temperatureCtrlr.GetCurrentTemperature()
+	sample := c.boilerTemperatureCtrlr.GetCurrentTemperature()
 
 	pbTime, err := ptypes.TimestampProto(sample.ObservedAt)
 	if err != nil {
@@ -48,7 +48,7 @@ func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.Get
 }
 
 func (c *grpcController) GetBoilerTemperatureHistory(context.Context, *appliancepb.GetBoilerTemperatureHistoryRequest) (*appliancepb.GetBoilerTemperatureHistoryResponse, error) {
-	samples := c.temperatureCtrlr.GetTemperatureHistory()
+	samples := c.boilerTemperatureCtrlr.GetTemperatureHistory()
 
 	var pbSamples []*appliancepb.TemperatureSample
 	for _, s := range samples {
@@ -69,7 +69,7 @@ func (c *grpcController) GetBoilerTemperatureHistory(context.Context, *appliance
 }
 
 func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetTargetTemperatureRequest) (*appliancepb.GetTargetTemperatureResponse, error) {
-	targetTemperature := c.temperatureCtrlr.GetTargetTemperature()
+	targetTemperature := c.boilerTemperatureCtrlr.GetTargetTemperature()
 
 	pbTime, err := ptypes.TimestampProto(targetTemperature.SetAt)
 	if err != nil {
@@ -83,7 +83,7 @@ func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetT
 }
 
 func (c *grpcController) SetTargetTemperature(ctx context.Context, req *appliancepb.SetTargetTemperatureRequest) (*appliancepb.SetTargetTemperatureResponse, error) {
-	targetTemperature := c.temperatureCtrlr.SetTargetTemperature(req.Temperature)
+	targetTemperature := c.boilerTemperatureCtrlr.SetTargetTemperature(req.Temperature)
 
 	pbTime, err := ptypes.TimestampProto(targetTemperature.SetAt)
 	if err != nil {
