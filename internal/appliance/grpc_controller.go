@@ -31,7 +31,7 @@ func newGrpcController(c Configuration) (*grpcController, error) {
 	}, nil
 }
 
-func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.GetCurrentTemperatureRequest) (*appliancepb.GetCurrentTemperatureResponse, error) {
+func (c *grpcController) GetCurrentBoilerTemperature(context.Context, *appliancepb.GetCurrentBoilerTemperatureRequest) (*appliancepb.GetCurrentBoilerTemperatureResponse, error) {
 	sample := c.boilerTemperatureCtrlr.GetCurrentTemperature()
 
 	pbTime, err := ptypes.TimestampProto(sample.ObservedAt)
@@ -39,7 +39,7 @@ func (c *grpcController) GetCurrentTemperature(context.Context, *appliancepb.Get
 		return nil, err
 	}
 
-	return &appliancepb.GetCurrentTemperatureResponse{
+	return &appliancepb.GetCurrentBoilerTemperatureResponse{
 		Sample: &appliancepb.TemperatureSample{
 			Value:      sample.Value,
 			ObservedAt: pbTime,
