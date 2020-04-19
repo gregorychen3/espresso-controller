@@ -27,7 +27,10 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
   },
-  fixedHeight: {
+  halfHeight: {
+    height: 250,
+  },
+  tallHeight: {
     height: 500,
   },
 }));
@@ -36,7 +39,7 @@ export default () => {
   const showSetTemperatureModal = useSelector(showTargetTempModal);
 
   const classes = useStyles();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const tallHeightPaper = clsx(classes.paper, classes.tallHeight);
 
   const dispatch = useDispatch();
 
@@ -60,12 +63,12 @@ export default () => {
       {showSetTemperatureModal && <SetTemperatureModal />}
       <Grid container spacing={3}>
         <Grid item xs={12} md={8} lg={9}>
-          <Paper className={fixedHeightPaper}>
+          <Paper className={tallHeightPaper}>
             <TemperatureChart title="Boiler Temperature" />
           </Paper>
         </Grid>
         <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}>
+          <Paper className={tallHeightPaper}>
             <Temperature />
           </Paper>
         </Grid>
