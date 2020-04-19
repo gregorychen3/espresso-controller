@@ -74,8 +74,8 @@ func (p *Bangbang) Run() error {
 	go func() {
 		for {
 			p.temperatureHistoryMu.Lock()
-			for i, sample := range p.temperatureHistory {
-				if time.Since(sample.ObservedAt) > time.Hour*1 { // keep 1hr of history
+			for i := len(p.temperatureHistory) - 1; i >= 0; i-- {
+				if time.Since(p.temperatureHistory[i].ObservedAt) > time.Hour*1 { // keep 1hr of history
 					p.temperatureHistory = p.temperatureHistory[i+1:]
 					log.Debug("Pruned temperature history", zap.Int("numPruned", i+1), zap.Int("numRemaining", len(p.temperatureHistory)))
 					break
