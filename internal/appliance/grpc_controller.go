@@ -68,6 +68,10 @@ func (c *grpcController) GetBoilerTemperatureHistory(context.Context, *appliance
 	}, nil
 }
 
+func (c *grpcController) BoilerTemperature(req *appliancepb.BoilerTemperatureRequest, stream appliancepb.Appliance_BoilerTemperatureServer) error {
+	return nil
+}
+
 func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetTargetTemperatureRequest) (*appliancepb.GetTargetTemperatureResponse, error) {
 	targetTemperature := c.boilerTemperatureCtrlr.GetTargetTemperature()
 
