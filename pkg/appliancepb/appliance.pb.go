@@ -72,6 +72,45 @@ func (m *TemperatureSample) GetObservedAt() *timestamp.Timestamp {
 	return nil
 }
 
+type TemperatureHistory struct {
+	Samples              []*TemperatureSample `protobuf:"bytes,1,rep,name=samples,proto3" json:"samples,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
+}
+
+func (m *TemperatureHistory) Reset()         { *m = TemperatureHistory{} }
+func (m *TemperatureHistory) String() string { return proto.CompactTextString(m) }
+func (*TemperatureHistory) ProtoMessage()    {}
+func (*TemperatureHistory) Descriptor() ([]byte, []int) {
+	return fileDescriptor_cb8bec84a49a6ea7, []int{1}
+}
+
+func (m *TemperatureHistory) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TemperatureHistory.Unmarshal(m, b)
+}
+func (m *TemperatureHistory) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TemperatureHistory.Marshal(b, m, deterministic)
+}
+func (m *TemperatureHistory) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TemperatureHistory.Merge(m, src)
+}
+func (m *TemperatureHistory) XXX_Size() int {
+	return xxx_messageInfo_TemperatureHistory.Size(m)
+}
+func (m *TemperatureHistory) XXX_DiscardUnknown() {
+	xxx_messageInfo_TemperatureHistory.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TemperatureHistory proto.InternalMessageInfo
+
+func (m *TemperatureHistory) GetSamples() []*TemperatureSample {
+	if m != nil {
+		return m.Samples
+	}
+	return nil
+}
+
 type GetBoilerTemperatureHistoryRequest struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -82,7 +121,7 @@ func (m *GetBoilerTemperatureHistoryRequest) Reset()         { *m = GetBoilerTem
 func (m *GetBoilerTemperatureHistoryRequest) String() string { return proto.CompactTextString(m) }
 func (*GetBoilerTemperatureHistoryRequest) ProtoMessage()    {}
 func (*GetBoilerTemperatureHistoryRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cb8bec84a49a6ea7, []int{1}
+	return fileDescriptor_cb8bec84a49a6ea7, []int{2}
 }
 
 func (m *GetBoilerTemperatureHistoryRequest) XXX_Unmarshal(b []byte) error {
@@ -114,7 +153,7 @@ func (m *GetBoilerTemperatureHistoryResponse) Reset()         { *m = GetBoilerTe
 func (m *GetBoilerTemperatureHistoryResponse) String() string { return proto.CompactTextString(m) }
 func (*GetBoilerTemperatureHistoryResponse) ProtoMessage()    {}
 func (*GetBoilerTemperatureHistoryResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cb8bec84a49a6ea7, []int{2}
+	return fileDescriptor_cb8bec84a49a6ea7, []int{3}
 }
 
 func (m *GetBoilerTemperatureHistoryResponse) XXX_Unmarshal(b []byte) error {
@@ -152,7 +191,7 @@ func (m *GetCurrentBoilerTemperatureRequest) Reset()         { *m = GetCurrentBo
 func (m *GetCurrentBoilerTemperatureRequest) String() string { return proto.CompactTextString(m) }
 func (*GetCurrentBoilerTemperatureRequest) ProtoMessage()    {}
 func (*GetCurrentBoilerTemperatureRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cb8bec84a49a6ea7, []int{3}
+	return fileDescriptor_cb8bec84a49a6ea7, []int{4}
 }
 
 func (m *GetCurrentBoilerTemperatureRequest) XXX_Unmarshal(b []byte) error {
@@ -184,7 +223,7 @@ func (m *GetCurrentBoilerTemperatureResponse) Reset()         { *m = GetCurrentB
 func (m *GetCurrentBoilerTemperatureResponse) String() string { return proto.CompactTextString(m) }
 func (*GetCurrentBoilerTemperatureResponse) ProtoMessage()    {}
 func (*GetCurrentBoilerTemperatureResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cb8bec84a49a6ea7, []int{4}
+	return fileDescriptor_cb8bec84a49a6ea7, []int{5}
 }
 
 func (m *GetCurrentBoilerTemperatureResponse) XXX_Unmarshal(b []byte) error {
@@ -212,6 +251,117 @@ func (m *GetCurrentBoilerTemperatureResponse) GetSample() *TemperatureSample {
 	return nil
 }
 
+type BoilerTemperatureRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *BoilerTemperatureRequest) Reset()         { *m = BoilerTemperatureRequest{} }
+func (m *BoilerTemperatureRequest) String() string { return proto.CompactTextString(m) }
+func (*BoilerTemperatureRequest) ProtoMessage()    {}
+func (*BoilerTemperatureRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_cb8bec84a49a6ea7, []int{6}
+}
+
+func (m *BoilerTemperatureRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_BoilerTemperatureRequest.Unmarshal(m, b)
+}
+func (m *BoilerTemperatureRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_BoilerTemperatureRequest.Marshal(b, m, deterministic)
+}
+func (m *BoilerTemperatureRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BoilerTemperatureRequest.Merge(m, src)
+}
+func (m *BoilerTemperatureRequest) XXX_Size() int {
+	return xxx_messageInfo_BoilerTemperatureRequest.Size(m)
+}
+func (m *BoilerTemperatureRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_BoilerTemperatureRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_BoilerTemperatureRequest proto.InternalMessageInfo
+
+type BoilerTemperatureResponse struct {
+	// Types that are valid to be assigned to Data:
+	//	*BoilerTemperatureResponse_History
+	//	*BoilerTemperatureResponse_Sample
+	Data                 isBoilerTemperatureResponse_Data `protobuf_oneof:"data"`
+	XXX_NoUnkeyedLiteral struct{}                         `json:"-"`
+	XXX_unrecognized     []byte                           `json:"-"`
+	XXX_sizecache        int32                            `json:"-"`
+}
+
+func (m *BoilerTemperatureResponse) Reset()         { *m = BoilerTemperatureResponse{} }
+func (m *BoilerTemperatureResponse) String() string { return proto.CompactTextString(m) }
+func (*BoilerTemperatureResponse) ProtoMessage()    {}
+func (*BoilerTemperatureResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_cb8bec84a49a6ea7, []int{7}
+}
+
+func (m *BoilerTemperatureResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_BoilerTemperatureResponse.Unmarshal(m, b)
+}
+func (m *BoilerTemperatureResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_BoilerTemperatureResponse.Marshal(b, m, deterministic)
+}
+func (m *BoilerTemperatureResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BoilerTemperatureResponse.Merge(m, src)
+}
+func (m *BoilerTemperatureResponse) XXX_Size() int {
+	return xxx_messageInfo_BoilerTemperatureResponse.Size(m)
+}
+func (m *BoilerTemperatureResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_BoilerTemperatureResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_BoilerTemperatureResponse proto.InternalMessageInfo
+
+type isBoilerTemperatureResponse_Data interface {
+	isBoilerTemperatureResponse_Data()
+}
+
+type BoilerTemperatureResponse_History struct {
+	History *TemperatureHistory `protobuf:"bytes,1,opt,name=history,proto3,oneof"`
+}
+
+type BoilerTemperatureResponse_Sample struct {
+	Sample *TemperatureSample `protobuf:"bytes,2,opt,name=sample,proto3,oneof"`
+}
+
+func (*BoilerTemperatureResponse_History) isBoilerTemperatureResponse_Data() {}
+
+func (*BoilerTemperatureResponse_Sample) isBoilerTemperatureResponse_Data() {}
+
+func (m *BoilerTemperatureResponse) GetData() isBoilerTemperatureResponse_Data {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+func (m *BoilerTemperatureResponse) GetHistory() *TemperatureHistory {
+	if x, ok := m.GetData().(*BoilerTemperatureResponse_History); ok {
+		return x.History
+	}
+	return nil
+}
+
+func (m *BoilerTemperatureResponse) GetSample() *TemperatureSample {
+	if x, ok := m.GetData().(*BoilerTemperatureResponse_Sample); ok {
+		return x.Sample
+	}
+	return nil
+}
+
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*BoilerTemperatureResponse) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
+		(*BoilerTemperatureResponse_History)(nil),
+		(*BoilerTemperatureResponse_Sample)(nil),
+	}
+}
+
 type GetTargetTemperatureRequest struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -222,7 +372,7 @@ func (m *GetTargetTemperatureRequest) Reset()         { *m = GetTargetTemperatur
 func (m *GetTargetTemperatureRequest) String() string { return proto.CompactTextString(m) }
 func (*GetTargetTemperatureRequest) ProtoMessage()    {}
 func (*GetTargetTemperatureRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cb8bec84a49a6ea7, []int{5}
+	return fileDescriptor_cb8bec84a49a6ea7, []int{8}
 }
 
 func (m *GetTargetTemperatureRequest) XXX_Unmarshal(b []byte) error {
@@ -255,7 +405,7 @@ func (m *GetTargetTemperatureResponse) Reset()         { *m = GetTargetTemperatu
 func (m *GetTargetTemperatureResponse) String() string { return proto.CompactTextString(m) }
 func (*GetTargetTemperatureResponse) ProtoMessage()    {}
 func (*GetTargetTemperatureResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cb8bec84a49a6ea7, []int{6}
+	return fileDescriptor_cb8bec84a49a6ea7, []int{9}
 }
 
 func (m *GetTargetTemperatureResponse) XXX_Unmarshal(b []byte) error {
@@ -301,7 +451,7 @@ func (m *SetTargetTemperatureRequest) Reset()         { *m = SetTargetTemperatur
 func (m *SetTargetTemperatureRequest) String() string { return proto.CompactTextString(m) }
 func (*SetTargetTemperatureRequest) ProtoMessage()    {}
 func (*SetTargetTemperatureRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cb8bec84a49a6ea7, []int{7}
+	return fileDescriptor_cb8bec84a49a6ea7, []int{10}
 }
 
 func (m *SetTargetTemperatureRequest) XXX_Unmarshal(b []byte) error {
@@ -341,7 +491,7 @@ func (m *SetTargetTemperatureResponse) Reset()         { *m = SetTargetTemperatu
 func (m *SetTargetTemperatureResponse) String() string { return proto.CompactTextString(m) }
 func (*SetTargetTemperatureResponse) ProtoMessage()    {}
 func (*SetTargetTemperatureResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cb8bec84a49a6ea7, []int{8}
+	return fileDescriptor_cb8bec84a49a6ea7, []int{11}
 }
 
 func (m *SetTargetTemperatureResponse) XXX_Unmarshal(b []byte) error {
@@ -378,10 +528,13 @@ func (m *SetTargetTemperatureResponse) GetSetAt() *timestamp.Timestamp {
 
 func init() {
 	proto.RegisterType((*TemperatureSample)(nil), "appliancepb.TemperatureSample")
+	proto.RegisterType((*TemperatureHistory)(nil), "appliancepb.TemperatureHistory")
 	proto.RegisterType((*GetBoilerTemperatureHistoryRequest)(nil), "appliancepb.GetBoilerTemperatureHistoryRequest")
 	proto.RegisterType((*GetBoilerTemperatureHistoryResponse)(nil), "appliancepb.GetBoilerTemperatureHistoryResponse")
 	proto.RegisterType((*GetCurrentBoilerTemperatureRequest)(nil), "appliancepb.GetCurrentBoilerTemperatureRequest")
 	proto.RegisterType((*GetCurrentBoilerTemperatureResponse)(nil), "appliancepb.GetCurrentBoilerTemperatureResponse")
+	proto.RegisterType((*BoilerTemperatureRequest)(nil), "appliancepb.BoilerTemperatureRequest")
+	proto.RegisterType((*BoilerTemperatureResponse)(nil), "appliancepb.BoilerTemperatureResponse")
 	proto.RegisterType((*GetTargetTemperatureRequest)(nil), "appliancepb.GetTargetTemperatureRequest")
 	proto.RegisterType((*GetTargetTemperatureResponse)(nil), "appliancepb.GetTargetTemperatureResponse")
 	proto.RegisterType((*SetTargetTemperatureRequest)(nil), "appliancepb.SetTargetTemperatureRequest")
@@ -393,31 +546,36 @@ func init() {
 }
 
 var fileDescriptor_cb8bec84a49a6ea7 = []byte{
-	// 380 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x92, 0x3d, 0x4f, 0xeb, 0x30,
-	0x14, 0x86, 0x9b, 0x5b, 0xb5, 0x57, 0xf7, 0x64, 0xb8, 0xc2, 0xea, 0x50, 0xa5, 0x7c, 0x44, 0x86,
-	0x21, 0x2c, 0x29, 0x14, 0x09, 0x21, 0x31, 0xa0, 0xc2, 0x50, 0xe6, 0xa4, 0x2b, 0xaa, 0x1c, 0x38,
-	0xad, 0x22, 0x25, 0xb5, 0xb1, 0x9d, 0x4a, 0xac, 0xfc, 0x65, 0xfe, 0x00, 0x22, 0x1f, 0x10, 0x48,
-	0xd3, 0x64, 0x62, 0x8c, 0xfd, 0xc6, 0xcf, 0x63, 0x9f, 0x17, 0xfe, 0x33, 0x21, 0xa2, 0x90, 0xad,
-	0x1f, 0xd1, 0x15, 0x92, 0x6b, 0x4e, 0xcc, 0xcf, 0x05, 0x11, 0x58, 0x47, 0x2b, 0xce, 0x57, 0x11,
-	0x8e, 0xd3, 0xad, 0x20, 0x59, 0x8e, 0x75, 0x18, 0xa3, 0xd2, 0x2c, 0x16, 0x59, 0x9a, 0x2e, 0x61,
-	0x6f, 0x8e, 0xb1, 0x40, 0xc9, 0x74, 0x22, 0xd1, 0x67, 0xb1, 0x88, 0x90, 0x0c, 0xa0, 0xb7, 0x61,
-	0x51, 0x82, 0x43, 0xc3, 0x36, 0x1c, 0xc3, 0xcb, 0x3e, 0xc8, 0x35, 0x98, 0x3c, 0x50, 0x28, 0x37,
-	0xf8, 0xb4, 0x60, 0x7a, 0xf8, 0xc7, 0x36, 0x1c, 0x73, 0x62, 0xb9, 0x19, 0xc1, 0x2d, 0x08, 0xee,
-	0xbc, 0x20, 0x78, 0x50, 0xc4, 0xa7, 0x9a, 0x9e, 0x00, 0x9d, 0xa1, 0xbe, 0xe5, 0x61, 0x84, 0xb2,
-	0x04, 0xbc, 0x0f, 0x95, 0xe6, 0xf2, 0xc5, 0xc3, 0xe7, 0x04, 0x95, 0xa6, 0x0b, 0x38, 0xde, 0x99,
-	0x52, 0x82, 0xaf, 0x15, 0x92, 0x2b, 0xf8, 0xab, 0x52, 0x53, 0x35, 0x34, 0xec, 0xae, 0x63, 0x4e,
-	0x0e, 0xdd, 0xd2, 0xa5, 0xdd, 0xca, 0x85, 0xbc, 0x22, 0x9e, 0x6b, 0xdc, 0x25, 0x52, 0xe2, 0xba,
-	0xca, 0x29, 0x34, 0x1e, 0x52, 0x8d, 0xfa, 0x54, 0xae, 0x71, 0x09, 0xfd, 0xec, 0xdc, 0xf4, 0x9d,
-	0x9a, 0x2d, 0xf2, 0x34, 0x3d, 0x80, 0xd1, 0x0c, 0xf5, 0x9c, 0xc9, 0x15, 0xea, 0x2d, 0x74, 0x05,
-	0xfb, 0xdb, 0xb7, 0x73, 0xac, 0x0d, 0xa6, 0xfe, 0x5a, 0xce, 0x67, 0x54, 0x5e, 0x22, 0xe7, 0xd0,
-	0x57, 0xa8, 0xdb, 0x0d, 0xa9, 0xa7, 0x50, 0x4f, 0x35, 0xbd, 0x81, 0x91, 0x5f, 0xef, 0xd4, 0xcc,
-	0xfc, 0xb0, 0xf6, 0x7f, 0xdb, 0x7a, 0xf2, 0xd6, 0x85, 0x7f, 0xd3, 0xe2, 0xcd, 0xc9, 0xab, 0x91,
-	0x3e, 0x6c, 0x5d, 0x7d, 0xc8, 0xf8, 0xdb, 0x7c, 0x9a, 0xeb, 0x68, 0x9d, 0xb5, 0xff, 0x21, 0xbb,
-	0x25, 0xed, 0x14, 0x12, 0x75, 0xe5, 0xa9, 0x4a, 0x34, 0x94, 0xb1, 0x2a, 0xd1, 0xd4, 0x4b, 0xda,
-	0x21, 0x31, 0x0c, 0xb6, 0x55, 0x88, 0x38, 0x3f, 0xcf, 0xaa, 0x1b, 0xb8, 0x75, 0xda, 0x22, 0x59,
-	0xc6, 0xf9, 0xcd, 0x38, 0xbf, 0x35, 0xce, 0xdf, 0x89, 0x0b, 0xfa, 0x69, 0x21, 0x2e, 0xde, 0x03,
-	0x00, 0x00, 0xff, 0xff, 0x65, 0xd9, 0x66, 0xca, 0xfb, 0x04, 0x00, 0x00,
+	// 456 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x93, 0x4f, 0x6f, 0xd3, 0x30,
+	0x18, 0xc6, 0xeb, 0xb1, 0x75, 0xe2, 0xcd, 0x01, 0xcd, 0xea, 0xa1, 0x64, 0xc0, 0x2a, 0xf3, 0x47,
+	0xe5, 0x92, 0x8e, 0x22, 0xa1, 0x49, 0x3b, 0xa0, 0x8e, 0xc3, 0x7a, 0xe2, 0x90, 0xf4, 0x8a, 0x26,
+	0x97, 0xbe, 0x2b, 0x95, 0x92, 0xda, 0xd8, 0x6f, 0x26, 0x71, 0xe5, 0x63, 0xf0, 0xcd, 0xf8, 0x36,
+	0x88, 0x24, 0x2e, 0x1d, 0xa9, 0x9b, 0x48, 0x48, 0x1c, 0xeb, 0x3c, 0xf6, 0xef, 0xe7, 0xb7, 0x8f,
+	0xe1, 0x91, 0xd4, 0x3a, 0x5d, 0xc9, 0xf5, 0x67, 0x8c, 0xb4, 0x51, 0xa4, 0x78, 0xb0, 0x59, 0xd0,
+	0xf3, 0xf0, 0x6c, 0xa9, 0xd4, 0x32, 0xc5, 0x51, 0xf1, 0x69, 0x9e, 0xdf, 0x8e, 0x68, 0x95, 0xa1,
+	0x25, 0x99, 0xe9, 0x32, 0x2d, 0x6e, 0xe1, 0x64, 0x86, 0x99, 0x46, 0x23, 0x29, 0x37, 0x98, 0xc8,
+	0x4c, 0xa7, 0xc8, 0x7b, 0x70, 0x74, 0x27, 0xd3, 0x1c, 0xfb, 0x6c, 0xc0, 0x86, 0x2c, 0x2e, 0x7f,
+	0xf0, 0x4b, 0x08, 0xd4, 0xdc, 0xa2, 0xb9, 0xc3, 0xc5, 0x8d, 0xa4, 0xfe, 0xc1, 0x80, 0x0d, 0x83,
+	0x71, 0x18, 0x95, 0x84, 0xc8, 0x11, 0xa2, 0x99, 0x23, 0xc4, 0xe0, 0xe2, 0x13, 0x12, 0x1f, 0x81,
+	0x6f, 0x71, 0xa6, 0x2b, 0x4b, 0xca, 0x7c, 0xe3, 0x17, 0x70, 0x6c, 0x0b, 0xa4, 0xed, 0xb3, 0xc1,
+	0x83, 0x61, 0x30, 0x7e, 0x16, 0x6d, 0xd9, 0x47, 0x35, 0xb3, 0xd8, 0xc5, 0xc5, 0x0b, 0x10, 0xd7,
+	0x48, 0x57, 0x6a, 0x95, 0xa2, 0xa9, 0x1f, 0x1c, 0xe3, 0xd7, 0x1c, 0x2d, 0x89, 0x1b, 0x78, 0xbe,
+	0x37, 0x65, 0xb5, 0x5a, 0x5b, 0xfc, 0x67, 0x8d, 0x0f, 0xb9, 0x31, 0xb8, 0xae, 0x73, 0x9c, 0xc6,
+	0xa7, 0x42, 0xc3, 0x9f, 0xaa, 0x34, 0xde, 0x41, 0xb7, 0x3c, 0xb7, 0x98, 0x7b, 0xb3, 0x45, 0x95,
+	0x16, 0x21, 0xf4, 0xbd, 0xe8, 0x1f, 0x0c, 0x1e, 0xfb, 0x89, 0x97, 0x70, 0xfc, 0xa5, 0x9c, 0x45,
+	0x85, 0x3c, 0xf3, 0x21, 0xab, 0x91, 0x4d, 0x3b, 0xb1, 0xdb, 0xc1, 0x2f, 0x36, 0xba, 0x07, 0x6d,
+	0x74, 0xa7, 0x1d, 0x27, 0x7c, 0xd5, 0x85, 0xc3, 0x85, 0x24, 0x29, 0x9e, 0xc2, 0xe9, 0x35, 0xd2,
+	0x4c, 0x9a, 0x25, 0xd2, 0x0e, 0x77, 0x0b, 0x4f, 0x76, 0x7f, 0xae, 0xec, 0x07, 0x10, 0xd0, 0x9f,
+	0xe5, 0xaa, 0xac, 0xdb, 0x4b, 0xfc, 0x0d, 0x74, 0x2d, 0x52, 0xbb, 0xb6, 0x1e, 0x59, 0xa4, 0x09,
+	0x89, 0xf7, 0x70, 0x9a, 0xf8, 0x9d, 0x9a, 0x99, 0xbf, 0xad, 0x93, 0xff, 0x6d, 0x3d, 0xfe, 0x79,
+	0x08, 0x0f, 0x27, 0x6e, 0xfa, 0xfc, 0x3b, 0x2b, 0x06, 0xeb, 0xeb, 0x3d, 0x1f, 0xdd, 0xfb, 0xa7,
+	0x9a, 0xdf, 0x51, 0x78, 0xde, 0x7e, 0x43, 0x79, 0x4b, 0xd1, 0x71, 0x12, 0xbe, 0xd6, 0xd7, 0x25,
+	0x1a, 0x5e, 0x51, 0x5d, 0xa2, 0xe9, 0x41, 0x89, 0x0e, 0x5f, 0xc0, 0x49, 0x9d, 0xfc, 0xf2, 0xde,
+	0x41, 0x5e, 0xde, 0xab, 0xa6, 0x58, 0x49, 0x39, 0x67, 0x3c, 0x83, 0xde, 0xae, 0xa2, 0xf2, 0xe1,
+	0xdf, 0xc6, 0xbe, 0x5a, 0x85, 0xaf, 0x5b, 0x24, 0x37, 0x97, 0xca, 0xa0, 0x97, 0x34, 0xe3, 0x92,
+	0xd6, 0xb8, 0x64, 0x2f, 0x6e, 0xde, 0x2d, 0x6a, 0xf7, 0xf6, 0x57, 0x00, 0x00, 0x00, 0xff, 0xff,
+	0xb8, 0x46, 0xb6, 0xdc, 0x6a, 0x06, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -434,6 +592,7 @@ const _ = grpc.SupportPackageIsVersion6
 type ApplianceClient interface {
 	GetBoilerTemperatureHistory(ctx context.Context, in *GetBoilerTemperatureHistoryRequest, opts ...grpc.CallOption) (*GetBoilerTemperatureHistoryResponse, error)
 	GetCurrentBoilerTemperature(ctx context.Context, in *GetCurrentBoilerTemperatureRequest, opts ...grpc.CallOption) (*GetCurrentBoilerTemperatureResponse, error)
+	BoilerTemperature(ctx context.Context, in *BoilerTemperatureRequest, opts ...grpc.CallOption) (Appliance_BoilerTemperatureClient, error)
 	GetTargetTemperature(ctx context.Context, in *GetTargetTemperatureRequest, opts ...grpc.CallOption) (*GetTargetTemperatureResponse, error)
 	SetTargetTemperature(ctx context.Context, in *SetTargetTemperatureRequest, opts ...grpc.CallOption) (*SetTargetTemperatureResponse, error)
 }
@@ -464,6 +623,38 @@ func (c *applianceClient) GetCurrentBoilerTemperature(ctx context.Context, in *G
 	return out, nil
 }
 
+func (c *applianceClient) BoilerTemperature(ctx context.Context, in *BoilerTemperatureRequest, opts ...grpc.CallOption) (Appliance_BoilerTemperatureClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_Appliance_serviceDesc.Streams[0], "/appliancepb.Appliance/BoilerTemperature", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &applianceBoilerTemperatureClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Appliance_BoilerTemperatureClient interface {
+	Recv() (*BoilerTemperatureResponse, error)
+	grpc.ClientStream
+}
+
+type applianceBoilerTemperatureClient struct {
+	grpc.ClientStream
+}
+
+func (x *applianceBoilerTemperatureClient) Recv() (*BoilerTemperatureResponse, error) {
+	m := new(BoilerTemperatureResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *applianceClient) GetTargetTemperature(ctx context.Context, in *GetTargetTemperatureRequest, opts ...grpc.CallOption) (*GetTargetTemperatureResponse, error) {
 	out := new(GetTargetTemperatureResponse)
 	err := c.cc.Invoke(ctx, "/appliancepb.Appliance/GetTargetTemperature", in, out, opts...)
@@ -486,6 +677,7 @@ func (c *applianceClient) SetTargetTemperature(ctx context.Context, in *SetTarge
 type ApplianceServer interface {
 	GetBoilerTemperatureHistory(context.Context, *GetBoilerTemperatureHistoryRequest) (*GetBoilerTemperatureHistoryResponse, error)
 	GetCurrentBoilerTemperature(context.Context, *GetCurrentBoilerTemperatureRequest) (*GetCurrentBoilerTemperatureResponse, error)
+	BoilerTemperature(*BoilerTemperatureRequest, Appliance_BoilerTemperatureServer) error
 	GetTargetTemperature(context.Context, *GetTargetTemperatureRequest) (*GetTargetTemperatureResponse, error)
 	SetTargetTemperature(context.Context, *SetTargetTemperatureRequest) (*SetTargetTemperatureResponse, error)
 }
@@ -499,6 +691,9 @@ func (*UnimplementedApplianceServer) GetBoilerTemperatureHistory(ctx context.Con
 }
 func (*UnimplementedApplianceServer) GetCurrentBoilerTemperature(ctx context.Context, req *GetCurrentBoilerTemperatureRequest) (*GetCurrentBoilerTemperatureResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentBoilerTemperature not implemented")
+}
+func (*UnimplementedApplianceServer) BoilerTemperature(req *BoilerTemperatureRequest, srv Appliance_BoilerTemperatureServer) error {
+	return status.Errorf(codes.Unimplemented, "method BoilerTemperature not implemented")
 }
 func (*UnimplementedApplianceServer) GetTargetTemperature(ctx context.Context, req *GetTargetTemperatureRequest) (*GetTargetTemperatureResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTargetTemperature not implemented")
@@ -545,6 +740,27 @@ func _Appliance_GetCurrentBoilerTemperature_Handler(srv interface{}, ctx context
 		return srv.(ApplianceServer).GetCurrentBoilerTemperature(ctx, req.(*GetCurrentBoilerTemperatureRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _Appliance_BoilerTemperature_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(BoilerTemperatureRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApplianceServer).BoilerTemperature(m, &applianceBoilerTemperatureServer{stream})
+}
+
+type Appliance_BoilerTemperatureServer interface {
+	Send(*BoilerTemperatureResponse) error
+	grpc.ServerStream
+}
+
+type applianceBoilerTemperatureServer struct {
+	grpc.ServerStream
+}
+
+func (x *applianceBoilerTemperatureServer) Send(m *BoilerTemperatureResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Appliance_GetTargetTemperature_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -604,6 +820,12 @@ var _Appliance_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Appliance_SetTargetTemperature_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "BoilerTemperature",
+			Handler:       _Appliance_BoilerTemperature_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "appliance.proto",
 }

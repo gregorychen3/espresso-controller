@@ -22,6 +22,15 @@ type ApplianceGetCurrentBoilerTemperature = {
   readonly responseType: typeof pkg_appliancepb_appliance_pb.GetCurrentBoilerTemperatureResponse;
 };
 
+type ApplianceBoilerTemperature = {
+  readonly methodName: string;
+  readonly service: typeof Appliance;
+  readonly requestStream: false;
+  readonly responseStream: true;
+  readonly requestType: typeof pkg_appliancepb_appliance_pb.BoilerTemperatureRequest;
+  readonly responseType: typeof pkg_appliancepb_appliance_pb.BoilerTemperatureResponse;
+};
+
 type ApplianceGetTargetTemperature = {
   readonly methodName: string;
   readonly service: typeof Appliance;
@@ -44,6 +53,7 @@ export class Appliance {
   static readonly serviceName: string;
   static readonly GetBoilerTemperatureHistory: ApplianceGetBoilerTemperatureHistory;
   static readonly GetCurrentBoilerTemperature: ApplianceGetCurrentBoilerTemperature;
+  static readonly BoilerTemperature: ApplianceBoilerTemperature;
   static readonly GetTargetTemperature: ApplianceGetTargetTemperature;
   static readonly SetTargetTemperature: ApplianceSetTargetTemperature;
 }
@@ -98,6 +108,7 @@ export class ApplianceClient {
     requestMessage: pkg_appliancepb_appliance_pb.GetCurrentBoilerTemperatureRequest,
     callback: (error: ServiceError|null, responseMessage: pkg_appliancepb_appliance_pb.GetCurrentBoilerTemperatureResponse|null) => void
   ): UnaryResponse;
+  boilerTemperature(requestMessage: pkg_appliancepb_appliance_pb.BoilerTemperatureRequest, metadata?: grpc.Metadata): ResponseStream<pkg_appliancepb_appliance_pb.BoilerTemperatureResponse>;
   getTargetTemperature(
     requestMessage: pkg_appliancepb_appliance_pb.GetTargetTemperatureRequest,
     metadata: grpc.Metadata,
