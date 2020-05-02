@@ -1,6 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
-import { BoilerTemperatureRequest } from "../../proto/pkg/appliancepb/appliance_pb";
+import {
+  BoilerTemperatureRequest,
+  BoilerTemperatureResponse,
+} from "../../proto/pkg/appliancepb/appliance_pb";
 import { TemperatureSample } from "../../types";
 import { applianceClient, ReturnType } from "../helpers";
 
@@ -19,47 +22,53 @@ export const temperatureSlice = createSlice({
   } as State,
   reducers: {
     // BoilerTemperature
-    startBoilerTemperatureStream: (state) => {
-      const stream = applianceClient.boilerTemperature(
-        new BoilerTemperatureRequest()
-      );
-      stream.on("data", (msg) => {
-        const history = msg.getHistory();
-        if (history) {
-          const temperatureHistory = history
-            .getSamplesList()
-            .reduce((acc: TemperatureSample[], curSample) => {
-              const observedAt = curSample.getObservedAt();
-              return observedAt
-                ? [
-                    ...acc,
-                    {
-                      value: curSample.getValue(),
-                      observedAt: moment(observedAt.toDate()),
-                    },
-                  ]
-                : acc;
-            }, [])
-            .filter((s) => s !== null);
+    getBoilerTemperatureStream: (
+      state,
+      action: PayloadAction<
+        ReturnType<typeof applianceClient.boilerTemperature>
+      >
+    ) => {
+      state.stream = action.payload;
+    },
 
-          state.temperatureHistory = temperatureHistory;
+    receiveBoilerTemperatureStreamMsg: (
+      state,
+      action: PayloadAction<BoilerTemperatureResponse>
+    ) => {
+      const msg = action.payload;
+      const history = msg.getHistory();
+      if (history) {
+        const temperatureHistory = history
+          .getSamplesList()
+          .reduce((acc: TemperatureSample[], curSample) => {
+            const observedAt = curSample.getObservedAt();
+            return observedAt
+              ? [
+                  ...acc,
+                  {
+                    value: curSample.getValue(),
+                    observedAt: moment(observedAt.toDate()),
+                  },
+                ]
+              : acc;
+          }, [])
+          .filter((s) => s !== null);
+
+        state.temperatureHistory = temperatureHistory;
+      }
+
+      const sample = msg.getSample();
+      if (sample) {
+        const observedAt = sample.getObservedAt();
+        if (!observedAt) {
+          return;
         }
 
-        const sample = msg.getSample();
-        if (sample) {
-          const observedAt = sample.getObservedAt();
-          if (!observedAt) {
-            return;
-          }
-
-          state.temperatureHistory.push({
-            value: sample.getValue(),
-            observedAt: moment(observedAt.toDate()),
-          });
-        }
-      });
-
-      state.stream = stream;
+        state.temperatureHistory.push({
+          value: sample.getValue(),
+          observedAt: moment(observedAt.toDate()),
+        });
+      }
     },
     closeBoilerTemperatureStream: (state) => {
       state.stream?.cancel();
@@ -68,7 +77,15 @@ export const temperatureSlice = createSlice({
   },
 });
 
-export const {
-  startBoilerTemperatureStream,
-  closeBoilerTemperatureStream,
-} = temperatureSlice.actions;
+export const startBoilerTemperatureStream = (req: BoilerTemperatureRequest) => (
+  dispatch: Dispatch
+) => {
+  const stream = applianceClient.boilerTemperature(req);
+  dispatch(temperatureSlice.actions.getBoilerTemperatureStream(stream));
+
+  stream.on("data", (msg) => {
+    dispatch(temperatureSlice.actions.receiveBoilerTemperatureStreamMsg(msg));
+  });
+};
+
+export const { closeBoilerTemperatureStream } = temperatureSlice.actions;
