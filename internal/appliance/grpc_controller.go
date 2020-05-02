@@ -2,6 +2,7 @@ package appliance
 
 import (
 	"context"
+	"time"
 
 	"github.com/golang/protobuf/ptypes"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
@@ -69,7 +70,53 @@ func (c *grpcController) GetBoilerTemperatureHistory(context.Context, *appliance
 }
 
 func (c *grpcController) BoilerTemperature(req *appliancepb.BoilerTemperatureRequest, stream appliancepb.Appliance_BoilerTemperatureServer) error {
-	return nil
+	// the first message sent on the stream is the temperature history
+	var pbSamples []*appliancepb.TemperatureSample
+	samples := c.boilerTemperatureCtrlr.GetTemperatureHistory()
+	for _, s := range samples {
+		pbTime, err := ptypes.TimestampProto(s.ObservedAt)
+		if err != nil {
+			return err
+		}
+		pbSample := appliancepb.TemperatureSample{
+			Value:      s.Value,
+			ObservedAt: pbTime,
+		}
+		pbSamples = append(pbSamples, &pbSample)
+	}
+
+	if err := stream.Send(&appliancepb.BoilerTemperatureResponse{
+		Data: &appliancepb.BoilerTemperatureResponse_History{
+			History: &appliancepb.TemperatureHistory{
+				Samples: pbSamples,
+			},
+		},
+	}); err != nil {
+		return err
+	}
+
+	// send a current sample every 2 secs
+	ticker := time.NewTicker(2 * time.Second)
+	for {
+		select {
+		case <-ticker.C:
+			sample := c.boilerTemperatureCtrlr.GetCurrentTemperature()
+			pbTime, err := ptypes.TimestampProto(sample.ObservedAt)
+			if err != nil {
+				return err
+			}
+			if err := stream.Send(&appliancepb.BoilerTemperatureResponse{
+				Data: &appliancepb.BoilerTemperatureResponse_Sample{
+					Sample: &appliancepb.TemperatureSample{
+						Value:      sample.Value,
+						ObservedAt: pbTime,
+					},
+				},
+			}); err != nil {
+				return err
+			}
+		}
+	}
 }
 
 func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetTargetTemperatureRequest) (*appliancepb.GetTargetTemperatureResponse, error) {
