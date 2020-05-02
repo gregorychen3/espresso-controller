@@ -18,8 +18,8 @@ const (
 )
 
 type HeatingElement interface {
-	On() error
-	Off() error
+	On()
+	Off()
 }
 
 // Bangbang is a temperature controller that implements bang-bang control. It
