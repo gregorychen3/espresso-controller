@@ -17,6 +17,11 @@ const (
 	max float64 = 100.0
 )
 
+type HeatingElement interface {
+	On() error
+	Off() error
+}
+
 // Bangbang is a temperature controller that implements bang-bang control. It
 // satisfies the control.Strategy interface.
 // https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control
@@ -29,7 +34,7 @@ type Bangbang struct {
 	temperatureHistory   []*control.TemperatureSample
 }
 
-func NewBangbang() (*Bangbang, error) {
+func NewBangbang(heatingElement HeatingElement) (*Bangbang, error) {
 	sampler, err := ds18b20.NewDS18B20()
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to initialize temperature sampler")
