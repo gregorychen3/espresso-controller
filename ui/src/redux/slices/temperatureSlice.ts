@@ -1,22 +1,54 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
 import {
-  GetCurrentBoilerTemperatureRequest,
-  GetCurrentBoilerTemperatureResponse,
+  BoilerTemperatureRequest,
   GetBoilerTemperatureHistoryRequest,
   GetBoilerTemperatureHistoryResponse,
+  GetCurrentBoilerTemperatureRequest,
+  GetCurrentBoilerTemperatureResponse,
 } from "../../proto/pkg/appliancepb/appliance_pb";
 import { ServiceError } from "../../proto/pkg/appliancepb/appliance_pb_service";
 import { TemperatureSample } from "../../types";
-import { applianceClient, createUnaryGrpcThunk } from "../helpers";
+import { applianceClient, createUnaryGrpcThunk, ReturnType } from "../helpers";
+
+interface State {
+  stream?: ReturnType<typeof applianceClient.boilerTemperature>;
+  temperatureHistory: TemperatureSample[];
+  isFetching: boolean;
+}
 
 export const temperatureSlice = createSlice({
   name: "temperature",
-  initialState: { temperatureHistory: [], isFetching: false } as {
-    temperatureHistory: TemperatureSample[];
-    isFetching: boolean;
-  },
+  initialState: {
+    stream: undefined,
+    temperatureHistory: [],
+    isFetching: false,
+  } as State,
   reducers: {
+    // BoilerTemperature
+    startBoilerTemperatureStream: (state) => {
+      const stream = applianceClient.boilerTemperature(
+        new BoilerTemperatureRequest()
+      );
+      stream.on("data", (msg) => {
+        const history = msg.getHistory();
+        if (history) {
+          console.log("history");
+          console.log(history);
+        }
+        const sample = msg.getSample();
+        if (sample) {
+          console.log("sample");
+          console.log(sample);
+        }
+      });
+      state.stream = stream;
+    },
+    closeBoilerTemperatureStream: (state) => {
+      state.stream?.cancel();
+      state.stream = undefined;
+    },
+
     // GetBoilerTemperatureHistory
     getBoilerTemperatureHistoryRequest: (
       state,
@@ -123,3 +155,8 @@ export const getBoilerTemperatureHistory = (
     },
     dispatch
   );
+
+export const {
+  startBoilerTemperatureStream,
+  closeBoilerTemperatureStream,
+} = temperatureSlice.actions;

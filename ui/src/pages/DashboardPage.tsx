@@ -7,25 +7,22 @@ import parsePromText, { Metric } from "parse-prometheus-text-format";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MetricCard from "../components/MetricCard";
-import RecentActions from "../components/RecentActions";
 import SetTemperatureModal from "../components/SetTemperatureModal";
 import TemperatureCard from "../components/TemperatureCard";
 import TemperatureChart from "../components/TemperatureChart";
 import {
+  GetBoilerTemperatureHistoryRequest,
   GetCurrentBoilerTemperatureRequest,
   GetTargetTemperatureRequest,
-  GetBoilerTemperatureHistoryRequest,
-  BoilerTemperatureRequest,
-  BoilerTemperatureResponse,
 } from "../proto/pkg/appliancepb/appliance_pb";
 import { showTargetTempModal } from "../redux/selectors";
 import { getTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 import {
-  getCurrentBoilerTemperature,
+  closeBoilerTemperatureStream,
   getBoilerTemperatureHistory,
+  getCurrentBoilerTemperature,
+  startBoilerTemperatureStream,
 } from "../redux/slices/temperatureSlice";
-import { ApplianceClient } from "../proto/pkg/appliancepb/appliance_pb_service";
-import { applianceClient } from "../redux/helpers";
 
 const boilerTemperatureRefreshIntervalMillis = 2000;
 const metricsRefreshIntervalMillis = 5000;
@@ -74,22 +71,11 @@ export default () => {
   // Boiler temperature stream
   // -------------------------
   useEffect(() => {
-    const stream = applianceClient.boilerTemperature(
-      new BoilerTemperatureRequest()
-    );
-    stream.on("data", (msg) => {
-      const history = msg.getHistory();
-      if (history) {
-        console.log("history");
-        console.log(history);
-      }
-      const sample = msg.getSample();
-      if (sample) {
-        console.log("sample");
-        console.log(sample);
-      }
-    });
-  }, []);
+    dispatch(startBoilerTemperatureStream());
+    return () => {
+      dispatch(closeBoilerTemperatureStream());
+    };
+  }, [dispatch]);
 
   //
   // System metrics

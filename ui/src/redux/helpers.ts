@@ -43,3 +43,9 @@ export const createUnaryGrpcThunk = <T1 extends Message, T2 extends Message>(
     }
   );
 };
+
+export type ReturnType<T extends (...args: any[]) => any> = T extends (
+  ...args: any[]
+) => infer R
+  ? R
+  : never;
