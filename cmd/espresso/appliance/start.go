@@ -11,6 +11,7 @@ import (
 
 var configKeys = []config.Key{
 	{Path: "Port", ShortFlag: "p", Description: "Port on which the appliance server should listen", Default: "8080"},
+	{Path: "RelayPinNum", ShortFlag: "r", Description: "The bcm2835 (not physical) GPIO pin number on which the relay is connected", Default: 5},
 }
 
 func NewApplianceStartCmd() *cobra.Command {

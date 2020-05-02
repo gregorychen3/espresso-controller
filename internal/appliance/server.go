@@ -18,7 +18,8 @@ import (
 )
 
 type Configuration struct {
-	Port int
+	Port        int
+	RelayPinNum int
 }
 
 type Server struct {
