@@ -33,15 +33,39 @@ export const temperatureSlice = createSlice({
       stream.on("data", (msg) => {
         const history = msg.getHistory();
         if (history) {
-          console.log("history");
-          console.log(history);
+          const temperatureHistory = history
+            .getSamplesList()
+            .reduce((acc: TemperatureSample[], curSample) => {
+              const observedAt = curSample.getObservedAt();
+              return observedAt
+                ? [
+                    ...acc,
+                    {
+                      value: curSample.getValue(),
+                      observedAt: moment(observedAt.toDate()),
+                    },
+                  ]
+                : acc;
+            }, [])
+            .filter((s) => s !== null);
+
+          state.temperatureHistory = temperatureHistory;
         }
+
         const sample = msg.getSample();
         if (sample) {
-          console.log("sample");
-          console.log(sample);
+          const observedAt = sample.getObservedAt();
+          if (!observedAt) {
+            return;
+          }
+
+          state.temperatureHistory.push({
+            value: sample.getValue(),
+            observedAt: moment(observedAt.toDate()),
+          });
         }
       });
+
       state.stream = stream;
     },
     closeBoilerTemperatureStream: (state) => {
