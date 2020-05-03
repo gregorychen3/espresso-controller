@@ -7,7 +7,9 @@ type Relay struct {
 }
 
 func NewRelay(relayPinNum int) *Relay {
-	return &Relay{pin: rpio.Pin(relayPinNum)}
+	pin := rpio.Pin(relayPinNum)
+	pin.Output()
+	return &Relay{pin: pin}
 }
 
 func (r *Relay) Run() error {
