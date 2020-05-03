@@ -8,12 +8,15 @@ type Relay struct {
 
 func NewRelay(relayPinNum int) *Relay {
 	pin := rpio.Pin(relayPinNum)
-	pin.Output()
 	return &Relay{pin: pin}
 }
 
 func (r *Relay) Run() error {
-	return rpio.Open()
+	if err := rpio.Open(); err != nil {
+		return err
+	}
+	r.pin.Output()
+	return nil
 }
 
 func (r *Relay) Shutdown() error {
