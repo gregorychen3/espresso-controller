@@ -6,10 +6,8 @@ import (
 
 	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
-	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature/ds18b20"
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/pkg/control"
-	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
 
@@ -30,12 +28,7 @@ type Bangbang struct {
 	temperatureHistory   []*control.TemperatureSample
 }
 
-func NewBangbang(heatingElement heating_element.HeatingElement) (*Bangbang, error) {
-	sampler, err := ds18b20.NewDS18B20()
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to initialize temperature sampler")
-	}
-
+func NewBangbang(heatingElement heating_element.HeatingElement, sampler temperature.TemperatureSampler) (*Bangbang, error) {
 	return &Bangbang{
 		temperatureSampler: sampler,
 		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},

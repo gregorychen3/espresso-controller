@@ -9,6 +9,8 @@ import (
 
 	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element/relay"
+	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
+	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature/ds18b20"
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/internal/metrics"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
@@ -33,7 +35,8 @@ type Server struct {
 	grpcApplianceServer appliancepb.ApplianceServer
 	grpcServer          *grpc.Server
 
-	heatingElem heating_element.HeatingElement
+	boilerThermometer temperature.TemperatureSampler
+	heatingElem       heating_element.HeatingElement
 
 	shutdownCh chan struct{}
 }
@@ -50,13 +53,19 @@ func (s *Server) Run() error {
 		return errors.Wrap(err, "initializing metrics")
 	}
 
+	boilerThermometer, err := ds18b20.NewDS18B20()
+	if err != nil {
+		return errors.Wrap(err, "failed to initialize boiler thermometer")
+	}
+	s.boilerThermometer = boilerThermometer
+
 	heatingElem := relay.NewRelay(s.c.RelayPinNum)
 	if err := heatingElem.Run(); err != nil {
 		return errors.Wrap(err, "Starting relay")
 	}
 	s.heatingElem = heatingElem
 
-	grpcController, err := newGrpcController(s.c, heatingElem)
+	grpcController, err := newGrpcController(s.c, heatingElem, boilerThermometer)
 	if err != nil {
 		return err
 	}
