@@ -2,19 +2,14 @@ package appliance
 
 import (
 	"context"
-	"os"
-	"os/signal"
-	"syscall"
 	"time"
 
 	"github.com/golang/protobuf/ptypes"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/relay"
-	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
 	"github.com/gregorychen3/espresso-controller/pkg/control"
 	"github.com/gregorychen3/espresso-controller/pkg/control/bangbang"
 	"github.com/pkg/errors"
-	"go.uber.org/zap"
 )
 
 type TemperatureController interface {
@@ -160,17 +155,6 @@ func (c *grpcController) SetTargetTemperature(ctx context.Context, req *applianc
 	}, nil
 }
 
-func (c *grpcController) watchSignals() {
-	sigCh := make(chan os.Signal, 1)
-	signal.Notify(sigCh, syscall.SIGTERM, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGKILL, syscall.SIGHUP)
-
-	s := <-sigCh
-	log.Info("Recieved signal, shutting down", zap.Stringer("signal", s))
-	if err := c.shutdown(); err != nil {
-		log.Error("Failed to shut down", zap.Error(err))
-	}
-}
-
-func (c *grpcController) shutdown() error {
+func (c *grpcController) Shutdown() error {
 	return c.boilerTemperatureCtrlr.Shutdown()
 }

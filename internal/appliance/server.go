@@ -3,6 +3,9 @@ package appliance
 import (
 	"fmt"
 	"net"
+	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/internal/metrics"
@@ -58,10 +61,15 @@ func (s *Server) Run() error {
 
 	go s.serveTCP()
 
-	<-s.shutdownCh
+	s.watchSignals() // blocks until signal received
 
-	log.Info("Shutdown complete")
-	return nil
+	if err := s.Shutdown(); err != nil {
+		log.Error("Failed while shutting down", zap.Error(err))
+		return err
+	} else {
+		log.Info("Shutdown complete")
+		return nil
+	}
 }
 
 func (s *Server) serveTCP() error {
@@ -101,5 +109,17 @@ func (s *Server) serveHTTP1(listener net.Listener, grpcServer *grpc.Server) erro
 		log.Error("gRPC web server failed", zap.Error(err))
 		return errors.Wrap(err, "gRPC web server failed")
 	}
+	return nil
+}
+
+func (s *Server) watchSignals() {
+	sigCh := make(chan os.Signal, 1)
+	signal.Notify(sigCh, syscall.SIGTERM, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGKILL, syscall.SIGHUP)
+
+	sig := <-sigCh
+	log.Info("Received signal", zap.Stringer("signal", sig))
+}
+
+func (s *Server) Shutdown() error {
 	return nil
 }
