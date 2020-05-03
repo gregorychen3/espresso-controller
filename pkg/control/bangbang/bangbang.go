@@ -22,16 +22,18 @@ const (
 type Bangbang struct {
 	targetTemperature control.TargetTemperature
 
+	heatingElement     heating_element.HeatingElement
 	temperatureSampler temperature.TemperatureSampler
 
 	temperatureHistoryMu sync.RWMutex
 	temperatureHistory   []*control.TemperatureSample
 }
 
-func NewBangbang(heatingElement heating_element.HeatingElement, sampler temperature.TemperatureSampler) (*Bangbang, error) {
+func NewBangbang(heatingElem heating_element.HeatingElement, sampler temperature.TemperatureSampler) (*Bangbang, error) {
 	return &Bangbang{
-		temperatureSampler: sampler,
 		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},
+		heatingElement:     heatingElem,
+		temperatureSampler: sampler,
 	}, nil
 }
 
@@ -51,13 +53,13 @@ func (p *Bangbang) Run() error {
 			p.temperatureHistoryMu.Unlock()
 
 			if sample.Value < p.GetTargetTemperature().Value {
-				log.Info("Switching heating element on", zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
-				// TODO
+				log.Debug("Switching heating element on", zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
+				p.heatingElement.HeatOn()
 			}
 
 			if sample.Value > p.GetTargetTemperature().Value+1 {
-				log.Info("Switching heating element off", zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
-				// TODO
+				log.Debug("Switching heating element off", zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
+				p.heatingElement.HeatOff()
 			}
 
 			time.Sleep(2 * time.Second)
