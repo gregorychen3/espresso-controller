@@ -47,7 +47,6 @@ func (s *Server) Run() error {
 	if err != nil {
 		return err
 	}
-	grpcController.Run()
 	s.grpcApplianceServer = grpcController
 
 	grpcServer := grpc.NewServer(

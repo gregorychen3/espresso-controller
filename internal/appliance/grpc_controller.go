@@ -45,10 +45,6 @@ func newGrpcController(c Configuration) (*grpcController, error) {
 	}, nil
 }
 
-func (c *grpcController) Run() {
-	go c.watchSignals()
-}
-
 func (c *grpcController) GetCurrentBoilerTemperature(context.Context, *appliancepb.GetCurrentBoilerTemperatureRequest) (*appliancepb.GetCurrentBoilerTemperatureResponse, error) {
 	sample := c.boilerTemperatureCtrlr.GetCurrentTemperature()
 
