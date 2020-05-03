@@ -34,11 +34,11 @@ type Server struct {
 	shutdownCh chan struct{}
 }
 
-func New(c Configuration) (*Server, error) {
+func New(c Configuration) *Server {
 	return &Server{
 		c:          c,
 		shutdownCh: make(chan struct{}),
-	}, nil
+	}
 }
 
 func (s *Server) Run() error {

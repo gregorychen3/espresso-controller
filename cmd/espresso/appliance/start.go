@@ -44,11 +44,7 @@ func NewApplianceStartCmd() *cobra.Command {
 				log.Fatal("Unmarshalling configuration: %s\n", err.Error())
 			}
 
-			server, err := appliance.New(c)
-			if err != nil {
-				log.Fatal("Failed to create server: %s\n", err.Error())
-			}
-
+			server := appliance.New(c)
 			return server.Run()
 		},
 	}
