@@ -27,10 +27,15 @@ type Server struct {
 
 	grpcApplianceServer appliancepb.ApplianceServer
 	grpcServer          *grpc.Server
+
+	shutdownCh chan struct{}
 }
 
 func New(c Configuration) (*Server, error) {
-	return &Server{c: c}, nil
+	return &Server{
+		c:          c,
+		shutdownCh: make(chan struct{}),
+	}, nil
 }
 
 func (s *Server) Run() error {
@@ -52,7 +57,12 @@ func (s *Server) Run() error {
 		)))
 	s.grpcServer = grpcServer
 
-	return s.serveTCP()
+	go s.serveTCP()
+
+	<-s.shutdownCh
+
+	log.Info("Shutdown complete")
+	return nil
 }
 
 func (s *Server) serveTCP() error {
