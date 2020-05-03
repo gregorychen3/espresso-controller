@@ -24,6 +24,9 @@ type Configuration struct {
 
 type Server struct {
 	c Configuration
+
+	grpcApplianceServer appliancepb.ApplianceServer
+	grpcServer          *grpc.Server
 }
 
 func New(c Configuration) (*Server, error) {
@@ -35,36 +38,38 @@ func (s *Server) Run() error {
 		return errors.Wrap(err, "initializing metrics")
 	}
 
-	return s.serveTCP()
-}
-
-func (s *Server) serveTCP() error {
 	grpcController, err := newGrpcController(s.c)
 	if err != nil {
 		return err
 	}
-
 	grpcController.Run()
+	s.grpcApplianceServer = grpcController
 
 	grpcServer := grpc.NewServer(
 		grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
 			grpc_ctxtags.UnaryServerInterceptor(),
 			grpc_zap.UnaryServerInterceptor(log.Logger),
 		)))
-	appliancepb.RegisterApplianceServer(grpcServer, grpcController)
+	s.grpcServer = grpcServer
 
+	return s.serveTCP()
+}
+
+func (s *Server) serveTCP() error {
 	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", s.c.Port))
 	if err != nil {
 		return errors.Wrap(err, fmt.Sprintf("failed to listen on port %d", s.c.Port))
 	}
+
+	appliancepb.RegisterApplianceServer(s.grpcServer, s.grpcApplianceServer)
 
 	mux := cmux.New(listener)
 	grpcListener := mux.MatchWithWriters(cmux.HTTP2MatchHeaderFieldPrefixSendSettings("content-type", "application/grpc"))
 	http1Listener := mux.Match(cmux.HTTP1())
 
 	eg := errgroup.Group{}
-	eg.Go(func() error { return s.serveGRPC(grpcListener, grpcServer) })
-	eg.Go(func() error { return s.serveHTTP1(http1Listener, grpcServer) })
+	eg.Go(func() error { return s.serveGRPC(grpcListener, s.grpcServer) })
+	eg.Go(func() error { return s.serveHTTP1(http1Listener, s.grpcServer) })
 	eg.Go(func() error { return mux.Serve() })
 	if err := eg.Wait(); err != nil {
 		return err
