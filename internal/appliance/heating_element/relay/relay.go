@@ -14,14 +14,14 @@ func (r *Relay) Run() error {
 	return rpio.Open()
 }
 
-func (r *Relay) On() {
+func (r *Relay) Shutdown() error {
+	return rpio.Close()
+}
+
+func (r *Relay) HeatOn() {
 	r.pin.High()
 }
 
-func (r *Relay) Off() {
+func (r *Relay) HeatOff() {
 	r.pin.Low()
-}
-
-func (r *Relay) Shutdown() error {
-	return rpio.Close()
 }

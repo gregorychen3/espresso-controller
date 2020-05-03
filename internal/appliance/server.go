@@ -7,6 +7,8 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element"
+	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element/relay"
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/internal/metrics"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
@@ -31,6 +33,8 @@ type Server struct {
 	grpcApplianceServer appliancepb.ApplianceServer
 	grpcServer          *grpc.Server
 
+	heatingElem heating_element.HeatingElement
+
 	shutdownCh chan struct{}
 }
 
@@ -46,7 +50,13 @@ func (s *Server) Run() error {
 		return errors.Wrap(err, "initializing metrics")
 	}
 
-	grpcController, err := newGrpcController(s.c)
+	heatingElem := relay.NewRelay(s.c.RelayPinNum)
+	if err := heatingElem.Run(); err != nil {
+		return errors.Wrap(err, "Starting relay")
+	}
+	s.heatingElem = heatingElem
+
+	grpcController, err := newGrpcController(s.c, heatingElem)
 	if err != nil {
 		return err
 	}
@@ -121,5 +131,9 @@ func (s *Server) watchSignals() {
 }
 
 func (s *Server) Shutdown() error {
+	if err := s.heatingElem.Shutdown(); err != nil {
+		return errors.Wrap(err, "Shutting down heating element relay")
+	}
+
 	return nil
 }

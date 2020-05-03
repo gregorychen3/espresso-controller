@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/ptypes"
-	"github.com/gregorychen3/espresso-controller/internal/appliance/relay"
+	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
 	"github.com/gregorychen3/espresso-controller/pkg/control"
 	"github.com/gregorychen3/espresso-controller/pkg/control/bangbang"
@@ -22,9 +22,7 @@ type grpcController struct {
 	boilerTemperatureCtrlr TemperatureController
 }
 
-func newGrpcController(c Configuration) (*grpcController, error) {
-	heatingElem := relay.NewRelay(c.RelayPinNum)
-
+func newGrpcController(c Configuration, heatingElem heating_element.HeatingElement) (*grpcController, error) {
 	temperatureCtrlr, err := bangbang.NewBangbang(heatingElem)
 	if err != nil {
 		return nil, err
