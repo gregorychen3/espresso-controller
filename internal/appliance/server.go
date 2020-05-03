@@ -44,6 +44,8 @@ func (s *Server) serveTCP() error {
 		return err
 	}
 
+	grpcController.Run()
+
 	grpcServer := grpc.NewServer(
 		grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
 			grpc_ctxtags.UnaryServerInterceptor(),
