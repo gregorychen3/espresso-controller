@@ -2,7 +2,7 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import Title from "./Title";
 import moment from "moment";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Box } from "@material-ui/core";
 
 const useStyles = makeStyles({
   context: { flex: 1 },
@@ -20,7 +20,9 @@ export default ({ name, value, unitLabel, asOf }: Props) => {
     <>
       <Title>{name}</Title>
       <Typography component="p" variant="h4">
-        {value} {unitLabel}
+        <Box>
+          {value} {unitLabel}
+        </Box>
       </Typography>
       {asOf && (
         <Typography color="textSecondary" className={classes.context}>
