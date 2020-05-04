@@ -6,7 +6,7 @@ import moment from "moment";
 import parsePromText, { Metric } from "parse-prometheus-text-format";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MetricCard from "../components/MetricCard";
+import MetricCard, { Severity } from "../components/MetricCard";
 import SetTemperatureModal from "../components/SetTemperatureModal";
 import TemperatureCard from "../components/TemperatureCard";
 import TemperatureChart from "../components/TemperatureChart";
@@ -108,6 +108,16 @@ export default () => {
     dispatch(getTargetTemperature(new GetTargetTemperatureRequest()));
   }, [dispatch]);
 
+  const getRaspiTemperatureSeverity = (raspiTemperature: number): Severity => {
+    if (raspiTemperature < 80) {
+      return "normal";
+    } else if (80 <= raspiTemperature && raspiTemperature < 85) {
+      return "warning";
+    } else {
+      return "error";
+    }
+  };
+
   return (
     <>
       {showSetTemperatureModal && <SetTemperatureModal />}
@@ -131,6 +141,7 @@ export default () => {
               value={cpuUtilization?.toFixed(2) ?? "--"}
               unitLabel="%"
               asOf={metricsRefreshedAt}
+              severity={"normal"}
             />
           </Paper>
         </Grid>
@@ -141,6 +152,7 @@ export default () => {
               value={memUtilization?.toFixed(2) ?? "--"}
               unitLabel="%"
               asOf={metricsRefreshedAt}
+              severity={"normal"}
             />
           </Paper>
         </Grid>
@@ -151,6 +163,11 @@ export default () => {
               value={cpuTemperature?.toFixed(2) ?? "--"}
               unitLabel="°C"
               asOf={metricsRefreshedAt}
+              severity={
+                cpuTemperature
+                  ? getRaspiTemperatureSeverity(cpuTemperature)
+                  : "normal"
+              }
             />
           </Paper>
         </Grid>
@@ -161,6 +178,11 @@ export default () => {
               value={gpuTemperature?.toFixed(2) ?? "--"}
               unitLabel="°C"
               asOf={metricsRefreshedAt}
+              severity={
+                gpuTemperature
+                  ? getRaspiTemperatureSeverity(gpuTemperature)
+                  : "normal"
+              }
             />
           </Paper>
         </Grid>
