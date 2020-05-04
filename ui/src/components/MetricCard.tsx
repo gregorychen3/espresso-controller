@@ -4,9 +4,10 @@ import Title from "./Title";
 import moment from "moment";
 import { makeStyles, Box } from "@material-ui/core";
 
-type Severity = "success" | "warning" | "error";
+export type Severity = "normal" | "success" | "warning" | "error";
 
 const severityColorMap = {
+  normal: "text.primary",
   success: "success.main",
   warning: "warning.main",
   error: "error.main",
@@ -21,7 +22,7 @@ interface Props {
   value: string | number;
   unitLabel: string;
   asOf?: moment.Moment;
-  severity?: Severity;
+  severity: Severity;
 }
 export default ({ name, value, unitLabel, asOf, severity }: Props) => {
   const classes = useStyles();
@@ -30,7 +31,7 @@ export default ({ name, value, unitLabel, asOf, severity }: Props) => {
     <>
       <Title>{name}</Title>
       <Typography component="p" variant="h4">
-        <Box color={severity ? severityColorMap[severity] : "text.primary"}>
+        <Box color={severityColorMap[severity]}>
           {value} {unitLabel}
         </Box>
       </Typography>
