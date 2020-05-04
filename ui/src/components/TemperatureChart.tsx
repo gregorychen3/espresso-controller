@@ -6,6 +6,7 @@ import {
   Line,
   LineChart,
   ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
@@ -57,6 +58,7 @@ export default ({ title }: Props) => {
             stroke={theme.palette.primary.main}
             dot={false}
           />
+          <Tooltip />
         </LineChart>
       </ResponsiveContainer>
     </>
