@@ -27,7 +27,7 @@ export default () => {
 
   return (
     <>
-      <Title>Current Temperature</Title>
+      <Title>Boiler Temperature</Title>
       <Typography component="p" variant="h4">
         {curTemp?.value.toFixed(1) ?? "--"} °C
       </Typography>
@@ -39,7 +39,7 @@ export default () => {
           as of {curTemp.observedAt.format("HH:mm:ss")} Eastern Time
         </Typography>
       )}
-      <Title>Target Temperature</Title>
+      <Title>Target Boiler Temperature</Title>
       <Typography component="p" variant="h4">
         {targetTemp?.value} °C
       </Typography>
