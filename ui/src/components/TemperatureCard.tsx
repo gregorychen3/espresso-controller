@@ -15,14 +15,14 @@ const useStyles = makeStyles({
 });
 
 export default () => {
-  const dispatch = useDispatch();
+  const d = useDispatch();
   const classes = useStyles();
 
   const curTemp = useSelector(getCurTemp);
   const targetTemp = useSelector(getTargetTemp);
 
   const handleSetTargetTempButtonClicked = () => {
-    dispatch(setTargetTempModalVisibility(true));
+    d(setTargetTempModalVisibility(true));
   };
 
   return (

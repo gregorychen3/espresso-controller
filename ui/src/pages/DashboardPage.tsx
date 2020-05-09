@@ -45,17 +45,17 @@ export default () => {
   const classes = useStyles();
   const tallHeightPaper = clsx(classes.paper, classes.tallHeight);
 
-  const dispatch = useDispatch();
+  const d = useDispatch();
 
   //
   // Boiler temperature
   // ------------------
   useEffect(() => {
-    dispatch(startBoilerTemperatureStream(new BoilerTemperatureRequest()));
+    d(startBoilerTemperatureStream(new BoilerTemperatureRequest()));
     return () => {
-      dispatch(closeBoilerTemperatureStream());
+      d(closeBoilerTemperatureStream());
     };
-  }, [dispatch]);
+  }, [d]);
 
   //
   // System metrics
@@ -105,8 +105,8 @@ export default () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getTargetTemperature(new GetTargetTemperatureRequest()));
-  }, [dispatch]);
+    d(getTargetTemperature(new GetTargetTemperatureRequest()));
+  }, [d]);
 
   const getRaspiTemperatureSeverity = (raspiTemperature: number): Severity => {
     if (raspiTemperature < 80) {

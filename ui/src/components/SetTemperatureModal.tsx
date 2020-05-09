@@ -13,14 +13,14 @@ import { setTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 import { setTargetTempModalVisibility } from "../redux/uiSlice";
 
 export default () => {
-  const dispatch = useDispatch();
+  const d = useDispatch();
 
   const [targetTempInput, setTargetTempInput] = useState<number | undefined>(
     undefined
   );
 
   const handleClose = () => {
-    dispatch(setTargetTempModalVisibility(false));
+    d(setTargetTempModalVisibility(false));
   };
 
   const handleTargetTempChanged = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +34,7 @@ export default () => {
 
     const req = new SetTargetTemperatureRequest();
     req.setTemperature(targetTempInput);
-    dispatch(setTargetTemperature(req));
+    d(setTargetTemperature(req));
   };
 
   return (
