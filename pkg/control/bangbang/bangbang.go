@@ -23,13 +23,13 @@ type Bangbang struct {
 	targetTemperature control.TargetTemperature
 
 	heatingElement     heating_element.HeatingElement
-	temperatureSampler temperature.TemperatureSampler
+	temperatureSampler temperature.Sampler
 
 	temperatureHistoryMu sync.RWMutex
-	temperatureHistory   []*temperature.TemperatureSample
+	temperatureHistory   []*temperature.Sample
 }
 
-func NewBangbang(heatingElem heating_element.HeatingElement, sampler temperature.TemperatureSampler) (*Bangbang, error) {
+func NewBangbang(heatingElem heating_element.HeatingElement, sampler temperature.Sampler) (*Bangbang, error) {
 	return &Bangbang{
 		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},
 		heatingElement:     heatingElem,
@@ -83,14 +83,14 @@ func (p *Bangbang) Run() error {
 	return nil
 }
 
-func (p *Bangbang) GetCurrentTemperature() *temperature.TemperatureSample {
+func (p *Bangbang) GetCurrentTemperature() *temperature.Sample {
 	p.temperatureHistoryMu.RLock()
 	defer p.temperatureHistoryMu.RUnlock()
 
 	return p.temperatureHistory[len(p.temperatureHistory)-1]
 }
 
-func (p *Bangbang) GetTemperatureHistory() []*temperature.TemperatureSample {
+func (p *Bangbang) GetTemperatureHistory() []*temperature.Sample {
 	p.temperatureHistoryMu.RLock()
 	defer p.temperatureHistoryMu.RUnlock()
 
@@ -110,14 +110,14 @@ func (p *Bangbang) SetTargetTemperature(temperature float64) control.TargetTempe
 	return targetTemperature
 }
 
-func (p *Bangbang) sampleTemperature() (*temperature.TemperatureSample, error) {
+func (p *Bangbang) sampleTemperature() (*temperature.Sample, error) {
 	sample, err := p.temperatureSampler.Sample()
 	if err != nil {
 		return nil, err
 	}
 
 	log.Debug("Sampled boiler temperature", zap.Float64("temperature", sample))
-	return &temperature.TemperatureSample{Value: sample, ObservedAt: time.Now()}, nil
+	return &temperature.Sample{Value: sample, ObservedAt: time.Now()}, nil
 }
 
 func (p *Bangbang) Shutdown() error {

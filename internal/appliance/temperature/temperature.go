@@ -2,11 +2,11 @@ package temperature
 
 import "time"
 
-type TemperatureSample struct {
+type Sample struct {
 	Value      float64
 	ObservedAt time.Time
 }
 
-type TemperatureSampler interface {
+type Sampler interface {
 	Sample() (float64, error)
 }

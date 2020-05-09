@@ -35,7 +35,7 @@ type Server struct {
 	grpcApplianceServer appliancepb.ApplianceServer
 	grpcServer          *grpc.Server
 
-	boilerThermometer temperature.TemperatureSampler
+	boilerThermometer temperature.Sampler
 	heatingElem       heating_element.HeatingElement
 
 	shutdownCh chan struct{}

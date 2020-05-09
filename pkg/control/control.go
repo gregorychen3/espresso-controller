@@ -7,8 +7,8 @@ import (
 )
 
 type Strategy interface {
-	GetCurrentTemperature() *temperature.TemperatureSample
-	GetTemperatureHistory() []*temperature.TemperatureSample
+	GetCurrentTemperature() *temperature.Sample
+	GetTemperatureHistory() []*temperature.Sample
 
 	GetTargetTemperature() TargetTemperature
 	SetTargetTemperature(temperature float64) TargetTemperature
