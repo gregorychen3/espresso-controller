@@ -5,8 +5,6 @@ export const getCurTemp = (state: State) =>
   _.last(state.temperatureSlice.temperatureHistory);
 export const getTempHistory = (state: State) =>
   state.temperatureSlice.temperatureHistory;
-export const isFetchingCurTemp = (state: State) =>
-  state.temperatureSlice.isFetching;
 
 export const getTargetTemp = (state: State) =>
   state.targetTemperatureSlice.targetTemp;
