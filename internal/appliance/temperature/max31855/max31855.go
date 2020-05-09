@@ -26,3 +26,5 @@ func (m *Max31855) Sample() (*temperature.Sample, error) {
 		ObservedAt: m.sensor.Timestamp,
 	}, nil
 }
+
+// TODO: shutdown logic

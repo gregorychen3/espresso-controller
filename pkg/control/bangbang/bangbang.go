@@ -116,8 +116,8 @@ func (p *Bangbang) sampleTemperature() (*temperature.Sample, error) {
 		return nil, err
 	}
 
-	log.Debug("Sampled boiler temperature", zap.Float64("temperature", sample))
-	return &temperature.Sample{Value: sample, ObservedAt: time.Now()}, nil
+	log.Debug("Sampled boiler temperature", zap.Float64("value", sample.Value), zap.Time("observedAt", sample.ObservedAt))
+	return sample, nil
 }
 
 func (p *Bangbang) Shutdown() error {
