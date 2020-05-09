@@ -34,38 +34,58 @@ export const temperatureSlice = createSlice({
       action: PayloadAction<BoilerTemperatureResponse>
     ) => {
       const msg = action.payload;
-      const history = msg.getHistory();
-      if (history) {
-        const temperatureHistory = history
-          .getSamplesList()
-          .reduce((acc: TemperatureSample[], curSample) => {
-            const observedAt = curSample.getObservedAt();
-            return observedAt
-              ? [
-                  ...acc,
-                  {
-                    value: curSample.getValue(),
-                    observedAt: moment(observedAt.toDate()),
-                  },
-                ]
-              : acc;
-          }, [])
-          .filter((s) => s !== null);
+      switch (msg.getDataCase()) {
+        case BoilerTemperatureResponse.DataCase.HISTORY:
+          const history = msg.getHistory();
+          if (!history) {
+            console.error(
+              "Failed to process boiler temperature stream message data"
+            );
+            return;
+          }
 
-        state.temperatureHistory = temperatureHistory;
-      }
+          state.temperatureHistory = history
+            .getSamplesList()
+            .reduce((acc: TemperatureSample[], curSample) => {
+              const observedAt = curSample.getObservedAt();
+              return observedAt
+                ? [
+                    ...acc,
+                    {
+                      value: curSample.getValue(),
+                      observedAt: moment(observedAt.toDate()),
+                    },
+                  ]
+                : acc;
+            }, [])
+            .filter((s) => s !== null);
+          break;
+        case BoilerTemperatureResponse.DataCase.SAMPLE:
+          const sample = msg.getSample();
+          if (!sample) {
+            console.error(
+              "Failed to process boiler temperature stream message data"
+            );
+            return;
+          }
 
-      const sample = msg.getSample();
-      if (sample) {
-        const observedAt = sample.getObservedAt();
-        if (!observedAt) {
-          return;
-        }
+          const observedAt = sample.getObservedAt();
+          if (!observedAt) {
+            console.error(
+              "Failed to process boiler temperature stream message data"
+            );
+            return;
+          }
 
-        state.temperatureHistory.push({
-          value: sample.getValue(),
-          observedAt: moment(observedAt.toDate()),
-        });
+          state.temperatureHistory.push({
+            value: sample.getValue(),
+            observedAt: moment(observedAt.toDate()),
+          });
+          break;
+        default:
+          console.error(
+            "Failed to process boiler temperature stream message data"
+          );
       }
     },
     closeBoilerTemperatureStream: (state) => {
