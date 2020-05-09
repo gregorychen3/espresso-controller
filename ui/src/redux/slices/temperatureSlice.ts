@@ -10,7 +10,6 @@ import { applianceClient, ReturnType } from "../helpers";
 interface State {
   stream?: ReturnType<typeof applianceClient.boilerTemperature>;
   temperatureHistory: TemperatureSample[];
-  isFetching: boolean;
 }
 
 export const temperatureSlice = createSlice({
@@ -18,7 +17,6 @@ export const temperatureSlice = createSlice({
   initialState: {
     stream: undefined,
     temperatureHistory: [],
-    isFetching: false,
   } as State,
   reducers: {
     // BoilerTemperature
