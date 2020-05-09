@@ -102,8 +102,8 @@ func (c *grpcController) BoilerTemperature(req *appliancepb.BoilerTemperatureReq
 		return err
 	}
 
-	// send a current sample every 2 secs
-	ticker := time.NewTicker(2 * time.Second)
+	// send a current sample every second
+	ticker := time.NewTicker(time.Second)
 	for {
 		select {
 		case <-ticker.C:

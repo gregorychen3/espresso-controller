@@ -18,9 +18,8 @@ func NewDS18B20() (*DS18B20, error) {
 		return nil, err
 	}
 	if len(sensors) > 1 {
-		return nil, errors.New("multiple DS18B20 found")
+		return nil, errors.New("multiple DS18B20 sensors found")
 	}
-
 	log.Info("Initialized DS18B20 sensor", zap.String("sensorID", sensors[0]))
 	return &DS18B20{sensorID: sensors[0]}, nil
 }
