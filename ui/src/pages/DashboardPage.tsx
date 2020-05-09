@@ -21,7 +21,6 @@ import {
   startBoilerTemperatureStream,
 } from "../redux/slices/temperatureSlice";
 
-const boilerTemperatureRefreshIntervalMillis = 2000;
 const metricsRefreshIntervalMillis = 5000;
 
 const useStyles = makeStyles((theme) => ({
