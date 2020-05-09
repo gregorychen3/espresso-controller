@@ -144,5 +144,9 @@ func (s *Server) Shutdown() error {
 		return errors.Wrap(err, "Shutting down heating element relay")
 	}
 
+	if err := s.boilerThermometer.Shutdown(); err != nil {
+		return errors.Wrap(err, "Shutting down boiler thermometer")
+	}
+
 	return nil
 }

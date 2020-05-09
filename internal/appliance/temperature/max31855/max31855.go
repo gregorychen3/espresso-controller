@@ -27,4 +27,6 @@ func (m *Max31855) Sample() (*temperature.Sample, error) {
 	}, nil
 }
 
-// TODO: shutdown logic
+func (m *Max31855) Shutdown() error {
+	return m.sensor.Close()
+}
