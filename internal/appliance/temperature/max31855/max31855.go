@@ -1,6 +1,7 @@
 package max31855
 
 import (
+	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
 	"github.com/teebr/go-max31855"
 )
 
@@ -16,9 +17,12 @@ func NewMax31855() (*Max31855, error) {
 	return &Max31855{sensor: sensor}, nil
 }
 
-func (m *Max31855) Sample() (float64, error) {
+func (m *Max31855) Sample() (*temperature.Sample, error) {
 	if err := m.sensor.Read(); err != nil {
-		return 0, err
+		return nil, err
 	}
-	return m.sensor.Thermocouple, nil
+	return &temperature.Sample{
+		Value:      m.sensor.Thermocouple,
+		ObservedAt: m.sensor.Timestamp,
+	}, nil
 }

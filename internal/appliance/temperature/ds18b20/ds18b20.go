@@ -2,7 +2,9 @@ package ds18b20
 
 import (
 	"errors"
+	"time"
 
+	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/yryz/ds18b20"
 	"go.uber.org/zap"
@@ -24,10 +26,13 @@ func NewDS18B20() (*DS18B20, error) {
 	return &DS18B20{sensorID: sensors[0]}, nil
 }
 
-func (d *DS18B20) Sample() (float64, error) {
-	temperature, err := ds18b20.Temperature(d.sensorID)
+func (d *DS18B20) Sample() (*temperature.Sample, error) {
+	t, err := ds18b20.Temperature(d.sensorID)
 	if err != nil {
-		return 0, err
+		return nil, err
 	}
-	return temperature, nil
+	return &temperature.Sample{
+		Value:      t,
+		ObservedAt: time.Now(),
+	}, nil
 }

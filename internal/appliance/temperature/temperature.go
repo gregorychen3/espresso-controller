@@ -8,5 +8,5 @@ type Sample struct {
 }
 
 type Sampler interface {
-	Sample() (float64, error)
+	Sample() (Sample, error)
 }
