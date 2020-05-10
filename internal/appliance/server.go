@@ -38,8 +38,8 @@ type Server struct {
 	grpcApplianceServer appliancepb.ApplianceServer
 	grpcServer          *grpc.Server
 
-	groupThermometer  temperature.Sampler
-	boilerThermometer temperature.Sampler
+	groupTherm  temperature.Sampler
+	boilerTherm temperature.Sampler
 
 	heatingElem heating_element.HeatingElement
 
@@ -58,18 +58,18 @@ func (s *Server) Run() error {
 		return errors.Wrap(err, "initializing metrics")
 	}
 
-	groupThermometer, err := max31855.NewMax31855(s.c.GroupThermSPIDevice)
+	groupTherm, err := max31855.NewMax31855(s.c.GroupThermSPIDevice)
 	if err != nil {
 		return errors.Wrap(err, "failed to initialize group thermometer")
 	}
-	s.groupThermometer = groupThermometer
+	s.groupTherm = groupTherm
 
-	boilerThermometer, err := ds18b20.NewDS18B20()
+	boilerTherm, err := ds18b20.NewDS18B20()
 	//boilerThermometer, err := max31855.NewMax31855(s.c.BoilerThermSPIDevice)
 	if err != nil {
 		return errors.Wrap(err, "failed to initialize boiler thermometer")
 	}
-	s.boilerThermometer = boilerThermometer
+	s.boilerTherm = boilerTherm
 
 	heatingElem := relay.NewRelay(s.c.RelayGPIOPin)
 	if err := heatingElem.Run(); err != nil {
@@ -77,7 +77,7 @@ func (s *Server) Run() error {
 	}
 	s.heatingElem = heatingElem
 
-	grpcController, err := newGrpcController(s.c, heatingElem, boilerThermometer)
+	grpcController, err := newGrpcController(s.c, heatingElem, boilerTherm)
 	if err != nil {
 		return err
 	}
@@ -156,11 +156,11 @@ func (s *Server) Shutdown() error {
 		return errors.Wrap(err, "Shutting down heating element relay")
 	}
 
-	if err := s.groupThermometer.Shutdown(); err != nil {
+	if err := s.groupTherm.Shutdown(); err != nil {
 		return errors.Wrap(err, "Shutting down group thermometer")
 	}
 
-	if err := s.boilerThermometer.Shutdown(); err != nil {
+	if err := s.boilerTherm.Shutdown(); err != nil {
 		return errors.Wrap(err, "Shutting down boiler thermometer")
 	}
 
