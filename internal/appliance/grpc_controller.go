@@ -26,9 +26,9 @@ type grpcController struct {
 func newGrpcController(
 	c Configuration,
 	heatingElem heating_element.HeatingElement,
-	boilerThermometer temperature.Sampler,
+	boilerTherm temperature.Sampler,
 ) (*grpcController, error) {
-	temperatureCtrlr, err := bangbang.NewBangbang(heatingElem, boilerThermometer)
+	temperatureCtrlr, err := bangbang.NewBangbang(heatingElem, boilerTherm)
 	if err != nil {
 		return nil, err
 	}

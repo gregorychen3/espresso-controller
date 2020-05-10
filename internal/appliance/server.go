@@ -65,7 +65,7 @@ func (s *Server) Run() error {
 	s.groupTherm = groupTherm
 
 	boilerTherm, err := ds18b20.NewDS18B20()
-	//boilerThermometer, err := max31855.NewMax31855(s.c.BoilerThermSPIDevice)
+	//boilerTherm, err := max31855.NewMax31855(s.c.BoilerThermSPIDevice)
 	if err != nil {
 		return errors.Wrap(err, "failed to initialize boiler thermometer")
 	}
