@@ -11,7 +11,7 @@ import (
 
 var configKeys = []config.Key{
 	{Path: "Port", ShortFlag: "p", Description: "Port on which the appliance server should listen", Default: "8080"},
-	{Path: "RelayPinNum", ShortFlag: "r", Description: "The bcm2835 (not physical) GPIO pin number on which the relay is connected", Default: 5},
+	{Path: "RelayPinNum", ShortFlag: "r", Description: "The GPIO pin on which the relay is connected", Default: 5},
 	{Path: "BoilerThermSPIDeviceNum", ShortFlag: "b", Description: "The SPI chip-enable pin on which the boiler thermocouple is connected", Default: 0},
 	{Path: "GroupThermSPIDeviceNum", ShortFlag: "g", Description: "The SPI chip-enable pin on which the group head thermocouple is connected", Default: 1},
 }
