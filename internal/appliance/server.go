@@ -11,6 +11,7 @@ import (
 	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element/relay"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature/ds18b20"
+	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature/max31855"
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/internal/metrics"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
@@ -37,8 +38,10 @@ type Server struct {
 	grpcApplianceServer appliancepb.ApplianceServer
 	grpcServer          *grpc.Server
 
+	groupThermometer  temperature.Sampler
 	boilerThermometer temperature.Sampler
-	heatingElem       heating_element.HeatingElement
+
+	heatingElem heating_element.HeatingElement
 
 	shutdownCh chan struct{}
 }
@@ -54,6 +57,12 @@ func (s *Server) Run() error {
 	if err := metrics.InitMetrics(); err != nil {
 		return errors.Wrap(err, "initializing metrics")
 	}
+
+	groupThermometer, err := max31855.NewMax31855(s.c.GroupThermSPIDevice)
+	if err != nil {
+		return errors.Wrap(err, "failed to initialize group thermometer")
+	}
+	s.groupThermometer = groupThermometer
 
 	boilerThermometer, err := ds18b20.NewDS18B20()
 	//boilerThermometer, err := max31855.NewMax31855(s.c.BoilerThermSPIDevice)
@@ -145,6 +154,10 @@ func (s *Server) watchSignals() {
 func (s *Server) Shutdown() error {
 	if err := s.heatingElem.Shutdown(); err != nil {
 		return errors.Wrap(err, "Shutting down heating element relay")
+	}
+
+	if err := s.groupThermometer.Shutdown(); err != nil {
+		return errors.Wrap(err, "Shutting down group thermometer")
 	}
 
 	if err := s.boilerThermometer.Shutdown(); err != nil {
