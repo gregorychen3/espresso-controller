@@ -13,10 +13,12 @@ type Max31855 struct {
 
 func NewMax31855(spiDeviceNum int) (*Max31855, error) {
 	var sensor max31855.MAX31855
+
 	path := fmt.Sprintf("/dev/spidev0.%d", spiDeviceNum)
 	if err := sensor.Open(path); err != nil {
 		return nil, err
 	}
+
 	return &Max31855{sensor: sensor}, nil
 }
 
