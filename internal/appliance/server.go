@@ -77,7 +77,7 @@ func (s *Server) Run() error {
 	}
 	s.heatingElem = heatingElem
 
-	grpcController, err := newGrpcController(s.c, heatingElem, boilerTherm)
+	grpcController, err := newGrpcController(s.c, heatingElem, boilerTherm, groupTherm)
 	if err != nil {
 		return err
 	}

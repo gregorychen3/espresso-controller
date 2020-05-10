@@ -21,12 +21,14 @@ type TemperatureController interface {
 type grpcController struct {
 	c                      Configuration
 	boilerTemperatureCtrlr TemperatureController
+	groupTherm             temperature.Sampler
 }
 
 func newGrpcController(
 	c Configuration,
 	heatingElem heating_element.HeatingElement,
 	boilerTherm temperature.Sampler,
+	groupTherm temperature.Sampler,
 ) (*grpcController, error) {
 	temperatureCtrlr, err := bangbang.NewBangbang(heatingElem, boilerTherm)
 	if err != nil {
@@ -40,6 +42,7 @@ func newGrpcController(
 	return &grpcController{
 		c:                      c,
 		boilerTemperatureCtrlr: temperatureCtrlr,
+		groupTherm:             groupTherm,
 	}, nil
 }
 
