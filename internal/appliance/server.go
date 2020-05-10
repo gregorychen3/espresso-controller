@@ -25,10 +25,10 @@ import (
 )
 
 type Configuration struct {
-	Port                    int
-	RelayPinNum             int
-	BoilerThermSPIDeviceNum int
-	GroupThermSPIDeviceNum  int
+	Port                 int
+	RelayGPIOPin         int
+	BoilerThermSPIDevice int
+	GroupThermSPIDevice  int
 }
 
 type Server struct {
@@ -61,7 +61,7 @@ func (s *Server) Run() error {
 	}
 	s.boilerThermometer = boilerThermometer
 
-	heatingElem := relay.NewRelay(s.c.RelayPinNum)
+	heatingElem := relay.NewRelay(s.c.RelayGPIOPin)
 	if err := heatingElem.Run(); err != nil {
 		return errors.Wrap(err, "Starting relay")
 	}
