@@ -19,16 +19,6 @@ message TemperatureHistory {
     repeated TemperatureSample samples = 1;
 }
 
-message GetBoilerTemperatureHistoryRequest {}
-message GetBoilerTemperatureHistoryResponse {
-    repeated TemperatureSample samples = 1;
-}
-
-message GetCurrentBoilerTemperatureRequest {}
-message GetCurrentBoilerTemperatureResponse {
-    TemperatureSample sample = 1;
-}
-
 message BoilerTemperatureRequest {}
 message BoilerTemperatureResponse {
     oneof data {
