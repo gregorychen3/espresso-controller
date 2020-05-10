@@ -46,7 +46,7 @@ func newGrpcController(
 	}, nil
 }
 
-func (c *grpcController) BoilerTemperature(req *appliancepb.BoilerTemperatureRequest, stream appliancepb.Appliance_BoilerTemperatureServer) error {
+func (c *grpcController) BoilerTemperature(req *appliancepb.TemperatureStreamRequest, stream appliancepb.Appliance_BoilerTemperatureServer) error {
 	// the first message sent on the stream is the temperature history
 	var pbSamples []*appliancepb.TemperatureSample
 	samples := c.boilerTemperatureCtrlr.GetTemperatureHistory()
@@ -62,8 +62,8 @@ func (c *grpcController) BoilerTemperature(req *appliancepb.BoilerTemperatureReq
 		pbSamples = append(pbSamples, &pbSample)
 	}
 
-	if err := stream.Send(&appliancepb.BoilerTemperatureResponse{
-		Data: &appliancepb.BoilerTemperatureResponse_History{
+	if err := stream.Send(&appliancepb.TemperatureStreamResponse{
+		Data: &appliancepb.TemperatureStreamResponse_History{
 			History: &appliancepb.TemperatureHistory{
 				Samples: pbSamples,
 			},
@@ -82,8 +82,8 @@ func (c *grpcController) BoilerTemperature(req *appliancepb.BoilerTemperatureReq
 			if err != nil {
 				return err
 			}
-			if err := stream.Send(&appliancepb.BoilerTemperatureResponse{
-				Data: &appliancepb.BoilerTemperatureResponse_Sample{
+			if err := stream.Send(&appliancepb.TemperatureStreamResponse{
+				Data: &appliancepb.TemperatureStreamResponse_Sample{
 					Sample: &appliancepb.TemperatureSample{
 						Value:      sample.Value,
 						ObservedAt: pbTime,
