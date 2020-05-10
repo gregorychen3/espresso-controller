@@ -5,7 +5,7 @@ package appliancepb;
 import "google/protobuf/timestamp.proto";
 
 service Appliance {
-  rpc BoilerTemperature(BoilerTemperatureRequest) returns (stream BoilerTemperatureResponse);
+  rpc BoilerTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
   rpc GetTargetTemperature (GetTargetTemperatureRequest) returns (GetTargetTemperatureResponse) {}
   rpc SetTargetTemperature (SetTargetTemperatureRequest) returns (SetTargetTemperatureResponse) {}
 }
@@ -19,8 +19,8 @@ message TemperatureHistory {
     repeated TemperatureSample samples = 1;
 }
 
-message BoilerTemperatureRequest {}
-message BoilerTemperatureResponse {
+message TemperatureStreamRequest {}
+message TemperatureStreamResponse {
     oneof data {
         TemperatureHistory history = 1;
         TemperatureSample sample = 2;
