@@ -16,8 +16,8 @@ Appliance.BoilerTemperature = {
   service: Appliance,
   requestStream: false,
   responseStream: true,
-  requestType: pkg_appliancepb_appliance_pb.BoilerTemperatureRequest,
-  responseType: pkg_appliancepb_appliance_pb.BoilerTemperatureResponse
+  requestType: pkg_appliancepb_appliance_pb.TemperatureStreamRequest,
+  responseType: pkg_appliancepb_appliance_pb.TemperatureStreamResponse
 };
 
 Appliance.GetTargetTemperature = {

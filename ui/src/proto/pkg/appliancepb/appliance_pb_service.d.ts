@@ -9,8 +9,8 @@ type ApplianceBoilerTemperature = {
   readonly service: typeof Appliance;
   readonly requestStream: false;
   readonly responseStream: true;
-  readonly requestType: typeof pkg_appliancepb_appliance_pb.BoilerTemperatureRequest;
-  readonly responseType: typeof pkg_appliancepb_appliance_pb.BoilerTemperatureResponse;
+  readonly requestType: typeof pkg_appliancepb_appliance_pb.TemperatureStreamRequest;
+  readonly responseType: typeof pkg_appliancepb_appliance_pb.TemperatureStreamResponse;
 };
 
 type ApplianceGetTargetTemperature = {
@@ -70,7 +70,7 @@ export class ApplianceClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
-  boilerTemperature(requestMessage: pkg_appliancepb_appliance_pb.BoilerTemperatureRequest, metadata?: grpc.Metadata): ResponseStream<pkg_appliancepb_appliance_pb.BoilerTemperatureResponse>;
+  boilerTemperature(requestMessage: pkg_appliancepb_appliance_pb.TemperatureStreamRequest, metadata?: grpc.Metadata): ResponseStream<pkg_appliancepb_appliance_pb.TemperatureStreamResponse>;
   getTargetTemperature(
     requestMessage: pkg_appliancepb_appliance_pb.GetTargetTemperatureRequest,
     metadata: grpc.Metadata,
