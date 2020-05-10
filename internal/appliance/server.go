@@ -25,8 +25,10 @@ import (
 )
 
 type Configuration struct {
-	Port        int
-	RelayPinNum int
+	Port                    int
+	RelayPinNum             int
+	BoilerThermSPIDeviceNum int
+	GroupThermSPIDeviceNum  int
 }
 
 type Server struct {
