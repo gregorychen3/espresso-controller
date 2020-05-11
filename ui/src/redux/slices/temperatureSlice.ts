@@ -106,6 +106,11 @@ export const startBoilerTemperatureStream = (req: TemperatureStreamRequest) => (
       toast.error(`Error: ${e.message}`);
     }
   });
+  stream.on("end", (status) => {
+    toast.error(
+      `Error: stream ended with status code ${status?.code} (${status?.details})`
+    );
+  });
 };
 
 export const { closeBoilerTemperatureStream } = boilerTemperatureSlice.actions;
