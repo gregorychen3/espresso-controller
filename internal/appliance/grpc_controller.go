@@ -2,7 +2,6 @@ package appliance
 
 import (
 	"context"
-	"time"
 
 	"github.com/golang/protobuf/ptypes"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element"
@@ -22,15 +21,16 @@ type grpcController struct {
 	c                      Configuration
 	boilerTemperatureCtrlr TemperatureController
 	groupMonitor           *temperature.Monitor
+	boilerMonitor          *temperature.Monitor
 }
 
 func newGrpcController(
 	c Configuration,
 	heatingElem heating_element.HeatingElement,
-	boilerTherm temperature.Sampler,
+	boilerMonitor *temperature.Monitor,
 	groupMonitor *temperature.Monitor,
 ) (*grpcController, error) {
-	temperatureCtrlr, err := bangbang.NewBangbang(heatingElem, boilerTherm)
+	temperatureCtrlr, err := bangbang.NewBangbang(heatingElem, boilerMonitor)
 	if err != nil {
 		return nil, err
 	}
@@ -43,6 +43,7 @@ func newGrpcController(
 		c:                      c,
 		boilerTemperatureCtrlr: temperatureCtrlr,
 		groupMonitor:           groupMonitor,
+		boilerMonitor:          boilerMonitor,
 	}, nil
 }
 
@@ -97,7 +98,7 @@ func (c *grpcController) GroupHeadTemperature(req *appliancepb.TemperatureStream
 func (c *grpcController) BoilerTemperature(req *appliancepb.TemperatureStreamRequest, stream appliancepb.Appliance_BoilerTemperatureServer) error {
 	// the first message sent on the stream is the temperature history
 	var pbSamples []*appliancepb.TemperatureSample
-	samples := c.boilerTemperatureCtrlr.GetTemperatureHistory()
+	samples := c.boilerMonitor.GetHistory()
 	for _, s := range samples {
 		pbTime, err := ptypes.TimestampProto(s.ObservedAt)
 		if err != nil {
@@ -121,27 +122,25 @@ func (c *grpcController) BoilerTemperature(req *appliancepb.TemperatureStreamReq
 	}
 
 	// send a current sample every second
-	ticker := time.NewTicker(time.Second)
-	for {
-		select {
-		case <-ticker.C:
-			sample := c.boilerTemperatureCtrlr.GetCurrentTemperature()
-			pbTime, err := ptypes.TimestampProto(sample.ObservedAt)
-			if err != nil {
-				return err
-			}
-			if err := stream.Send(&appliancepb.TemperatureStreamResponse{
-				Data: &appliancepb.TemperatureStreamResponse_Sample{
-					Sample: &appliancepb.TemperatureSample{
-						Value:      sample.Value,
-						ObservedAt: pbTime,
-					},
+	subId, subCh := c.boilerMonitor.Subscribe()
+	defer c.boilerMonitor.Unsubscribe(subId)
+	for sample := range subCh {
+		pbTime, err := ptypes.TimestampProto(sample.ObservedAt)
+		if err != nil {
+			return err
+		}
+		if err := stream.Send(&appliancepb.TemperatureStreamResponse{
+			Data: &appliancepb.TemperatureStreamResponse_Sample{
+				Sample: &appliancepb.TemperatureSample{
+					Value:      sample.Value,
+					ObservedAt: pbTime,
 				},
-			}); err != nil {
-				return err
-			}
+			},
+		}); err != nil {
+			return err
 		}
 	}
+	return errors.New("temperature monitor stopped publishing")
 }
 
 func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetTargetTemperatureRequest) (*appliancepb.GetTargetTemperatureResponse, error) {

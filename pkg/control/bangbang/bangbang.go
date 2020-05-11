@@ -1,9 +1,9 @@
 package bangbang
 
 import (
-	"sync"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
 	"github.com/gregorychen3/espresso-controller/internal/log"
@@ -20,38 +20,28 @@ const (
 // satisfies the control.Strategy interface.
 // https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control
 type Bangbang struct {
-	targetTemperature control.TargetTemperature
-
+	targetTemperature  control.TargetTemperature
 	heatingElement     heating_element.HeatingElement
-	temperatureSampler temperature.Sampler
+	temperatureMonitor *temperature.Monitor
 
-	temperatureHistoryMu sync.RWMutex
-	temperatureHistory   []*temperature.Sample
+	temperatureSubId uuid.UUID
 }
 
-func NewBangbang(heatingElem heating_element.HeatingElement, sampler temperature.Sampler) (*Bangbang, error) {
+func NewBangbang(heatingElem heating_element.HeatingElement, sampler *temperature.Monitor) (*Bangbang, error) {
 	return &Bangbang{
 		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},
 		heatingElement:     heatingElem,
-		temperatureSampler: sampler,
+		temperatureMonitor: sampler,
 	}, nil
 }
 
 func (p *Bangbang) Run() error {
-	// sample temperature on interval
+	// adjust heating element on interval
 	go func() {
-		for {
-			sample, err := p.sampleTemperature()
-			if err != nil {
-				log.Error("Failed to sample temperature", zap.Error(err))
-				time.Sleep(time.Second)
-				continue
-			}
+		subId, subCh := p.temperatureMonitor.Subscribe()
+		p.temperatureSubId = subId
 
-			p.temperatureHistoryMu.Lock()
-			p.temperatureHistory = append(p.temperatureHistory, sample)
-			p.temperatureHistoryMu.Unlock()
-
+		for sample := range subCh {
 			if sample.Value < p.GetTargetTemperature().Value-2 {
 				log.Debug("Switching heating element on", zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
 				p.heatingElement.HeatOn()
@@ -59,42 +49,9 @@ func (p *Bangbang) Run() error {
 				log.Debug("Switching heating element off", zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
 				p.heatingElement.HeatOff()
 			}
-
-			time.Sleep(time.Second)
 		}
 	}()
-
-	// prune temperature history on interval
-	go func() {
-		for {
-			p.temperatureHistoryMu.Lock()
-			for i := len(p.temperatureHistory) - 1; i >= 0; i-- {
-				if time.Since(p.temperatureHistory[i].ObservedAt) > time.Hour*1 { // keep 1hr of history
-					p.temperatureHistory = p.temperatureHistory[i+1:]
-					log.Debug("Pruned temperature history", zap.Int("numPruned", i+1), zap.Int("numRemaining", len(p.temperatureHistory)))
-					break
-				}
-			}
-			p.temperatureHistoryMu.Unlock()
-			time.Sleep(10 * time.Minute)
-		}
-	}()
-
 	return nil
-}
-
-func (p *Bangbang) GetCurrentTemperature() *temperature.Sample {
-	p.temperatureHistoryMu.RLock()
-	defer p.temperatureHistoryMu.RUnlock()
-
-	return p.temperatureHistory[len(p.temperatureHistory)-1]
-}
-
-func (p *Bangbang) GetTemperatureHistory() []*temperature.Sample {
-	p.temperatureHistoryMu.RLock()
-	defer p.temperatureHistoryMu.RUnlock()
-
-	return p.temperatureHistory
 }
 
 func (p *Bangbang) GetTargetTemperature() control.TargetTemperature {
@@ -110,16 +67,7 @@ func (p *Bangbang) SetTargetTemperature(temperature float64) control.TargetTempe
 	return targetTemperature
 }
 
-func (p *Bangbang) sampleTemperature() (*temperature.Sample, error) {
-	sample, err := p.temperatureSampler.Sample()
-	if err != nil {
-		return nil, err
-	}
-
-	log.Debug("Sampled boiler temperature", zap.Float64("value", sample.Value), zap.Time("observedAt", sample.ObservedAt))
-	return sample, nil
-}
-
 func (p *Bangbang) Shutdown() error {
+	p.temperatureMonitor.Unsubscribe(p.temperatureSubId)
 	return nil
 }
