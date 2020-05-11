@@ -10,14 +10,14 @@ import { applianceClient, ReturnType } from "../helpers";
 
 interface State {
   stream?: ReturnType<typeof applianceClient.boilerTemperature>;
-  temperatureHistory: TemperatureSample[];
+  history: TemperatureSample[];
 }
 
-export const temperatureSlice = createSlice({
-  name: "temperature",
+export const boilerTemperatureSlice = createSlice({
+  name: "boilerTemperature",
   initialState: {
     stream: undefined,
-    temperatureHistory: [],
+    history: [],
   } as State,
   reducers: {
     // BoilerTemperature
@@ -44,7 +44,7 @@ export const temperatureSlice = createSlice({
             );
           }
 
-          state.temperatureHistory = history
+          state.history = history
             .getSamplesList()
             .reduce((acc: TemperatureSample[], curSample) => {
               const observedAt = curSample.getObservedAt();
@@ -75,7 +75,7 @@ export const temperatureSlice = createSlice({
             );
           }
 
-          state.temperatureHistory.push({
+          state.history.push({
             value: sample.getValue(),
             observedAt: moment(observedAt.toDate()),
           });
@@ -97,15 +97,15 @@ export const startBoilerTemperatureStream = (req: TemperatureStreamRequest) => (
   d: Dispatch
 ) => {
   const stream = applianceClient.boilerTemperature(req);
-  d(temperatureSlice.actions.getBoilerTemperatureStream(stream));
+  d(boilerTemperatureSlice.actions.getBoilerTemperatureStream(stream));
 
   stream.on("data", (msg) => {
     try {
-      d(temperatureSlice.actions.receiveBoilerTemperatureStreamMsg(msg));
+      d(boilerTemperatureSlice.actions.receiveBoilerTemperatureStreamMsg(msg));
     } catch (e) {
       toast.error(`Error: ${e.message}`);
     }
   });
 };
 
-export const { closeBoilerTemperatureStream } = temperatureSlice.actions;
+export const { closeBoilerTemperatureStream } = boilerTemperatureSlice.actions;
