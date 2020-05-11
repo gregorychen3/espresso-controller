@@ -42,7 +42,8 @@ type Server struct {
 	groupTherm   temperature.Sampler
 	groupMonitor *temperature.Monitor
 
-	boilerTherm temperature.Sampler
+	boilerTherm   temperature.Sampler
+	boilerMonitor *temperature.Monitor
 
 	heatingElem heating_element.HeatingElement
 
@@ -71,10 +72,12 @@ func (s *Server) Run() error {
 
 	boilerTherm, err := ds18b20.NewDS18B20()
 	//boilerTherm, err := max31855.NewMax31855(s.c.BoilerThermSPIDevice)
+	boilerMonitor := temperature.NewMonitor(boilerTherm, time.Second)
 	if err != nil {
 		return errors.Wrap(err, "failed to initialize boiler thermometer")
 	}
 	s.boilerTherm = boilerTherm
+	s.boilerMonitor = boilerMonitor
 
 	heatingElem := relay.NewRelay(s.c.RelayGPIOPin)
 	if err := heatingElem.Run(); err != nil {
