@@ -39,10 +39,9 @@ export const temperatureSlice = createSlice({
         case TemperatureStreamResponse.DataCase.HISTORY:
           const history = msg.getHistory();
           if (!history) {
-            console.error(
+            throw new Error(
               "Failed to process boiler temperature stream message data"
             );
-            return;
           }
 
           state.temperatureHistory = history
@@ -64,18 +63,16 @@ export const temperatureSlice = createSlice({
         case TemperatureStreamResponse.DataCase.SAMPLE:
           const sample = msg.getSample();
           if (!sample) {
-            console.error(
+            throw new Error(
               "Failed to process boiler temperature stream message data"
             );
-            return;
           }
 
           const observedAt = sample.getObservedAt();
           if (!observedAt) {
-            console.error(
+            throw new Error(
               "Failed to process boiler temperature stream message data"
             );
-            return;
           }
 
           state.temperatureHistory.push({
@@ -84,7 +81,7 @@ export const temperatureSlice = createSlice({
           });
           break;
         default:
-          console.error(
+          throw new Error(
             "Failed to process boiler temperature stream message data"
           );
       }
