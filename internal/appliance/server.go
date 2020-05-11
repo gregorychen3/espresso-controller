@@ -68,6 +68,7 @@ func (s *Server) Run() error {
 		return errors.Wrap(err, "failed to initialize group thermometer")
 	}
 	groupMonitor := temperature.NewMonitor(groupTherm, time.Second)
+	groupMonitor.Run()
 	s.groupTherm = groupTherm
 	s.groupMonitor = groupMonitor
 
@@ -75,6 +76,7 @@ func (s *Server) Run() error {
 	boilerTherm, err := ds18b20.NewDS18B20()
 	//boilerTherm, err := max31855.NewMax31855(s.c.BoilerThermSPIDevice)
 	boilerMonitor := temperature.NewMonitor(boilerTherm, time.Second)
+	boilerMonitor.Run()
 	if err != nil {
 		return errors.Wrap(err, "failed to initialize boiler thermometer")
 	}
