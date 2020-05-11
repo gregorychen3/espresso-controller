@@ -3,9 +3,11 @@ module github.com/gregorychen3/espresso-controller
 go 1.14
 
 require (
+	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
 	github.com/go-chi/chi v4.1.0+incompatible
 	github.com/go-chi/cors v1.0.1
+	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/gobuffalo/packr/v2 v2.8.0
 	github.com/golang/protobuf v1.3.5
 	github.com/google/uuid v1.1.1
