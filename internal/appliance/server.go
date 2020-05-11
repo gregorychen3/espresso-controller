@@ -14,7 +14,6 @@ import (
 	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature/ds18b20"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature/max31855"
 	"github.com/gregorychen3/espresso-controller/internal/log"
-	"github.com/gregorychen3/espresso-controller/internal/metrics"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
@@ -58,10 +57,6 @@ func New(c Configuration) *Server {
 }
 
 func (s *Server) Run() error {
-	if err := metrics.InitMetrics(); err != nil {
-		return errors.Wrap(err, "initializing metrics")
-	}
-
 	log.Info("Initializing group head temperature monitor")
 	groupTherm, err := max31855.NewMax31855(s.c.GroupThermSPIDevice)
 	if err != nil {

@@ -3,7 +3,6 @@ module github.com/gregorychen3/espresso-controller
 go 1.14
 
 require (
-	github.com/armon/go-metrics v0.3.3
 	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
 	github.com/go-chi/chi v4.1.0+incompatible
 	github.com/go-chi/cors v1.0.1
