@@ -24,7 +24,7 @@ var (
 
 // InitMetrics creates a prometheus sink
 func InitMetrics() error {
-	log.Info("Configurting prometheus metrics sink")
+	log.Info("Configuring prometheus metrics sink")
 	promSink, err := prometheus.NewPrometheusSinkFrom(prometheus.PrometheusOpts{Expiration: time.Hour * 24})
 	if err != nil {
 		return err
