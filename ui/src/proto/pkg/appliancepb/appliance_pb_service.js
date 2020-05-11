@@ -11,6 +11,15 @@ var Appliance = (function () {
   return Appliance;
 }());
 
+Appliance.GroupHeadTemperature = {
+  methodName: "GroupHeadTemperature",
+  service: Appliance,
+  requestStream: false,
+  responseStream: true,
+  requestType: pkg_appliancepb_appliance_pb.TemperatureStreamRequest,
+  responseType: pkg_appliancepb_appliance_pb.TemperatureStreamResponse
+};
+
 Appliance.BoilerTemperature = {
   methodName: "BoilerTemperature",
   service: Appliance,
@@ -44,6 +53,45 @@ function ApplianceClient(serviceHost, options) {
   this.serviceHost = serviceHost;
   this.options = options || {};
 }
+
+ApplianceClient.prototype.groupHeadTemperature = function groupHeadTemperature(requestMessage, metadata) {
+  var listeners = {
+    data: [],
+    end: [],
+    status: []
+  };
+  var client = grpc.invoke(Appliance.GroupHeadTemperature, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onMessage: function (responseMessage) {
+      listeners.data.forEach(function (handler) {
+        handler(responseMessage);
+      });
+    },
+    onEnd: function (status, statusMessage, trailers) {
+      listeners.status.forEach(function (handler) {
+        handler({ code: status, details: statusMessage, metadata: trailers });
+      });
+      listeners.end.forEach(function (handler) {
+        handler({ code: status, details: statusMessage, metadata: trailers });
+      });
+      listeners = null;
+    }
+  });
+  return {
+    on: function (type, handler) {
+      listeners[type].push(handler);
+      return this;
+    },
+    cancel: function () {
+      listeners = null;
+      client.close();
+    }
+  };
+};
 
 ApplianceClient.prototype.boilerTemperature = function boilerTemperature(requestMessage, metadata) {
   var listeners = {

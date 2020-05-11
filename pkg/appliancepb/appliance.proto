@@ -5,6 +5,7 @@ package appliancepb;
 import "google/protobuf/timestamp.proto";
 
 service Appliance {
+  rpc GroupHeadTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
   rpc BoilerTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
   rpc GetTargetTemperature (GetTargetTemperatureRequest) returns (GetTargetTemperatureResponse) {}
   rpc SetTargetTemperature (SetTargetTemperatureRequest) returns (SetTargetTemperatureResponse) {}

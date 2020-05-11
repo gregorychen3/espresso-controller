@@ -4,6 +4,15 @@
 import * as pkg_appliancepb_appliance_pb from "../../pkg/appliancepb/appliance_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
+type ApplianceGroupHeadTemperature = {
+  readonly methodName: string;
+  readonly service: typeof Appliance;
+  readonly requestStream: false;
+  readonly responseStream: true;
+  readonly requestType: typeof pkg_appliancepb_appliance_pb.TemperatureStreamRequest;
+  readonly responseType: typeof pkg_appliancepb_appliance_pb.TemperatureStreamResponse;
+};
+
 type ApplianceBoilerTemperature = {
   readonly methodName: string;
   readonly service: typeof Appliance;
@@ -33,6 +42,7 @@ type ApplianceSetTargetTemperature = {
 
 export class Appliance {
   static readonly serviceName: string;
+  static readonly GroupHeadTemperature: ApplianceGroupHeadTemperature;
   static readonly BoilerTemperature: ApplianceBoilerTemperature;
   static readonly GetTargetTemperature: ApplianceGetTargetTemperature;
   static readonly SetTargetTemperature: ApplianceSetTargetTemperature;
@@ -70,6 +80,7 @@ export class ApplianceClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
+  groupHeadTemperature(requestMessage: pkg_appliancepb_appliance_pb.TemperatureStreamRequest, metadata?: grpc.Metadata): ResponseStream<pkg_appliancepb_appliance_pb.TemperatureStreamResponse>;
   boilerTemperature(requestMessage: pkg_appliancepb_appliance_pb.TemperatureStreamRequest, metadata?: grpc.Metadata): ResponseStream<pkg_appliancepb_appliance_pb.TemperatureStreamResponse>;
   getTargetTemperature(
     requestMessage: pkg_appliancepb_appliance_pb.GetTargetTemperatureRequest,
