@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element/relay"
@@ -38,7 +39,9 @@ type Server struct {
 	grpcApplianceServer appliancepb.ApplianceServer
 	grpcServer          *grpc.Server
 
-	groupTherm  temperature.Sampler
+	groupTherm   temperature.Sampler
+	groupMonitor *temperature.Monitor
+
 	boilerTherm temperature.Sampler
 
 	heatingElem heating_element.HeatingElement
@@ -62,7 +65,9 @@ func (s *Server) Run() error {
 	if err != nil {
 		return errors.Wrap(err, "failed to initialize group thermometer")
 	}
+	groupMonitor := temperature.NewMonitor(groupTherm, time.Second)
 	s.groupTherm = groupTherm
+	s.groupMonitor = groupMonitor
 
 	boilerTherm, err := ds18b20.NewDS18B20()
 	//boilerTherm, err := max31855.NewMax31855(s.c.BoilerThermSPIDevice)
@@ -77,7 +82,7 @@ func (s *Server) Run() error {
 	}
 	s.heatingElem = heatingElem
 
-	grpcController, err := newGrpcController(s.c, heatingElem, boilerTherm, groupTherm)
+	grpcController, err := newGrpcController(s.c, heatingElem, boilerTherm, groupMonitor)
 	if err != nil {
 		return err
 	}
