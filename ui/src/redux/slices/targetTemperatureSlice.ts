@@ -87,7 +87,7 @@ export const targetTemperatureSlice = createSlice({
 });
 
 export const getTargetTemperature = (req: GetTargetTemperatureRequest) => (
-  dispatch: Dispatch
+  d: Dispatch
 ) =>
   createUnaryGrpcThunk(
     applianceClient.getTargetTemperature,
@@ -97,11 +97,11 @@ export const getTargetTemperature = (req: GetTargetTemperatureRequest) => (
       response: targetTemperatureSlice.actions.getTargetTemperatureResponse,
       failure: targetTemperatureSlice.actions.getTargetTemperatureFailure,
     },
-    dispatch
+    d
   );
 
 export const setTargetTemperature = (req: SetTargetTemperatureRequest) => (
-  dispatch: Dispatch
+  d: Dispatch
 ) =>
   createUnaryGrpcThunk(
     applianceClient.setTargetTemperature,
@@ -111,5 +111,5 @@ export const setTargetTemperature = (req: SetTargetTemperatureRequest) => (
       response: targetTemperatureSlice.actions.setTargetTemperatureResponse,
       failure: targetTemperatureSlice.actions.setTargetTemperatureFailure,
     },
-    dispatch
+    d
   );

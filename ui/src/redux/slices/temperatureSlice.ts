@@ -94,14 +94,14 @@ export const temperatureSlice = createSlice({
 });
 
 export const startBoilerTemperatureStream = (req: TemperatureStreamRequest) => (
-  dispatch: Dispatch
+  d: Dispatch
 ) => {
   const stream = applianceClient.boilerTemperature(req);
-  dispatch(temperatureSlice.actions.getBoilerTemperatureStream(stream));
+  d(temperatureSlice.actions.getBoilerTemperatureStream(stream));
 
   stream.on("data", (msg) => {
     try {
-      dispatch(temperatureSlice.actions.receiveBoilerTemperatureStreamMsg(msg));
+      d(temperatureSlice.actions.receiveBoilerTemperatureStreamMsg(msg));
     } catch (e) {
       toast.error(`Error: ${e.message}`);
     }

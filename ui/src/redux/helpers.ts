@@ -26,19 +26,19 @@ export const createUnaryGrpcThunk = <T1 extends Message, T2 extends Message>(
       string
     >;
   },
-  dispatch: Dispatch
+  d: Dispatch
 ) => {
   const { request, response, failure } = actionCreators;
-  dispatch(request(requestMsg));
+  d(request(requestMsg));
   apiCall.bind(applianceClient)(
     requestMsg,
     (err: ServiceError, responseMsg: T2) => {
       if (err) {
         console.error(err);
-        dispatch(failure({ req: requestMsg, err }));
+        d(failure({ req: requestMsg, err }));
         toast.error(`Error: ${err.message}`);
       } else {
-        dispatch(response(responseMsg));
+        d(response(responseMsg));
       }
     }
   );
