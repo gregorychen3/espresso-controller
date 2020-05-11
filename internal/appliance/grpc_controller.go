@@ -6,6 +6,7 @@ import (
 	"github.com/golang/protobuf/ptypes"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
+	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
 	"github.com/gregorychen3/espresso-controller/pkg/control"
 	"github.com/gregorychen3/espresso-controller/pkg/control/bangbang"
@@ -96,6 +97,8 @@ func (c *grpcController) GroupHeadTemperature(req *appliancepb.TemperatureStream
 }
 
 func (c *grpcController) BoilerTemperature(req *appliancepb.TemperatureStreamRequest, stream appliancepb.Appliance_BoilerTemperatureServer) error {
+	log.Info("Started boiler temperature stream")
+
 	// the first message sent on the stream is the temperature history
 	var pbSamples []*appliancepb.TemperatureSample
 	samples := c.boilerMonitor.GetHistory()

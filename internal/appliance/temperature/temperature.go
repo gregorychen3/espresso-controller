@@ -45,6 +45,7 @@ func (m *Monitor) Run() {
 				time.Sleep(time.Second)
 				continue
 			}
+			log.Debug("Sampled temperature", zap.Float64("value", sample.Value))
 
 			m.temperatureHistoryMu.Lock()
 			m.temperatureHistory = append(m.temperatureHistory, sample)
