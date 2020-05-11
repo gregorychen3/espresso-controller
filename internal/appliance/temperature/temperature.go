@@ -4,6 +4,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/google/uuid"
+
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"go.uber.org/zap"
 )
@@ -19,7 +21,7 @@ type Sampler interface {
 }
 
 type Monitor struct {
-	subscriptionChans []chan *Sample
+	subscriptionChans map[uuid.UUID]chan *Sample
 
 	sampler              Sampler
 	temperatureHistoryMu sync.RWMutex
@@ -28,7 +30,8 @@ type Monitor struct {
 
 func NewMonitor(sampler Sampler, sampleRate time.Duration) *Monitor {
 	return &Monitor{
-		sampler: sampler,
+		subscriptionChans: map[uuid.UUID]chan *Sample{},
+		sampler:           sampler,
 	}
 }
 
@@ -72,10 +75,15 @@ func (m *Monitor) Run() {
 	}()
 }
 
-func (m *Monitor) Subscribe() chan *Sample {
-	subscription := make(chan *Sample)
-	m.subscriptionChans = append(m.subscriptionChans, subscription)
-	return subscription
+func (m *Monitor) Subscribe() (uuid.UUID, chan *Sample) {
+	subId := uuid.New()
+	subscriptionCh := make(chan *Sample)
+	m.subscriptionChans[subId] = subscriptionCh
+	return subId, subscriptionCh
+}
+
+func (m *Monitor) Unsubscribe(subId uuid.UUID) {
+	delete(m.subscriptionChans, subId)
 }
 
 func (m *Monitor) GetHistory() []*Sample {
