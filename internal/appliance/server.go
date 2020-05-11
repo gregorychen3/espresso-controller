@@ -62,6 +62,7 @@ func (s *Server) Run() error {
 		return errors.Wrap(err, "initializing metrics")
 	}
 
+	log.Info("Initializing group head temperature monitor")
 	groupTherm, err := max31855.NewMax31855(s.c.GroupThermSPIDevice)
 	if err != nil {
 		return errors.Wrap(err, "failed to initialize group thermometer")
@@ -70,6 +71,7 @@ func (s *Server) Run() error {
 	s.groupTherm = groupTherm
 	s.groupMonitor = groupMonitor
 
+	log.Info("Initializing boiler temperature monitor")
 	boilerTherm, err := ds18b20.NewDS18B20()
 	//boilerTherm, err := max31855.NewMax31855(s.c.BoilerThermSPIDevice)
 	boilerMonitor := temperature.NewMonitor(boilerTherm, time.Second)
@@ -79,6 +81,7 @@ func (s *Server) Run() error {
 	s.boilerTherm = boilerTherm
 	s.boilerMonitor = boilerMonitor
 
+	log.Info("Initializing heating element relay")
 	heatingElem := relay.NewRelay(s.c.RelayGPIOPin)
 	if err := heatingElem.Run(); err != nil {
 		return errors.Wrap(err, "Starting relay")
