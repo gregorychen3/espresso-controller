@@ -21,14 +21,14 @@ type TemperatureController interface {
 type grpcController struct {
 	c                      Configuration
 	boilerTemperatureCtrlr TemperatureController
-	groupMonitor           temperature.Monitor
+	groupMonitor           *temperature.Monitor
 }
 
 func newGrpcController(
 	c Configuration,
 	heatingElem heating_element.HeatingElement,
 	boilerTherm temperature.Sampler,
-	groupMonitor temperature.Monitor,
+	groupMonitor *temperature.Monitor,
 ) (*grpcController, error) {
 	temperatureCtrlr, err := bangbang.NewBangbang(heatingElem, boilerTherm)
 	if err != nil {
@@ -44,6 +44,54 @@ func newGrpcController(
 		boilerTemperatureCtrlr: temperatureCtrlr,
 		groupMonitor:           groupMonitor,
 	}, nil
+}
+
+func (c *grpcController) GroupHeadTemperature(req *appliancepb.TemperatureStreamRequest, stream appliancepb.Appliance_GroupHeadTemperatureServer) error {
+	// the first message sent on the stream is the temperature history
+	var pbSamples []*appliancepb.TemperatureSample
+	samples := c.groupMonitor.GetHistory()
+	for _, s := range samples {
+		pbTime, err := ptypes.TimestampProto(s.ObservedAt)
+		if err != nil {
+			return err
+		}
+		pbSample := appliancepb.TemperatureSample{
+			Value:      s.Value,
+			ObservedAt: pbTime,
+		}
+		pbSamples = append(pbSamples, &pbSample)
+	}
+
+	if err := stream.Send(&appliancepb.TemperatureStreamResponse{
+		Data: &appliancepb.TemperatureStreamResponse_History{
+			History: &appliancepb.TemperatureHistory{
+				Samples: pbSamples,
+			},
+		},
+	}); err != nil {
+		return err
+	}
+
+	// send a current sample every second
+	subId, subCh := c.groupMonitor.Subscribe()
+	defer c.groupMonitor.Unsubscribe(subId)
+	for sample := range subCh {
+		pbTime, err := ptypes.TimestampProto(sample.ObservedAt)
+		if err != nil {
+			return err
+		}
+		if err := stream.Send(&appliancepb.TemperatureStreamResponse{
+			Data: &appliancepb.TemperatureStreamResponse_Sample{
+				Sample: &appliancepb.TemperatureSample{
+					Value:      sample.Value,
+					ObservedAt: pbTime,
+				},
+			},
+		}); err != nil {
+			return err
+		}
+	}
+	return errors.New("temperature monitor stopped publishing")
 }
 
 func (c *grpcController) BoilerTemperature(req *appliancepb.TemperatureStreamRequest, stream appliancepb.Appliance_BoilerTemperatureServer) error {
