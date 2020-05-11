@@ -1,5 +1,6 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
+import { toast } from "react-toastify";
 import {
   TemperatureStreamRequest,
   TemperatureStreamResponse,
@@ -102,7 +103,11 @@ export const startBoilerTemperatureStream = (req: TemperatureStreamRequest) => (
   dispatch(temperatureSlice.actions.getBoilerTemperatureStream(stream));
 
   stream.on("data", (msg) => {
-    dispatch(temperatureSlice.actions.receiveBoilerTemperatureStreamMsg(msg));
+    try {
+      dispatch(temperatureSlice.actions.receiveBoilerTemperatureStreamMsg(msg));
+    } catch (e) {
+      toast.error(`Error: ${e.message}`);
+    }
   });
 };
 
