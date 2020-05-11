@@ -19,7 +19,7 @@ type Sampler interface {
 }
 
 type Monitor struct {
-	TemperatureCh chan *Sample
+	subscriptionChans []chan *Sample
 
 	sampler              Sampler
 	temperatureHistoryMu sync.RWMutex
@@ -28,8 +28,7 @@ type Monitor struct {
 
 func NewMonitor(sampler Sampler, sampleRate time.Duration) *Monitor {
 	return &Monitor{
-		TemperatureCh: make(chan *Sample),
-		sampler:       sampler,
+		sampler: sampler,
 	}
 }
 
@@ -48,7 +47,9 @@ func (m *Monitor) Run() {
 			m.temperatureHistory = append(m.temperatureHistory, sample)
 			m.temperatureHistoryMu.Unlock()
 
-			m.TemperatureCh <- sample
+			for _, ch := range m.subscriptionChans {
+				ch <- sample
+			}
 
 			time.Sleep(time.Second)
 		}
@@ -69,6 +70,12 @@ func (m *Monitor) Run() {
 			time.Sleep(1 * time.Minute)
 		}
 	}()
+}
+
+func (m *Monitor) Subscribe() chan *Sample {
+	subscription := make(chan *Sample)
+	m.subscriptionChans = append(m.subscriptionChans, subscription)
+	return subscription
 }
 
 func (m *Monitor) GetHistory() []*Sample {
