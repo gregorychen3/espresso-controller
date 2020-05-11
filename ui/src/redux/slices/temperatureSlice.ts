@@ -1,8 +1,8 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
 import {
-  BoilerTemperatureRequest,
-  BoilerTemperatureResponse,
+  TemperatureStreamRequest,
+  TemperatureStreamResponse,
 } from "../../proto/pkg/appliancepb/appliance_pb";
 import { TemperatureSample } from "../../types";
 import { applianceClient, ReturnType } from "../helpers";
@@ -31,11 +31,11 @@ export const temperatureSlice = createSlice({
 
     receiveBoilerTemperatureStreamMsg: (
       state,
-      action: PayloadAction<BoilerTemperatureResponse>
+      action: PayloadAction<TemperatureStreamResponse>
     ) => {
       const msg = action.payload;
       switch (msg.getDataCase()) {
-        case BoilerTemperatureResponse.DataCase.HISTORY:
+        case TemperatureStreamResponse.DataCase.HISTORY:
           const history = msg.getHistory();
           if (!history) {
             console.error(
@@ -60,7 +60,7 @@ export const temperatureSlice = createSlice({
             }, [])
             .filter((s) => s !== null);
           break;
-        case BoilerTemperatureResponse.DataCase.SAMPLE:
+        case TemperatureStreamResponse.DataCase.SAMPLE:
           const sample = msg.getSample();
           if (!sample) {
             console.error(
@@ -95,7 +95,7 @@ export const temperatureSlice = createSlice({
   },
 });
 
-export const startBoilerTemperatureStream = (req: BoilerTemperatureRequest) => (
+export const startBoilerTemperatureStream = (req: TemperatureStreamRequest) => (
   dispatch: Dispatch
 ) => {
   const stream = applianceClient.boilerTemperature(req);

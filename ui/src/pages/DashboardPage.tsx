@@ -11,8 +11,8 @@ import SetTemperatureModal from "../components/SetTemperatureModal";
 import TemperatureCard from "../components/TemperatureCard";
 import TemperatureChart from "../components/TemperatureChart";
 import {
-  BoilerTemperatureRequest,
   GetTargetTemperatureRequest,
+  TemperatureStreamRequest,
 } from "../proto/pkg/appliancepb/appliance_pb";
 import { showTargetTempModal } from "../redux/selectors";
 import { getTargetTemperature } from "../redux/slices/targetTemperatureSlice";
@@ -50,7 +50,7 @@ export default () => {
   // Boiler temperature
   // ------------------
   useEffect(() => {
-    d(startBoilerTemperatureStream(new BoilerTemperatureRequest()));
+    d(startBoilerTemperatureStream(new TemperatureStreamRequest()));
     return () => {
       d(closeBoilerTemperatureStream());
     };
