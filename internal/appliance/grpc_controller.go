@@ -6,11 +6,19 @@ import (
 	"github.com/golang/protobuf/ptypes"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
-	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
 	"github.com/gregorychen3/espresso-controller/pkg/control"
 	"github.com/gregorychen3/espresso-controller/pkg/control/bangbang"
 	"github.com/pkg/errors"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
+)
+
+var (
+	grpcStreams = promauto.NewGauge(prometheus.GaugeOpts{
+		Name: "espresso_grpc_streams",
+		Help: "Number of streaming rpcs currently being serviced",
+	})
 )
 
 type TemperatureController interface {
@@ -49,6 +57,9 @@ func newGrpcController(
 }
 
 func (c *grpcController) GroupHeadTemperature(req *appliancepb.TemperatureStreamRequest, stream appliancepb.Appliance_GroupHeadTemperatureServer) error {
+	grpcStreams.Inc()
+	defer grpcStreams.Dec()
+
 	// the first message sent on the stream is the temperature history
 	var pbSamples []*appliancepb.TemperatureSample
 	samples := c.groupMonitor.GetHistory()
@@ -97,7 +108,8 @@ func (c *grpcController) GroupHeadTemperature(req *appliancepb.TemperatureStream
 }
 
 func (c *grpcController) BoilerTemperature(req *appliancepb.TemperatureStreamRequest, stream appliancepb.Appliance_BoilerTemperatureServer) error {
-	log.Info("Started boiler temperature stream")
+	grpcStreams.Inc()
+	defer grpcStreams.Dec()
 
 	// the first message sent on the stream is the temperature history
 	var pbSamples []*appliancepb.TemperatureSample
