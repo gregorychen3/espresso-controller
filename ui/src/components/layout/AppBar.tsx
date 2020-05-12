@@ -50,7 +50,11 @@ export default () => {
         >
           Espresso Controller
         </Typography>
-        <IconButton color="inherit">
+        <IconButton
+          href="https://github.com/gregorychen3/espresso-controller"
+          target="_blank"
+          color="inherit"
+        >
           <GitHubIcon />
         </IconButton>
       </Toolbar>
