@@ -15,9 +15,6 @@ PID control and monitoring for an espresso machine.
 - Water level monitoring
 - Application timer
 
-## Block Diagram
-![System Block Diagram](ui/public/system_block_diagram.svg)
-
 ## Usage
 ```console
 $ build/espresso appliance start -v
@@ -45,13 +42,6 @@ $ build/espresso appliance start -v
 2020-04-16T22:51:05.660-0400	INFO	appliance/server.go:69	Initializing gRPC web server	{"port": 8080}
 2020-04-16T22:51:05.659-0400	DEBUG	bangbang/bangbang.go:91	Temperature sampled	{"temperature": 92.09320831298828}
 2020-04-16T22:51:05.661-0400	INFO	bangbang/bangbang.go:46	Switching heating element on	{"curTemperature": 92.09320831298828, "targetTemperature": 93}
-```
-
-## Development
-### Docker
-```console
-$ docker build -t gregorychen3/espresso-controller:latest .
-$ docker push gregorychen3/espresso-controller:latest
 ```
 
 ## Credits
