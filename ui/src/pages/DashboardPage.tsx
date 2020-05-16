@@ -19,7 +19,7 @@ import { getTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 import {
   closeBoilerTemperatureStream,
   startBoilerTemperatureStream,
-} from "../redux/slices/temperatureSlice";
+} from "../redux/slices/boilerTemperatureSlice";
 
 const metricsRefreshIntervalMillis = 5000;
 
