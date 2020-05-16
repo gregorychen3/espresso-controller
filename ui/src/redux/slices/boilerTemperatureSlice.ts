@@ -21,7 +21,7 @@ export const boilerTemperatureSlice = createSlice({
   } as State,
   reducers: {
     // BoilerTemperature server streaming rpc
-    getBoilerTemperatureStream: (
+    startBoilerTemperatureStream: (
       state,
       action: PayloadAction<
         ReturnType<typeof applianceClient.boilerTemperature>
@@ -29,7 +29,6 @@ export const boilerTemperatureSlice = createSlice({
     ) => {
       state.stream = action.payload;
     },
-
     receiveBoilerTemperatureStreamMsg: (
       state,
       action: PayloadAction<TemperatureStreamResponse>
@@ -86,7 +85,7 @@ export const boilerTemperatureSlice = createSlice({
           );
       }
     },
-    closeBoilerTemperatureStream: (state) => {
+    endBoilerTemperatureStream: (state) => {
       state.stream?.cancel();
       state.stream = undefined;
     },
@@ -97,7 +96,7 @@ export const startBoilerTemperatureStream = (req: TemperatureStreamRequest) => (
   d: Dispatch
 ) => {
   const stream = applianceClient.boilerTemperature(req);
-  d(boilerTemperatureSlice.actions.getBoilerTemperatureStream(stream));
+  d(boilerTemperatureSlice.actions.startBoilerTemperatureStream(stream));
 
   stream.on("data", (msg) => {
     try {
@@ -111,4 +110,4 @@ export const startBoilerTemperatureStream = (req: TemperatureStreamRequest) => (
   });
 };
 
-export const { closeBoilerTemperatureStream } = boilerTemperatureSlice.actions;
+export const { endBoilerTemperatureStream } = boilerTemperatureSlice.actions;

@@ -17,7 +17,7 @@ import {
 import { showTargetTempModal } from "../redux/selectors";
 import { getTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 import {
-  closeBoilerTemperatureStream,
+  endBoilerTemperatureStream,
   startBoilerTemperatureStream,
 } from "../redux/slices/boilerTemperatureSlice";
 
@@ -52,7 +52,7 @@ export default () => {
   useEffect(() => {
     d(startBoilerTemperatureStream(new TemperatureStreamRequest()));
     return () => {
-      d(closeBoilerTemperatureStream());
+      d(endBoilerTemperatureStream());
     };
   }, [d]);
 
