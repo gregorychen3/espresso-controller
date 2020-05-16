@@ -20,7 +20,7 @@ export const boilerTemperatureSlice = createSlice({
     history: [],
   } as State,
   reducers: {
-    // BoilerTemperature
+    // BoilerTemperature server streaming rpc
     getBoilerTemperatureStream: (
       state,
       action: PayloadAction<
