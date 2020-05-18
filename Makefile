@@ -7,7 +7,7 @@ build:
 	go build -o build/espresso ./cmd/espresso
 
 build-pi:
-	env GOOS=linux GOARCH=arm GOARM=5 go build -o build/espresso ./cmd/espresso
+	env GOOS=linux GOARCH=arm GOARM=7 go build -o build/espresso ./cmd/espresso
 
 install:
 	go install ./cmd/espresso

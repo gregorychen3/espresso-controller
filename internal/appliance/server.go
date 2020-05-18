@@ -11,7 +11,6 @@ import (
 	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element/relay"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
-	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature/ds18b20"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature/max31855"
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
@@ -58,18 +57,18 @@ func New(c Configuration) *Server {
 
 func (s *Server) Run() error {
 	log.Info("Initializing group head temperature monitor")
-	groupTherm, err := max31855.NewMax31855(s.c.GroupThermSPIDevice)
-	if err != nil {
-		return errors.Wrap(err, "failed to initialize group thermometer")
-	}
-	groupMonitor := temperature.NewMonitor(groupTherm, time.Second)
-	groupMonitor.Run()
-	s.groupTherm = groupTherm
-	s.groupMonitor = groupMonitor
+	//groupTherm, err := max31855.NewMax31855(s.c.GroupThermSPIDevice)
+	//if err != nil {
+	//	return errors.Wrap(err, "failed to initialize group thermometer")
+	//}
+	//groupMonitor := temperature.NewMonitor(groupTherm, time.Second)
+	//groupMonitor.Run()
+	//s.groupTherm = groupTherm
+	//s.groupMonitor = groupMonitor
 
 	log.Info("Initializing boiler temperature monitor")
-	boilerTherm, err := ds18b20.NewDS18B20()
-	//boilerTherm, err := max31855.NewMax31855(s.c.BoilerThermSPIDevice)
+	//boilerTherm, err := ds18b20.NewDS18B20()
+	boilerTherm, err := max31855.NewMax31855(s.c.BoilerThermSPIDevice)
 	boilerMonitor := temperature.NewMonitor(boilerTherm, time.Second)
 	boilerMonitor.Run()
 	if err != nil {
@@ -85,7 +84,7 @@ func (s *Server) Run() error {
 	}
 	s.heatingElem = heatingElem
 
-	grpcController, err := newGrpcController(s.c, heatingElem, boilerMonitor, groupMonitor)
+	grpcController, err := newGrpcController(s.c, heatingElem, boilerMonitor, nil)
 	if err != nil {
 		return err
 	}
@@ -164,12 +163,12 @@ func (s *Server) Shutdown() error {
 		return errors.Wrap(err, "Shutting down heating element relay")
 	}
 
-	if err := s.groupTherm.Shutdown(); err != nil {
-		return errors.Wrap(err, "Shutting down group thermometer")
-	}
-
 	if err := s.boilerTherm.Shutdown(); err != nil {
 		return errors.Wrap(err, "Shutting down boiler thermometer")
+	}
+
+	if err := s.groupTherm.Shutdown(); err != nil {
+		return errors.Wrap(err, "Shutting down group thermometer")
 	}
 
 	return nil
