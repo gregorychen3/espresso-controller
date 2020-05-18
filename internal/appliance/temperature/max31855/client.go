@@ -1,6 +1,7 @@
 package max31855
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -14,7 +15,8 @@ type Client struct {
 	url string
 }
 
-func NewClient(url string) *Client {
+func NewClient(port int) *Client {
+	url := fmt.Sprintf("http://127.0.0.1:%d/temperature", port)
 	return &Client{url: url}
 }
 

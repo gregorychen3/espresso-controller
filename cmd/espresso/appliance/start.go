@@ -12,8 +12,8 @@ import (
 var configKeys = []config.Key{
 	{Path: "Port", ShortFlag: "p", Description: "Port on which the appliance server should listen", Default: "8080"},
 	{Path: "RelayGPIOPin", ShortFlag: "r", Description: "The GPIO pin on which the relay is connected", Default: 5},
-	{Path: "BoilerThermSPIDevice", ShortFlag: "b", Description: "The SPI chip-enable pin on which the boiler thermocouple is connected", Default: 0},
-	{Path: "GroupThermSPIDevice", ShortFlag: "g", Description: "The SPI chip-enable pin on which the group head thermocouple is connected", Default: 1},
+	{Path: "BoilerThermPort", ShortFlag: "b", Description: "The local port where the boiler thermocouple service is located", Default: 5000},
+	{Path: "GroupThermPort", ShortFlag: "g", Description: "The local port where the group head thermocouple service is located", Default: 5001},
 }
 
 func NewApplianceStartCmd() *cobra.Command {

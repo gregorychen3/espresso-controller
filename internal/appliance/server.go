@@ -25,10 +25,10 @@ import (
 )
 
 type Configuration struct {
-	Port                 int
-	RelayGPIOPin         int
-	BoilerThermSPIDevice int
-	GroupThermSPIDevice  int
+	Port            int
+	RelayGPIOPin    int
+	BoilerThermPort int
+	GroupThermPort  int
 }
 
 type Server struct {
@@ -67,7 +67,7 @@ func (s *Server) Run() error {
 	//s.groupMonitor = groupMonitor
 
 	log.Info("Initializing boiler temperature monitor")
-	boilerTherm := max31855.NewClient("http://127.0.0.1:5000/temperature")
+	boilerTherm := max31855.NewClient(s.c.BoilerThermPort)
 	boilerMonitor := temperature.NewMonitor(boilerTherm, time.Second)
 	boilerMonitor.Run()
 	s.boilerTherm = boilerTherm
