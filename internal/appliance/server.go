@@ -167,9 +167,9 @@ func (s *Server) Shutdown() error {
 		return errors.Wrap(err, "Shutting down boiler thermometer")
 	}
 
-	if err := s.groupTherm.Shutdown(); err != nil {
-		return errors.Wrap(err, "Shutting down group thermometer")
-	}
+	//if err := s.groupTherm.Shutdown(); err != nil {
+	//	return errors.Wrap(err, "Shutting down group thermometer")
+	//}
 
 	return nil
 }
