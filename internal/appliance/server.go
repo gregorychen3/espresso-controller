@@ -67,13 +67,9 @@ func (s *Server) Run() error {
 	//s.groupMonitor = groupMonitor
 
 	log.Info("Initializing boiler temperature monitor")
-	//boilerTherm, err := ds18b20.NewDS18B20()
-	boilerTherm, err := max31855.NewMax31855(s.c.BoilerThermSPIDevice)
+	boilerTherm := max31855.NewClient("http://127.0.0.1:5000/temperature")
 	boilerMonitor := temperature.NewMonitor(boilerTherm, time.Second)
 	boilerMonitor.Run()
-	if err != nil {
-		return errors.Wrap(err, "failed to initialize boiler thermometer")
-	}
 	s.boilerTherm = boilerTherm
 	s.boilerMonitor = boilerMonitor
 
