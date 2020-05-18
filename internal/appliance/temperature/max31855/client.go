@@ -25,8 +25,11 @@ func (c *Client) Sample() (*temperature.Sample, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "issuing request to thermocouple server")
 	}
-
 	defer resp.Body.Close()
+	if resp.StatusCode != 200 {
+		return nil, errors.New("received non-200 response code")
+	}
+
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, errors.Wrap(err, "reading response body")
