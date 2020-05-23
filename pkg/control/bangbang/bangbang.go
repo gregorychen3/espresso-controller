@@ -42,7 +42,7 @@ func (p *Bangbang) Run() error {
 		p.temperatureSubId = subId
 
 		for sample := range subCh {
-			if sample.Value < p.GetTargetTemperature().Value-0.5 {
+			if sample.Value < p.GetTargetTemperature().Value-1 {
 				log.Debug("Switching heating element on", zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
 				p.heatingElement.HeatOn()
 			} else {
