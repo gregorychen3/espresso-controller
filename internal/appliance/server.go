@@ -8,7 +8,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element/relay"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
 	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature/max31855"
@@ -39,13 +38,7 @@ type Server struct {
 	grpcApplianceServer appliancepb.ApplianceServer
 	grpcServer          *grpc.Server
 
-	groupTherm   temperature.Sampler
 	groupMonitor *temperature.Monitor
-
-	boilerTherm   temperature.Sampler
-	boilerMonitor *temperature.Monitor
-
-	heatingElem heating_element.HeatingElement
 
 	shutdownCh chan struct{}
 }
@@ -58,31 +51,17 @@ func New(c Configuration) *Server {
 }
 
 func (s *Server) Run() error {
-	log.Info("Initializing memory range for gpio access")
 	if err := rpio.Open(); err != nil {
 		return errors.Wrap(err, "initializing gpio access")
 	}
 
-	//log.Info("Initializing group head temperature monitor")
-	//groupTherm, err := max31855.NewMax31855(s.c.GroupThermSPIDevice)
-	//if err != nil {
-	//	return errors.Wrap(err, "failed to initialize group thermometer")
-	//}
-	//groupMonitor := temperature.NewMonitor(groupTherm, time.Second)
-	//groupMonitor.Run()
-	//s.groupTherm = groupTherm
-	//s.groupMonitor = groupMonitor
-
-	log.Info("Initializing boiler temperature monitor")
-	boilerTherm := max31855.NewMax31855(s.c.BoilerThermCsPin, s.c.BoilerThermClkPin, s.c.BoilerThermMisoPin)
-	boilerMonitor := temperature.NewMonitor(boilerTherm, time.Second)
-	s.boilerTherm = boilerTherm
-	s.boilerMonitor = boilerMonitor
-	boilerMonitor.Run()
-
-	log.Info("Initializing heating element relay")
 	heatingElem := relay.NewRelay(s.c.RelayPin)
-	s.heatingElem = heatingElem
+
+	boilerMonitor := temperature.NewMonitor(
+		max31855.NewMax31855(s.c.BoilerThermCsPin, s.c.BoilerThermClkPin, s.c.BoilerThermMisoPin),
+		time.Second,
+	)
+	boilerMonitor.Run()
 
 	grpcController, err := newGrpcController(s.c, heatingElem, boilerMonitor, nil)
 	if err != nil {
