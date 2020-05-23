@@ -17,7 +17,6 @@ type Sample struct {
 
 type Sampler interface {
 	Sample() (*Sample, error)
-	Shutdown() error
 }
 
 type Monitor struct {

@@ -159,19 +159,9 @@ func (s *Server) watchSignals() {
 }
 
 func (s *Server) Shutdown() error {
-	log.Info("Shutting down boiler thermometer")
-	if err := s.boilerTherm.Shutdown(); err != nil {
-		return errors.Wrap(err, "shutting down boiler thermometer")
-	}
-
-	//if err := s.groupTherm.Shutdown(); err != nil {
-	//	return errors.Wrap(err, "Shutting down group thermometer")
-	//}
-
 	log.Info("Unmapping gpio memory")
 	if err := rpio.Close(); err != nil {
 		return errors.Wrap(err, "unmapping gpio memory")
 	}
-
 	return nil
 }

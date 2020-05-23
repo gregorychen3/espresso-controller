@@ -35,10 +35,6 @@ func (m *Max31855) Sample() (*temperature.Sample, error) {
 	}, nil
 }
 
-func (m *Max31855) Shutdown() error {
-	return nil
-}
-
 func (m *Max31855) readBits() uint32 {
 	m.cs.Low()        // begin the read
 	defer m.cs.High() // end the read

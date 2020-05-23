@@ -36,7 +36,3 @@ func (d *DS18B20) Sample() (*temperature.Sample, error) {
 		ObservedAt: time.Now(),
 	}, nil
 }
-
-func (d *DS18B20) Shutdown() error {
-	return nil
-}
