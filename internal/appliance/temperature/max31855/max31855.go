@@ -10,19 +10,19 @@ import (
 const dataBitLength = 32
 
 type Max31855 struct {
-	CS    rpio.Pin
-	Clock rpio.Pin
-	MISO  rpio.Pin
+	CS   rpio.Pin
+	CLK  rpio.Pin
+	MISO rpio.Pin
 }
 
 func NewMax31855() *Max31855 {
 	c := Max31855{
-		CS:    8,
-		Clock: 11,
-		MISO:  9,
+		CS:   8,
+		CLK:  11,
+		MISO: 9,
 	}
 	c.CS.Output()
-	c.Clock.Output()
+	c.CLK.Output()
 	c.MISO.Input()
 	return &c
 }
@@ -45,7 +45,7 @@ func (m *Max31855) readBits() uint32 {
 
 	var bits uint32
 	for i := 0; i < dataBitLength; i++ {
-		m.Clock.High()
+		m.CLK.High()
 		bit := m.MISO.Read()
 		if bit == rpio.High {
 			bits |= 0x1
@@ -53,7 +53,7 @@ func (m *Max31855) readBits() uint32 {
 		if i != dataBitLength-1 { // shift left to get to the next bit to be read
 			bits <<= 1
 		}
-		m.Clock.Low() // pulse low, then high again to get the next bit
+		m.CLK.Low() // pulse low, then high again to get the next bit
 	}
 	return bits
 }
