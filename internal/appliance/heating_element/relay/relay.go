@@ -7,13 +7,12 @@ type Relay struct {
 }
 
 func NewRelay(relayPinNum int) *Relay {
-	pin := rpio.Pin(relayPinNum)
-	return &Relay{pin: pin}
-}
-
-func (r *Relay) Run() error {
+	r := Relay{
+		pin: rpio.Pin(relayPinNum),
+	}
 	r.pin.Output()
-	return nil
+	r.HeatOff()
+	return &r
 }
 
 func (r *Relay) HeatOn() {

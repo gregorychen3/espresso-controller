@@ -82,9 +82,6 @@ func (s *Server) Run() error {
 
 	log.Info("Initializing heating element relay")
 	heatingElem := relay.NewRelay(s.c.RelayPin)
-	if err := heatingElem.Run(); err != nil {
-		return errors.Wrap(err, "Starting relay")
-	}
 	s.heatingElem = heatingElem
 
 	grpcController, err := newGrpcController(s.c, heatingElem, boilerMonitor, nil)
