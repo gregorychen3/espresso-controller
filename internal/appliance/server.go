@@ -26,9 +26,8 @@ import (
 )
 
 type Configuration struct {
-	Port     int
-	RelayPin int
-
+	Port               int
+	RelayPin           int
 	BoilerThermCsPin   int
 	BoilerThermClkPin  int
 	BoilerThermMisoPin int
