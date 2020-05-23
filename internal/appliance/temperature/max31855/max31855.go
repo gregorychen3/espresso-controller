@@ -1,37 +1,72 @@
 package max31855
 
 import (
-	"fmt"
+	"time"
 
 	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
-	"github.com/teebr/go-max31855"
+	"github.com/stianeikeland/go-rpio/v4"
 )
 
+const dataBitLength = 32
+
 type Max31855 struct {
-	sensor max31855.MAX31855
+	CS    rpio.Pin
+	Clock rpio.Pin
+	MISO  rpio.Pin
 }
 
-func NewMax31855(spiDeviceNum int) (*Max31855, error) {
-	var sensor max31855.MAX31855
-
-	path := fmt.Sprintf("/dev/spidev0.%d", spiDeviceNum)
-	if err := sensor.Open(path); err != nil {
-		return nil, err
+func NewMax31855() *Max31855 {
+	c := Max31855{
+		CS:    8,
+		Clock: 11,
+		MISO:  9,
 	}
-
-	return &Max31855{sensor: sensor}, nil
+	c.CS.Output()
+	c.Clock.Output()
+	c.MISO.Input()
+	return &c
 }
 
 func (m *Max31855) Sample() (*temperature.Sample, error) {
-	if err := m.sensor.Read(); err != nil {
-		return nil, err
-	}
+	bits := m.readBits()
 	return &temperature.Sample{
-		Value:      m.sensor.Thermocouple,
-		ObservedAt: m.sensor.Timestamp,
+		Value:      bitsToTemperature(bits),
+		ObservedAt: time.Now(),
 	}, nil
 }
 
 func (m *Max31855) Shutdown() error {
-	return m.sensor.Close()
+	return nil
+}
+
+func (m *Max31855) readBits() uint32 {
+	m.CS.Low()        // begin the read
+	defer m.CS.High() // end the read
+
+	var bits uint32
+	for i := 0; i < dataBitLength; i++ {
+		m.Clock.High()
+		bit := m.MISO.Read()
+		if bit == rpio.High {
+			bits |= 0x1
+		}
+		if i != dataBitLength-1 { // shift left to get to the next bit to be read
+			bits <<= 1
+		}
+		m.Clock.Low() // pulse low, then high again to get the next bit
+	}
+	return bits
+}
+
+func bitsToTemperature(bits uint32) float64 {
+	thermoData := ((bits >> 18) & 0x3FFF)
+	if thermoData&0x2000 != 0 { // two's complement (untested!)
+		withoutResolution := ^thermoData & 0x1FFF
+		withoutResolution = withoutResolution + 1
+		temp := int64(withoutResolution) * (-1)
+		return float64(temp) / 4
+	} else {
+		withoutResolution := thermoData & 0x1FFF
+		return float64(withoutResolution) / 4
+	}
 }

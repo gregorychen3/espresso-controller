@@ -19,6 +19,7 @@ import (
 	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
 	"github.com/pkg/errors"
 	"github.com/soheilhy/cmux"
+	"github.com/stianeikeland/go-rpio/v4"
 	"go.uber.org/zap"
 	"golang.org/x/sync/errgroup"
 	"google.golang.org/grpc"
@@ -56,7 +57,12 @@ func New(c Configuration) *Server {
 }
 
 func (s *Server) Run() error {
-	log.Info("Initializing group head temperature monitor")
+	log.Info("Initializing memory range for gpio access")
+	if err := rpio.Open(); err != nil {
+		return errors.Wrap(err, "initializing gpio access")
+	}
+
+	//log.Info("Initializing group head temperature monitor")
 	//groupTherm, err := max31855.NewMax31855(s.c.GroupThermSPIDevice)
 	//if err != nil {
 	//	return errors.Wrap(err, "failed to initialize group thermometer")
@@ -67,7 +73,7 @@ func (s *Server) Run() error {
 	//s.groupMonitor = groupMonitor
 
 	log.Info("Initializing boiler temperature monitor")
-	boilerTherm := max31855.NewClient(s.c.BoilerThermPort)
+	boilerTherm := max31855.NewMax31855()
 	boilerMonitor := temperature.NewMonitor(boilerTherm, time.Second)
 	boilerMonitor.Run()
 	s.boilerTherm = boilerTherm
@@ -155,17 +161,24 @@ func (s *Server) watchSignals() {
 }
 
 func (s *Server) Shutdown() error {
+	log.Info("Shutting down heating element relay")
 	if err := s.heatingElem.Shutdown(); err != nil {
-		return errors.Wrap(err, "Shutting down heating element relay")
+		return errors.Wrap(err, "shutting down heating element relay")
 	}
 
+	log.Info("Shutting down boiler thermometer")
 	if err := s.boilerTherm.Shutdown(); err != nil {
-		return errors.Wrap(err, "Shutting down boiler thermometer")
+		return errors.Wrap(err, "shutting down boiler thermometer")
 	}
 
 	//if err := s.groupTherm.Shutdown(); err != nil {
 	//	return errors.Wrap(err, "Shutting down group thermometer")
 	//}
+
+	log.Info("Unmapping gpio memory")
+	if err := rpio.Close(); err != nil {
+		return errors.Wrap(err, "unmapping gpio memory")
+	}
 
 	return nil
 }
