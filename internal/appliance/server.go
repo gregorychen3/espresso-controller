@@ -74,7 +74,7 @@ func (s *Server) Run() error {
 	//s.groupMonitor = groupMonitor
 
 	log.Info("Initializing boiler temperature monitor")
-	boilerTherm := max31855.NewMax31855(8, 11, 9)
+	boilerTherm := max31855.NewMax31855(s.c.BoilerThermCsPin, s.c.BoilerThermClkPin, s.c.BoilerThermMisoPin)
 	boilerMonitor := temperature.NewMonitor(boilerTherm, time.Second)
 	s.boilerTherm = boilerTherm
 	s.boilerMonitor = boilerMonitor
