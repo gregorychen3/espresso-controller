@@ -20,7 +20,7 @@ func (r *Relay) Run() error {
 }
 
 func (r *Relay) Shutdown() error {
-	return rpio.Close()
+	return nil
 }
 
 func (r *Relay) HeatOn() {
