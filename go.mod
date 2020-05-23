@@ -24,7 +24,6 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.4.0
 	github.com/stianeikeland/go-rpio/v4 v4.4.0
-	github.com/teebr/go-max31855 v0.0.0-20190512151533-ca8a73d06e4c
 	github.com/yryz/ds18b20 v0.0.0-20180211073435-3cf383a40624
 	go.uber.org/zap v1.10.0
 	golang.org/x/crypto v0.0.0-20200406173513-056763e48d71 // indirect
