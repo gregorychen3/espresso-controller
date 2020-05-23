@@ -162,11 +162,6 @@ func (s *Server) watchSignals() {
 }
 
 func (s *Server) Shutdown() error {
-	log.Info("Shutting down heating element relay")
-	if err := s.heatingElem.Shutdown(); err != nil {
-		return errors.Wrap(err, "shutting down heating element relay")
-	}
-
 	log.Info("Shutting down boiler thermometer")
 	if err := s.boilerTherm.Shutdown(); err != nil {
 		return errors.Wrap(err, "shutting down boiler thermometer")

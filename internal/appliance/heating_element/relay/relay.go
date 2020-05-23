@@ -12,14 +12,7 @@ func NewRelay(relayPinNum int) *Relay {
 }
 
 func (r *Relay) Run() error {
-	if err := rpio.Open(); err != nil {
-		return err
-	}
 	r.pin.Output()
-	return nil
-}
-
-func (r *Relay) Shutdown() error {
 	return nil
 }
 
