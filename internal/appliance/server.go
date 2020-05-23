@@ -75,9 +75,9 @@ func (s *Server) Run() error {
 	log.Info("Initializing boiler temperature monitor")
 	boilerTherm := max31855.NewMax31855(8, 11, 9)
 	boilerMonitor := temperature.NewMonitor(boilerTherm, time.Second)
-	boilerMonitor.Run()
 	s.boilerTherm = boilerTherm
 	s.boilerMonitor = boilerMonitor
+	boilerMonitor.Run()
 
 	log.Info("Initializing heating element relay")
 	heatingElem := relay.NewRelay(s.c.RelayGPIOPin)
