@@ -26,8 +26,8 @@ import (
 )
 
 type Configuration struct {
-	Port         int
-	RelayGPIOPin int
+	Port     int
+	RelayPin int
 
 	BoilerThermCsPin   int
 	BoilerThermClkPin  int
@@ -82,7 +82,7 @@ func (s *Server) Run() error {
 	boilerMonitor.Run()
 
 	log.Info("Initializing heating element relay")
-	heatingElem := relay.NewRelay(s.c.RelayGPIOPin)
+	heatingElem := relay.NewRelay(s.c.RelayPin)
 	if err := heatingElem.Run(); err != nil {
 		return errors.Wrap(err, "Starting relay")
 	}
