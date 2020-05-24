@@ -33,7 +33,7 @@ func newRootCmd() *cobra.Command {
 			}
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
-			log.Info("For more information visit https://github.com/gregorychen3/espresso-controller\n%s", cmdutil.Logo)
+			log.Info("For more information, go to https://github.com/gregorychen3/espresso-controller\n%s", cmdutil.Logo)
 
 			if verbose := viper.GetBool("Verbose"); verbose {
 				serverLogger.UseDevLogger()
