@@ -173,13 +173,15 @@ func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetT
 }
 
 func (c *grpcController) SetTargetTemperature(ctx context.Context, req *appliancepb.SetTargetTemperatureRequest) (*appliancepb.SetTargetTemperatureResponse, error) {
-	targetTemperature := c.boilerTemperatureCtrlr.SetTargetTemperature(req.Temperature)
+	if 0 < req.Temperature || req.Temperature > 100 {
+		return nil, errors.New("temperature must be within [0, 100]°C")
+	}
 
+	targetTemperature := c.boilerTemperatureCtrlr.SetTargetTemperature(req.Temperature)
 	pbTime, err := ptypes.TimestampProto(targetTemperature.SetAt)
 	if err != nil {
 		return nil, err
 	}
-
 	return &appliancepb.SetTargetTemperatureResponse{
 		Temperature: targetTemperature.Value,
 		SetAt:       pbTime,
