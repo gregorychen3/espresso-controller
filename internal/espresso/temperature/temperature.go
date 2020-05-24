@@ -63,7 +63,7 @@ func (m *Monitor) Run() {
 		for {
 			m.temperatureHistoryMu.Lock()
 			for i := len(m.temperatureHistory) - 1; i >= 0; i-- {
-				if time.Since(m.temperatureHistory[i].ObservedAt) > time.Hour*1 { // keep 1hr of history
+				if time.Since(m.temperatureHistory[i].ObservedAt) > time.Minute*30 { // keep 30 mins of history
 					m.temperatureHistory = m.temperatureHistory[i+1:]
 					log.Debug("Pruned temperature history", zap.Int("numPruned", i+1), zap.Int("numRemaining", len(m.temperatureHistory)))
 					break

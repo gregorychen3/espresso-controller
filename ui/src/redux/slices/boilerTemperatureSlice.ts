@@ -8,7 +8,7 @@ import {
 import { TemperatureSample } from "../../types";
 import { espressoClient, ReturnType } from "../helpers";
 
-const maxNumSamples = 3600;
+const maxNumSamples = 1800; // 30 minutes of history at a rate of 1 sample/sec
 
 interface State {
   stream?: ReturnType<typeof espressoClient.boilerTemperature>;
