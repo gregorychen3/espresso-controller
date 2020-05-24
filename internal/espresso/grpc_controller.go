@@ -173,8 +173,8 @@ func (c *grpcController) GetTargetTemperature(context.Context, *espressopb.GetTa
 }
 
 func (c *grpcController) SetTargetTemperature(ctx context.Context, req *espressopb.SetTargetTemperatureRequest) (*espressopb.SetTargetTemperatureResponse, error) {
-	if 0 < req.Temperature || req.Temperature > 100 {
-		return nil, errors.New("temperature must be within [0, 100]°C")
+	if req.Temperature < 0 || req.Temperature > 100 {
+		return nil, errors.New("temperature must be in range [0, 100] °C")
 	}
 
 	targetTemperature := c.boilerTemperatureCtrlr.SetTargetTemperature(req.Temperature)
