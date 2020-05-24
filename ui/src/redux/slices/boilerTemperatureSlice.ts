@@ -8,6 +8,8 @@ import {
 import { TemperatureSample } from "../../types";
 import { applianceClient, ReturnType } from "../helpers";
 
+const maxNumSamples = 3600;
+
 interface State {
   stream?: ReturnType<typeof applianceClient.boilerTemperature>;
   history: TemperatureSample[];
@@ -74,6 +76,7 @@ export const boilerTemperatureSlice = createSlice({
             );
           }
 
+          state.history = state.history.slice(-(maxNumSamples - 1));
           state.history.push({
             value: sample.getValue(),
             observedAt: moment(observedAt.toDate()),
