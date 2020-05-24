@@ -5,7 +5,7 @@ Temperature control and monitoring for a Rancilio Silvia or comparable espresso 
 ## Requirements
 
 - Espresso machine, e.g., [Rancilio Silvia](https://www.ranciliogroupna.com/silvia)
-- Raspberry PI
+- Raspberry Pi
 - [Solid state relay](https://www.amazon.com/dp/B00HV974KC/ref=cm_sw_em_r_mt_dp_U_9WTYEbEA0TNGG)
 - [Type K thermocouple](https://www.amazon.com/dp/B07MMLY3PZ/ref=cm_sw_em_r_mt_dp_U_OXTYEb0AVQZWD)
 - [MAX31855 thermocouple amplifier](https://www.adafruit.com/product/269)
