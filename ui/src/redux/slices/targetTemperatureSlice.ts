@@ -5,9 +5,9 @@ import {
   GetTargetTemperatureResponse,
   SetTargetTemperatureRequest,
   SetTargetTemperatureResponse,
-} from "../../proto/pkg/appliancepb/appliance_pb";
-import { ServiceError } from "../../proto/pkg/appliancepb/appliance_pb_service";
-import { applianceClient, createUnaryGrpcThunk } from "../helpers";
+} from "../../proto/pkg/espressopb/espresso_pb";
+import { ServiceError } from "../../proto/pkg/espressopb/espresso_pb_service";
+import { espressoClient, createUnaryGrpcThunk } from "../helpers";
 
 export const targetTemperatureSlice = createSlice({
   name: "targetTemp",
@@ -90,7 +90,7 @@ export const getTargetTemperature = (req: GetTargetTemperatureRequest) => (
   d: Dispatch
 ) =>
   createUnaryGrpcThunk(
-    applianceClient.getTargetTemperature,
+    espressoClient.getTargetTemperature,
     req,
     {
       request: targetTemperatureSlice.actions.getTargetTemperatureRequest,
@@ -104,7 +104,7 @@ export const setTargetTemperature = (req: SetTargetTemperatureRequest) => (
   d: Dispatch
 ) =>
   createUnaryGrpcThunk(
-    applianceClient.setTargetTemperature,
+    espressoClient.setTargetTemperature,
     req,
     {
       request: targetTemperatureSlice.actions.setTargetTemperatureRequest,

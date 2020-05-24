@@ -13,7 +13,7 @@ import TemperatureChart from "../components/TemperatureChart";
 import {
   GetTargetTemperatureRequest,
   TemperatureStreamRequest,
-} from "../proto/pkg/appliancepb/appliance_pb";
+} from "../proto/pkg/espressopb/espresso_pb";
 import { showTargetTempModal } from "../redux/selectors";
 import { getTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 import {

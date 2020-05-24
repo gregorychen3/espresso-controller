@@ -2,11 +2,11 @@ import { ActionCreatorWithPayload, Dispatch } from "@reduxjs/toolkit";
 import { Message } from "google-protobuf";
 import { toast } from "react-toastify";
 import {
-  ApplianceClient,
+  EspressoClient,
   ServiceError,
-} from "../proto/pkg/appliancepb/appliance_pb_service";
+} from "../proto/pkg/espressopb/espresso_pb_service";
 
-export const applianceClient = new ApplianceClient("");
+export const espressoClient = new EspressoClient("");
 
 /**
  * Creates a thunk action for a unary grpc with request jspb.Message of type T1
@@ -30,7 +30,7 @@ export const createUnaryGrpcThunk = <T1 extends Message, T2 extends Message>(
 ) => {
   const { request, response, failure } = actionCreators;
   d(request(requestMsg));
-  apiCall.bind(applianceClient)(
+  apiCall.bind(espressoClient)(
     requestMsg,
     (err: ServiceError, responseMsg: T2) => {
       if (err) {

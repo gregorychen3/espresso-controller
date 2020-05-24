@@ -4,7 +4,7 @@ import { TextField } from "formik-material-ui";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-import { SetTargetTemperatureRequest } from "../proto/pkg/appliancepb/appliance_pb";
+import { SetTargetTemperatureRequest } from "../proto/pkg/espressopb/espresso_pb";
 import { getTargetTemp } from "../redux/selectors";
 import { setTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 

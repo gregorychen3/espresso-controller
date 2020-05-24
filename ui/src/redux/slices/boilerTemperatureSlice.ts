@@ -4,14 +4,14 @@ import { toast } from "react-toastify";
 import {
   TemperatureStreamRequest,
   TemperatureStreamResponse,
-} from "../../proto/pkg/appliancepb/appliance_pb";
+} from "../../proto/pkg/espressopb/espresso_pb";
 import { TemperatureSample } from "../../types";
-import { applianceClient, ReturnType } from "../helpers";
+import { espressoClient, ReturnType } from "../helpers";
 
 const maxNumSamples = 3600;
 
 interface State {
-  stream?: ReturnType<typeof applianceClient.boilerTemperature>;
+  stream?: ReturnType<typeof espressoClient.boilerTemperature>;
   history: TemperatureSample[];
 }
 
@@ -25,9 +25,7 @@ export const boilerTemperatureSlice = createSlice({
     // BoilerTemperature server streaming rpc
     startBoilerTemperatureStream: (
       state,
-      action: PayloadAction<
-        ReturnType<typeof applianceClient.boilerTemperature>
-      >
+      action: PayloadAction<ReturnType<typeof espressoClient.boilerTemperature>>
     ) => {
       state.stream = action.payload;
     },
@@ -98,7 +96,7 @@ export const boilerTemperatureSlice = createSlice({
 export const startBoilerTemperatureStream = (req: TemperatureStreamRequest) => (
   d: Dispatch
 ) => {
-  const stream = applianceClient.boilerTemperature(req);
+  const stream = espressoClient.boilerTemperature(req);
   d(boilerTemperatureSlice.actions.startBoilerTemperatureStream(stream));
 
   stream.on("data", (msg) => {
