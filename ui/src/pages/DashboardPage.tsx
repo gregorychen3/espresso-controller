@@ -7,7 +7,7 @@ import parsePromText, { Metric } from "parse-prometheus-text-format";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MetricCard, { Severity } from "../components/MetricCard";
-import SetTemperatureModal from "../components/SetTemperatureModal";
+import SetTemperatureModal from "../components/TargetTemperatureDialog";
 import TemperatureCard from "../components/TemperatureCard";
 import TemperatureChart from "../components/TemperatureChart";
 import {
