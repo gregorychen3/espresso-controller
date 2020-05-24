@@ -6,9 +6,9 @@ import (
 	"github.com/golang/protobuf/ptypes"
 	"github.com/gregorychen3/espresso-controller/internal/espresso/heating_element"
 	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature"
-	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
 	"github.com/gregorychen3/espresso-controller/pkg/control"
 	"github.com/gregorychen3/espresso-controller/pkg/control/bangbang"
+	"github.com/gregorychen3/espresso-controller/pkg/espressopb"
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
@@ -56,28 +56,28 @@ func newGrpcController(
 	}, nil
 }
 
-func (c *grpcController) GroupHeadTemperature(req *appliancepb.TemperatureStreamRequest, stream appliancepb.Appliance_GroupHeadTemperatureServer) error {
+func (c *grpcController) GroupHeadTemperature(req *espressopb.TemperatureStreamRequest, stream espressopb.Espresso_GroupHeadTemperatureServer) error {
 	grpcStreams.Inc()
 	defer grpcStreams.Dec()
 
 	// the first message sent on the stream is the temperature history
-	var pbSamples []*appliancepb.TemperatureSample
+	var pbSamples []*espressopb.TemperatureSample
 	samples := c.groupMonitor.GetHistory()
 	for _, s := range samples {
 		pbTime, err := ptypes.TimestampProto(s.ObservedAt)
 		if err != nil {
 			return err
 		}
-		pbSample := appliancepb.TemperatureSample{
+		pbSample := espressopb.TemperatureSample{
 			Value:      s.Value,
 			ObservedAt: pbTime,
 		}
 		pbSamples = append(pbSamples, &pbSample)
 	}
 
-	if err := stream.Send(&appliancepb.TemperatureStreamResponse{
-		Data: &appliancepb.TemperatureStreamResponse_History{
-			History: &appliancepb.TemperatureHistory{
+	if err := stream.Send(&espressopb.TemperatureStreamResponse{
+		Data: &espressopb.TemperatureStreamResponse_History{
+			History: &espressopb.TemperatureHistory{
 				Samples: pbSamples,
 			},
 		},
@@ -93,9 +93,9 @@ func (c *grpcController) GroupHeadTemperature(req *appliancepb.TemperatureStream
 		if err != nil {
 			return err
 		}
-		if err := stream.Send(&appliancepb.TemperatureStreamResponse{
-			Data: &appliancepb.TemperatureStreamResponse_Sample{
-				Sample: &appliancepb.TemperatureSample{
+		if err := stream.Send(&espressopb.TemperatureStreamResponse{
+			Data: &espressopb.TemperatureStreamResponse_Sample{
+				Sample: &espressopb.TemperatureSample{
 					Value:      sample.Value,
 					ObservedAt: pbTime,
 				},
@@ -107,28 +107,28 @@ func (c *grpcController) GroupHeadTemperature(req *appliancepb.TemperatureStream
 	return errors.New("temperature monitor stopped publishing")
 }
 
-func (c *grpcController) BoilerTemperature(req *appliancepb.TemperatureStreamRequest, stream appliancepb.Appliance_BoilerTemperatureServer) error {
+func (c *grpcController) BoilerTemperature(req *espressopb.TemperatureStreamRequest, stream espressopb.Espresso_BoilerTemperatureServer) error {
 	grpcStreams.Inc()
 	defer grpcStreams.Dec()
 
 	// the first message sent on the stream is the temperature history
-	var pbSamples []*appliancepb.TemperatureSample
+	var pbSamples []*espressopb.TemperatureSample
 	samples := c.boilerMonitor.GetHistory()
 	for _, s := range samples {
 		pbTime, err := ptypes.TimestampProto(s.ObservedAt)
 		if err != nil {
 			return err
 		}
-		pbSample := appliancepb.TemperatureSample{
+		pbSample := espressopb.TemperatureSample{
 			Value:      s.Value,
 			ObservedAt: pbTime,
 		}
 		pbSamples = append(pbSamples, &pbSample)
 	}
 
-	if err := stream.Send(&appliancepb.TemperatureStreamResponse{
-		Data: &appliancepb.TemperatureStreamResponse_History{
-			History: &appliancepb.TemperatureHistory{
+	if err := stream.Send(&espressopb.TemperatureStreamResponse{
+		Data: &espressopb.TemperatureStreamResponse_History{
+			History: &espressopb.TemperatureHistory{
 				Samples: pbSamples,
 			},
 		},
@@ -144,9 +144,9 @@ func (c *grpcController) BoilerTemperature(req *appliancepb.TemperatureStreamReq
 		if err != nil {
 			return err
 		}
-		if err := stream.Send(&appliancepb.TemperatureStreamResponse{
-			Data: &appliancepb.TemperatureStreamResponse_Sample{
-				Sample: &appliancepb.TemperatureSample{
+		if err := stream.Send(&espressopb.TemperatureStreamResponse{
+			Data: &espressopb.TemperatureStreamResponse_Sample{
+				Sample: &espressopb.TemperatureSample{
 					Value:      sample.Value,
 					ObservedAt: pbTime,
 				},
@@ -158,7 +158,7 @@ func (c *grpcController) BoilerTemperature(req *appliancepb.TemperatureStreamReq
 	return errors.New("temperature monitor stopped publishing")
 }
 
-func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetTargetTemperatureRequest) (*appliancepb.GetTargetTemperatureResponse, error) {
+func (c *grpcController) GetTargetTemperature(context.Context, *espressopb.GetTargetTemperatureRequest) (*espressopb.GetTargetTemperatureResponse, error) {
 	targetTemperature := c.boilerTemperatureCtrlr.GetTargetTemperature()
 
 	pbTime, err := ptypes.TimestampProto(targetTemperature.SetAt)
@@ -166,13 +166,13 @@ func (c *grpcController) GetTargetTemperature(context.Context, *appliancepb.GetT
 		return nil, err
 	}
 
-	return &appliancepb.GetTargetTemperatureResponse{
+	return &espressopb.GetTargetTemperatureResponse{
 		Temperature: targetTemperature.Value,
 		SetAt:       pbTime,
 	}, nil
 }
 
-func (c *grpcController) SetTargetTemperature(ctx context.Context, req *appliancepb.SetTargetTemperatureRequest) (*appliancepb.SetTargetTemperatureResponse, error) {
+func (c *grpcController) SetTargetTemperature(ctx context.Context, req *espressopb.SetTargetTemperatureRequest) (*espressopb.SetTargetTemperatureResponse, error) {
 	if 0 < req.Temperature || req.Temperature > 100 {
 		return nil, errors.New("temperature must be within [0, 100]°C")
 	}
@@ -182,7 +182,7 @@ func (c *grpcController) SetTargetTemperature(ctx context.Context, req *applianc
 	if err != nil {
 		return nil, err
 	}
-	return &appliancepb.SetTargetTemperatureResponse{
+	return &espressopb.SetTargetTemperatureResponse{
 		Temperature: targetTemperature.Value,
 		SetAt:       pbTime,
 	}, nil

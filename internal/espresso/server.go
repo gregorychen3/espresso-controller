@@ -12,7 +12,7 @@ import (
 	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature"
 	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature/max31855"
 	"github.com/gregorychen3/espresso-controller/internal/log"
-	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
+	"github.com/gregorychen3/espresso-controller/pkg/espressopb"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
 	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
@@ -35,8 +35,8 @@ type Configuration struct {
 type Server struct {
 	c Configuration
 
-	grpcApplianceServer appliancepb.ApplianceServer
-	grpcServer          *grpc.Server
+	grpcEspressoServer espressopb.EspressoServer
+	grpcServer         *grpc.Server
 
 	groupMonitor *temperature.Monitor
 
@@ -67,7 +67,7 @@ func (s *Server) Run() error {
 	if err != nil {
 		return err
 	}
-	s.grpcApplianceServer = grpcController
+	s.grpcEspressoServer = grpcController
 
 	grpcServer := grpc.NewServer(
 		grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
@@ -95,7 +95,7 @@ func (s *Server) serveTCP() error {
 		return errors.Wrap(err, fmt.Sprintf("failed to listen on port %d", s.c.Port))
 	}
 
-	appliancepb.RegisterApplianceServer(s.grpcServer, s.grpcApplianceServer)
+	espressopb.RegisterEspressoServer(s.grpcServer, s.grpcEspressoServer)
 
 	mux := cmux.New(listener)
 	grpcListener := mux.MatchWithWriters(cmux.HTTP2MatchHeaderFieldPrefixSendSettings("content-type", "application/grpc"))
