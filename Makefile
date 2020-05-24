@@ -13,11 +13,11 @@ install:
 	go install ./cmd/espresso
 
 proto:
-	protoc -I pkg/appliancepb/ pkg/appliancepb/appliance.proto --go_out=plugins=grpc:pkg/appliancepb
+	protoc -I pkg/espressopb/ pkg/espressopb/espresso.proto --go_out=plugins=grpc:pkg/espressopb
 	protoc --plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
 		--js_out="import_style=commonjs,binary:${PROTOC_JS_TS_OUT_DIR}" \
 		--ts_out="service=grpc-web:${PROTOC_JS_TS_OUT_DIR}" \
-		pkg/appliancepb/appliance.proto
+		pkg/espressopb/espresso.proto
 	for file in `find ui/src/proto -name '*.js'`; do \
 		line=$$(sed -n '1p' $$file); \
 		if [ "$$line" != "/* eslint-disable */" ]; then \
@@ -27,7 +27,7 @@ proto:
 
 build-ui:
 	(cd ui && npm i && npm run build)
-	(cd internal/appliance && GO111MODULE=auto packr2)
+	(cd internal/espresso && GO111MODULE=auto packr2)
 
 .PHONY: build install
 

@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package appliancepb;
+package espressopb;
 
 import "google/protobuf/timestamp.proto";
 
-service Appliance {
+service Espresso {
   rpc GroupHeadTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
   rpc BoilerTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
   rpc GetTargetTemperature (GetTargetTemperatureRequest) returns (GetTargetTemperatureResponse) {}
