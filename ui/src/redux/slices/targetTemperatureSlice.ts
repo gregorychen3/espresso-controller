@@ -35,7 +35,7 @@ export const targetTemperatureSlice = createSlice({
       const value = action.payload.getTemperature();
       const setAt = action.payload.getSetAt()?.toDate();
       if (!setAt) {
-        console.log("Target temperature response missing setAt time");
+        console.warn("Target temperature response missing setAt time");
         return;
       }
 
@@ -67,7 +67,7 @@ export const targetTemperatureSlice = createSlice({
       const value = action.payload.getTemperature();
       const setAt = action.payload.getSetAt()?.toDate();
       if (!setAt) {
-        console.log("Target temperature response missing setAt time");
+        console.warn("Target temperature response missing setAt time");
         return;
       }
 
