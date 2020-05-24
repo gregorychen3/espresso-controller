@@ -16,8 +16,9 @@ PID control and monitoring for an espresso machine.
 - Application timer
 
 ## Usage
+
 ```console
-$ build/espresso appliance start -v
+$ ./build/espresso start -v
 
      ╓▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
     █▀─╓▄         ┌▄▄┌         ▄▄ ╙█

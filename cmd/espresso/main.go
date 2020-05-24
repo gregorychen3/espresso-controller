@@ -11,7 +11,7 @@ import (
 )
 
 var configKeys = []config.Key{
-	{Path: "Port", ShortFlag: "p", Description: "Port on which the appliance server should listen", Default: "8080"},
+	{Path: "Port", ShortFlag: "p", Description: "Port on which the espresso server should listen", Default: "8080"},
 	{Path: "RelayPin", ShortFlag: "r", Description: "The GPIO pin on which the relay is connected", Default: 5},
 	{Path: "BoilerThermCsPin", ShortFlag: "", Description: "The GPIO pin connected to the boiler thermometer's max31855 chip select, aka chip enable", Default: 8},
 	{Path: "BoilerThermClkPin", ShortFlag: "", Description: "The GPIO pin connected to the boiler thermometer's max31855 clock", Default: 11},
