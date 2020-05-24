@@ -11,12 +11,8 @@ import {
   YAxis,
 } from "recharts";
 import { getTempHistory } from "../redux/selectors";
-import Title from "./Title";
 
-interface Props {
-  title: string;
-}
-export default ({ title }: Props) => {
+export default () => {
   const theme = useTheme();
 
   const samples = useSelector(getTempHistory);
@@ -27,7 +23,6 @@ export default ({ title }: Props) => {
 
   return (
     <>
-      <Title>{title}</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
