@@ -3,6 +3,6 @@
 
 // You can use the "packr clean" command to clean up this,
 // and any other packr generated files.
-package appliance
+package espresso
 
-import _ "github.com/gregorychen3/espresso-controller/internal/appliance/packrd"
+import _ "github.com/gregorychen3/espresso-controller/internal/espresso/packrd"

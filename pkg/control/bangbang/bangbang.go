@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element"
-	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
+	"github.com/gregorychen3/espresso-controller/internal/espresso/heating_element"
+	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature"
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/pkg/control"
 	"go.uber.org/zap"

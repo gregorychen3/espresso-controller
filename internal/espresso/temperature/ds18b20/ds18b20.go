@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
+	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature"
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/yryz/ds18b20"
 	"go.uber.org/zap"

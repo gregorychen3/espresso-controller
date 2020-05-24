@@ -4,7 +4,7 @@ import (
 	"github.com/gregorychen3/espresso-controller/cmd/espresso/cmdutil"
 	"github.com/gregorychen3/espresso-controller/cmd/espresso/config"
 	"github.com/gregorychen3/espresso-controller/cmd/espresso/log"
-	"github.com/gregorychen3/espresso-controller/internal/appliance"
+	"github.com/gregorychen3/espresso-controller/internal/espresso"
 	serverLogger "github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -46,12 +46,12 @@ func newRootCmd() *cobra.Command {
 				)
 			}
 
-			c := appliance.Configuration{}
+			c := espresso.Configuration{}
 			if err := viper.Unmarshal(&c); err != nil {
 				log.Fatal("Unmarshalling configuration: %s\n", err.Error())
 			}
 
-			server := appliance.New(c)
+			server := espresso.New(c)
 			return server.Run()
 		},
 	}

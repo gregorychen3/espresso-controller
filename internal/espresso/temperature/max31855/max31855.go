@@ -3,7 +3,7 @@ package max31855
 import (
 	"time"
 
-	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
+	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature"
 	"github.com/stianeikeland/go-rpio/v4"
 )
 

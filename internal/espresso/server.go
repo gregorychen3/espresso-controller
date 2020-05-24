@@ -1,4 +1,4 @@
-package appliance
+package espresso
 
 import (
 	"fmt"
@@ -8,9 +8,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element/relay"
-	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
-	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature/max31855"
+	"github.com/gregorychen3/espresso-controller/internal/espresso/heating_element/relay"
+	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature"
+	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature/max31855"
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"

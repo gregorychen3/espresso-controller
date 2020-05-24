@@ -1,11 +1,11 @@
-package appliance
+package espresso
 
 import (
 	"context"
 
 	"github.com/golang/protobuf/ptypes"
-	"github.com/gregorychen3/espresso-controller/internal/appliance/heating_element"
-	"github.com/gregorychen3/espresso-controller/internal/appliance/temperature"
+	"github.com/gregorychen3/espresso-controller/internal/espresso/heating_element"
+	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature"
 	"github.com/gregorychen3/espresso-controller/pkg/appliancepb"
 	"github.com/gregorychen3/espresso-controller/pkg/control"
 	"github.com/gregorychen3/espresso-controller/pkg/control/bangbang"
