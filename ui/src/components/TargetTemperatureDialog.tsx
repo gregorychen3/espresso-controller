@@ -1,40 +1,19 @@
-import { InputAdornment } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import TextField from "@material-ui/core/TextField";
-import React, { ChangeEvent, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { SetTargetTemperatureRequest } from "../proto/pkg/appliancepb/appliance_pb";
-import { setTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 import { setTargetTempModalVisibility } from "../redux/uiSlice";
+import TargetTemperatureForm from "./TargetTemperatureForm";
 
 export default () => {
   const d = useDispatch();
 
-  const [targetTempInput, setTargetTempInput] = useState<number | undefined>(
-    undefined
-  );
-
   const handleClose = () => {
     d(setTargetTempModalVisibility(false));
-  };
-
-  const handleTargetTempChanged = (e: ChangeEvent<HTMLInputElement>) => {
-    setTargetTempInput(parseInt(e.target.value, 10));
-  };
-
-  const handleSubmit = () => {
-    if (!targetTempInput) {
-      return;
-    }
-
-    const req = new SetTargetTemperatureRequest();
-    req.setTemperature(targetTempInput);
-    d(setTargetTemperature(req));
   };
 
   return (
@@ -49,27 +28,13 @@ export default () => {
           The specified temperature will become the new set point of the
           temperature controller.
         </DialogContentText>
-        <TextField
-          onChange={handleTargetTempChanged}
-          autoFocus
-          margin="dense"
-          id="temperature"
-          label="Temperature"
-          type="number"
-          InputProps={{
-            endAdornment: <InputAdornment position="end">°C</InputAdornment>,
-          }}
-        />
+        <TargetTemperatureForm />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        <Button
-          disabled={!targetTempInput}
-          onClick={handleSubmit}
-          color="primary"
-        >
+        <Button type="submit" form="targettemperature" color="primary">
           Submit
         </Button>
       </DialogActions>
