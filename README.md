@@ -18,7 +18,8 @@ PID control and monitoring for an espresso machine.
 ## Usage
 
 ```console
-$ ./build/espresso start -v
+pi@raspberrypi:~ $ ./espresso -v -r 26
+For more information, go to https://github.com/gregorychen3/espresso-controller
 
      ╓▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
     █▀─╓▄         ┌▄▄┌         ▄▄ ╙█
@@ -39,10 +40,11 @@ $ ./build/espresso start -v
     █                              █─
     ╙▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
-2020-04-16T22:51:05.660-0400	INFO	appliance/server.go:61	Initializing gRPC server	{"port": 8080}
-2020-04-16T22:51:05.660-0400	INFO	appliance/server.go:69	Initializing gRPC web server	{"port": 8080}
-2020-04-16T22:51:05.659-0400	DEBUG	bangbang/bangbang.go:91	Temperature sampled	{"temperature": 92.09320831298828}
-2020-04-16T22:51:05.661-0400	INFO	bangbang/bangbang.go:46	Switching heating element on	{"curTemperature": 92.09320831298828, "targetTemperature": 93}
+2020-05-24T12:14:27.865-0400	DEBUG	temperature/temperature.go:47	Sampled temperature	{"value": 81}
+2020-05-24T12:14:27.867-0400	DEBUG	bangbang/bangbang.go:46	Switching heating element on	{"curTemperature": 81, "targetTemperature": 93}
+2020-05-24T12:14:27.867-0400	INFO	espresso/server.go:115	Initializing gRPC server	{"port": 8080}
+2020-05-24T12:14:27.867-0400	INFO	espresso/server.go:123	Initializing gRPC web server	{"port": 8080}
+2020-05-24T12:14:28.867-0400	DEBUG	temperature/temperature.go:47	Sampled temperature	{"value": 81}
 ```
 
 ## Credits
