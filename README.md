@@ -19,54 +19,54 @@ Temperature control and monitoring for a Rancilio Silvia or comparable espresso 
 
 TODO: diagram
 
-### Raspberry Pi Setup
+### Raspi Setup
 
 1. Follow instructions [here](https://projects.raspberrypi.org/en/projects/raspberry-pi-getting-started). Be sure to connect it to a wifi network.
 2. Take note of the Raspberry Pi's private ip address.
 
-```console
-pi@raspberrypi:~ $ hostname -I
-192.168.1.124
-```
+   ```console
+   pi@raspberrypi:~ $ hostname -I
+   192.168.1.124
+   ```
 
-2. Copy the program to the Raspberry Pi.
+3. Copy the program to the Raspberry Pi.
 
-```console
-TODO: download from releases and scp to pi
-```
+   ```console
+   TODO: download from releases and scp to pi
+   ```
 
-3. Start the program
+4. Start the program
 
-```console
-pi@raspberrypi:~ $ ./espresso -v -r 26
+   ```console
+   pi@raspberrypi:~ $ ./espresso -v -r 26
 
-     ╓▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-    █▀─╓▄         ┌▄▄┌         ▄▄ ╙█
-    █ ╫█╠█ ╔▓▓  ▄█▀╟█╙█▄  ╔▓▓ █▌╟█ ██▓▄
-    █  ╙╙       █  ╘▀  █▄      ╙╙  █─▐█
-    █ ╔█▀█ ╓▄▄  █▌    ▄█  ╓▄▄ ▓██▌ █▄██
-    █  ▀▀▀       ╙▀▀▀▀╙       ╙▀▀└ █╨
-    ╙▀██▓▓▓▓▓▓██▓▓▓▓▓▓▓▓██▓██▓▓▓██▀╙
- ╔▓▓▓▓██▓▓▓▓▓▓█▌        ▐▌ ▐█▓▓▓██▓▓▓▄
- ╫█▄▄▄▄▄▄▄▄▄▄▄██▄▄▄▄▄▄▄▄██      ▐█ ▄██▄
-      ╫▌          █▌▄█          ▐█ █▌▐█
-      ╫▌           └└─          ▐█ █▄▐█
-      ╫▌      ╒▓▓▓▓▓▓▓▓▓▓▓▓▓▄   ▐█ ╙╙╙└
-      ╫▌      ▐█▄▄▄▄▄▄▄▄██  █▌  ▐█
-      ╫▌      ╘█        █▀▀▀▀   ▐█
-      █▌       ╠█▓▄┌ ▄▄█▌       ▐█
-    █▀╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙█
-    █                              █─
-    ╙▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+        ╓▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+       █▀─╓▄         ┌▄▄┌         ▄▄ ╙█
+       █ ╫█╠█ ╔▓▓  ▄█▀╟█╙█▄  ╔▓▓ █▌╟█ ██▓▄
+       █  ╙╙       █  ╘▀  █▄      ╙╙  █─▐█
+       █ ╔█▀█ ╓▄▄  █▌    ▄█  ╓▄▄ ▓██▌ █▄██
+       █  ▀▀▀       ╙▀▀▀▀╙       ╙▀▀└ █╨
+       ╙▀██▓▓▓▓▓▓██▓▓▓▓▓▓▓▓██▓██▓▓▓██▀╙
+    ╔▓▓▓▓██▓▓▓▓▓▓█▌        ▐▌ ▐█▓▓▓██▓▓▓▄
+    ╫█▄▄▄▄▄▄▄▄▄▄▄██▄▄▄▄▄▄▄▄██      ▐█ ▄██▄
+         ╫▌          █▌▄█          ▐█ █▌▐█
+         ╫▌           └└─          ▐█ █▄▐█
+         ╫▌      ╒▓▓▓▓▓▓▓▓▓▓▓▓▓▄   ▐█ ╙╙╙└
+         ╫▌      ▐█▄▄▄▄▄▄▄▄██  █▌  ▐█
+         ╫▌      ╘█        █▀▀▀▀   ▐█
+         █▌       ╠█▓▄┌ ▄▄█▌       ▐█
+       █▀╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙╙█
+       █                              █─
+       ╙▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
-For more information, go to https://github.com/gregorychen3/espresso-controller
+   For more information, go to https://github.com/gregorychen3/espresso-controller
 
-2020-05-24T16:45:27.370-0400	DEBUG	temperature/temperature.go:47	Sampled temperature	{"value": 83.25}
-2020-05-24T16:45:27.371-0400	DEBUG	bangbang/bangbang.go:46	Switching heating element on	{"curTemperature": 83.25, "targetTemperature": 93}
-2020-05-24T16:45:27.372-0400	INFO	espresso/server.go:115	Initializing gRPC server	{"port": 8080}
-2020-05-24T16:45:27.372-0400	INFO	espresso/server.go:123	Initializing gRPC web server	{"port": 8080}
-...
-```
+   2020-05-24T16:45:27.370-0400	DEBUG	temperature/temperature.go:47	Sampled temperature	{"value": 83.25}
+   2020-05-24T16:45:27.371-0400	DEBUG	bangbang/bangbang.go:46	Switching heating element on	{"curTemperature": 83.25, "targetTemperature": 93}
+   2020-05-24T16:45:27.372-0400	INFO	espresso/server.go:115	Initializing gRPC server	{"port": 8080}
+   2020-05-24T16:45:27.372-0400	INFO	espresso/server.go:123	Initializing gRPC web server	{"port": 8080}
+   ...
+   ```
 
 ### Control and monitor
 
