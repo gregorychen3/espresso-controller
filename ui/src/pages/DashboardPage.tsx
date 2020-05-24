@@ -123,7 +123,7 @@ export default () => {
       <Grid container spacing={3}>
         <Grid item xs={12} md={9} lg={9}>
           <Paper className={tallHeightPaper}>
-            <TemperatureChart title="Temperature" />
+            <TemperatureChart />
           </Paper>
         </Grid>
 
