@@ -15,7 +15,7 @@ Temperature control and monitoring for a Rancilio Silvia or comparable espresso 
 
 ## Installation
 
-### Rewire
+### Wiring
 
 TODO: diagram
 
@@ -61,8 +61,6 @@ TODO: diagram
 
    For more information, go to https://github.com/gregorychen3/espresso-controller
 
-   2020-05-24T16:45:27.370-0400	DEBUG	temperature/temperature.go:47	Sampled temperature	{"value": 83.25}
-   2020-05-24T16:45:27.371-0400	DEBUG	bangbang/bangbang.go:46	Switching heating element on	{"curTemperature": 83.25, "targetTemperature": 93}
    2020-05-24T16:45:27.372-0400	INFO	espresso/server.go:115	Initializing gRPC server	{"port": 8080}
    2020-05-24T16:45:27.372-0400	INFO	espresso/server.go:123	Initializing gRPC web server	{"port": 8080}
    ...
