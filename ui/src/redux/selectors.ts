@@ -1,8 +1,9 @@
 import { State } from ".";
-import _ from "lodash";
 
 export const getCurTemp = (state: State) =>
-  _.last(state.boilerTemperatureSlice.history);
+  state.boilerTemperatureSlice.history[
+    state.boilerTemperatureSlice.history.length - 1
+  ];
 export const getTempHistory = (state: State) =>
   state.boilerTemperatureSlice.history;
 
