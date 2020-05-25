@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Copyright from "./components/Copyright";
 import AppBar from "./components/layout/AppBar";
 import DashboardPage from "./pages/DashboardPage";
 
@@ -35,7 +34,6 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <DashboardPage />
-          <Copyright />
         </Container>
       </main>
       <ToastContainer />
