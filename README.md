@@ -2,6 +2,18 @@
 
 Temperature control and monitoring for a Rancilio Silvia or comparable espresso machine.
 
+Table of Contents
+=================
+
+   * [Espresso Controller](#espresso-controller)
+      * [Tech Stack](#tech-stack)
+      * [Requirements](#requirements)
+      * [Installation](#installation)
+         * [Wiring](#wiring)
+         * [Raspi Setup](#raspi-setup)
+         * [Control and monitor](#control-and-monitor)
+      * [Credits](#credits)
+
 ## Tech Stack
 
 Single Go binary implementing:
