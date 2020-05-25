@@ -94,11 +94,16 @@ func (s *GRPCWebServer) Listen(listener net.Listener, enableDevLogger bool) erro
 		return errors.Wrap(err, "loading ui html")
 	}
 
+	faviconBytes, err := box.Find("favicon.ico")
+	router.Get("/favicon.ico", func(writer http.ResponseWriter, request *http.Request) {
+		writer.WriteHeader(200)
+		writer.Write(faviconBytes)
+	})
+
 	router.Group(func(r chi.Router) {
 		r.Use(NewGrpcWebMiddleware(grpcweb.WrapServer(s.grpcServer)).Handler)
 
-		// serve static assets from the packr box
-		r.Get("/static/*", http.FileServer(box).ServeHTTP)
+		r.Get("/static/*", http.FileServer(box).ServeHTTP) // serve static assets from the packr box
 
 		// respond with index.html for all other routes (react router routes)
 		r.Get("/*", func(writer http.ResponseWriter, request *http.Request) {
