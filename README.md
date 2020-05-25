@@ -14,7 +14,7 @@ Temperature control and monitoring for a Rancilio Silvia or comparable espresso 
 
 ## Tech Stack
 
-Single Go binary implementing:
+The application is contained in a single Go binary implementing:
 
 - gRPC API as defined in [espresso.proto](https://github.com/gregorychen3/espresso-controller/blob/master/pkg/espressopb/espresso.proto),
 - dashboard web app using React and [Material-UI](https://material-ui.com/), and
