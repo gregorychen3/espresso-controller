@@ -76,11 +76,12 @@ TODO: screenshot
 
 ## Tech Stack
 
-The server is a single binary written in Go, which implements a
+Single Go binary implementing:
 
 - gRPC API as defined in [espresso.proto](https://github.com/gregorychen3/espresso-controller/blob/master/pkg/espressopb/espresso.proto),
 - dashboard web app using React and [Material-UI](https://material-ui.com/), and
-- `/metrics` web endpoint for Prometheus scraping.
+- `/metrics` web endpoint for Prometheus scraping
+  all served on a single port (default 8080).
 
 ## Credits
 
