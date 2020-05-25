@@ -2,6 +2,15 @@
 
 Temperature control and monitoring for a Rancilio Silvia or comparable espresso machine.
 
+## Tech Stack
+
+Single Go binary implementing:
+
+- gRPC API as defined in [espresso.proto](https://github.com/gregorychen3/espresso-controller/blob/master/pkg/espressopb/espresso.proto),
+- dashboard web app using React and [Material-UI](https://material-ui.com/), and
+- `/metrics` web endpoint for Prometheus scraping
+  all served on a single port (default 8080).
+
 ## Requirements
 
 - Espresso machine, e.g., [Rancilio Silvia](https://www.ranciliogroupna.com/silvia)
@@ -73,15 +82,6 @@ Rewire it like so:
 Using a web browser, visit `http://<ip_addr_from_step_2>:8080`.
 
 TODO: screenshot
-
-## Tech Stack
-
-Single Go binary implementing:
-
-- gRPC API as defined in [espresso.proto](https://github.com/gregorychen3/espresso-controller/blob/master/pkg/espressopb/espresso.proto),
-- dashboard web app using React and [Material-UI](https://material-ui.com/), and
-- `/metrics` web endpoint for Prometheus scraping
-  all served on a single port (default 8080).
 
 ## Credits
 
