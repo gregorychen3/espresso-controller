@@ -1,6 +1,7 @@
 package max31855
 
 import (
+	"errors"
 	"time"
 
 	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature"
@@ -29,6 +30,9 @@ func NewMax31855(csPin, clkPin, misoPin int) *Max31855 {
 
 func (m *Max31855) Sample() (*temperature.Sample, error) {
 	bits := m.read32Bits()
+	if err := checkErr(bits); err != nil {
+		return nil, err
+	}
 	return &temperature.Sample{
 		Value:      bitsToTemperature(bits),
 		ObservedAt: time.Now(),
@@ -65,4 +69,26 @@ func bitsToTemperature(bits uint32) float64 {
 		withoutResolution := thermoData & 0x1FFF
 		return float64(withoutResolution) / 4
 	}
+}
+
+// checkErr as defined in https://datasheets.maximintegrated.com/en/ds/MAX31855.pdf
+func checkErr(bits uint32) error {
+	hasErr := (bits & 0x10000) != 0     // fault bit, D16
+	openCircuit := (bits & 0b1) != 0    // OC bit, D0
+	shortToGround := (bits & 0b10) != 0 // SCG bit, D1
+	shortToVCC := (bits & 0b100) != 0   // SCV bit, D2
+
+	if !hasErr {
+		return nil
+	}
+	if openCircuit {
+		return errors.New("open circuit")
+	}
+	if shortToGround {
+		return errors.New("short to ground")
+	}
+	if shortToVCC {
+		return errors.New("short to vcc")
+	}
+	return errors.New("unknown error")
 }
