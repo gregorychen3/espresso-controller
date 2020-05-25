@@ -40,7 +40,7 @@ all served on a single port (default 8080).
 
 Here is the original circuit diagram from the [manual](https://www.ranciliogroupna.com/filebin/images/Downloadables/User_Manuals/Homeline/Silvia_User_Manual_2017.PDF):
 ![unmodified](images/circuit_diagram_original.png)
-Rewire it like this:
+Rewire it like this (default gpio pin numbers shown):
 ![modified](images/circuit_diagram_modified.png)
 
 ### Raspi Setup
