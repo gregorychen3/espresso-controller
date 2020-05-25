@@ -1,6 +1,7 @@
 # Espresso Controller
 
 Temperature control and monitoring for a Rancilio Silvia or comparable espresso machine.
+![dashboard](images/dashboard.png)
 
 ## Table of Contents
 
@@ -37,9 +38,9 @@ The application is contained in a single Go binary implementing:
 ### Wiring
 
 Here is the original circuit diagram from the [manual](https://www.ranciliogroupna.com/filebin/images/Downloadables/User_Manuals/Homeline/Silvia_User_Manual_2017.PDF):
-![original](images/circuit_diagram_original.png)
+![unmodified](images/circuit_diagram_original.png)
 Rewire it like this:
-![original](images/circuit_diagram_modified.png)
+![modified](images/circuit_diagram_modified.png)
 
 ### Raspi Setup
 
