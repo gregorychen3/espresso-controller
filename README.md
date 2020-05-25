@@ -21,7 +21,9 @@ The application is contained in a single Go binary implementing:
 - `/metrics` web endpoint for Prometheus scraping
   all served on a single port (default 8080).
 
-## Requirements
+## Installation
+
+### Requirements
 
 - Espresso machine, e.g., [Rancilio Silvia](https://www.ranciliogroupna.com/silvia)
 - Raspberry Pi
@@ -31,8 +33,6 @@ The application is contained in a single Go binary implementing:
 - [Male blade connectors](https://en.wikipedia.org/wiki/FASTON_terminal#/media/File:Faston_Style_Terminals_Male.jpg)
 - Electrical wire
 - Thermal tape
-
-## Installation
 
 ### Wiring
 
