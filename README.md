@@ -60,7 +60,7 @@ Rewire it like this (default gpio pin numbers shown):
    [~]$ scp ./espresso pi@<ip_addr_from_step_2>:
    ```
 
-4. Start the application.
+4. Start the application (run `./espresso --help` for configuration instructions)
 
    ```console
    pi@raspberrypi:~ $ ./espresso -v -r 26
