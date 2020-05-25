@@ -45,7 +45,7 @@ Rewire it like this (default gpio pin numbers shown):
 
 ### Raspi Setup
 
-1. Follow instructions [here](https://projects.raspberrypi.org/en/projects/raspberry-pi-getting-started). Be sure to connect it to a wifi network.
+1. Follow the Raspberry Pi [Getting Started Guide](https://projects.raspberrypi.org/en/projects/raspberry-pi-getting-started). Be sure to connect it to a wifi network.
 2. Take note of the Raspberry Pi's private ip address.
 
    ```console
