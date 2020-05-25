@@ -74,6 +74,14 @@ Use a web browser to visit `http://<raspi_ip_addr>:8080`, e.g., `http://192.168.
 
 TODO: screenshot
 
+## Tech Stack
+
+The server is a single binary written in Go, which implements a
+
+- gRPC API as defined in [espresso.proto](https://github.com/gregorychen3/espresso-controller/blob/master/pkg/espressopb/espresso.proto),
+- dashboard web app using React and [Material-UI](https://material-ui.com/), and
+- `/metrics` web endpoint for Prometheus scraping.
+
 ## Credits
 
 Logo icon made by [catkuro](https://www.flaticon.com/authors/catkuro) from [flaticon.com](https://www.flaticon.com) and converted to ASCII art using [asciiart.club](https://asciiart.club).
