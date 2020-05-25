@@ -52,7 +52,7 @@ Rewire it like this:
    192.168.1.124
    ```
 
-3. Download the latest release binary and copy it to the Raspberry Pi.
+3. Download the application and copy it to the Raspberry Pi.
 
    ```console
    [~]$ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.1.0/espresso
