@@ -95,6 +95,9 @@ func (s *GRPCWebServer) Listen(listener net.Listener, enableDevLogger bool) erro
 	}
 
 	faviconBytes, err := box.Find("favicon.ico")
+	if err != nil {
+		return errors.Wrap(err, "loading favicon.ico")
+	}
 	router.Get("/favicon.ico", func(writer http.ResponseWriter, request *http.Request) {
 		writer.WriteHeader(200)
 		writer.Write(faviconBytes)
