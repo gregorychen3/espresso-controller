@@ -3,17 +3,9 @@ import { Field, Form, Formik } from "formik";
 import { TextField } from "formik-material-ui";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as Yup from "yup";
 import { SetTargetTemperatureRequest } from "../proto/pkg/espressopb/espresso_pb";
 import { getTargetTemp } from "../redux/selectors";
 import { setTargetTemperature } from "../redux/slices/targetTemperatureSlice";
-
-const schema = Yup.object().shape({
-  targetTemperature: Yup.number()
-    .min(0, "Too low")
-    .max(100, "Too high")
-    .required("Required"),
-});
 
 export default () => {
   const d = useDispatch();
@@ -25,7 +17,17 @@ export default () => {
       initialValues={{
         targetTemperature: curTargetTemperature?.value,
       }}
-      validationSchema={schema}
+      validate={(values) => {
+        if (!values.targetTemperature) {
+          return { targetTemperature: "Required" };
+        }
+        if (values.targetTemperature < 0 || values.targetTemperature > 100) {
+          return {
+            targetTemperature: "Must be in range [0, 100] °C",
+          };
+        }
+        return {};
+      }}
       onSubmit={(values, { setSubmitting }) => {
         const req = new SetTargetTemperatureRequest();
         req.setTemperature(values.targetTemperature!);
