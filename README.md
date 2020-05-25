@@ -91,7 +91,7 @@ Rewire it like this:
 
 ### Control and monitor
 
-Using a web browser, visit `http://<ip_addr_from_step_2>:8080`.
+Finally, visit `http://<ip_addr_from_step_2>:8080` using a web browser. Control and monitor the system from the dashboard there.
 
 TODO: screenshot
 
