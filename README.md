@@ -18,9 +18,9 @@ Temperature control and monitoring for a Rancilio Silvia or comparable espresso 
 ### Wiring
 
 Original Rancilio Silvia circuit diagram from the [manual](https://www.ranciliogroupna.com/filebin/images/Downloadables/User_Manuals/Homeline/Silvia_User_Manual_2017.PDF)
-![original](circuit_diagram_original.png)
+![original](images/circuit_diagram_original.png)
 Rewired
-![original](circuit_diagram_modified.png)
+![original](images/circuit_diagram_modified.png)
 
 ### Raspi Setup
 
