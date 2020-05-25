@@ -28,14 +28,14 @@ func NewMax31855(csPin, clkPin, misoPin int) *Max31855 {
 }
 
 func (m *Max31855) Sample() (*temperature.Sample, error) {
-	bits := m.readBits()
+	bits := m.read32Bits()
 	return &temperature.Sample{
 		Value:      bitsToTemperature(bits),
 		ObservedAt: time.Now(),
 	}, nil
 }
 
-func (m *Max31855) readBits() uint32 {
+func (m *Max31855) read32Bits() uint32 {
 	m.cs.Low()        // begin the read
 	defer m.cs.High() // end the read
 
