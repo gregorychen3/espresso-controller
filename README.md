@@ -32,13 +32,13 @@ Rewire it like so:
    192.168.1.124
    ```
 
-3. Copy the program to the Raspberry Pi.
+3. Copy the application to the Raspberry Pi.
 
    ```console
    TODO: download from releases and scp to pi
    ```
 
-4. Start the program
+4. Start the application.
 
    ```console
    pi@raspberrypi:~ $ ./espresso -v -r 26
@@ -66,12 +66,11 @@ Rewire it like so:
 
    2020-05-24T16:45:27.372-0400	INFO	espresso/server.go:115	Initializing gRPC server	{"port": 8080}
    2020-05-24T16:45:27.372-0400	INFO	espresso/server.go:123	Initializing gRPC web server	{"port": 8080}
-   ...
    ```
 
 ### Control and monitor
 
-Use a web browser to visit `http://<raspi_ip_addr>:8080`, e.g., `http://192.168.1.124:8080`.
+Using a web browser, visit `http://<ip_addr_from_step_2>:8080`.
 
 TODO: screenshot
 
