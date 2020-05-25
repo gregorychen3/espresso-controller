@@ -20,7 +20,8 @@ The application is contained in a single Go binary implementing:
 - gRPC API as defined in [espresso.proto](https://github.com/gregorychen3/espresso-controller/blob/master/pkg/espressopb/espresso.proto),
 - dashboard web app using React and [Material-UI](https://material-ui.com/), and
 - `/metrics` web endpoint for Prometheus scraping
-  all served on a single port (default 8080).
+
+all served on a single port (default 8080).
 
 ## Installation
 
