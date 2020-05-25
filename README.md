@@ -21,7 +21,7 @@ The application is contained in a single Go binary implementing:
 - dashboard web app using React and [Material-UI](https://material-ui.com/), and
 - `/metrics` web endpoint for Prometheus scraping
 
-all served on a single port (default 8080).
+all served on a single port (default 8080) of a Raspberry Pi.
 
 ## Installation
 
