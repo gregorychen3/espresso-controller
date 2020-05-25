@@ -22,3 +22,7 @@ func (r *Relay) HeatOn() {
 func (r *Relay) HeatOff() {
 	r.pin.Low()
 }
+
+func (r *Relay) Shutdown() {
+	r.pin.Low()
+}

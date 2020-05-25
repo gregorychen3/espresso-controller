@@ -38,6 +38,8 @@ type Server struct {
 	grpcEspressoServer espressopb.EspressoServer
 	grpcServer         *grpc.Server
 
+	heatingElem *relay.Relay
+
 	groupMonitor *temperature.Monitor
 
 	shutdownCh chan struct{}
@@ -56,6 +58,7 @@ func (s *Server) Run() error {
 	}
 
 	heatingElem := relay.NewRelay(s.c.RelayPin)
+	s.heatingElem = heatingElem
 
 	boilerMonitor := temperature.NewMonitor(
 		max31855.NewMax31855(s.c.BoilerThermCsPin, s.c.BoilerThermClkPin, s.c.BoilerThermMisoPin),
@@ -138,6 +141,9 @@ func (s *Server) watchSignals() {
 }
 
 func (s *Server) Shutdown() error {
+	log.Info("Shutting down heating element relay")
+	s.heatingElem.Shutdown()
+
 	log.Info("Unmapping gpio memory")
 	if err := rpio.Close(); err != nil {
 		return errors.Wrap(err, "unmapping gpio memory")
