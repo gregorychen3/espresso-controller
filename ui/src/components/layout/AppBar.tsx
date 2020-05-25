@@ -5,7 +5,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import TimelineIcon from "@material-ui/icons/Timeline";
-import clsx from "clsx";
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,13 +30,13 @@ export default () => {
   const classes = useStyles();
 
   return (
-    <AppBar position="absolute" className={clsx(classes.appBar)}>
+    <AppBar position="absolute" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         <IconButton
           edge="start"
           color="inherit"
           aria-label="open drawer"
-          className={clsx(classes.menuButton)}
+          className={classes.menuButton}
         >
           <TimelineIcon fontSize="large" />
         </IconButton>

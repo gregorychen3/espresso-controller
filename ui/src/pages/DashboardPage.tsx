@@ -1,7 +1,6 @@
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
 import moment from "moment";
 import parsePromText, { Metric } from "parse-prometheus-text-format";
 import React, { useEffect, useState } from "react";
@@ -15,11 +14,11 @@ import {
   TemperatureStreamRequest,
 } from "../proto/pkg/espressopb/espresso_pb";
 import { showTargetTempModal } from "../redux/selectors";
-import { getTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 import {
   endBoilerTemperatureStream,
   startBoilerTemperatureStream,
 } from "../redux/slices/boilerTemperatureSlice";
+import { getTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 
 const metricsRefreshIntervalMillis = 5000;
 
@@ -30,10 +29,11 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
   },
-  halfHeight: {
-    height: 250,
-  },
-  tallHeight: {
+  tallPaper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
     height: 500,
   },
 }));
@@ -42,7 +42,6 @@ export default () => {
   const showSetTemperatureModal = useSelector(showTargetTempModal);
 
   const classes = useStyles();
-  const tallHeightPaper = clsx(classes.paper, classes.tallHeight);
 
   const d = useDispatch();
 
@@ -122,13 +121,13 @@ export default () => {
       {showSetTemperatureModal && <SetTemperatureModal />}
       <Grid container spacing={3}>
         <Grid item xs={12} md={9} lg={9}>
-          <Paper className={tallHeightPaper}>
+          <Paper className={classes.tallPaper}>
             <TemperatureChart />
           </Paper>
         </Grid>
 
         <Grid item xs={12} md={3} lg={3}>
-          <Paper className={tallHeightPaper}>
+          <Paper className={classes.tallPaper}>
             <TemperatureCard />
           </Paper>
         </Grid>
