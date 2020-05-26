@@ -56,7 +56,7 @@ Rewire it like this (default gpio pin numbers shown):
 3. Download the application and copy it to the Raspberry Pi.
 
    ```console
-   [~]$ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.1.0/espresso
+   [~]$ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.1.1/espresso
    [~]$ scp ./espresso pi@<ip_addr_from_step_2>:
    ```
 
