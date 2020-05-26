@@ -63,7 +63,7 @@ Rewire it like this (default gpio pin numbers shown):
 4. Start the application (run `./espresso --help` for configuration options)
 
    ```console
-   pi@raspberrypi:~ $ ./espresso -v -r 26
+   pi@raspberrypi:~ $ ./espresso -v
 
         ╓▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
        █▀─╓▄         ┌▄▄┌         ▄▄ ╙█
