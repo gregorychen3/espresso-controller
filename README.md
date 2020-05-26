@@ -8,6 +8,7 @@ Temperature control and monitoring for a Rancilio Silvia or comparable espresso 
 - [Tech Stack](#tech-stack)
 - [Requirements](#requirements)
 - [Installation](#installation)
+  - [Requirements](#requirements)
   - [Wiring](#wiring)
   - [Raspi Setup](#raspi-setup)
   - [Control and monitor](#control-and-monitor)
