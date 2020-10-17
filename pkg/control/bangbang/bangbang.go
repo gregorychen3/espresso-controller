@@ -21,13 +21,13 @@ const (
 // https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control
 type Bangbang struct {
 	targetTemperature  control.TargetTemperature
-	heatingElement     heating_element.HeatingElement
+	heatingElement     *heating_element.HeatingElement
 	temperatureMonitor *temperature.Monitor
 
 	temperatureSubId uuid.UUID
 }
 
-func NewBangbang(heatingElem heating_element.HeatingElement, sampler *temperature.Monitor) (*Bangbang, error) {
+func NewBangbang(heatingElem *heating_element.HeatingElement, sampler *temperature.Monitor) (*Bangbang, error) {
 	return &Bangbang{
 		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},
 		heatingElement:     heatingElem,
@@ -44,10 +44,10 @@ func (p *Bangbang) Run() error {
 		for sample := range subCh {
 			if sample.Value < p.GetTargetTemperature().Value-1 {
 				log.Debug("Switching heating element on", zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
-				p.heatingElement.HeatOn()
+				p.heatingElement.SetDutyFactor(0.5)
 			} else {
 				log.Debug("Switching heating element off", zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
-				p.heatingElement.HeatOff()
+				p.heatingElement.SetDutyFactor(0)
 			}
 		}
 	}()

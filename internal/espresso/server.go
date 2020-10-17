@@ -8,7 +8,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gregorychen3/espresso-controller/internal/espresso/heating_element/relay"
+	"github.com/gregorychen3/espresso-controller/internal/espresso/heating_element"
 	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature"
 	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature/max31855"
 	"github.com/gregorychen3/espresso-controller/internal/log"
@@ -38,7 +38,7 @@ type Server struct {
 	grpcEspressoServer espressopb.EspressoServer
 	grpcServer         *grpc.Server
 
-	heatingElem *relay.Relay
+	heatingElem *heating_element.HeatingElement
 
 	groupMonitor *temperature.Monitor
 
@@ -57,8 +57,9 @@ func (s *Server) Run() error {
 		return errors.Wrap(err, "initializing gpio access")
 	}
 
-	heatingElem := relay.NewRelay(s.c.RelayPin)
+	heatingElem := heating_element.NewHeatingElement(s.c.RelayPin)
 	s.heatingElem = heatingElem
+	heatingElem.Run()
 
 	boilerMonitor := temperature.NewMonitor(
 		max31855.NewMax31855(s.c.BoilerThermCsPin, s.c.BoilerThermClkPin, s.c.BoilerThermMisoPin),

@@ -35,7 +35,7 @@ type grpcController struct {
 
 func newGrpcController(
 	c Configuration,
-	heatingElem heating_element.HeatingElement,
+	heatingElem *heating_element.HeatingElement,
 	boilerMonitor *temperature.Monitor,
 	groupMonitor *temperature.Monitor,
 ) (*grpcController, error) {
