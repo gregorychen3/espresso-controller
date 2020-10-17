@@ -43,10 +43,10 @@ func (p *Bangbang) Run() error {
 
 		for sample := range subCh {
 			if sample.Value < p.GetTargetTemperature().Value-1 {
-				log.Debug("Switching heating element on", zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
+				log.Debug("Setting duty factor", zap.Float32("dutyFactor", 0.5), zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
 				p.heatingElement.SetDutyFactor(0.5)
 			} else {
-				log.Debug("Switching heating element off", zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
+				log.Debug("Setting duty factor", zap.Float32("dutyFactor", 0), zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", p.GetTargetTemperature().Value))
 				p.heatingElement.SetDutyFactor(0)
 			}
 		}

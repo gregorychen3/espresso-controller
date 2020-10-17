@@ -24,16 +24,33 @@ func NewHeatingElement(relayPinNum int) *HeatingElement {
 func (h *HeatingElement) Run() {
 	go func() {
 		for {
-			h.relayPin.High()
-			ms := int(h.dutyFactor * 1000)
-			time.Sleep(time.Duration(ms) * time.Millisecond)
-			h.relayPin.Low()
+			if h.dutyFactor == 0 {
+				h.off()
+				time.Sleep(1 * time.Second)
+				continue
+			}
+
+			onMs := h.dutyFactor * 1000
+			offMs := (1 - h.dutyFactor) * 1000
+
+			h.on()
+			time.Sleep(time.Duration(onMs) * time.Millisecond)
+			h.off()
+			time.Sleep(time.Duration(offMs) * time.Millisecond)
 		}
 	}()
 }
 
 func (h *HeatingElement) SetDutyFactor(factor float32) {
 	h.dutyFactor = factor
+}
+
+func (h *HeatingElement) on() {
+	h.relayPin.High()
+}
+
+func (h *HeatingElement) off() {
+	h.relayPin.Low()
 }
 
 func (h *HeatingElement) Shutdown() {
