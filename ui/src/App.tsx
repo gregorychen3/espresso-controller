@@ -6,11 +6,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AppBar from "./components/layout/AppBar";
 import DashboardPage from "./pages/DashboardPage";
+import { getThemedToastClass } from "./theme";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
+  root: { display: "flex", },
+  toast: getThemedToastClass(theme),
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
@@ -36,7 +36,7 @@ export default function Dashboard() {
           <DashboardPage />
         </Container>
       </main>
-      <ToastContainer />
+      <ToastContainer toastClassName={classes.toast}/>
     </div>
   );
 }
