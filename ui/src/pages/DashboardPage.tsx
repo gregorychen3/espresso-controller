@@ -6,7 +6,7 @@ import parsePromText, { Metric } from "parse-prometheus-text-format";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MetricCard, { Severity } from "../components/MetricCard";
-import SetTemperatureModal from "../components/TargetTemperatureDialog";
+import ConfigurationDialog from "../components/ConfigurationDialog";
 import TemperatureCard from "../components/TemperatureCard";
 import TemperatureChart from "../components/TemperatureChart";
 import { GetTargetTemperatureRequest, TemperatureStreamRequest } from "../proto/pkg/espressopb/espresso_pb";
@@ -94,7 +94,7 @@ export default () => {
 
   return (
     <>
-      {showSetTemperatureModal && <SetTemperatureModal />}
+      {showSetTemperatureModal && <ConfigurationDialog />}
       <Grid container spacing={3}>
         <Grid item xs={12} md={9} lg={9}>
           <Paper className={classes.tallPaper}>

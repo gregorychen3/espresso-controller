@@ -7,9 +7,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setTargetTempModalVisibility } from "../redux/uiSlice";
-import TargetTemperatureForm from "./TargetTemperatureForm";
+import ConfigurationForm from "./ConfigurationForm";
 
-export default function TargetTemperatureDialog() {
+export default function ConfigurationDialog() {
   const d = useDispatch();
 
   const handleClose = () => {
@@ -23,7 +23,7 @@ export default function TargetTemperatureDialog() {
         <DialogContentText>
           The specified temperature will become the new set point of the temperature controller.
         </DialogContentText>
-        <TargetTemperatureForm />
+        <ConfigurationForm />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">

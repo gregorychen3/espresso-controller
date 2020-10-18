@@ -7,7 +7,7 @@ import { SetTargetTemperatureRequest } from "../proto/pkg/espressopb/espresso_pb
 import { getTargetTemp } from "../redux/selectors";
 import { setTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 
-export default function TargetTemperatureForm() {
+export default function ConfigurationForm() {
   const d = useDispatch();
   const curTargetTemperature = useSelector(getTargetTemp);
 
