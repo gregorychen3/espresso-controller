@@ -21,6 +21,7 @@ const (
 // https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control
 type PID struct {
 	P                  float64
+	I                  float64
 	D                  float64
 	targetTemperature  control.TargetTemperature
 	heatingElement     *heating_element.HeatingElement
