@@ -26,7 +26,7 @@ Espresso.GetConfiguration = {
   requestStream: false,
   responseStream: false,
   requestType: pkg_espressopb_espresso_pb.GetConfigurationRequest,
-  responseType: pkg_espressopb_espresso_pb.GetConfigurationResponse
+  responseType: pkg_espressopb_espresso_pb.Configuration
 };
 
 Espresso.SetConfiguration = {
@@ -34,8 +34,8 @@ Espresso.SetConfiguration = {
   service: Espresso,
   requestStream: false,
   responseStream: false,
-  requestType: pkg_espressopb_espresso_pb.SetConfigurationRequest,
-  responseType: pkg_espressopb_espresso_pb.SetConfigurationResponse
+  requestType: pkg_espressopb_espresso_pb.Configuration,
+  responseType: pkg_espressopb_espresso_pb.Configuration
 };
 
 exports.Espresso = Espresso;

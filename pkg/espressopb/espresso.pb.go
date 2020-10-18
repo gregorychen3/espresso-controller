@@ -253,217 +253,75 @@ func (m *GetConfigurationRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_GetConfigurationRequest proto.InternalMessageInfo
 
-type GetConfigurationResponse struct {
+type Configuration struct {
 	Temperature          float64              `protobuf:"fixed64,1,opt,name=temperature,proto3" json:"temperature,omitempty"`
-	SetAt                *timestamp.Timestamp `protobuf:"bytes,2,opt,name=set_at,json=setAt,proto3" json:"set_at,omitempty"`
-	P                    float64              `protobuf:"fixed64,3,opt,name=p,proto3" json:"p,omitempty"`
-	I                    float64              `protobuf:"fixed64,4,opt,name=i,proto3" json:"i,omitempty"`
-	D                    float64              `protobuf:"fixed64,5,opt,name=d,proto3" json:"d,omitempty"`
+	P                    float64              `protobuf:"fixed64,2,opt,name=p,proto3" json:"p,omitempty"`
+	I                    float64              `protobuf:"fixed64,3,opt,name=i,proto3" json:"i,omitempty"`
+	D                    float64              `protobuf:"fixed64,4,opt,name=d,proto3" json:"d,omitempty"`
+	SetAt                *timestamp.Timestamp `protobuf:"bytes,5,opt,name=set_at,json=setAt,proto3" json:"set_at,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
 	XXX_unrecognized     []byte               `json:"-"`
 	XXX_sizecache        int32                `json:"-"`
 }
 
-func (m *GetConfigurationResponse) Reset()         { *m = GetConfigurationResponse{} }
-func (m *GetConfigurationResponse) String() string { return proto.CompactTextString(m) }
-func (*GetConfigurationResponse) ProtoMessage()    {}
-func (*GetConfigurationResponse) Descriptor() ([]byte, []int) {
+func (m *Configuration) Reset()         { *m = Configuration{} }
+func (m *Configuration) String() string { return proto.CompactTextString(m) }
+func (*Configuration) ProtoMessage()    {}
+func (*Configuration) Descriptor() ([]byte, []int) {
 	return fileDescriptor_445399412d1702d2, []int{5}
 }
 
-func (m *GetConfigurationResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_GetConfigurationResponse.Unmarshal(m, b)
+func (m *Configuration) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Configuration.Unmarshal(m, b)
 }
-func (m *GetConfigurationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_GetConfigurationResponse.Marshal(b, m, deterministic)
+func (m *Configuration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Configuration.Marshal(b, m, deterministic)
 }
-func (m *GetConfigurationResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetConfigurationResponse.Merge(m, src)
+func (m *Configuration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Configuration.Merge(m, src)
 }
-func (m *GetConfigurationResponse) XXX_Size() int {
-	return xxx_messageInfo_GetConfigurationResponse.Size(m)
+func (m *Configuration) XXX_Size() int {
+	return xxx_messageInfo_Configuration.Size(m)
 }
-func (m *GetConfigurationResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetConfigurationResponse.DiscardUnknown(m)
+func (m *Configuration) XXX_DiscardUnknown() {
+	xxx_messageInfo_Configuration.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_GetConfigurationResponse proto.InternalMessageInfo
+var xxx_messageInfo_Configuration proto.InternalMessageInfo
 
-func (m *GetConfigurationResponse) GetTemperature() float64 {
+func (m *Configuration) GetTemperature() float64 {
 	if m != nil {
 		return m.Temperature
 	}
 	return 0
 }
 
-func (m *GetConfigurationResponse) GetSetAt() *timestamp.Timestamp {
-	if m != nil {
-		return m.SetAt
-	}
-	return nil
-}
-
-func (m *GetConfigurationResponse) GetP() float64 {
+func (m *Configuration) GetP() float64 {
 	if m != nil {
 		return m.P
 	}
 	return 0
 }
 
-func (m *GetConfigurationResponse) GetI() float64 {
+func (m *Configuration) GetI() float64 {
 	if m != nil {
 		return m.I
 	}
 	return 0
 }
 
-func (m *GetConfigurationResponse) GetD() float64 {
+func (m *Configuration) GetD() float64 {
 	if m != nil {
 		return m.D
 	}
 	return 0
 }
 
-type SetConfigurationRequest struct {
-	Temperature          float64              `protobuf:"fixed64,1,opt,name=temperature,proto3" json:"temperature,omitempty"`
-	SetAt                *timestamp.Timestamp `protobuf:"bytes,2,opt,name=set_at,json=setAt,proto3" json:"set_at,omitempty"`
-	P                    float64              `protobuf:"fixed64,3,opt,name=p,proto3" json:"p,omitempty"`
-	I                    float64              `protobuf:"fixed64,4,opt,name=i,proto3" json:"i,omitempty"`
-	D                    float64              `protobuf:"fixed64,5,opt,name=d,proto3" json:"d,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
-	XXX_unrecognized     []byte               `json:"-"`
-	XXX_sizecache        int32                `json:"-"`
-}
-
-func (m *SetConfigurationRequest) Reset()         { *m = SetConfigurationRequest{} }
-func (m *SetConfigurationRequest) String() string { return proto.CompactTextString(m) }
-func (*SetConfigurationRequest) ProtoMessage()    {}
-func (*SetConfigurationRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_445399412d1702d2, []int{6}
-}
-
-func (m *SetConfigurationRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_SetConfigurationRequest.Unmarshal(m, b)
-}
-func (m *SetConfigurationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_SetConfigurationRequest.Marshal(b, m, deterministic)
-}
-func (m *SetConfigurationRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SetConfigurationRequest.Merge(m, src)
-}
-func (m *SetConfigurationRequest) XXX_Size() int {
-	return xxx_messageInfo_SetConfigurationRequest.Size(m)
-}
-func (m *SetConfigurationRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_SetConfigurationRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_SetConfigurationRequest proto.InternalMessageInfo
-
-func (m *SetConfigurationRequest) GetTemperature() float64 {
-	if m != nil {
-		return m.Temperature
-	}
-	return 0
-}
-
-func (m *SetConfigurationRequest) GetSetAt() *timestamp.Timestamp {
+func (m *Configuration) GetSetAt() *timestamp.Timestamp {
 	if m != nil {
 		return m.SetAt
 	}
 	return nil
-}
-
-func (m *SetConfigurationRequest) GetP() float64 {
-	if m != nil {
-		return m.P
-	}
-	return 0
-}
-
-func (m *SetConfigurationRequest) GetI() float64 {
-	if m != nil {
-		return m.I
-	}
-	return 0
-}
-
-func (m *SetConfigurationRequest) GetD() float64 {
-	if m != nil {
-		return m.D
-	}
-	return 0
-}
-
-type SetConfigurationResponse struct {
-	Temperature          float64              `protobuf:"fixed64,1,opt,name=temperature,proto3" json:"temperature,omitempty"`
-	SetAt                *timestamp.Timestamp `protobuf:"bytes,2,opt,name=set_at,json=setAt,proto3" json:"set_at,omitempty"`
-	P                    float64              `protobuf:"fixed64,3,opt,name=p,proto3" json:"p,omitempty"`
-	I                    float64              `protobuf:"fixed64,4,opt,name=i,proto3" json:"i,omitempty"`
-	D                    float64              `protobuf:"fixed64,5,opt,name=d,proto3" json:"d,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
-	XXX_unrecognized     []byte               `json:"-"`
-	XXX_sizecache        int32                `json:"-"`
-}
-
-func (m *SetConfigurationResponse) Reset()         { *m = SetConfigurationResponse{} }
-func (m *SetConfigurationResponse) String() string { return proto.CompactTextString(m) }
-func (*SetConfigurationResponse) ProtoMessage()    {}
-func (*SetConfigurationResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_445399412d1702d2, []int{7}
-}
-
-func (m *SetConfigurationResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_SetConfigurationResponse.Unmarshal(m, b)
-}
-func (m *SetConfigurationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_SetConfigurationResponse.Marshal(b, m, deterministic)
-}
-func (m *SetConfigurationResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SetConfigurationResponse.Merge(m, src)
-}
-func (m *SetConfigurationResponse) XXX_Size() int {
-	return xxx_messageInfo_SetConfigurationResponse.Size(m)
-}
-func (m *SetConfigurationResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_SetConfigurationResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_SetConfigurationResponse proto.InternalMessageInfo
-
-func (m *SetConfigurationResponse) GetTemperature() float64 {
-	if m != nil {
-		return m.Temperature
-	}
-	return 0
-}
-
-func (m *SetConfigurationResponse) GetSetAt() *timestamp.Timestamp {
-	if m != nil {
-		return m.SetAt
-	}
-	return nil
-}
-
-func (m *SetConfigurationResponse) GetP() float64 {
-	if m != nil {
-		return m.P
-	}
-	return 0
-}
-
-func (m *SetConfigurationResponse) GetI() float64 {
-	if m != nil {
-		return m.I
-	}
-	return 0
-}
-
-func (m *SetConfigurationResponse) GetD() float64 {
-	if m != nil {
-		return m.D
-	}
-	return 0
 }
 
 func init() {
@@ -472,9 +330,7 @@ func init() {
 	proto.RegisterType((*TemperatureStreamRequest)(nil), "espressopb.TemperatureStreamRequest")
 	proto.RegisterType((*TemperatureStreamResponse)(nil), "espressopb.TemperatureStreamResponse")
 	proto.RegisterType((*GetConfigurationRequest)(nil), "espressopb.GetConfigurationRequest")
-	proto.RegisterType((*GetConfigurationResponse)(nil), "espressopb.GetConfigurationResponse")
-	proto.RegisterType((*SetConfigurationRequest)(nil), "espressopb.SetConfigurationRequest")
-	proto.RegisterType((*SetConfigurationResponse)(nil), "espressopb.SetConfigurationResponse")
+	proto.RegisterType((*Configuration)(nil), "espressopb.Configuration")
 }
 
 func init() {
@@ -482,33 +338,32 @@ func init() {
 }
 
 var fileDescriptor_445399412d1702d2 = []byte{
-	// 414 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x52, 0xc1, 0x6e, 0xd4, 0x30,
-	0x10, 0xad, 0xdb, 0x6e, 0x8a, 0x26, 0x08, 0xb5, 0x16, 0x52, 0xdd, 0x48, 0x40, 0x14, 0x8a, 0xb4,
-	0xa7, 0x14, 0xc2, 0xa1, 0x12, 0x9c, 0x5a, 0x84, 0xd8, 0x0b, 0x97, 0xa4, 0xd7, 0x0a, 0x39, 0xca,
-	0xec, 0x12, 0x29, 0x59, 0x1b, 0x7b, 0x52, 0x89, 0x3f, 0x81, 0x7f, 0xe0, 0x23, 0x51, 0xe2, 0x44,
-	0x8d, 0xe8, 0x66, 0xd9, 0x1b, 0x1c, 0x9f, 0xe7, 0x79, 0xde, 0x9b, 0x99, 0x07, 0x4f, 0xd0, 0x6a,
-	0x83, 0xd6, 0xaa, 0x58, 0x1b, 0x45, 0x8a, 0xc3, 0x80, 0x75, 0x1e, 0xbc, 0x58, 0x29, 0xb5, 0xaa,
-	0xf0, 0xa2, 0xab, 0xe4, 0xcd, 0xf2, 0x82, 0xca, 0x1a, 0x2d, 0xc9, 0x5a, 0x3b, 0x72, 0xb4, 0x84,
-	0x93, 0x1b, 0xac, 0x35, 0x1a, 0x49, 0x8d, 0xc1, 0x4c, 0xd6, 0xba, 0x42, 0xfe, 0x14, 0x66, 0x77,
-	0xb2, 0x6a, 0x50, 0xb0, 0x90, 0xcd, 0x59, 0xea, 0x00, 0x7f, 0x0f, 0xbe, 0xca, 0x2d, 0x9a, 0x3b,
-	0x2c, 0xbe, 0x48, 0x12, 0xfb, 0x21, 0x9b, 0xfb, 0x49, 0x10, 0x3b, 0x85, 0x78, 0x50, 0x88, 0x6f,
-	0x06, 0x85, 0x14, 0x06, 0xfa, 0x15, 0x45, 0x9f, 0x81, 0x8f, 0x74, 0x16, 0xa5, 0x25, 0x65, 0xbe,
-	0xf3, 0x4b, 0x38, 0xb2, 0x9d, 0xa4, 0x15, 0x2c, 0x3c, 0x98, 0xfb, 0xc9, 0xb3, 0xf8, 0xde, 0x7c,
-	0xfc, 0xc0, 0x58, 0x3a, 0xb0, 0xa3, 0x00, 0xc4, 0xb8, 0x4a, 0x06, 0x65, 0x9d, 0xe2, 0xb7, 0x06,
-	0x2d, 0x45, 0x3f, 0x18, 0x9c, 0x6d, 0x28, 0x5a, 0xad, 0xd6, 0x16, 0xf9, 0x3b, 0x38, 0xfa, 0xea,
-	0xd4, 0xbb, 0xe9, 0xfc, 0xe4, 0xf9, 0x84, 0x64, 0xef, 0x71, 0xb1, 0x97, 0x0e, 0x1f, 0xf8, 0x25,
-	0x78, 0xce, 0x40, 0x3f, 0xfc, 0x76, 0xb7, 0x8b, 0xbd, 0xb4, 0xa7, 0x5f, 0x7b, 0x70, 0x58, 0x48,
-	0x92, 0xd1, 0x19, 0x9c, 0x7e, 0x42, 0xfa, 0xa0, 0xd6, 0xcb, 0x72, 0xd5, 0x18, 0x49, 0xa5, 0x5a,
-	0x0f, 0xae, 0x7f, 0x32, 0x10, 0x0f, 0x6b, 0xbd, 0xe9, 0x10, 0x7c, 0xba, 0x6f, 0xdf, 0x9f, 0x65,
-	0xfc, 0xc4, 0xdf, 0x80, 0x67, 0x91, 0x76, 0xbb, 0xcb, 0xcc, 0x22, 0x5d, 0x11, 0x7f, 0x0c, 0x4c,
-	0x8b, 0x83, 0xae, 0x15, 0xd3, 0x2d, 0x2a, 0xc5, 0xa1, 0x43, 0x65, 0x8b, 0x0a, 0x31, 0x73, 0xa8,
-	0x68, 0x37, 0x7a, 0x9a, 0x6d, 0xf6, 0xfd, 0xaf, 0xad, 0xb5, 0x6b, 0xcb, 0xfe, 0xcf, 0xb5, 0x25,
-	0xbf, 0xf6, 0xe1, 0xd1, 0xc7, 0x3e, 0x20, 0x3c, 0x87, 0x93, 0x6b, 0x55, 0x56, 0x68, 0x46, 0x39,
-	0xe1, 0xe7, 0x53, 0x01, 0x1a, 0x07, 0x3a, 0x78, 0xf5, 0x17, 0x96, 0x9b, 0xf6, 0x35, 0xe3, 0xb7,
-	0x70, 0xfc, 0x67, 0x84, 0xf8, 0xcb, 0xf1, 0xe7, 0x89, 0xf0, 0x05, 0xe7, 0xdb, 0x49, 0xfd, 0x3a,
-	0x6f, 0xe1, 0x38, 0xdb, 0xda, 0x3e, 0xdb, 0xa5, 0xfd, 0xd4, 0xb5, 0x72, 0xaf, 0xdb, 0xf9, 0xdb,
-	0xdf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x42, 0xed, 0x10, 0x4a, 0xd0, 0x04, 0x00, 0x00,
+	// 393 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x51, 0xc1, 0x6e, 0xd3, 0x40,
+	0x10, 0xed, 0xb6, 0x8d, 0x8b, 0xc6, 0x80, 0xda, 0x15, 0x12, 0x8e, 0x25, 0xc0, 0x32, 0x20, 0xe5,
+	0xe4, 0x82, 0x39, 0x54, 0x82, 0x53, 0x8b, 0x10, 0xbe, 0x70, 0xd9, 0xe6, 0x8e, 0xd6, 0xf2, 0x24,
+	0x58, 0xb2, 0xb3, 0xcb, 0xee, 0x38, 0x12, 0xff, 0x80, 0x38, 0xf3, 0xb9, 0x28, 0x5e, 0x5b, 0x71,
+	0x42, 0x9d, 0x1c, 0xdf, 0xce, 0xdb, 0x79, 0xef, 0xcd, 0x83, 0xa7, 0x68, 0xb5, 0x41, 0x6b, 0x55,
+	0xa2, 0x8d, 0x22, 0xc5, 0xa1, 0xc7, 0x3a, 0x0f, 0x5f, 0x2d, 0x95, 0x5a, 0x56, 0x78, 0xdd, 0x4e,
+	0xf2, 0x66, 0x71, 0x4d, 0x65, 0x8d, 0x96, 0x64, 0xad, 0x1d, 0x39, 0x5e, 0xc0, 0xd5, 0x1c, 0x6b,
+	0x8d, 0x46, 0x52, 0x63, 0xf0, 0x5e, 0xd6, 0xba, 0x42, 0xfe, 0x0c, 0x26, 0x6b, 0x59, 0x35, 0x18,
+	0xb0, 0x88, 0xcd, 0x98, 0x70, 0x80, 0x7f, 0x02, 0x5f, 0xe5, 0x16, 0xcd, 0x1a, 0x8b, 0xef, 0x92,
+	0x82, 0xd3, 0x88, 0xcd, 0xfc, 0x34, 0x4c, 0x9c, 0x42, 0xd2, 0x2b, 0x24, 0xf3, 0x5e, 0x41, 0x40,
+	0x4f, 0xbf, 0xa5, 0xf8, 0x1b, 0xf0, 0x81, 0x4e, 0x56, 0x5a, 0x52, 0xe6, 0x17, 0xbf, 0x81, 0x0b,
+	0xdb, 0x4a, 0xda, 0x80, 0x45, 0x67, 0x33, 0x3f, 0x7d, 0x91, 0x6c, 0xcd, 0x27, 0xff, 0x19, 0x13,
+	0x3d, 0x3b, 0x0e, 0x21, 0x18, 0x4e, 0xc9, 0xa0, 0xac, 0x05, 0xfe, 0x6c, 0xd0, 0x52, 0xfc, 0x97,
+	0xc1, 0xf4, 0x81, 0xa1, 0xd5, 0x6a, 0x65, 0x91, 0x7f, 0x84, 0x8b, 0x1f, 0x4e, 0xbd, 0x4d, 0xe7,
+	0xa7, 0x2f, 0x47, 0x24, 0x3b, 0x8f, 0xd9, 0x89, 0xe8, 0x3f, 0xf0, 0x1b, 0xf0, 0x9c, 0x81, 0x2e,
+	0xfc, 0x61, 0xb7, 0xd9, 0x89, 0xe8, 0xe8, 0x77, 0x1e, 0x9c, 0x17, 0x92, 0x64, 0x3c, 0x85, 0xe7,
+	0x5f, 0x91, 0x3e, 0xab, 0xd5, 0xa2, 0x5c, 0x36, 0x46, 0x52, 0xa9, 0x56, 0xbd, 0xeb, 0x3f, 0x0c,
+	0x9e, 0xec, 0x0c, 0x78, 0x04, 0x3e, 0x6d, 0x77, 0x76, 0x5d, 0x0c, 0x9f, 0xf8, 0x63, 0x60, 0xba,
+	0xb5, 0xc2, 0x04, 0xd3, 0x1b, 0x54, 0x06, 0x67, 0x0e, 0x95, 0x1b, 0x54, 0x04, 0xe7, 0x0e, 0x15,
+	0xfc, 0x3d, 0x78, 0x16, 0x69, 0x53, 0xdb, 0xe4, 0x68, 0x6d, 0x13, 0x8b, 0x74, 0x4b, 0xe9, 0xef,
+	0x53, 0x78, 0xf4, 0xa5, 0x8b, 0xc7, 0x73, 0xb8, 0xba, 0x53, 0x65, 0x85, 0x66, 0x90, 0x92, 0xbf,
+	0x19, 0x8b, 0x3f, 0xac, 0x23, 0x7c, 0x7b, 0x84, 0xe5, 0x7a, 0x79, 0xc7, 0xb8, 0x80, 0xcb, 0xfd,
+	0xe3, 0xf0, 0xd7, 0xc3, 0xcf, 0x23, 0xa7, 0x0b, 0xa7, 0x43, 0xd2, 0xee, 0xff, 0x0c, 0x2e, 0xef,
+	0xf7, 0x77, 0x8e, 0xd3, 0x0f, 0x6c, 0xca, 0xbd, 0xf6, 0x52, 0x1f, 0xfe, 0x05, 0x00, 0x00, 0xff,
+	0xff, 0x07, 0x05, 0xe8, 0xf0, 0x6e, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -524,8 +379,8 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type EspressoClient interface {
 	BoilerTemperature(ctx context.Context, in *TemperatureStreamRequest, opts ...grpc.CallOption) (Espresso_BoilerTemperatureClient, error)
-	GetConfiguration(ctx context.Context, in *GetConfigurationRequest, opts ...grpc.CallOption) (*GetConfigurationResponse, error)
-	SetConfiguration(ctx context.Context, in *SetConfigurationRequest, opts ...grpc.CallOption) (*SetConfigurationResponse, error)
+	GetConfiguration(ctx context.Context, in *GetConfigurationRequest, opts ...grpc.CallOption) (*Configuration, error)
+	SetConfiguration(ctx context.Context, in *Configuration, opts ...grpc.CallOption) (*Configuration, error)
 }
 
 type espressoClient struct {
@@ -568,8 +423,8 @@ func (x *espressoBoilerTemperatureClient) Recv() (*TemperatureStreamResponse, er
 	return m, nil
 }
 
-func (c *espressoClient) GetConfiguration(ctx context.Context, in *GetConfigurationRequest, opts ...grpc.CallOption) (*GetConfigurationResponse, error) {
-	out := new(GetConfigurationResponse)
+func (c *espressoClient) GetConfiguration(ctx context.Context, in *GetConfigurationRequest, opts ...grpc.CallOption) (*Configuration, error) {
+	out := new(Configuration)
 	err := c.cc.Invoke(ctx, "/espressopb.Espresso/GetConfiguration", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -577,8 +432,8 @@ func (c *espressoClient) GetConfiguration(ctx context.Context, in *GetConfigurat
 	return out, nil
 }
 
-func (c *espressoClient) SetConfiguration(ctx context.Context, in *SetConfigurationRequest, opts ...grpc.CallOption) (*SetConfigurationResponse, error) {
-	out := new(SetConfigurationResponse)
+func (c *espressoClient) SetConfiguration(ctx context.Context, in *Configuration, opts ...grpc.CallOption) (*Configuration, error) {
+	out := new(Configuration)
 	err := c.cc.Invoke(ctx, "/espressopb.Espresso/SetConfiguration", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -589,8 +444,8 @@ func (c *espressoClient) SetConfiguration(ctx context.Context, in *SetConfigurat
 // EspressoServer is the server API for Espresso service.
 type EspressoServer interface {
 	BoilerTemperature(*TemperatureStreamRequest, Espresso_BoilerTemperatureServer) error
-	GetConfiguration(context.Context, *GetConfigurationRequest) (*GetConfigurationResponse, error)
-	SetConfiguration(context.Context, *SetConfigurationRequest) (*SetConfigurationResponse, error)
+	GetConfiguration(context.Context, *GetConfigurationRequest) (*Configuration, error)
+	SetConfiguration(context.Context, *Configuration) (*Configuration, error)
 }
 
 // UnimplementedEspressoServer can be embedded to have forward compatible implementations.
@@ -600,10 +455,10 @@ type UnimplementedEspressoServer struct {
 func (*UnimplementedEspressoServer) BoilerTemperature(req *TemperatureStreamRequest, srv Espresso_BoilerTemperatureServer) error {
 	return status.Errorf(codes.Unimplemented, "method BoilerTemperature not implemented")
 }
-func (*UnimplementedEspressoServer) GetConfiguration(ctx context.Context, req *GetConfigurationRequest) (*GetConfigurationResponse, error) {
+func (*UnimplementedEspressoServer) GetConfiguration(ctx context.Context, req *GetConfigurationRequest) (*Configuration, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetConfiguration not implemented")
 }
-func (*UnimplementedEspressoServer) SetConfiguration(ctx context.Context, req *SetConfigurationRequest) (*SetConfigurationResponse, error) {
+func (*UnimplementedEspressoServer) SetConfiguration(ctx context.Context, req *Configuration) (*Configuration, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetConfiguration not implemented")
 }
 
@@ -651,7 +506,7 @@ func _Espresso_GetConfiguration_Handler(srv interface{}, ctx context.Context, de
 }
 
 func _Espresso_SetConfiguration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetConfigurationRequest)
+	in := new(Configuration)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -663,7 +518,7 @@ func _Espresso_SetConfiguration_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: "/espressopb.Espresso/SetConfiguration",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EspressoServer).SetConfiguration(ctx, req.(*SetConfigurationRequest))
+		return srv.(EspressoServer).SetConfiguration(ctx, req.(*Configuration))
 	}
 	return interceptor(ctx, in, info, handler)
 }

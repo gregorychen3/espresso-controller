@@ -119,14 +119,9 @@ export namespace GetConfigurationRequest {
   }
 }
 
-export class GetConfigurationResponse extends jspb.Message {
+export class Configuration extends jspb.Message {
   getTemperature(): number;
   setTemperature(value: number): void;
-
-  hasSetAt(): boolean;
-  clearSetAt(): void;
-  getSetAt(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setSetAt(value?: google_protobuf_timestamp_pb.Timestamp): void;
 
   getP(): number;
   setP(value: number): void;
@@ -137,99 +132,28 @@ export class GetConfigurationResponse extends jspb.Message {
   getD(): number;
   setD(value: number): void;
 
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetConfigurationResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetConfigurationResponse): GetConfigurationResponse.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: GetConfigurationResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetConfigurationResponse;
-  static deserializeBinaryFromReader(message: GetConfigurationResponse, reader: jspb.BinaryReader): GetConfigurationResponse;
-}
-
-export namespace GetConfigurationResponse {
-  export type AsObject = {
-    temperature: number,
-    setAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
-    p: number,
-    i: number,
-    d: number,
-  }
-}
-
-export class SetConfigurationRequest extends jspb.Message {
-  getTemperature(): number;
-  setTemperature(value: number): void;
-
   hasSetAt(): boolean;
   clearSetAt(): void;
   getSetAt(): google_protobuf_timestamp_pb.Timestamp | undefined;
   setSetAt(value?: google_protobuf_timestamp_pb.Timestamp): void;
 
-  getP(): number;
-  setP(value: number): void;
-
-  getI(): number;
-  setI(value: number): void;
-
-  getD(): number;
-  setD(value: number): void;
-
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): SetConfigurationRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: SetConfigurationRequest): SetConfigurationRequest.AsObject;
+  toObject(includeInstance?: boolean): Configuration.AsObject;
+  static toObject(includeInstance: boolean, msg: Configuration): Configuration.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: SetConfigurationRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): SetConfigurationRequest;
-  static deserializeBinaryFromReader(message: SetConfigurationRequest, reader: jspb.BinaryReader): SetConfigurationRequest;
+  static serializeBinaryToWriter(message: Configuration, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Configuration;
+  static deserializeBinaryFromReader(message: Configuration, reader: jspb.BinaryReader): Configuration;
 }
 
-export namespace SetConfigurationRequest {
+export namespace Configuration {
   export type AsObject = {
     temperature: number,
-    setAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     p: number,
     i: number,
     d: number,
-  }
-}
-
-export class SetConfigurationResponse extends jspb.Message {
-  getTemperature(): number;
-  setTemperature(value: number): void;
-
-  hasSetAt(): boolean;
-  clearSetAt(): void;
-  getSetAt(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setSetAt(value?: google_protobuf_timestamp_pb.Timestamp): void;
-
-  getP(): number;
-  setP(value: number): void;
-
-  getI(): number;
-  setI(value: number): void;
-
-  getD(): number;
-  setD(value: number): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): SetConfigurationResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: SetConfigurationResponse): SetConfigurationResponse.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: SetConfigurationResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): SetConfigurationResponse;
-  static deserializeBinaryFromReader(message: SetConfigurationResponse, reader: jspb.BinaryReader): SetConfigurationResponse;
-}
-
-export namespace SetConfigurationResponse {
-  export type AsObject = {
-    temperature: number,
     setAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
-    p: number,
-    i: number,
-    d: number,
   }
 }
 

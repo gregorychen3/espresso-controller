@@ -6,8 +6,8 @@ import "google/protobuf/timestamp.proto";
 
 service Espresso {
   rpc BoilerTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
-  rpc GetConfiguration (GetConfigurationRequest) returns (GetConfigurationResponse);
-  rpc SetConfiguration (SetConfigurationRequest) returns (SetConfigurationResponse);
+  rpc GetConfiguration (GetConfigurationRequest) returns (Configuration);
+  rpc SetConfiguration (Configuration) returns (Configuration);
 }
 
 message TemperatureSample {
@@ -29,26 +29,10 @@ message TemperatureStreamResponse {
 
 message GetConfigurationRequest {}
 
-message GetConfigurationResponse {
+message Configuration {
     double temperature = 1;
-    google.protobuf.Timestamp set_at = 2;
-    double p = 3;
-    double i = 4;
-    double d = 5;
-}
-
-message SetConfigurationRequest {
-    double temperature = 1;
-    google.protobuf.Timestamp set_at = 2;
-    double p = 3;
-    double i = 4;
-    double d = 5;
-}
-
-message SetConfigurationResponse {
-    double temperature = 1;
-    google.protobuf.Timestamp set_at = 2;
-    double p = 3;
-    double i = 4;
-    double d = 5;
+    double p = 2;
+    double i = 3;
+    double d = 4;
+    google.protobuf.Timestamp set_at = 5;
 }

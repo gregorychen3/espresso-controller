@@ -19,7 +19,7 @@ type EspressoGetConfiguration = {
   readonly requestStream: false;
   readonly responseStream: false;
   readonly requestType: typeof pkg_espressopb_espresso_pb.GetConfigurationRequest;
-  readonly responseType: typeof pkg_espressopb_espresso_pb.GetConfigurationResponse;
+  readonly responseType: typeof pkg_espressopb_espresso_pb.Configuration;
 };
 
 type EspressoSetConfiguration = {
@@ -27,8 +27,8 @@ type EspressoSetConfiguration = {
   readonly service: typeof Espresso;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof pkg_espressopb_espresso_pb.SetConfigurationRequest;
-  readonly responseType: typeof pkg_espressopb_espresso_pb.SetConfigurationResponse;
+  readonly requestType: typeof pkg_espressopb_espresso_pb.Configuration;
+  readonly responseType: typeof pkg_espressopb_espresso_pb.Configuration;
 };
 
 export class Espresso {
@@ -74,20 +74,20 @@ export class EspressoClient {
   getConfiguration(
     requestMessage: pkg_espressopb_espresso_pb.GetConfigurationRequest,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.GetConfigurationResponse|null) => void
+    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.Configuration|null) => void
   ): UnaryResponse;
   getConfiguration(
     requestMessage: pkg_espressopb_espresso_pb.GetConfigurationRequest,
-    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.GetConfigurationResponse|null) => void
+    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.Configuration|null) => void
   ): UnaryResponse;
   setConfiguration(
-    requestMessage: pkg_espressopb_espresso_pb.SetConfigurationRequest,
+    requestMessage: pkg_espressopb_espresso_pb.Configuration,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.SetConfigurationResponse|null) => void
+    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.Configuration|null) => void
   ): UnaryResponse;
   setConfiguration(
-    requestMessage: pkg_espressopb_espresso_pb.SetConfigurationRequest,
-    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.SetConfigurationResponse|null) => void
+    requestMessage: pkg_espressopb_espresso_pb.Configuration,
+    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.Configuration|null) => void
   ): UnaryResponse;
 }
 
