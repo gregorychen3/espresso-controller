@@ -54,7 +54,6 @@ export default function ConfigurationForm() {
               name="targetTemp"
               label="Temperature"
               InputProps={{ endAdornment: <InputAdornment position="end">°C</InputAdornment> }}
-              autoFocus
             />
           </Grid>
           <Grid item xs={4}>
