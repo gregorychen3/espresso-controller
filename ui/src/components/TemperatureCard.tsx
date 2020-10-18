@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurTemp } from "../redux/boilerTemperatureSlice";
+import { selectCurTemp } from "../redux/boilerTemperatureSlice";
 import { selectTargetTemp } from "../redux/configurationSlice";
 import { setTargetTempModalVisibility } from "../redux/uiSlice";
 import Title from "./Title";
@@ -19,7 +19,7 @@ export default function TemperatureCard() {
   const d = useDispatch();
   const classes = useStyles();
 
-  const curTemp = useSelector(getCurTemp);
+  const curTemp = useSelector(selectCurTemp);
   const targetTemp = useSelector(selectTargetTemp);
 
   const handleSetTargetTempButtonClicked = () => {

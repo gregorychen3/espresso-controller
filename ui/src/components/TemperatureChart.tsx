@@ -2,12 +2,12 @@ import { useTheme } from "@material-ui/core/styles";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Label, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { getTempHistory } from "../redux/boilerTemperatureSlice";
+import { selectTempHistory } from "../redux/boilerTemperatureSlice";
 
 export default function TemperatureChart() {
   const theme = useTheme();
 
-  const samples = useSelector(getTempHistory);
+  const samples = useSelector(selectTempHistory);
   const data = samples.map((s) => ({
     time: s.observedAt.format("HH:mm"),
     temp: s.value,

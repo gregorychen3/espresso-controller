@@ -112,5 +112,6 @@ export const { endBoilerTemperatureStream } = boilerTemperatureSlice.actions;
 // SELECTORS
 // ---------
 
-export const getCurTemp = (state: State) => state.boilerTemperature.history[state.boilerTemperature.history.length - 1];
-export const getTempHistory = (state: State) => state.boilerTemperature.history;
+export const selectCurTemp = (state: State) =>
+  state.boilerTemperature.history[state.boilerTemperature.history.length - 1];
+export const selectTempHistory = (state: State) => state.boilerTemperature.history;
