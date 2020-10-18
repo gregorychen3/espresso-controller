@@ -54,7 +54,7 @@ export default () => {
             size="small"
             onClick={handleSetTargetTempButtonClicked}
           >
-            SET NEW TARGET
+           CONFIGURE 
           </Button>
         </div>
       </div>
