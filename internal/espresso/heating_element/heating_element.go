@@ -42,7 +42,13 @@ func (h *HeatingElement) Run() {
 }
 
 func (h *HeatingElement) SetDutyFactor(factor float64) {
-	h.dutyFactor = factor
+	if h.dutyFactor <= 0 {
+		h.dutyFactor = 0
+	} else if h.dutyFactor >= 1 {
+		h.dutyFactor = 1
+	} else {
+		h.dutyFactor = factor
+	}
 }
 
 func (h *HeatingElement) on() {
