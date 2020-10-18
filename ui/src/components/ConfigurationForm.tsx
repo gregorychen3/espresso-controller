@@ -1,11 +1,15 @@
-import { InputAdornment } from "@material-ui/core";
-import { Field, Form, Formik } from "formik";
+import { Grid, InputAdornment } from "@material-ui/core";
+import { Field, FieldAttributes, Form, Formik } from "formik";
 import { TextField } from "formik-material-ui";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { SetConfigurationRequest } from "../proto/pkg/espressopb/espresso_pb";
 import { selectConfiguration, setConfiguration } from "../redux/configurationSlice";
+
+const NumberField = (props: FieldAttributes<any>) => (
+  <Field component={TextField} margin="dense" type="number" fullWidth {...props} />
+);
 
 const validationSchema = Yup.object().shape({
   targetTemp: Yup.number()
@@ -41,19 +45,23 @@ export default function ConfigurationForm() {
       }}
     >
       {() => (
-        <Form id="targettemperature">
-          <Field
-            component={TextField}
-            name="targetTemperature"
-            autoFocus
-            margin="dense"
-            id="temperature"
-            label="Temperature"
-            type="number"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">°C</InputAdornment>,
-            }}
-          />
+        <Form id="configuration">
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <NumberField
+                name="targetTemp"
+                label="Temperature"
+                InputProps={{ endAdornment: <InputAdornment position="end">°C</InputAdornment> }}
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <NumberField name="p" label="Proportional Term" />
+            </Grid>
+            <Grid item xs={4}>
+              <NumberField name="d" label="Derivative Term" />
+            </Grid>
+          </Grid>
         </Form>
       )}
     </Formik>
