@@ -7,8 +7,8 @@ import "google/protobuf/timestamp.proto";
 service Espresso {
   rpc GroupHeadTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
   rpc BoilerTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
-  rpc GetConfiguration (GetConfigurationRequest) returns (GetConfigurationRequest);
-  rpc SetConfiguration (SetConfigurationRequest) returns (SetConfigurationRequest);
+  rpc GetConfiguration (GetConfigurationRequest) returns (GetConfigurationResponse);
+  rpc SetConfiguration (SetConfigurationRequest) returns (SetConfigurationResponse);
 }
 
 message TemperatureSample {

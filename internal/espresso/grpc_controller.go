@@ -152,7 +152,7 @@ func (c *grpcController) BoilerTemperature(req *espressopb.TemperatureStreamRequ
 	return errors.New("temperature monitor stopped publishing")
 }
 
-func (c *grpcController) GetTargetTemperature(context.Context, *espressopb.GetTargetTemperatureRequest) (*espressopb.GetTargetTemperatureResponse, error) {
+func (c *grpcController) GetConfiguration(ctx context.Context, req *espressopb.GetConfigurationRequest) (*espressopb.GetConfigurationResponse, error) {
 	targetTemperature := c.pid.GetTargetTemperature()
 
 	pbTime, err := ptypes.TimestampProto(targetTemperature.SetAt)
@@ -160,38 +160,39 @@ func (c *grpcController) GetTargetTemperature(context.Context, *espressopb.GetTa
 		return nil, err
 	}
 
-	return &espressopb.GetTargetTemperatureResponse{
+	return &espressopb.GetConfigurationResponse{
 		Temperature: targetTemperature.Value,
 		SetAt:       pbTime,
+		P:           c.pid.P, D: c.pid.D,
 	}, nil
 }
 
-func (c *grpcController) SetTargetTemperature(ctx context.Context, req *espressopb.SetTargetTemperatureRequest) (*espressopb.SetTargetTemperatureResponse, error) {
+func (c *grpcController) SetConfiguration(ctx context.Context, req *espressopb.SetConfigurationRequest) (*espressopb.SetConfigurationResponse, error) {
 	if req.Temperature < 0 || req.Temperature > 100 {
 		return nil, errors.New("temperature must be in range [0, 100] °C")
 	}
 
+	if req.P < 0 || req.D < 0 {
+		return nil, errors.New("pid terms must be > 0")
+	}
+
 	targetTemperature := c.pid.SetTargetTemperature(req.Temperature)
+
 	pbTime, err := ptypes.TimestampProto(targetTemperature.SetAt)
 	if err != nil {
 		return nil, err
 	}
-	return &espressopb.SetTargetTemperatureResponse{
+
+	c.pid.P = req.P
+	c.pid.D = req.D
+
+	return &espressopb.SetConfigurationResponse{
 		Temperature: targetTemperature.Value,
 		SetAt:       pbTime,
+		P:           c.pid.P, D: c.pid.D,
 	}, nil
 }
 
 func (c *grpcController) Shutdown() error {
 	return c.pid.Shutdown()
-}
-
-func (c *grpcController) GetTerms(ctx context.Context, req *espressopb.GetTermsRequest) (*espressopb.GetTermsResponse, error) {
-	return &espressopb.GetTermsResponse{P: c.pid.P, D: c.pid.D}, nil
-}
-
-func (c *grpcController) SetTerms(ctx context.Context, req *espressopb.SetTermsRequest) (*espressopb.SetTermsResponse, error) {
-	c.pid.P = req.P
-	c.pid.D = req.D
-	return &espressopb.SetTermsResponse{P: c.pid.P, D: c.pid.D}, nil
 }
