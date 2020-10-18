@@ -9,7 +9,7 @@ import DashboardPage from "./pages/DashboardPage";
 import { getThemedToastClass } from "./theme";
 
 const useStyles = makeStyles((theme) => ({
-  root: { display: "flex", },
+  root: { display: "flex" },
   toast: getThemedToastClass(theme),
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -36,7 +36,7 @@ export default function Dashboard() {
           <DashboardPage />
         </Container>
       </main>
-      <ToastContainer toastClassName={classes.toast}/>
+      <ToastContainer toastClassName={classes.toast} />
     </div>
   );
 }

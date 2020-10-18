@@ -32,28 +32,13 @@ export default () => {
   return (
     <AppBar position="absolute" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="open drawer"
-          className={classes.menuButton}
-        >
+        <IconButton edge="start" color="inherit" aria-label="open drawer" className={classes.menuButton}>
           <TimelineIcon fontSize="large" />
         </IconButton>
-        <Typography
-          component="h1"
-          variant="h6"
-          color="inherit"
-          noWrap
-          className={classes.title}
-        >
+        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
           Espresso Controller
         </Typography>
-        <IconButton
-          href="https://github.com/gregorychen3/espresso-controller"
-          target="_blank"
-          color="inherit"
-        >
+        <IconButton href="https://github.com/gregorychen3/espresso-controller" target="_blank" color="inherit">
           <GitHubIcon />
         </IconButton>
       </Toolbar>

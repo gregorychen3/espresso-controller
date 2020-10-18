@@ -17,16 +17,11 @@ export default () => {
   };
 
   return (
-    <Dialog
-      open={true}
-      onClose={handleClose}
-      aria-labelledby="form-dialog-title"
-    >
+    <Dialog open={true} onClose={handleClose} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">Set Target Temperature</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          The specified temperature will become the new set point of the
-          temperature controller.
+          The specified temperature will become the new set point of the temperature controller.
         </DialogContentText>
         <TargetTemperatureForm />
       </DialogContent>

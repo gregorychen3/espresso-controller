@@ -10,12 +10,9 @@ export const uiSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(
-      targetTemperatureSlice.actions.setTargetTemperatureResponse,
-      (state, action) => {
-        state.targetTempModalVisibility = false;
-      }
-    );
+    builder.addCase(targetTemperatureSlice.actions.setTargetTemperatureResponse, (state, action) => {
+      state.targetTempModalVisibility = false;
+    });
   },
 });
 

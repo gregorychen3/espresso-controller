@@ -10,7 +10,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeWrapper>
-      <App />
+        <App />
       </ThemeWrapper>
     </Provider>
   </React.StrictMode>,

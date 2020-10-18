@@ -1,10 +1,7 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
 import { toast } from "react-toastify";
-import {
-  TemperatureStreamRequest,
-  TemperatureStreamResponse,
-} from "../../proto/pkg/espressopb/espresso_pb";
+import { TemperatureStreamRequest, TemperatureStreamResponse } from "../../proto/pkg/espressopb/espresso_pb";
 import { TemperatureSample } from "../../types";
 import { espressoClient, ReturnType } from "../helpers";
 
@@ -29,18 +26,13 @@ export const boilerTemperatureSlice = createSlice({
     ) => {
       state.stream = action.payload;
     },
-    receiveBoilerTemperatureStreamMsg: (
-      state,
-      action: PayloadAction<TemperatureStreamResponse>
-    ) => {
+    receiveBoilerTemperatureStreamMsg: (state, action: PayloadAction<TemperatureStreamResponse>) => {
       const msg = action.payload;
       switch (msg.getDataCase()) {
         case TemperatureStreamResponse.DataCase.HISTORY:
           const history = msg.getHistory();
           if (!history) {
-            throw new Error(
-              "Failed to process boiler temperature stream message data"
-            );
+            throw new Error("Failed to process boiler temperature stream message data");
           }
 
           state.history = history
@@ -62,16 +54,12 @@ export const boilerTemperatureSlice = createSlice({
         case TemperatureStreamResponse.DataCase.SAMPLE:
           const sample = msg.getSample();
           if (!sample) {
-            throw new Error(
-              "Failed to process boiler temperature stream message data"
-            );
+            throw new Error("Failed to process boiler temperature stream message data");
           }
 
           const observedAt = sample.getObservedAt();
           if (!observedAt) {
-            throw new Error(
-              "Failed to process boiler temperature stream message data"
-            );
+            throw new Error("Failed to process boiler temperature stream message data");
           }
 
           state.history = state.history.slice(-(maxNumSamples - 1));
@@ -81,9 +69,7 @@ export const boilerTemperatureSlice = createSlice({
           });
           break;
         default:
-          throw new Error(
-            "Failed to process boiler temperature stream message data"
-          );
+          throw new Error("Failed to process boiler temperature stream message data");
       }
     },
     endBoilerTemperatureStream: (state) => {
@@ -93,9 +79,7 @@ export const boilerTemperatureSlice = createSlice({
   },
 });
 
-export const startBoilerTemperatureStream = (req: TemperatureStreamRequest) => (
-  d: Dispatch
-) => {
+export const startBoilerTemperatureStream = (req: TemperatureStreamRequest) => (d: Dispatch) => {
   const stream = espressoClient.boilerTemperature(req);
   d(boilerTemperatureSlice.actions.startBoilerTemperatureStream(stream));
 

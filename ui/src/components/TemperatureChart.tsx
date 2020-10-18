@@ -1,15 +1,7 @@
 import { useTheme } from "@material-ui/core/styles";
 import React from "react";
 import { useSelector } from "react-redux";
-import {
-  Label,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Label, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { getTempHistory } from "../redux/selectors";
 
 export default () => {
@@ -34,15 +26,8 @@ export default () => {
           }}
         >
           <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
-          <YAxis
-            domain={["auto", "auto"]}
-            stroke={theme.palette.text.secondary}
-          >
-            <Label
-              angle={270}
-              position="left"
-              style={{ textAnchor: "middle", fill: theme.palette.text.primary }}
-            >
+          <YAxis domain={["auto", "auto"]} stroke={theme.palette.text.secondary}>
+            <Label angle={270} position="left" style={{ textAnchor: "middle", fill: theme.palette.text.primary }}>
               Temperature (°C)
             </Label>
           </YAxis>

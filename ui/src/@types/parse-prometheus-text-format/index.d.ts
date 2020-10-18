@@ -11,5 +11,5 @@ declare module "parse-prometheus-text-format" {
     labels: { [key: string]: string };
   }
 
-  export default function(prometheusText: string): Metric[];
+  export default function (prometheusText: string): Metric[];
 }

@@ -1,10 +1,7 @@
 import { ActionCreatorWithPayload, Dispatch } from "@reduxjs/toolkit";
 import { Message } from "google-protobuf";
 import { toast } from "react-toastify";
-import {
-  EspressoClient,
-  ServiceError,
-} from "../proto/pkg/espressopb/espresso_pb_service";
+import { EspressoClient, ServiceError } from "../proto/pkg/espressopb/espresso_pb_service";
 
 export const espressoClient = new EspressoClient("");
 
@@ -30,22 +27,15 @@ export const createUnaryGrpcThunk = <T1 extends Message, T2 extends Message>(
 ) => {
   const { request, response, failure } = actionCreators;
   d(request(requestMsg));
-  apiCall.bind(espressoClient)(
-    requestMsg,
-    (err: ServiceError, responseMsg: T2) => {
-      if (err) {
-        console.error(err);
-        d(failure({ req: requestMsg, err }));
-        toast.error(`Error: ${err.message}`);
-      } else {
-        d(response(responseMsg));
-      }
+  apiCall.bind(espressoClient)(requestMsg, (err: ServiceError, responseMsg: T2) => {
+    if (err) {
+      console.error(err);
+      d(failure({ req: requestMsg, err }));
+      toast.error(`Error: ${err.message}`);
+    } else {
+      d(response(responseMsg));
     }
-  );
+  });
 };
 
-export type ReturnType<T extends (...args: any[]) => any> = T extends (
-  ...args: any[]
-) => infer R
-  ? R
-  : never;
+export type ReturnType<T extends (...args: any[]) => any> = T extends (...args: any[]) => infer R ? R : never;

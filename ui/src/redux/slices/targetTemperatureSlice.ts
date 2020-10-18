@@ -22,16 +22,10 @@ export const targetTemperatureSlice = createSlice({
   },
   reducers: {
     // GetTargetTemperature
-    getTargetTemperatureRequest: (
-      state,
-      action: PayloadAction<GetTargetTemperatureRequest>
-    ) => {
+    getTargetTemperatureRequest: (state, action: PayloadAction<GetTargetTemperatureRequest>) => {
       state.isFetching = true;
     },
-    getTargetTemperatureResponse: (
-      state,
-      action: PayloadAction<GetTargetTemperatureResponse>
-    ) => {
+    getTargetTemperatureResponse: (state, action: PayloadAction<GetTargetTemperatureResponse>) => {
       const value = action.payload.getTemperature();
       const setAt = action.payload.getSetAt()?.toDate();
       if (!setAt) {
@@ -54,16 +48,10 @@ export const targetTemperatureSlice = createSlice({
     },
 
     // SetTargetTemperature
-    setTargetTemperatureRequest: (
-      state,
-      action: PayloadAction<SetTargetTemperatureRequest>
-    ) => {
+    setTargetTemperatureRequest: (state, action: PayloadAction<SetTargetTemperatureRequest>) => {
       state.isSetting = true;
     },
-    setTargetTemperatureResponse: (
-      state,
-      action: PayloadAction<SetTargetTemperatureResponse>
-    ) => {
+    setTargetTemperatureResponse: (state, action: PayloadAction<SetTargetTemperatureResponse>) => {
       const value = action.payload.getTemperature();
       const setAt = action.payload.getSetAt()?.toDate();
       if (!setAt) {
@@ -86,9 +74,7 @@ export const targetTemperatureSlice = createSlice({
   },
 });
 
-export const getTargetTemperature = (req: GetTargetTemperatureRequest) => (
-  d: Dispatch
-) =>
+export const getTargetTemperature = (req: GetTargetTemperatureRequest) => (d: Dispatch) =>
   createUnaryGrpcThunk(
     espressoClient.getTargetTemperature,
     req,
@@ -100,9 +86,7 @@ export const getTargetTemperature = (req: GetTargetTemperatureRequest) => (
     d
   );
 
-export const setTargetTemperature = (req: SetTargetTemperatureRequest) => (
-  d: Dispatch
-) =>
+export const setTargetTemperature = (req: SetTargetTemperatureRequest) => (d: Dispatch) =>
   createUnaryGrpcThunk(
     espressoClient.setTargetTemperature,
     req,

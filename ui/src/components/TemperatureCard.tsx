@@ -32,10 +32,7 @@ export default () => {
         {curTemp?.value.toFixed(1) ?? "--"} °C
       </Typography>
       {curTemp && (
-        <Typography
-          color="textSecondary"
-          className={classes.temperatureContext}
-        >
+        <Typography color="textSecondary" className={classes.temperatureContext}>
           as of {curTemp.observedAt.format("HH:mm:ss")} Eastern Time
         </Typography>
       )}
@@ -48,13 +45,8 @@ export default () => {
       </Typography>
       <div>
         <div className={classes.setTargetTempButton}>
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            onClick={handleSetTargetTempButtonClicked}
-          >
-           CONFIGURE 
+          <Button variant="contained" color="primary" size="small" onClick={handleSetTargetTempButtonClicked}>
+            CONFIGURE
           </Button>
         </div>
       </div>

@@ -11,7 +11,7 @@ import {
   primary,
   primaryDark,
   red,
-  warning
+  warning,
 } from "../theme";
 
 interface Props {
