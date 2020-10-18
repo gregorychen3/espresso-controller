@@ -187,9 +187,9 @@ func (c *grpcController) Shutdown() error {
 }
 
 func (c *grpcController) GetTerms(ctx context.Context, req *espressopb.GetTermsRequest) (*espressopb.GetTermsResponse, error) {
-	return &espressopb.GetTermsResponse{}, nil
+	return &espressopb.GetTermsResponse{P: c.pid.P, D: c.pid.D}, nil
 }
 
 func (c *grpcController) SetTerms(ctx context.Context, req *espressopb.SetTermsRequest) (*espressopb.SetTermsResponse, error) {
-	return &espressopb.SetTermsResponse{}, nil
+	return &espressopb.SetTermsResponse{P: req.P, D: req.D}, nil
 }
