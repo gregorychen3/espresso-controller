@@ -3,6 +3,9 @@ import moment from "moment";
 import { createUnaryGrpcThunk } from "../../createUnaryGrpcThunk";
 import { Espresso } from "../../proto/pkg/espressopb/espresso_pb_service";
 
+export const getConfiguration = createUnaryGrpcThunk(Espresso.GetConfiguration);
+export const setConfiguration = createUnaryGrpcThunk(Espresso.SetConfiguration);
+
 interface ConfigurationSlice {
   targetTemp?: { value: number; setAt: moment.Moment };
   p?: number;
@@ -55,11 +58,8 @@ export const configurationSlice = createSlice({
       state.targetTemp = { value, setAt: moment(setAt) };
       state.isFetching = false;
     });
-    builder.addCase(getConfiguration.rejected, (state) => {
+    builder.addCase(setConfiguration.rejected, (state) => {
       state.isFetching = false;
     });
   },
 });
-
-export const getConfiguration = createUnaryGrpcThunk(Espresso.GetConfiguration);
-export const setConfiguration = createUnaryGrpcThunk(Espresso.SetConfiguration);
