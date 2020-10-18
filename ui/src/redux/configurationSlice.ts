@@ -16,9 +16,11 @@ export const setConfiguration = createUnaryGrpcThunk(Espresso.SetConfiguration);
 // -----
 
 interface ConfigurationSlice {
-  targetTemp?: { value: number; setAt: moment.Moment };
-  p?: number;
-  d?: number;
+  configuration?: {
+    targetTemp: { value: number; setAt: moment.Moment };
+    p: number;
+    d: number;
+  };
   isFetching: boolean;
 }
 
@@ -35,40 +37,44 @@ export const configurationSlice = createSlice({
     builder.addCase(getConfiguration.pending, (state) => {
       state.isFetching = true;
     });
+    builder.addCase(getConfiguration.rejected, (state) => {
+      state.isFetching = false;
+    });
     builder.addCase(getConfiguration.fulfilled, (state, action) => {
+      state.isFetching = false;
       const value = action.payload.getTemperature();
       const setAt = action.payload.getSetAt()?.toDate();
       if (!setAt) {
         console.warn("Target temperature response missing setAt time");
-        state.isFetching = false;
         return;
       }
-      state.targetTemp = { value, setAt: moment(setAt) };
-      state.isFetching = false;
-    });
-    builder.addCase(getConfiguration.rejected, (state) => {
-      state.targetTemp = undefined;
-      state.isFetching = false;
+      state.configuration = {
+        targetTemp: { value, setAt: moment(setAt) },
+        p: action.payload.getP(),
+        d: action.payload.getD(),
+      };
     });
 
     // SetConfiguration
     builder.addCase(setConfiguration.pending, (state) => {
       state.isFetching = true;
     });
+    builder.addCase(setConfiguration.rejected, (state) => {
+      state.isFetching = false;
+    });
     builder.addCase(setConfiguration.fulfilled, (state, action) => {
+      state.isFetching = false;
       const value = action.payload.getTemperature();
       const setAt = action.payload.getSetAt()?.toDate();
       if (!setAt) {
         console.warn("Target temperature response missing setAt time");
-        state.isFetching = false;
         return;
       }
-
-      state.targetTemp = { value, setAt: moment(setAt) };
-      state.isFetching = false;
-    });
-    builder.addCase(setConfiguration.rejected, (state) => {
-      state.isFetching = false;
+      state.configuration = {
+        targetTemp: { value, setAt: moment(setAt) },
+        p: action.payload.getP(),
+        d: action.payload.getD(),
+      };
     });
   },
 });
@@ -77,5 +83,5 @@ export const configurationSlice = createSlice({
 // SELECTORS
 // ---------
 
-export const selectTargetTemp = (state: State) => state.configuration.targetTemp;
+export const selectConfiguration = (state: State) => state.configuration.configuration;
 export const selectFetchingTargetTemp = (state: State) => state.configuration.isFetching;

@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurTemp } from "../redux/boilerTemperatureSlice";
-import { selectTargetTemp } from "../redux/configurationSlice";
+import { selectConfiguration } from "../redux/configurationSlice";
 import { setTargetTempModalVisibility } from "../redux/uiSlice";
 import Title from "./Title";
 
@@ -20,7 +20,7 @@ export default function TemperatureCard() {
   const classes = useStyles();
 
   const curTemp = useSelector(selectCurTemp);
-  const targetTemp = useSelector(selectTargetTemp);
+  const configuration = useSelector(selectConfiguration);
 
   const handleSetTargetTempButtonClicked = () => {
     d(setTargetTempModalVisibility(true));
@@ -39,10 +39,10 @@ export default function TemperatureCard() {
       )}
       <Title>Target Boiler Temperature</Title>
       <Typography component="p" variant="h4">
-        {targetTemp?.value} °C
+        {configuration?.targetTemp.value} °C
       </Typography>
       <Typography color="textSecondary" className={classes.temperatureContext}>
-        set {targetTemp?.setAt.fromNow()}
+        set {configuration?.targetTemp.setAt.fromNow()}
       </Typography>
       <div>
         <div className={classes.setTargetTempButton}>
