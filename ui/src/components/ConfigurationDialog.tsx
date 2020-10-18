@@ -17,7 +17,7 @@ export default function ConfigurationDialog() {
   };
 
   return (
-    <Dialog open={true} onClose={handleClose} aria-labelledby="form-dialog-title">
+    <Dialog open={true} onClose={handleClose}>
       <DialogTitle id="form-dialog-title">Set Target Temperature</DialogTitle>
       <DialogContent>
         <DialogContentText>

@@ -32,7 +32,7 @@ export default function AppHeader() {
   return (
     <AppBar position="absolute" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
-        <IconButton edge="start" color="inherit" aria-label="open drawer" className={classes.menuButton}>
+        <IconButton edge="start" color="inherit" className={classes.menuButton}>
           <TimelineIcon fontSize="large" />
         </IconButton>
         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
