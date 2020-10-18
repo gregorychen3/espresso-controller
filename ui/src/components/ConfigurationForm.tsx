@@ -4,7 +4,7 @@ import { TextField } from "formik-material-ui";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SetConfigurationRequest } from "../proto/pkg/espressopb/espresso_pb";
-import { getTargetTemp, setConfiguration } from "../redux/slices/configurationSlice";
+import { getTargetTemp, setConfiguration } from "../redux/configurationSlice";
 
 interface Values {
   targetTemperature: number;

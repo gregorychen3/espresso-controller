@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurTemp } from "../redux/boilerTemperatureSlice";
-import { getTargetTemp } from "../redux/slices/configurationSlice";
+import { getTargetTemp } from "../redux/configurationSlice";
 import { setTargetTempModalVisibility } from "../redux/uiSlice";
 import Title from "./Title";
 
