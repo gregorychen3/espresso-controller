@@ -37,7 +37,7 @@ export default function MetricCard({ name, value, unitLabel, asOf, severity }: P
       </Typography>
       {asOf && (
         <Typography color="textSecondary" className={classes.context}>
-          as of {asOf.format("HH:mm:ss")} Eastern Time
+          as of {asOf.format("HH:mm:ss")}
         </Typography>
       )}
     </>
