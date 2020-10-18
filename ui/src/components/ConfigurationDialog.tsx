@@ -2,7 +2,6 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -12,17 +11,12 @@ import ConfigurationForm from "./ConfigurationForm";
 export default function ConfigurationDialog() {
   const d = useDispatch();
 
-  const handleClose = () => {
-    d(setTargetTempModalVisibility(false));
-  };
+  const handleClose = () => d(setTargetTempModalVisibility(false));
 
   return (
     <Dialog open={true} onClose={handleClose}>
-      <DialogTitle id="form-dialog-title">Set Target Temperature</DialogTitle>
+      <DialogTitle>Configure PID Controller Parameters</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          The specified temperature will become the new set point of the temperature controller.
-        </DialogContentText>
         <ConfigurationForm />
       </DialogContent>
       <DialogActions>
