@@ -191,3 +191,51 @@ export namespace SetTargetTemperatureResponse {
   }
 }
 
+export class SetTermsRequest extends jspb.Message {
+  getP(): number;
+  setP(value: number): void;
+
+  getD(): number;
+  setD(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): SetTermsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: SetTermsRequest): SetTermsRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: SetTermsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): SetTermsRequest;
+  static deserializeBinaryFromReader(message: SetTermsRequest, reader: jspb.BinaryReader): SetTermsRequest;
+}
+
+export namespace SetTermsRequest {
+  export type AsObject = {
+    p: number,
+    d: number,
+  }
+}
+
+export class SetTermsResponse extends jspb.Message {
+  getP(): number;
+  setP(value: number): void;
+
+  getD(): number;
+  setD(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): SetTermsResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: SetTermsResponse): SetTermsResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: SetTermsResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): SetTermsResponse;
+  static deserializeBinaryFromReader(message: SetTermsResponse, reader: jspb.BinaryReader): SetTermsResponse;
+}
+
+export namespace SetTermsResponse {
+  export type AsObject = {
+    p: number,
+    d: number,
+  }
+}
+

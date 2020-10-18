@@ -47,6 +47,15 @@ Espresso.SetTargetTemperature = {
   responseType: pkg_espressopb_espresso_pb.SetTargetTemperatureResponse
 };
 
+Espresso.SetTerms = {
+  methodName: "SetTerms",
+  service: Espresso,
+  requestStream: false,
+  responseStream: false,
+  requestType: pkg_espressopb_espresso_pb.SetTermsRequest,
+  responseType: pkg_espressopb_espresso_pb.SetTermsResponse
+};
+
 exports.Espresso = Espresso;
 
 function EspressoClient(serviceHost, options) {
@@ -168,6 +177,37 @@ EspressoClient.prototype.setTargetTemperature = function setTargetTemperature(re
     callback = arguments[1];
   }
   var client = grpc.unary(Espresso.SetTargetTemperature, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+EspressoClient.prototype.setTerms = function setTerms(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(Espresso.SetTerms, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

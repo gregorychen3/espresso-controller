@@ -7,8 +7,9 @@ import "google/protobuf/timestamp.proto";
 service Espresso {
   rpc GroupHeadTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
   rpc BoilerTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
-  rpc GetTargetTemperature (GetTargetTemperatureRequest) returns (GetTargetTemperatureResponse) {}
-  rpc SetTargetTemperature (SetTargetTemperatureRequest) returns (SetTargetTemperatureResponse) {}
+  rpc GetTargetTemperature (GetTargetTemperatureRequest) returns (GetTargetTemperatureResponse);
+  rpc SetTargetTemperature (SetTargetTemperatureRequest) returns (SetTargetTemperatureResponse);
+  rpc SetTerms(SetTermsRequest) returns (SetTermsResponse);
 }
 
 message TemperatureSample {
@@ -40,4 +41,14 @@ message SetTargetTemperatureRequest {
 message SetTargetTemperatureResponse {
     double temperature = 1;
     google.protobuf.Timestamp set_at = 2;
+}
+
+message SetTermsRequest {
+    float p = 1;
+    float d = 2;
+}
+
+message SetTermsResponse {
+    float p = 1;
+    float d = 2;
 }
