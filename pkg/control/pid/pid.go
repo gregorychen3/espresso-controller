@@ -20,12 +20,12 @@ const (
 // satisfies the control.Strategy interface.
 // https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control
 type PID struct {
+	P                  float32
+	D                  float32
 	targetTemperature  control.TargetTemperature
 	heatingElement     *heating_element.HeatingElement
 	temperatureMonitor *temperature.Monitor
 	temperatureSubId   uuid.UUID
-	P                  float32
-	D                  float32
 }
 
 func NewPid(heatingElem *heating_element.HeatingElement, sampler *temperature.Monitor) (*PID, error) {
