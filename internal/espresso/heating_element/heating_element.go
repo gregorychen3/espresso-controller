@@ -8,7 +8,7 @@ import (
 
 type HeatingElement struct {
 	relayPin   rpio.Pin
-	dutyFactor float32
+	dutyFactor float64
 }
 
 func NewHeatingElement(relayPinNum int) *HeatingElement {
@@ -41,7 +41,7 @@ func (h *HeatingElement) Run() {
 	}()
 }
 
-func (h *HeatingElement) SetDutyFactor(factor float32) {
+func (h *HeatingElement) SetDutyFactor(factor float64) {
 	h.dutyFactor = factor
 }
 

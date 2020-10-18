@@ -49,7 +49,15 @@ func (c *PID) Run() error {
 			curErr := c.targetTemperature.Value - sample.Value
 			rawOut := c.P*curErr + c.D*(curErr-prevErr)
 			out := rawOut / 200
-			log.Debug("Setting duty factor", zap.Float64("dutyFactor", out), zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", c.GetTargetTemperature().Value))
+			log.Debug("Setting duty factor",
+				zap.Float64("prevErr", prevErr),
+				zap.Float64("curErr", curErr),
+				zap.Float64("dutyFactor", out),
+				zap.Float64("curTemperature", sample.Value),
+				zap.Float64("targetTemperature",
+					c.GetTargetTemperature().Value),
+			)
+			c.heatingElement.SetDutyFactor(out)
 			prevErr = curErr
 		}
 	}()
