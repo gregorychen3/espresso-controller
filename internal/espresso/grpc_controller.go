@@ -6,7 +6,6 @@ import (
 	"github.com/golang/protobuf/ptypes"
 	"github.com/gregorychen3/espresso-controller/internal/espresso/heating_element"
 	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature"
-	"github.com/gregorychen3/espresso-controller/pkg/control"
 	"github.com/gregorychen3/espresso-controller/pkg/control/pid"
 	"github.com/gregorychen3/espresso-controller/pkg/espressopb"
 	"github.com/pkg/errors"
@@ -21,14 +20,9 @@ var (
 	})
 )
 
-type TemperatureController interface {
-	control.Strategy
-	Shutdown() error
-}
-
 type grpcController struct {
 	c                      Configuration
-	boilerTemperatureCtrlr TemperatureController
+	boilerTemperatureCtrlr *pid.PID
 	groupMonitor           *temperature.Monitor
 	boilerMonitor          *temperature.Monitor
 }
@@ -190,4 +184,12 @@ func (c *grpcController) SetTargetTemperature(ctx context.Context, req *espresso
 
 func (c *grpcController) Shutdown() error {
 	return c.boilerTemperatureCtrlr.Shutdown()
+}
+
+func (c *grpcController) GetTerms(ctx context.Context, req *espressopb.GetTermsRequest) (*espressopb.GetTermsResponse, error) {
+	return &espressopb.GetTermsResponse{}, nil
+}
+
+func (c *grpcController) SetTerms(ctx context.Context, req *espressopb.SetTermsRequest) (*espressopb.SetTermsResponse, error) {
+	return &espressopb.SetTermsResponse{}, nil
 }

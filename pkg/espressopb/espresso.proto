@@ -9,6 +9,7 @@ service Espresso {
   rpc BoilerTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
   rpc GetTargetTemperature (GetTargetTemperatureRequest) returns (GetTargetTemperatureResponse);
   rpc SetTargetTemperature (SetTargetTemperatureRequest) returns (SetTargetTemperatureResponse);
+  rpc GetTerms(GetTermsRequest) returns (GetTermsResponse);
   rpc SetTerms(SetTermsRequest) returns (SetTermsResponse);
 }
 
@@ -41,6 +42,13 @@ message SetTargetTemperatureRequest {
 message SetTargetTemperatureResponse {
     double temperature = 1;
     google.protobuf.Timestamp set_at = 2;
+}
+
+message GetTermsRequest {}
+
+message GetTermsResponse {
+    float p = 1;
+    float d = 2;
 }
 
 message SetTermsRequest {

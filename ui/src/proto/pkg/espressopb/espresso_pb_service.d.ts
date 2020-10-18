@@ -40,6 +40,15 @@ type EspressoSetTargetTemperature = {
   readonly responseType: typeof pkg_espressopb_espresso_pb.SetTargetTemperatureResponse;
 };
 
+type EspressoGetTerms = {
+  readonly methodName: string;
+  readonly service: typeof Espresso;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof pkg_espressopb_espresso_pb.GetTermsRequest;
+  readonly responseType: typeof pkg_espressopb_espresso_pb.GetTermsResponse;
+};
+
 type EspressoSetTerms = {
   readonly methodName: string;
   readonly service: typeof Espresso;
@@ -55,6 +64,7 @@ export class Espresso {
   static readonly BoilerTemperature: EspressoBoilerTemperature;
   static readonly GetTargetTemperature: EspressoGetTargetTemperature;
   static readonly SetTargetTemperature: EspressoSetTargetTemperature;
+  static readonly GetTerms: EspressoGetTerms;
   static readonly SetTerms: EspressoSetTerms;
 }
 
@@ -109,6 +119,15 @@ export class EspressoClient {
   setTargetTemperature(
     requestMessage: pkg_espressopb_espresso_pb.SetTargetTemperatureRequest,
     callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.SetTargetTemperatureResponse|null) => void
+  ): UnaryResponse;
+  getTerms(
+    requestMessage: pkg_espressopb_espresso_pb.GetTermsRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.GetTermsResponse|null) => void
+  ): UnaryResponse;
+  getTerms(
+    requestMessage: pkg_espressopb_espresso_pb.GetTermsRequest,
+    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.GetTermsResponse|null) => void
   ): UnaryResponse;
   setTerms(
     requestMessage: pkg_espressopb_espresso_pb.SetTermsRequest,
