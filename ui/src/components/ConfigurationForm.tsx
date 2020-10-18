@@ -25,6 +25,7 @@ interface Values {
   p: number | "";
   d: number | "";
 }
+
 export default function ConfigurationForm() {
   const d = useDispatch();
   const configuration = useSelector(selectConfiguration);
@@ -44,26 +45,24 @@ export default function ConfigurationForm() {
         setSubmitting(false);
       }}
     >
-      {() => (
-        <Form id="configuration">
-          <Grid container spacing={2}>
-            <Grid item xs={4}>
-              <NumberField
-                name="targetTemp"
-                label="Temperature"
-                InputProps={{ endAdornment: <InputAdornment position="end">°C</InputAdornment> }}
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <NumberField name="p" label="Proportional Term" />
-            </Grid>
-            <Grid item xs={4}>
-              <NumberField name="d" label="Derivative Term" />
-            </Grid>
+      <Form id="configuration">
+        <Grid container spacing={2}>
+          <Grid item xs={4}>
+            <NumberField
+              name="targetTemp"
+              label="Temperature"
+              InputProps={{ endAdornment: <InputAdornment position="end">°C</InputAdornment> }}
+              autoFocus
+            />
           </Grid>
-        </Form>
-      )}
+          <Grid item xs={4}>
+            <NumberField name="p" label="Proportional Term" />
+          </Grid>
+          <Grid item xs={4}>
+            <NumberField name="d" label="Derivative Term" />
+          </Grid>
+        </Grid>
+      </Form>
     </Formik>
   );
 }
