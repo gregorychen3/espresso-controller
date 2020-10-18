@@ -6,7 +6,11 @@ PROTOC_JS_TS_OUT_DIR="ui/src/proto"
 build:
 	go build -o build/espresso ./cmd/espresso
 
-build-pi:
+build.ui:
+	(cd ui && npm i && npm run build)
+	(cd internal/espresso && GO111MODULE=auto packr2)
+
+build.pi:
 	env GOOS=linux GOARCH=arm GOARM=7 go build -o build/espresso ./cmd/espresso
 
 install:
@@ -24,10 +28,6 @@ proto:
 				echo '/* eslint-disable */' | cat - "$$file" > temp && mv temp "$$file"; \
 		fi \
 	done
-
-build-ui:
-	(cd ui && npm i && npm run build)
-	(cd internal/espresso && GO111MODULE=auto packr2)
 
 .PHONY: build install
 
