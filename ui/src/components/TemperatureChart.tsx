@@ -14,33 +14,23 @@ export default function TemperatureChart() {
   }));
 
   return (
-    <>
-      <ResponsiveContainer>
-        <LineChart
-          data={data}
-          margin={{
-            top: 16,
-            right: 16,
-            bottom: 0,
-            left: 24,
-          }}
-        >
-          <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
-          <YAxis domain={["auto", "auto"]} stroke={theme.palette.text.secondary}>
-            <Label angle={270} position="left" style={{ textAnchor: "middle", fill: theme.palette.text.primary }}>
-              Temperature (°C)
-            </Label>
-          </YAxis>
-          <Line
-            isAnimationActive={false}
-            type="monotone"
-            dataKey="temp"
-            stroke={theme.palette.primary.main}
-            dot={false}
-          />
-          <Tooltip />
-        </LineChart>
-      </ResponsiveContainer>
-    </>
+    <ResponsiveContainer>
+      <LineChart data={data} margin={{ top: 16, right: 16, bottom: 0, left: 24 }}>
+        <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
+        <YAxis domain={["auto", "auto"]} stroke={theme.palette.text.secondary}>
+          <Label angle={270} position="left" style={{ textAnchor: "middle", fill: theme.palette.text.primary }}>
+            Temperature (°C)
+          </Label>
+        </YAxis>
+        <Line
+          isAnimationActive={false}
+          type="monotone"
+          dataKey="temp"
+          stroke={theme.palette.primary.main}
+          dot={false}
+        />
+        <Tooltip />
+      </LineChart>
+    </ResponsiveContainer>
   );
 }
