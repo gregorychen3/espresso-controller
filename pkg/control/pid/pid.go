@@ -43,12 +43,22 @@ func (c *PID) Run() error {
 	go func() {
 		subId, subCh := c.temperatureMonitor.Subscribe()
 		c.temperatureSubId = subId
-
-		prevErr := 0.0
+		prev10Errs := []float64{0.0}
 
 		for sample := range subCh {
 			curErr := c.targetTemperature.Value - sample.Value
-			rawOut := (c.P*curErr + c.I*(prevErr+curErr) - c.D*(prevErr-curErr)) / 100
+
+			prevErr := 0.0
+			if len(prev10Errs) > 0 {
+				prevErr = prev10Errs[len(prev10Errs)-1]
+			}
+
+			errSum := curErr
+			for _, e := range prev10Errs {
+				errSum += e
+			}
+
+			rawOut := (c.P*curErr + c.I*(errSum) - c.D*(prevErr-curErr)) / 100
 
 			var out float64
 			if rawOut <= 0 {
@@ -68,7 +78,12 @@ func (c *PID) Run() error {
 					c.GetTargetTemperature().Value),
 			)
 			c.heatingElement.SetDutyFactor(out)
-			prevErr = curErr
+
+			if (len(prev10Errs)) < 10 {
+				prev10Errs = append(prev10Errs, curErr)
+			} else {
+				prev10Errs = append(prev10Errs[1:], curErr)
+			}
 		}
 	}()
 	return nil
