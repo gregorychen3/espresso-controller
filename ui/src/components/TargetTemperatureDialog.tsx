@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { setTargetTempModalVisibility } from "../redux/uiSlice";
 import TargetTemperatureForm from "./TargetTemperatureForm";
 
-export default () => {
+export default function TargetTemperatureDialog() {
   const d = useDispatch();
 
   const handleClose = () => {
@@ -35,4 +35,4 @@ export default () => {
       </DialogActions>
     </Dialog>
   );
-};
+}

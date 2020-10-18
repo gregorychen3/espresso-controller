@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   setTargetTempButton: { textAlign: "center" },
 });
 
-export default () => {
+export default function TemperatureCard() {
   const d = useDispatch();
   const classes = useStyles();
 
@@ -52,4 +52,4 @@ export default () => {
       </div>
     </>
   );
-};
+}

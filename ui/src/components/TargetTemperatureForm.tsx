@@ -7,7 +7,7 @@ import { SetTargetTemperatureRequest } from "../proto/pkg/espressopb/espresso_pb
 import { getTargetTemp } from "../redux/selectors";
 import { setTargetTemperature } from "../redux/slices/targetTemperatureSlice";
 
-export default () => {
+export default function TargetTemperatureForm() {
   const d = useDispatch();
   const curTargetTemperature = useSelector(getTargetTemp);
 
@@ -53,4 +53,4 @@ export default () => {
       )}
     </Formik>
   );
-};
+}

@@ -24,7 +24,7 @@ interface Props {
   asOf?: moment.Moment;
   severity: Severity;
 }
-export default ({ name, value, unitLabel, asOf, severity }: Props) => {
+export default function MetricCard({ name, value, unitLabel, asOf, severity }: Props) {
   const classes = useStyles();
 
   return (
@@ -42,4 +42,4 @@ export default ({ name, value, unitLabel, asOf, severity }: Props) => {
       )}
     </>
   );
-};
+}

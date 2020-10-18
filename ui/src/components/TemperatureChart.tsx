@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Label, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { getTempHistory } from "../redux/selectors";
 
-export default () => {
+export default function TemperatureChart() {
   const theme = useTheme();
 
   const samples = useSelector(getTempHistory);
@@ -43,4 +43,4 @@ export default () => {
       </ResponsiveContainer>
     </>
   );
-};
+}
