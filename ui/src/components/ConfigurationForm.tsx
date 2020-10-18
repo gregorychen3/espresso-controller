@@ -4,7 +4,7 @@ import { TextField } from "formik-material-ui";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-import { SetConfigurationRequest } from "../proto/pkg/espressopb/espresso_pb";
+import { Configuration } from "../proto/pkg/espressopb/espresso_pb";
 import { selectConfiguration, setConfiguration } from "../redux/configurationSlice";
 
 const NumberField = (props: FieldAttributes<any>) => (
@@ -39,7 +39,7 @@ export default function ConfigurationForm() {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
-        const req = new SetConfigurationRequest();
+        const req = new Configuration();
         req.setTemperature(values.targetTemp as number);
         req.setP(values.p as number);
         req.setD(values.d as number);
