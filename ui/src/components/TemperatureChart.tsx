@@ -2,7 +2,7 @@ import { useTheme } from "@material-ui/core/styles";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Label, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { getTempHistory } from "../redux/slices/boilerTemperatureSlice";
+import { getTempHistory } from "../redux/boilerTemperatureSlice";
 
 export default function TemperatureChart() {
   const theme = useTheme();

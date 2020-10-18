@@ -11,7 +11,7 @@ import TemperatureCard from "../components/TemperatureCard";
 import TemperatureChart from "../components/TemperatureChart";
 import { GetConfigurationRequest, TemperatureStreamRequest } from "../proto/pkg/espressopb/espresso_pb";
 import { showTargetTempModal } from "../redux/selectors";
-import { endBoilerTemperatureStream, startBoilerTemperatureStream } from "../redux/slices/boilerTemperatureSlice";
+import { endBoilerTemperatureStream, startBoilerTemperatureStream } from "../redux/boilerTemperatureSlice";
 import { getConfiguration } from "../redux/slices/configurationSlice";
 
 const metricsRefreshIntervalMillis = 5000;

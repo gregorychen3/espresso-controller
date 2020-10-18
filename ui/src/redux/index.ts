@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { boilerTemperatureSlice } from "./slices/boilerTemperatureSlice";
+import { boilerTemperatureSlice } from "./boilerTemperatureSlice";
 import { configurationSlice } from "./slices/configurationSlice";
 import { uiSlice } from "./uiSlice";
 
