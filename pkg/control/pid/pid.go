@@ -47,7 +47,7 @@ func (c *PID) Run() error {
 
 		for sample := range subCh {
 			curErr := c.targetTemperature.Value - sample.Value
-			rawOut := (c.P*curErr + c.D*(curErr-prevErr)) / 100
+			rawOut := (c.P*curErr - c.D*(prevErr-curErr)) / 100
 
 			var out float64
 			if rawOut <= 0 {
