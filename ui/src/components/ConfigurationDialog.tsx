@@ -29,7 +29,7 @@ export default function ConfigurationDialog() {
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        <Button type="submit" form="targettemperature" color="primary">
+        <Button type="submit" form="configuration" color="primary">
           Submit
         </Button>
       </DialogActions>
