@@ -77,5 +77,5 @@ export const configurationSlice = createSlice({
 // SELECTORS
 // ---------
 
-export const getTargetTemp = (state: State) => state.configuration.targetTemp;
-export const isFetchingTargetTemp = (state: State) => state.configuration.isFetching;
+export const selectTargetTemp = (state: State) => state.configuration.targetTemp;
+export const selectFetchingTargetTemp = (state: State) => state.configuration.isFetching;
