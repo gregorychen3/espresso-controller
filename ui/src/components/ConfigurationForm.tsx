@@ -3,8 +3,18 @@ import { Field, Form, Formik } from "formik";
 import { TextField } from "formik-material-ui";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import * as Yup from "yup";
 import { SetConfigurationRequest } from "../proto/pkg/espressopb/espresso_pb";
 import { selectConfiguration, setConfiguration } from "../redux/configurationSlice";
+
+const validationSchema = Yup.object().shape({
+  targetTemp: Yup.number()
+    .min(0, "Must be in range [0, 100] °C")
+    .max(100, "Must be in range [0, 100] °C")
+    .required("Required"),
+  p: Yup.number().min(0, "Must be > 0").required("Required"),
+  d: Yup.number().min(0, "Must be > 0").required("Required"),
+});
 
 interface Values {
   targetTemp: number | "";
@@ -22,17 +32,7 @@ export default function ConfigurationForm() {
     <Formik
       enableReinitialize
       initialValues={initialValues}
-      validate={(values) => {
-        if (!values.targetTemp) {
-          return { targetTemperature: "Required" };
-        }
-        if (values.targetTemp < 0 || values.targetTemp > 100) {
-          return {
-            targetTemperature: "Must be in range [0, 100] °C",
-          };
-        }
-        return {};
-      }}
+      validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
         const req = new SetConfigurationRequest();
         req.setTemperature(values.targetTemp as number);
