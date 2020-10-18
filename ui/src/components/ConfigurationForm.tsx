@@ -52,20 +52,21 @@ export default function ConfigurationForm() {
     >
       <Form id="configuration">
         <Grid container spacing={2}>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <NumberField
               name="targetTemp"
               label="Temperature"
               InputProps={{ endAdornment: <InputAdornment position="end">°C</InputAdornment> }}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={8} />
+          <Grid item xs={4}>
             <NumberField name="p" label="Proportional Term" />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <NumberField name="i" label="Integral Term" />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <NumberField name="d" label="Derivative Term" />
           </Grid>
         </Grid>
