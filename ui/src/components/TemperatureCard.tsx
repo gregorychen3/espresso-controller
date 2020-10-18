@@ -22,9 +22,7 @@ export default function TemperatureCard() {
   const curTemp = useSelector(selectCurTemp);
   const configuration = useSelector(selectConfiguration);
 
-  const handleSetTargetTempButtonClicked = () => {
-    d(setTargetTempModalVisibility(true));
-  };
+  const handleConfigureClicked = () => d(setTargetTempModalVisibility(true));
 
   return (
     <>
@@ -46,7 +44,7 @@ export default function TemperatureCard() {
       </Typography>
       <div>
         <div className={classes.setTargetTempButton}>
-          <Button variant="contained" color="primary" size="small" onClick={handleSetTargetTempButtonClicked}>
+          <Button variant="contained" color="primary" size="small" onClick={handleConfigureClicked}>
             CONFIGURE
           </Button>
         </div>
