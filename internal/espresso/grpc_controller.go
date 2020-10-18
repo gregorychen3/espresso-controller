@@ -21,10 +21,10 @@ var (
 )
 
 type grpcController struct {
-	c                      Configuration
-	boilerTemperatureCtrlr *pid.PID
-	groupMonitor           *temperature.Monitor
-	boilerMonitor          *temperature.Monitor
+	c             Configuration
+	pid           *pid.PID
+	groupMonitor  *temperature.Monitor
+	boilerMonitor *temperature.Monitor
 }
 
 func newGrpcController(
@@ -43,10 +43,10 @@ func newGrpcController(
 	}
 
 	return &grpcController{
-		c:                      c,
-		boilerTemperatureCtrlr: temperatureCtrlr,
-		groupMonitor:           groupMonitor,
-		boilerMonitor:          boilerMonitor,
+		c:             c,
+		pid:           temperatureCtrlr,
+		groupMonitor:  groupMonitor,
+		boilerMonitor: boilerMonitor,
 	}, nil
 }
 
@@ -153,7 +153,7 @@ func (c *grpcController) BoilerTemperature(req *espressopb.TemperatureStreamRequ
 }
 
 func (c *grpcController) GetTargetTemperature(context.Context, *espressopb.GetTargetTemperatureRequest) (*espressopb.GetTargetTemperatureResponse, error) {
-	targetTemperature := c.boilerTemperatureCtrlr.GetTargetTemperature()
+	targetTemperature := c.pid.GetTargetTemperature()
 
 	pbTime, err := ptypes.TimestampProto(targetTemperature.SetAt)
 	if err != nil {
@@ -171,7 +171,7 @@ func (c *grpcController) SetTargetTemperature(ctx context.Context, req *espresso
 		return nil, errors.New("temperature must be in range [0, 100] °C")
 	}
 
-	targetTemperature := c.boilerTemperatureCtrlr.SetTargetTemperature(req.Temperature)
+	targetTemperature := c.pid.SetTargetTemperature(req.Temperature)
 	pbTime, err := ptypes.TimestampProto(targetTemperature.SetAt)
 	if err != nil {
 		return nil, err
@@ -183,7 +183,7 @@ func (c *grpcController) SetTargetTemperature(ctx context.Context, req *espresso
 }
 
 func (c *grpcController) Shutdown() error {
-	return c.boilerTemperatureCtrlr.Shutdown()
+	return c.pid.Shutdown()
 }
 
 func (c *grpcController) GetTerms(ctx context.Context, req *espressopb.GetTermsRequest) (*espressopb.GetTermsResponse, error) {
