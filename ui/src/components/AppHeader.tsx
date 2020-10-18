@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default () => {
+export default function AppHeader() {
   const classes = useStyles();
 
   return (
@@ -44,4 +44,4 @@ export default () => {
       </Toolbar>
     </AppBar>
   );
-};
+}
