@@ -1,7 +1,7 @@
 import { Grid, InputAdornment } from "@material-ui/core";
 import { Field, FieldAttributes, Form, Formik } from "formik";
 import { TextField } from "formik-material-ui";
-import * as React from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { SetConfigurationRequest } from "../proto/pkg/espressopb/espresso_pb";
