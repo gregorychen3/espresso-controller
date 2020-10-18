@@ -1,12 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { boilerTemperatureSlice } from "./slices/boilerTemperatureSlice";
-import { configurationSlice } from "./slices/targetTemperatureSlice";
+import { configurationSlice } from "./slices/configurationSlice";
 import { uiSlice } from "./uiSlice";
 
 const rootReducer = combineReducers({
-  boilerTemperatureSlice: boilerTemperatureSlice.reducer,
-  targetTemperatureSlice: configurationSlice.reducer,
-  uiSlice: uiSlice.reducer,
+  boilerTemperature: boilerTemperatureSlice.reducer,
+  configuration: configurationSlice.reducer,
+  ui: uiSlice.reducer,
 });
 
 export default rootReducer;
