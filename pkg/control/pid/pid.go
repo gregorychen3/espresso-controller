@@ -23,8 +23,9 @@ type PID struct {
 	targetTemperature  control.TargetTemperature
 	heatingElement     *heating_element.HeatingElement
 	temperatureMonitor *temperature.Monitor
-
-	temperatureSubId uuid.UUID
+	temperatureSubId   uuid.UUID
+	p                  float32
+	d                  float32
 }
 
 func NewPid(heatingElem *heating_element.HeatingElement, sampler *temperature.Monitor) (*PID, error) {
@@ -52,6 +53,14 @@ func (c *PID) Run() error {
 		}
 	}()
 	return nil
+}
+
+func (c *PID) SetP(p float32) {
+	c.p = p
+}
+
+func (c *PID) SetD(d float32) {
+	c.d = d
 }
 
 func (c *PID) GetTargetTemperature() control.TargetTemperature {
