@@ -7,7 +7,7 @@ import (
 	"github.com/gregorychen3/espresso-controller/internal/espresso/heating_element"
 	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature"
 	"github.com/gregorychen3/espresso-controller/pkg/control"
-	"github.com/gregorychen3/espresso-controller/pkg/control/bangbang"
+	"github.com/gregorychen3/espresso-controller/pkg/control/pid"
 	"github.com/gregorychen3/espresso-controller/pkg/espressopb"
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
@@ -39,7 +39,7 @@ func newGrpcController(
 	boilerMonitor *temperature.Monitor,
 	groupMonitor *temperature.Monitor,
 ) (*grpcController, error) {
-	temperatureCtrlr, err := bangbang.NewBangbang(heatingElem, boilerMonitor)
+	temperatureCtrlr, err := pid.NewPid(heatingElem, boilerMonitor)
 	if err != nil {
 		return nil, err
 	}
