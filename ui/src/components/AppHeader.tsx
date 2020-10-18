@@ -8,29 +8,16 @@ import TimelineIcon from "@material-ui/icons/Timeline";
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({
-  toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: 36,
-  },
-  title: {
-    flexGrow: 1,
-  },
+  toolbar: { paddingRight: theme.spacing(2) },
+  menuButton: { marginRight: theme.spacing(2) },
+  title: { flexGrow: 1 },
 }));
 
 export default function AppHeader() {
   const classes = useStyles();
 
   return (
-    <AppBar position="absolute" className={classes.appBar}>
+    <AppBar position="absolute">
       <Toolbar className={classes.toolbar}>
         <IconButton edge="start" color="inherit" className={classes.menuButton}>
           <TimelineIcon fontSize="large" />
