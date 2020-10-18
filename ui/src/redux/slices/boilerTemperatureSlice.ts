@@ -2,8 +2,12 @@ import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
 import { toast } from "react-toastify";
 import { TemperatureStreamRequest, TemperatureStreamResponse } from "../../proto/pkg/espressopb/espresso_pb";
+import { EspressoClient } from "../../proto/pkg/espressopb/espresso_pb_service";
 import { TemperatureSample } from "../../types";
-import { espressoClient, ReturnType } from "../helpers";
+
+type ReturnType<T extends (...args: any[]) => any> = T extends (...args: any[]) => infer R ? R : never;
+
+const espressoClient = new EspressoClient("");
 
 const maxNumSamples = 1800; // 30 minutes of history at a rate of 1 sample/sec
 

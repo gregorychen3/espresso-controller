@@ -5,14 +5,14 @@ import moment from "moment";
 import parsePromText, { Metric } from "parse-prometheus-text-format";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MetricCard, { Severity } from "../components/MetricCard";
 import ConfigurationDialog from "../components/ConfigurationDialog";
+import MetricCard, { Severity } from "../components/MetricCard";
 import TemperatureCard from "../components/TemperatureCard";
 import TemperatureChart from "../components/TemperatureChart";
-import { GetTargetTemperatureRequest, TemperatureStreamRequest } from "../proto/pkg/espressopb/espresso_pb";
+import { GetConfigurationRequest, TemperatureStreamRequest } from "../proto/pkg/espressopb/espresso_pb";
 import { showTargetTempModal } from "../redux/selectors";
 import { endBoilerTemperatureStream, startBoilerTemperatureStream } from "../redux/slices/boilerTemperatureSlice";
-import { getTargetTemperature } from "../redux/slices/targetTemperatureSlice";
+import { getConfiguration } from "../redux/slices/targetTemperatureSlice";
 
 const metricsRefreshIntervalMillis = 5000;
 
@@ -79,7 +79,7 @@ export default () => {
   }, []);
 
   useEffect(() => {
-    d(getTargetTemperature(new GetTargetTemperatureRequest()));
+    d(getConfiguration({ request: new GetConfigurationRequest() }));
   }, [d]);
 
   const getRaspiTemperatureSeverity = (raspiTemperature: number): Severity => {

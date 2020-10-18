@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { targetTemperatureSlice } from "./slices/targetTemperatureSlice";
+import { setConfiguration } from "./slices/targetTemperatureSlice";
 
 export const uiSlice = createSlice({
   name: "ui",
@@ -10,7 +10,7 @@ export const uiSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(targetTemperatureSlice.actions.setTargetTemperatureResponse, (state, action) => {
+    builder.addCase(setConfiguration.fulfilled, (state) => {
       state.targetTempModalVisibility = false;
     });
   },

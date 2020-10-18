@@ -3,9 +3,9 @@ import { Field, Form, Formik } from "formik";
 import { TextField } from "formik-material-ui";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SetTargetTemperatureRequest } from "../proto/pkg/espressopb/espresso_pb";
+import { SetConfigurationRequest } from "../proto/pkg/espressopb/espresso_pb";
 import { getTargetTemp } from "../redux/selectors";
-import { setTargetTemperature } from "../redux/slices/targetTemperatureSlice";
+import { setConfiguration } from "../redux/slices/targetTemperatureSlice";
 
 interface Values {
   targetTemperature: number;
@@ -34,9 +34,9 @@ export default function ConfigurationForm() {
         return {};
       }}
       onSubmit={(values, { setSubmitting }) => {
-        const req = new SetTargetTemperatureRequest();
+        const req = new SetConfigurationRequest();
         req.setTemperature(values.targetTemperature!);
-        d(setTargetTemperature(req));
+        d(setConfiguration({ request: req }));
         setSubmitting(false);
       }}
     >
