@@ -2,7 +2,7 @@ import { grpc } from "@improbable-eng/grpc-web";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as jspb from "google-protobuf";
 import { toast } from "react-toastify";
-import { State } from "./redux";
+import { RootState } from "./redux";
 
 export const createUnaryGrpcThunk = <TReq extends jspb.Message, TResp extends jspb.Message>(
   method: grpc.UnaryMethodDefinition<TReq, TResp>
@@ -12,7 +12,7 @@ export const createUnaryGrpcThunk = <TReq extends jspb.Message, TResp extends js
     request: TReq;
   }
 
-  return createAsyncThunk<TResp, Payload, { state: State }>(
+  return createAsyncThunk<TResp, Payload, { state: RootState }>(
     methodName,
     async ({ request }: Payload) =>
       new Promise<TResp>((resolve, reject) => {

@@ -1,7 +1,7 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
 import { toast } from "react-toastify";
-import { State } from ".";
+import { RootState } from ".";
 import { TemperatureStreamRequest, TemperatureStreamResponse } from "../proto/pkg/espressopb/espresso_pb";
 import { EspressoClient } from "../proto/pkg/espressopb/espresso_pb_service";
 import { TemperatureSample } from "../types";
@@ -112,6 +112,6 @@ export const { endBoilerTemperatureStream } = boilerTemperatureSlice.actions;
 // SELECTORS
 // ---------
 
-export const selectCurTemp = (state: State) =>
+export const selectCurTemp = (state: RootState) =>
   state.boilerTemperature.history[state.boilerTemperature.history.length - 1];
-export const selectTempHistory = (state: State) => state.boilerTemperature.history;
+export const selectTempHistory = (state: RootState) => state.boilerTemperature.history;

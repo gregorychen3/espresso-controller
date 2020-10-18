@@ -1,3 +1,3 @@
-import { State } from ".";
+import { RootState } from ".";
 
-export const showTargetTempModal = (state: State) => state.ui.targetTempModalVisibility;
+export const showTargetTempModal = (state: RootState) => state.ui.targetTempModalVisibility;

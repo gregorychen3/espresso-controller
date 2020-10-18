@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import moment from "moment";
-import { State } from ".";
+import { RootState } from ".";
 import { createUnaryGrpcThunk } from "../createUnaryGrpcThunk";
 import { Espresso } from "../proto/pkg/espressopb/espresso_pb_service";
 
@@ -83,5 +83,5 @@ export const configurationSlice = createSlice({
 // SELECTORS
 // ---------
 
-export const selectConfiguration = (state: State) => state.configuration.configuration;
-export const selectFetchingTargetTemp = (state: State) => state.configuration.isFetching;
+export const selectConfiguration = (state: RootState) => state.configuration.configuration;
+export const selectFetchingTargetTemp = (state: RootState) => state.configuration.isFetching;
