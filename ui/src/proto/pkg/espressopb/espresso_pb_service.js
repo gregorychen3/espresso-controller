@@ -29,40 +29,22 @@ Espresso.BoilerTemperature = {
   responseType: pkg_espressopb_espresso_pb.TemperatureStreamResponse
 };
 
-Espresso.GetTargetTemperature = {
-  methodName: "GetTargetTemperature",
+Espresso.GetConfiguration = {
+  methodName: "GetConfiguration",
   service: Espresso,
   requestStream: false,
   responseStream: false,
-  requestType: pkg_espressopb_espresso_pb.GetTargetTemperatureRequest,
-  responseType: pkg_espressopb_espresso_pb.GetTargetTemperatureResponse
+  requestType: pkg_espressopb_espresso_pb.GetConfigurationRequest,
+  responseType: pkg_espressopb_espresso_pb.GetConfigurationRequest
 };
 
-Espresso.SetTargetTemperature = {
-  methodName: "SetTargetTemperature",
+Espresso.SetConfiguration = {
+  methodName: "SetConfiguration",
   service: Espresso,
   requestStream: false,
   responseStream: false,
-  requestType: pkg_espressopb_espresso_pb.SetTargetTemperatureRequest,
-  responseType: pkg_espressopb_espresso_pb.SetTargetTemperatureResponse
-};
-
-Espresso.GetTerms = {
-  methodName: "GetTerms",
-  service: Espresso,
-  requestStream: false,
-  responseStream: false,
-  requestType: pkg_espressopb_espresso_pb.GetTermsRequest,
-  responseType: pkg_espressopb_espresso_pb.GetTermsResponse
-};
-
-Espresso.SetTerms = {
-  methodName: "SetTerms",
-  service: Espresso,
-  requestStream: false,
-  responseStream: false,
-  requestType: pkg_espressopb_espresso_pb.SetTermsRequest,
-  responseType: pkg_espressopb_espresso_pb.SetTermsResponse
+  requestType: pkg_espressopb_espresso_pb.SetConfigurationRequest,
+  responseType: pkg_espressopb_espresso_pb.SetConfigurationRequest
 };
 
 exports.Espresso = Espresso;
@@ -150,11 +132,11 @@ EspressoClient.prototype.boilerTemperature = function boilerTemperature(requestM
   };
 };
 
-EspressoClient.prototype.getTargetTemperature = function getTargetTemperature(requestMessage, metadata, callback) {
+EspressoClient.prototype.getConfiguration = function getConfiguration(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(Espresso.GetTargetTemperature, {
+  var client = grpc.unary(Espresso.GetConfiguration, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -181,73 +163,11 @@ EspressoClient.prototype.getTargetTemperature = function getTargetTemperature(re
   };
 };
 
-EspressoClient.prototype.setTargetTemperature = function setTargetTemperature(requestMessage, metadata, callback) {
+EspressoClient.prototype.setConfiguration = function setConfiguration(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(Espresso.SetTargetTemperature, {
-    request: requestMessage,
-    host: this.serviceHost,
-    metadata: metadata,
-    transport: this.options.transport,
-    debug: this.options.debug,
-    onEnd: function (response) {
-      if (callback) {
-        if (response.status !== grpc.Code.OK) {
-          var err = new Error(response.statusMessage);
-          err.code = response.status;
-          err.metadata = response.trailers;
-          callback(err, null);
-        } else {
-          callback(null, response.message);
-        }
-      }
-    }
-  });
-  return {
-    cancel: function () {
-      callback = null;
-      client.close();
-    }
-  };
-};
-
-EspressoClient.prototype.getTerms = function getTerms(requestMessage, metadata, callback) {
-  if (arguments.length === 2) {
-    callback = arguments[1];
-  }
-  var client = grpc.unary(Espresso.GetTerms, {
-    request: requestMessage,
-    host: this.serviceHost,
-    metadata: metadata,
-    transport: this.options.transport,
-    debug: this.options.debug,
-    onEnd: function (response) {
-      if (callback) {
-        if (response.status !== grpc.Code.OK) {
-          var err = new Error(response.statusMessage);
-          err.code = response.status;
-          err.metadata = response.trailers;
-          callback(err, null);
-        } else {
-          callback(null, response.message);
-        }
-      }
-    }
-  });
-  return {
-    cancel: function () {
-      callback = null;
-      client.close();
-    }
-  };
-};
-
-EspressoClient.prototype.setTerms = function setTerms(requestMessage, metadata, callback) {
-  if (arguments.length === 2) {
-    callback = arguments[1];
-  }
-  var client = grpc.unary(Espresso.SetTerms, {
+  var client = grpc.unary(Espresso.SetConfiguration, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

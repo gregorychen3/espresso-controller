@@ -7,10 +7,8 @@ import "google/protobuf/timestamp.proto";
 service Espresso {
   rpc GroupHeadTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
   rpc BoilerTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
-  rpc GetTargetTemperature (GetTargetTemperatureRequest) returns (GetTargetTemperatureResponse);
-  rpc SetTargetTemperature (SetTargetTemperatureRequest) returns (SetTargetTemperatureResponse);
-  rpc GetTerms(GetTermsRequest) returns (GetTermsResponse);
-  rpc SetTerms(SetTermsRequest) returns (SetTermsResponse);
+  rpc GetConfiguration (GetConfigurationRequest) returns (GetConfigurationRequest);
+  rpc SetConfiguration (SetConfigurationRequest) returns (SetConfigurationRequest);
 }
 
 message TemperatureSample {
@@ -30,33 +28,25 @@ message TemperatureStreamResponse {
     }
 }
 
-message GetTargetTemperatureRequest {}
-message GetTargetTemperatureResponse {
+message GetConfigurationRequest {}
+
+message GetConfigurationResponse {
     double temperature = 1;
     google.protobuf.Timestamp set_at = 2;
+    float p = 3;
+    float d = 4;
 }
 
-message SetTargetTemperatureRequest {
-    double temperature = 1;
-}
-message SetTargetTemperatureResponse {
+message SetConfigurationRequest {
     double temperature = 1;
     google.protobuf.Timestamp set_at = 2;
+    float p = 3;
+    float d = 4;
 }
 
-message GetTermsRequest {}
-
-message GetTermsResponse {
-    float p = 1;
-    float d = 2;
-}
-
-message SetTermsRequest {
-    float p = 1;
-    float d = 2;
-}
-
-message SetTermsResponse {
-    float p = 1;
-    float d = 2;
+message SetConfigurationResponse {
+    double temperature = 1;
+    google.protobuf.Timestamp set_at = 2;
+    float p = 3;
+    float d = 4;
 }
