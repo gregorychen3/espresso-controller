@@ -111,10 +111,10 @@ func (c *grpcController) GetConfiguration(ctx context.Context, req *espressopb.G
 
 	return &espressopb.Configuration{
 		Temperature: targetTemperature.Value,
-		SetAt:       pbTime,
 		P:           c.pid.P,
 		I:           c.pid.I,
 		D:           c.pid.D,
+		SetAt:       pbTime,
 	}, nil
 }
 
@@ -140,10 +140,10 @@ func (c *grpcController) SetConfiguration(ctx context.Context, req *espressopb.C
 
 	return &espressopb.Configuration{
 		Temperature: targetTemperature.Value,
-		SetAt:       pbTime,
 		P:           c.pid.P,
 		I:           c.pid.I,
 		D:           c.pid.D,
+		SetAt:       pbTime,
 	}, nil
 }
 
