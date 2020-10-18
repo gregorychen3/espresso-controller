@@ -20,6 +20,7 @@ interface ConfigurationSlice {
   configuration?: {
     targetTemp: { value: number; setAt: moment.Moment };
     p: number;
+    i: number;
     d: number;
   };
   isFetching: boolean;
@@ -52,6 +53,7 @@ const configurationSlice = createSlice({
       state.configuration = {
         targetTemp: { value, setAt: moment(setAt) },
         p: action.payload.getP(),
+        i: action.payload.getI(),
         d: action.payload.getD(),
       };
     });
@@ -74,6 +76,7 @@ const configurationSlice = createSlice({
       state.configuration = {
         targetTemp: { value, setAt: moment(setAt) },
         p: action.payload.getP(),
+        i: action.payload.getI(),
         d: action.payload.getD(),
       };
       toast.success("PID successfully configured");

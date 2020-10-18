@@ -17,12 +17,14 @@ const validationSchema = Yup.object().shape({
     .max(100, "Must be in range [0, 100] °C")
     .required("Required"),
   p: Yup.number().min(0, "Must be > 0").required("Required"),
+  i: Yup.number().min(0, "Must be > 0").required("Required"),
   d: Yup.number().min(0, "Must be > 0").required("Required"),
 });
 
 interface Values {
   targetTemp: number | "";
   p: number | "";
+  i: number | "";
   d: number | "";
 }
 
@@ -30,8 +32,8 @@ export default function ConfigurationForm() {
   const d = useDispatch();
   const configuration = useSelector(selectConfiguration);
   const initialValues: Values = configuration
-    ? { targetTemp: configuration.targetTemp.value, p: configuration.p, d: configuration.d }
-    : { targetTemp: "", p: "", d: "" };
+    ? { targetTemp: configuration.targetTemp.value, p: configuration.p, i: configuration.i, d: configuration.d }
+    : { targetTemp: "", p: "", i: "", d: "" };
 
   return (
     <Formik
@@ -42,6 +44,7 @@ export default function ConfigurationForm() {
         const req = new Configuration();
         req.setTemperature(values.targetTemp as number);
         req.setP(values.p as number);
+        req.setI(values.i as number);
         req.setD(values.d as number);
         d(setConfiguration({ request: req }));
         setSubmitting(false);
@@ -49,17 +52,20 @@ export default function ConfigurationForm() {
     >
       <Form id="configuration">
         <Grid container spacing={2}>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <NumberField
               name="targetTemp"
               label="Temperature"
               InputProps={{ endAdornment: <InputAdornment position="end">°C</InputAdornment> }}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <NumberField name="p" label="Proportional Term" />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
+            <NumberField name="i" label="Integral Term" />
+          </Grid>
+          <Grid item xs={3}>
             <NumberField name="d" label="Derivative Term" />
           </Grid>
         </Grid>
