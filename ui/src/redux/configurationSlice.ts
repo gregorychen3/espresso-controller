@@ -28,7 +28,7 @@ const initialState: ConfigurationSlice = {
   isFetching: false,
 };
 
-export const configurationSlice = createSlice({
+const configurationSlice = createSlice({
   name: "configuration",
   initialState,
   reducers: {},
@@ -78,6 +78,8 @@ export const configurationSlice = createSlice({
     });
   },
 });
+
+export default configurationSlice.reducer;
 
 //
 // SELECTORS

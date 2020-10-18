@@ -26,7 +26,7 @@ const initialState: BoilerTemperatureSlice = {
   history: [],
 };
 
-export const boilerTemperatureSlice = createSlice({
+const boilerTemperatureSlice = createSlice({
   name: "boilerTemperature",
   initialState,
   reducers: {
@@ -89,6 +89,8 @@ export const boilerTemperatureSlice = createSlice({
     },
   },
 });
+
+export default boilerTemperatureSlice.reducer;
 
 export const startBoilerTemperatureStream = (req: TemperatureStreamRequest) => (d: Dispatch) => {
   const stream = espressoClient.boilerTemperature(req);

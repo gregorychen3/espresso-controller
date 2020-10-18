@@ -1,12 +1,12 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import { boilerTemperatureSlice } from "./boilerTemperatureSlice";
-import { configurationSlice } from "./configurationSlice";
+import boilerTemperatureReducer from "./boilerTemperatureSlice";
+import configurationReducer from "./configurationSlice";
 import { uiSlice } from "./uiSlice";
 
 export const store = configureStore({
   reducer: {
-    boilerTemperature: boilerTemperatureSlice.reducer,
-    configuration: configurationSlice.reducer,
+    boilerTemperature: boilerTemperatureReducer,
+    configuration: configurationReducer,
     ui: uiSlice.reducer,
   },
   middleware: getDefaultMiddleware({
