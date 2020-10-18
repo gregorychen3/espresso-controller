@@ -191,5 +191,7 @@ func (c *grpcController) GetTerms(ctx context.Context, req *espressopb.GetTermsR
 }
 
 func (c *grpcController) SetTerms(ctx context.Context, req *espressopb.SetTermsRequest) (*espressopb.SetTermsResponse, error) {
-	return &espressopb.SetTermsResponse{P: req.P, D: req.D}, nil
+	c.pid.P = req.P
+	c.pid.D = req.D
+	return &espressopb.SetTermsResponse{P: c.pid.P, D: c.pid.D}, nil
 }
