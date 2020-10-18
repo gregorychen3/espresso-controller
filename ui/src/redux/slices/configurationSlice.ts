@@ -1,10 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import moment from "moment";
+import { State } from "..";
 import { createUnaryGrpcThunk } from "../../createUnaryGrpcThunk";
 import { Espresso } from "../../proto/pkg/espressopb/espresso_pb_service";
 
+//
+// THUNKS
+// ------
+
 export const getConfiguration = createUnaryGrpcThunk(Espresso.GetConfiguration);
 export const setConfiguration = createUnaryGrpcThunk(Espresso.SetConfiguration);
+
+//
+// SLICE
+// -----
 
 interface ConfigurationSlice {
   targetTemp?: { value: number; setAt: moment.Moment };
@@ -63,3 +72,10 @@ export const configurationSlice = createSlice({
     });
   },
 });
+
+//
+// SELECTORS
+// ---------
+
+export const getTargetTemp = (state: State) => state.configuration.targetTemp;
+export const isFetchingTargetTemp = (state: State) => state.configuration.isFetching;
