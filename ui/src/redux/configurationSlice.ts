@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import moment from "moment";
+import { toast } from "react-toastify";
 import { RootState } from ".";
 import { createUnaryGrpcThunk } from "../createUnaryGrpcThunk";
 import { Espresso } from "../proto/pkg/espressopb/espresso_pb_service";
@@ -75,6 +76,7 @@ const configurationSlice = createSlice({
         p: action.payload.getP(),
         d: action.payload.getD(),
       };
+      toast.success("PID successfully configured");
     });
   },
 });
