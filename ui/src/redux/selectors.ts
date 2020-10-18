@@ -1,3 +1,3 @@
 import { RootState } from ".";
 
-export const showTargetTempModal = (state: RootState) => state.ui.targetTempModalVisibility;
+export const showConfigDialog = (state: RootState) => state.ui.configureDialogVisibility;

@@ -5,7 +5,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurTemp } from "../redux/boilerTemperatureSlice";
 import { selectConfiguration } from "../redux/configurationSlice";
-import { setTargetTempModalVisibility } from "../redux/uiSlice";
+import { setConfigureDialogVisibility } from "../redux/uiSlice";
 import Title from "./Title";
 
 const useStyles = makeStyles({
@@ -22,7 +22,7 @@ export default function TemperatureCard() {
   const curTemp = useSelector(selectCurTemp);
   const configuration = useSelector(selectConfiguration);
 
-  const handleConfigureClicked = () => d(setTargetTempModalVisibility(true));
+  const handleConfigureClicked = () => d(setConfigureDialogVisibility(true));
 
   return (
     <>

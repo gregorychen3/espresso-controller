@@ -5,13 +5,13 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setTargetTempModalVisibility } from "../redux/uiSlice";
+import { setConfigureDialogVisibility } from "../redux/uiSlice";
 import ConfigurationForm from "./ConfigurationForm";
 
 export default function ConfigurationDialog() {
   const d = useDispatch();
 
-  const handleClose = () => d(setTargetTempModalVisibility(false));
+  const handleClose = () => d(setConfigureDialogVisibility(false));
 
   return (
     <Dialog open={true} onClose={handleClose}>

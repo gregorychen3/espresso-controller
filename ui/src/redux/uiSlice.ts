@@ -3,17 +3,17 @@ import { setConfiguration } from "./configurationSlice";
 
 export const uiSlice = createSlice({
   name: "ui",
-  initialState: { targetTempModalVisibility: false },
+  initialState: { configureDialogVisibility: false },
   reducers: {
-    setTargetTempModalVisibility: (state, action: PayloadAction<boolean>) => {
-      state.targetTempModalVisibility = action.payload;
+    setConfigureDialogVisibility: (state, action: PayloadAction<boolean>) => {
+      state.configureDialogVisibility = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(setConfiguration.fulfilled, (state) => {
-      state.targetTempModalVisibility = false;
+      state.configureDialogVisibility = false;
     });
   },
 });
 
-export const { setTargetTempModalVisibility } = uiSlice.actions;
+export const { setConfigureDialogVisibility } = uiSlice.actions;

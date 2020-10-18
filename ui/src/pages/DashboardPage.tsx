@@ -10,7 +10,7 @@ import MetricCard, { Severity } from "../components/MetricCard";
 import TemperatureCard from "../components/TemperatureCard";
 import TemperatureChart from "../components/TemperatureChart";
 import { GetConfigurationRequest, TemperatureStreamRequest } from "../proto/pkg/espressopb/espresso_pb";
-import { showTargetTempModal } from "../redux/selectors";
+import { showConfigDialog } from "../redux/selectors";
 import { endBoilerTemperatureStream, startBoilerTemperatureStream } from "../redux/boilerTemperatureSlice";
 import { getConfiguration } from "../redux/configurationSlice";
 
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default () => {
-  const showSetTemperatureModal = useSelector(showTargetTempModal);
+  const showSetTemperatureModal = useSelector(showConfigDialog);
 
   const classes = useStyles();
 
