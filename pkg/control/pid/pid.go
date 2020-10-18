@@ -20,8 +20,8 @@ const (
 // satisfies the control.Strategy interface.
 // https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control
 type PID struct {
-	P                  float32
-	D                  float32
+	P                  float64
+	D                  float64
 	targetTemperature  control.TargetTemperature
 	heatingElement     *heating_element.HeatingElement
 	temperatureMonitor *temperature.Monitor
@@ -30,6 +30,8 @@ type PID struct {
 
 func NewPid(heatingElem *heating_element.HeatingElement, sampler *temperature.Monitor) (*PID, error) {
 	return &PID{
+		P:                  0,
+		D:                  0,
 		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},
 		heatingElement:     heatingElem,
 		temperatureMonitor: sampler,
@@ -37,19 +39,18 @@ func NewPid(heatingElem *heating_element.HeatingElement, sampler *temperature.Mo
 }
 
 func (c *PID) Run() error {
-	// adjust heating element on interval
 	go func() {
 		subId, subCh := c.temperatureMonitor.Subscribe()
 		c.temperatureSubId = subId
 
+		prevErr := 0.0
+
 		for sample := range subCh {
-			if sample.Value < c.GetTargetTemperature().Value-1 {
-				log.Debug("Setting duty factor", zap.Float32("dutyFactor", 0.5), zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", c.GetTargetTemperature().Value))
-				c.heatingElement.SetDutyFactor(0.5)
-			} else {
-				log.Debug("Setting duty factor", zap.Float32("dutyFactor", 0), zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", c.GetTargetTemperature().Value))
-				c.heatingElement.SetDutyFactor(0)
-			}
+			curErr := c.targetTemperature.Value - sample.Value
+			rawOut := c.P*curErr + c.D*(curErr-prevErr)
+			out := rawOut / 200
+			log.Debug("Setting duty factor", zap.Float64("dutyFactor", out), zap.Float64("curTemperature", sample.Value), zap.Float64("targetTemperature", c.GetTargetTemperature().Value))
+			prevErr = curErr
 		}
 	}()
 	return nil

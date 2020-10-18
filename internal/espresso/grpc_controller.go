@@ -112,7 +112,8 @@ func (c *grpcController) GetConfiguration(ctx context.Context, req *espressopb.G
 	return &espressopb.GetConfigurationResponse{
 		Temperature: targetTemperature.Value,
 		SetAt:       pbTime,
-		P:           c.pid.P, D: c.pid.D,
+		P:           c.pid.P,
+		D:           c.pid.D,
 	}, nil
 }
 

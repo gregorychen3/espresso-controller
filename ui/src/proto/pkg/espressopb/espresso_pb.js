@@ -1045,11 +1045,11 @@ proto.espressopb.GetConfigurationResponse.deserializeBinaryFromReader = function
       msg.setSetAt(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readFloat());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setP(value);
       break;
     case 4:
-      var value = /** @type {number} */ (reader.readFloat());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setD(value);
       break;
     default:
@@ -1098,14 +1098,14 @@ proto.espressopb.GetConfigurationResponse.serializeBinaryToWriter = function(mes
   }
   f = message.getP();
   if (f !== 0.0) {
-    writer.writeFloat(
+    writer.writeDouble(
       3,
       f
     );
   }
   f = message.getD();
   if (f !== 0.0) {
-    writer.writeFloat(
+    writer.writeDouble(
       4,
       f
     );
@@ -1169,7 +1169,7 @@ proto.espressopb.GetConfigurationResponse.prototype.hasSetAt = function() {
 
 
 /**
- * optional float p = 3;
+ * optional double p = 3;
  * @return {number}
  */
 proto.espressopb.GetConfigurationResponse.prototype.getP = function() {
@@ -1187,7 +1187,7 @@ proto.espressopb.GetConfigurationResponse.prototype.setP = function(value) {
 
 
 /**
- * optional float d = 4;
+ * optional double d = 4;
  * @return {number}
  */
 proto.espressopb.GetConfigurationResponse.prototype.getD = function() {
@@ -1286,11 +1286,11 @@ proto.espressopb.SetConfigurationRequest.deserializeBinaryFromReader = function(
       msg.setSetAt(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readFloat());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setP(value);
       break;
     case 4:
-      var value = /** @type {number} */ (reader.readFloat());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setD(value);
       break;
     default:
@@ -1339,14 +1339,14 @@ proto.espressopb.SetConfigurationRequest.serializeBinaryToWriter = function(mess
   }
   f = message.getP();
   if (f !== 0.0) {
-    writer.writeFloat(
+    writer.writeDouble(
       3,
       f
     );
   }
   f = message.getD();
   if (f !== 0.0) {
-    writer.writeFloat(
+    writer.writeDouble(
       4,
       f
     );
@@ -1410,7 +1410,7 @@ proto.espressopb.SetConfigurationRequest.prototype.hasSetAt = function() {
 
 
 /**
- * optional float p = 3;
+ * optional double p = 3;
  * @return {number}
  */
 proto.espressopb.SetConfigurationRequest.prototype.getP = function() {
@@ -1428,7 +1428,7 @@ proto.espressopb.SetConfigurationRequest.prototype.setP = function(value) {
 
 
 /**
- * optional float d = 4;
+ * optional double d = 4;
  * @return {number}
  */
 proto.espressopb.SetConfigurationRequest.prototype.getD = function() {
@@ -1527,11 +1527,11 @@ proto.espressopb.SetConfigurationResponse.deserializeBinaryFromReader = function
       msg.setSetAt(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readFloat());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setP(value);
       break;
     case 4:
-      var value = /** @type {number} */ (reader.readFloat());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setD(value);
       break;
     default:
@@ -1580,14 +1580,14 @@ proto.espressopb.SetConfigurationResponse.serializeBinaryToWriter = function(mes
   }
   f = message.getP();
   if (f !== 0.0) {
-    writer.writeFloat(
+    writer.writeDouble(
       3,
       f
     );
   }
   f = message.getD();
   if (f !== 0.0) {
-    writer.writeFloat(
+    writer.writeDouble(
       4,
       f
     );
@@ -1651,7 +1651,7 @@ proto.espressopb.SetConfigurationResponse.prototype.hasSetAt = function() {
 
 
 /**
- * optional float p = 3;
+ * optional double p = 3;
  * @return {number}
  */
 proto.espressopb.SetConfigurationResponse.prototype.getP = function() {
@@ -1669,7 +1669,7 @@ proto.espressopb.SetConfigurationResponse.prototype.setP = function(value) {
 
 
 /**
- * optional float d = 4;
+ * optional double d = 4;
  * @return {number}
  */
 proto.espressopb.SetConfigurationResponse.prototype.getD = function() {
