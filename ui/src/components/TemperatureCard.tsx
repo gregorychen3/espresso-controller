@@ -45,7 +45,7 @@ export default function TemperatureCard() {
       <div>
         <div className={classes.setTargetTempButton}>
           <Button variant="contained" color="primary" size="small" onClick={handleConfigureClicked}>
-            CONFIGURE
+            CONFIGURE PID
           </Button>
         </div>
       </div>
