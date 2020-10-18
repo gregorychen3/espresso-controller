@@ -33,19 +33,22 @@ message GetConfigurationResponse {
     double temperature = 1;
     google.protobuf.Timestamp set_at = 2;
     double p = 3;
-    double d = 4;
+    double i = 4;
+    double d = 5;
 }
 
 message SetConfigurationRequest {
     double temperature = 1;
     google.protobuf.Timestamp set_at = 2;
     double p = 3;
-    double d = 4;
+    double i = 4;
+    double d = 5;
 }
 
 message SetConfigurationResponse {
     double temperature = 1;
     google.protobuf.Timestamp set_at = 2;
     double p = 3;
-    double d = 4;
+    double i = 4;
+    double d = 5;
 }

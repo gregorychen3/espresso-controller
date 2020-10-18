@@ -998,7 +998,8 @@ proto.espressopb.GetConfigurationResponse.toObject = function(includeInstance, m
     temperature: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
     setAt: (f = msg.getSetAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     p: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
-    d: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0)
+    i: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    d: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0)
   };
 
   if (includeInstance) {
@@ -1049,6 +1050,10 @@ proto.espressopb.GetConfigurationResponse.deserializeBinaryFromReader = function
       msg.setP(value);
       break;
     case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setI(value);
+      break;
+    case 5:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setD(value);
       break;
@@ -1103,10 +1108,17 @@ proto.espressopb.GetConfigurationResponse.serializeBinaryToWriter = function(mes
       f
     );
   }
-  f = message.getD();
+  f = message.getI();
   if (f !== 0.0) {
     writer.writeDouble(
       4,
+      f
+    );
+  }
+  f = message.getD();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
       f
     );
   }
@@ -1187,10 +1199,10 @@ proto.espressopb.GetConfigurationResponse.prototype.setP = function(value) {
 
 
 /**
- * optional double d = 4;
+ * optional double i = 4;
  * @return {number}
  */
-proto.espressopb.GetConfigurationResponse.prototype.getD = function() {
+proto.espressopb.GetConfigurationResponse.prototype.getI = function() {
   return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
 };
 
@@ -1199,8 +1211,26 @@ proto.espressopb.GetConfigurationResponse.prototype.getD = function() {
  * @param {number} value
  * @return {!proto.espressopb.GetConfigurationResponse} returns this
  */
-proto.espressopb.GetConfigurationResponse.prototype.setD = function(value) {
+proto.espressopb.GetConfigurationResponse.prototype.setI = function(value) {
   return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional double d = 5;
+ * @return {number}
+ */
+proto.espressopb.GetConfigurationResponse.prototype.getD = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.espressopb.GetConfigurationResponse} returns this
+ */
+proto.espressopb.GetConfigurationResponse.prototype.setD = function(value) {
+  return jspb.Message.setProto3FloatField(this, 5, value);
 };
 
 
@@ -1239,7 +1269,8 @@ proto.espressopb.SetConfigurationRequest.toObject = function(includeInstance, ms
     temperature: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
     setAt: (f = msg.getSetAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     p: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
-    d: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0)
+    i: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    d: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0)
   };
 
   if (includeInstance) {
@@ -1290,6 +1321,10 @@ proto.espressopb.SetConfigurationRequest.deserializeBinaryFromReader = function(
       msg.setP(value);
       break;
     case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setI(value);
+      break;
+    case 5:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setD(value);
       break;
@@ -1344,10 +1379,17 @@ proto.espressopb.SetConfigurationRequest.serializeBinaryToWriter = function(mess
       f
     );
   }
-  f = message.getD();
+  f = message.getI();
   if (f !== 0.0) {
     writer.writeDouble(
       4,
+      f
+    );
+  }
+  f = message.getD();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
       f
     );
   }
@@ -1428,10 +1470,10 @@ proto.espressopb.SetConfigurationRequest.prototype.setP = function(value) {
 
 
 /**
- * optional double d = 4;
+ * optional double i = 4;
  * @return {number}
  */
-proto.espressopb.SetConfigurationRequest.prototype.getD = function() {
+proto.espressopb.SetConfigurationRequest.prototype.getI = function() {
   return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
 };
 
@@ -1440,8 +1482,26 @@ proto.espressopb.SetConfigurationRequest.prototype.getD = function() {
  * @param {number} value
  * @return {!proto.espressopb.SetConfigurationRequest} returns this
  */
-proto.espressopb.SetConfigurationRequest.prototype.setD = function(value) {
+proto.espressopb.SetConfigurationRequest.prototype.setI = function(value) {
   return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional double d = 5;
+ * @return {number}
+ */
+proto.espressopb.SetConfigurationRequest.prototype.getD = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.espressopb.SetConfigurationRequest} returns this
+ */
+proto.espressopb.SetConfigurationRequest.prototype.setD = function(value) {
+  return jspb.Message.setProto3FloatField(this, 5, value);
 };
 
 
@@ -1480,7 +1540,8 @@ proto.espressopb.SetConfigurationResponse.toObject = function(includeInstance, m
     temperature: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
     setAt: (f = msg.getSetAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     p: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
-    d: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0)
+    i: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    d: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0)
   };
 
   if (includeInstance) {
@@ -1531,6 +1592,10 @@ proto.espressopb.SetConfigurationResponse.deserializeBinaryFromReader = function
       msg.setP(value);
       break;
     case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setI(value);
+      break;
+    case 5:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setD(value);
       break;
@@ -1585,10 +1650,17 @@ proto.espressopb.SetConfigurationResponse.serializeBinaryToWriter = function(mes
       f
     );
   }
-  f = message.getD();
+  f = message.getI();
   if (f !== 0.0) {
     writer.writeDouble(
       4,
+      f
+    );
+  }
+  f = message.getD();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
       f
     );
   }
@@ -1669,10 +1741,10 @@ proto.espressopb.SetConfigurationResponse.prototype.setP = function(value) {
 
 
 /**
- * optional double d = 4;
+ * optional double i = 4;
  * @return {number}
  */
-proto.espressopb.SetConfigurationResponse.prototype.getD = function() {
+proto.espressopb.SetConfigurationResponse.prototype.getI = function() {
   return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
 };
 
@@ -1681,8 +1753,26 @@ proto.espressopb.SetConfigurationResponse.prototype.getD = function() {
  * @param {number} value
  * @return {!proto.espressopb.SetConfigurationResponse} returns this
  */
-proto.espressopb.SetConfigurationResponse.prototype.setD = function(value) {
+proto.espressopb.SetConfigurationResponse.prototype.setI = function(value) {
   return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional double d = 5;
+ * @return {number}
+ */
+proto.espressopb.SetConfigurationResponse.prototype.getD = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.espressopb.SetConfigurationResponse} returns this
+ */
+proto.espressopb.SetConfigurationResponse.prototype.setD = function(value) {
+  return jspb.Message.setProto3FloatField(this, 5, value);
 };
 
 

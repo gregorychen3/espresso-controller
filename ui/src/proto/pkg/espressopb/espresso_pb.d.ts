@@ -131,6 +131,9 @@ export class GetConfigurationResponse extends jspb.Message {
   getP(): number;
   setP(value: number): void;
 
+  getI(): number;
+  setI(value: number): void;
+
   getD(): number;
   setD(value: number): void;
 
@@ -149,6 +152,7 @@ export namespace GetConfigurationResponse {
     temperature: number,
     setAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     p: number,
+    i: number,
     d: number,
   }
 }
@@ -164,6 +168,9 @@ export class SetConfigurationRequest extends jspb.Message {
 
   getP(): number;
   setP(value: number): void;
+
+  getI(): number;
+  setI(value: number): void;
 
   getD(): number;
   setD(value: number): void;
@@ -183,6 +190,7 @@ export namespace SetConfigurationRequest {
     temperature: number,
     setAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     p: number,
+    i: number,
     d: number,
   }
 }
@@ -198,6 +206,9 @@ export class SetConfigurationResponse extends jspb.Message {
 
   getP(): number;
   setP(value: number): void;
+
+  getI(): number;
+  setI(value: number): void;
 
   getD(): number;
   setD(value: number): void;
@@ -217,6 +228,7 @@ export namespace SetConfigurationResponse {
     temperature: number,
     setAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     p: number,
+    i: number,
     d: number,
   }
 }
