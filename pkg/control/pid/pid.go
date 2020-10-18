@@ -47,8 +47,17 @@ func (c *PID) Run() error {
 
 		for sample := range subCh {
 			curErr := c.targetTemperature.Value - sample.Value
-			rawOut := c.P*curErr + c.D*(curErr-prevErr)
-			out := rawOut / 100
+			rawOut := (c.P*curErr + c.D*(curErr-prevErr)) / 100
+
+			var out float64
+			if rawOut <= 0 {
+				out = 0
+			} else if rawOut >= 1 {
+				out = 1
+			} else {
+				out = rawOut
+			}
+
 			log.Debug("Setting duty factor",
 				zap.Float64("prevErr", prevErr),
 				zap.Float64("curErr", curErr),
