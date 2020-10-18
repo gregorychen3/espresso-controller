@@ -50,57 +50,6 @@ func newGrpcController(
 	}, nil
 }
 
-func (c *grpcController) GroupHeadTemperature(req *espressopb.TemperatureStreamRequest, stream espressopb.Espresso_GroupHeadTemperatureServer) error {
-	grpcStreams.Inc()
-	defer grpcStreams.Dec()
-
-	// the first message sent on the stream is the temperature history
-	var pbSamples []*espressopb.TemperatureSample
-	samples := c.groupMonitor.GetHistory()
-	for _, s := range samples {
-		pbTime, err := ptypes.TimestampProto(s.ObservedAt)
-		if err != nil {
-			return err
-		}
-		pbSample := espressopb.TemperatureSample{
-			Value:      s.Value,
-			ObservedAt: pbTime,
-		}
-		pbSamples = append(pbSamples, &pbSample)
-	}
-
-	if err := stream.Send(&espressopb.TemperatureStreamResponse{
-		Data: &espressopb.TemperatureStreamResponse_History{
-			History: &espressopb.TemperatureHistory{
-				Samples: pbSamples,
-			},
-		},
-	}); err != nil {
-		return err
-	}
-
-	// send a current sample every second
-	subId, subCh := c.groupMonitor.Subscribe()
-	defer c.groupMonitor.Unsubscribe(subId)
-	for sample := range subCh {
-		pbTime, err := ptypes.TimestampProto(sample.ObservedAt)
-		if err != nil {
-			return err
-		}
-		if err := stream.Send(&espressopb.TemperatureStreamResponse{
-			Data: &espressopb.TemperatureStreamResponse_Sample{
-				Sample: &espressopb.TemperatureSample{
-					Value:      sample.Value,
-					ObservedAt: pbTime,
-				},
-			},
-		}); err != nil {
-			return err
-		}
-	}
-	return errors.New("temperature monitor stopped publishing")
-}
-
 func (c *grpcController) BoilerTemperature(req *espressopb.TemperatureStreamRequest, stream espressopb.Espresso_BoilerTemperatureServer) error {
 	grpcStreams.Inc()
 	defer grpcStreams.Dec()

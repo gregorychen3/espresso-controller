@@ -11,15 +11,6 @@ var Espresso = (function () {
   return Espresso;
 }());
 
-Espresso.GroupHeadTemperature = {
-  methodName: "GroupHeadTemperature",
-  service: Espresso,
-  requestStream: false,
-  responseStream: true,
-  requestType: pkg_espressopb_espresso_pb.TemperatureStreamRequest,
-  responseType: pkg_espressopb_espresso_pb.TemperatureStreamResponse
-};
-
 Espresso.BoilerTemperature = {
   methodName: "BoilerTemperature",
   service: Espresso,
@@ -53,45 +44,6 @@ function EspressoClient(serviceHost, options) {
   this.serviceHost = serviceHost;
   this.options = options || {};
 }
-
-EspressoClient.prototype.groupHeadTemperature = function groupHeadTemperature(requestMessage, metadata) {
-  var listeners = {
-    data: [],
-    end: [],
-    status: []
-  };
-  var client = grpc.invoke(Espresso.GroupHeadTemperature, {
-    request: requestMessage,
-    host: this.serviceHost,
-    metadata: metadata,
-    transport: this.options.transport,
-    debug: this.options.debug,
-    onMessage: function (responseMessage) {
-      listeners.data.forEach(function (handler) {
-        handler(responseMessage);
-      });
-    },
-    onEnd: function (status, statusMessage, trailers) {
-      listeners.status.forEach(function (handler) {
-        handler({ code: status, details: statusMessage, metadata: trailers });
-      });
-      listeners.end.forEach(function (handler) {
-        handler({ code: status, details: statusMessage, metadata: trailers });
-      });
-      listeners = null;
-    }
-  });
-  return {
-    on: function (type, handler) {
-      listeners[type].push(handler);
-      return this;
-    },
-    cancel: function () {
-      listeners = null;
-      client.close();
-    }
-  };
-};
 
 EspressoClient.prototype.boilerTemperature = function boilerTemperature(requestMessage, metadata) {
   var listeners = {
