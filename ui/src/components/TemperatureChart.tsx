@@ -33,7 +33,9 @@ export default function TemperatureChart() {
           dot={false}
         />
         <Tooltip />
-        {targetTemp && <ReferenceLine y={targetTemp.value} stroke="green" strokeDasharray="3 3" />}
+        {targetTemp && (
+          <ReferenceLine y={targetTemp.value} stroke="green" strokeDasharray="3 3" ifOverflow="extendDomain" />
+        )}
       </LineChart>
     </ResponsiveContainer>
   );
