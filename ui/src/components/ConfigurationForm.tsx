@@ -41,6 +41,8 @@ export default function ConfigurationForm() {
       onSubmit={(values, { setSubmitting }) => {
         const req = new SetConfigurationRequest();
         req.setTemperature(values.targetTemp as number);
+        req.setP(values.p as number);
+        req.setD(values.d as number);
         d(setConfiguration({ request: req }));
         setSubmitting(false);
       }}
