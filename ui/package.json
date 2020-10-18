@@ -23,7 +23,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "^3.4.3",
     "react-toastify": "^5.5.0",
     "recharts": "^1.8.5",
     "ts-protoc-gen": "^0.12.0",
