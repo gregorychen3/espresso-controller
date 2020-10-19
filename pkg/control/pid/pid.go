@@ -6,6 +6,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/gregorychen3/espresso-controller/internal/espresso/heating_element"
 	"github.com/gregorychen3/espresso-controller/internal/espresso/temperature"
+	"github.com/gregorychen3/espresso-controller/internal/fifo"
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/pkg/control"
 	"go.uber.org/zap"
@@ -46,21 +47,12 @@ func (c *PID) Run() error {
 	go func() {
 		subId, subCh := c.temperatureMonitor.Subscribe()
 		c.temperatureSubId = subId
-		prevErrs := []float64{0.0}
+		prevErrs := fifo.NewFIFO(errSumLookback)
 
 		for sample := range subCh {
 			curErr := c.targetTemperature.Value - sample.Value
-
-			prevErr := 0.0
-			if len(prevErrs) > 0 {
-				prevErr = prevErrs[len(prevErrs)-1]
-			}
-
-			errSum := curErr
-			for _, e := range prevErrs {
-				errSum += e
-			}
-
+			prevErr := prevErrs.Last()
+			errSum := prevErrs.Sum()
 			rawOut := (c.P*curErr + c.I*(errSum) - c.D*(prevErr-curErr)) / 100
 
 			var out float64
@@ -82,11 +74,7 @@ func (c *PID) Run() error {
 			)
 			c.heatingElement.SetDutyFactor(out)
 
-			if (len(prevErrs)) < errSumLookback {
-				prevErrs = append(prevErrs, curErr)
-			} else {
-				prevErrs = append(prevErrs[1:], curErr)
-			}
+			prevErrs.Push(curErr)
 		}
 	}()
 	return nil
