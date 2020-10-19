@@ -36,7 +36,7 @@ func NewPid(heatingElem *heating_element.HeatingElement, sampler *temperature.Mo
 	return &PID{
 		P:                  3,
 		I:                  2,
-		D:                  60,
+		D:                  200,
 		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},
 		heatingElement:     heatingElem,
 		temperatureMonitor: sampler,
