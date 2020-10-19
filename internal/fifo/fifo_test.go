@@ -23,7 +23,12 @@ func TestFIFO_Sum(t *testing.T) {
 		{
 			name: "Sum multiple val fifo",
 			data: []float64{1.2, 3.4},
-			want: 4.8,
+			want: 4.6,
+		},
+		{
+			name: "Sum many vals fifo",
+			data: []float64{1, 2, 3, 4, 5, 6},
+			want: 20,
 		},
 	}
 	for _, tt := range tests {
