@@ -35,7 +35,7 @@ type PID struct {
 func NewPid(heatingElem *heating_element.HeatingElement, sampler *temperature.Monitor) (*PID, error) {
 	return &PID{
 		P:                  3,
-		I:                  1.1,
+		I:                  2,
 		D:                  50,
 		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},
 		heatingElement:     heatingElem,
@@ -48,12 +48,18 @@ func (c *PID) Run() error {
 		subId, subCh := c.temperatureMonitor.Subscribe()
 		c.temperatureSubId = subId
 		prevErrs := fifo.NewFIFO(errSumLookback)
+		prevSlopes := fifo.NewFIFO(avgSlopeLookback)
 
 		for sample := range subCh {
 			curErr := c.targetTemperature.Value - sample.Value
-			prevErr := prevErrs.Last()
+
+			prevSlopes.Push(prevErrs.Last() - curErr)
+			avgSlope := prevSlopes.Average()
+
+			prevErrs.Push(curErr)
 			errSum := prevErrs.Sum()
-			rawOut := (c.P*curErr + c.I*(errSum) - c.D*(prevErr-curErr)) / 100
+
+			rawOut := (c.P*curErr + c.I*(errSum) - c.D*(avgSlope)) / 100
 
 			var out float64
 			if rawOut <= 0 {
@@ -66,15 +72,14 @@ func (c *PID) Run() error {
 
 			log.Debug("Setting duty factor",
 				zap.Float64("dutyFactor", out),
-				zap.Float64("prevErr", prevErr),
-				zap.Float64("curErr", curErr),
+				zap.Float64("errSum", errSum),
+				zap.Float64("avgSlope", avgSlope),
 				zap.Float64("curTemperature", sample.Value),
 				zap.Float64("targetTemperature",
 					c.GetTargetTemperature().Value),
 			)
 			c.heatingElement.SetDutyFactor(out)
 
-			prevErrs.Push(curErr)
 		}
 	}()
 	return nil
