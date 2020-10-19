@@ -96,6 +96,7 @@ func (s *Server) Run() error {
 func (s *Server) serveTCP() error {
 	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", s.c.Port))
 	if err != nil {
+		log.Error("Failed to listen on port", zap.Error(err))
 		return errors.Wrap(err, fmt.Sprintf("failed to listen on port %d", s.c.Port))
 	}
 
