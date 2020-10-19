@@ -17,6 +17,10 @@ const (
 	max              float64 = 100.0
 	errSumLookback   int     = 5
 	avgSlopeLookback int     = 5
+
+	defaultP float64 = 3
+	defaultI float64 = 2
+	defaultD float64 = 200
 )
 
 // PID is a temperature controller that implements PID control. It
@@ -34,9 +38,9 @@ type PID struct {
 
 func NewPid(heatingElem *heating_element.HeatingElement, sampler *temperature.Monitor) (*PID, error) {
 	return &PID{
-		P:                  3,
-		I:                  2,
-		D:                  200,
+		P:                  defaultP,
+		I:                  defaultI,
+		D:                  defaultD,
 		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},
 		heatingElement:     heatingElem,
 		temperatureMonitor: sampler,
