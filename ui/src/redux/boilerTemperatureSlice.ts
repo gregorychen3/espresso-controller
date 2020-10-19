@@ -10,7 +10,7 @@ type ReturnType<T extends (...args: any[]) => any> = T extends (...args: any[]) 
 
 const espressoClient = new EspressoClient("");
 
-const maxNumSamples = 900; // 15 minutes of history at a rate of 1 sample/sec
+const maxNumSamples = 1200; // 20 minutes of history at a rate of 1 sample/sec
 
 //
 // SLICE

@@ -14,7 +14,7 @@ import { showConfigDialog } from "../redux/selectors";
 import { endBoilerTemperatureStream, startBoilerTemperatureStream } from "../redux/boilerTemperatureSlice";
 import { getConfiguration } from "../redux/configurationSlice";
 
-const metricsRefreshIntervalMillis = 5000;
+const metricsRefreshIntervalMillis = 8000;
 
 const useStyles = makeStyles((theme) => ({
   paper: {
