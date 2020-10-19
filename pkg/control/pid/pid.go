@@ -16,18 +16,18 @@ const (
 	errSumLookback   int = 5
 	avgSlopeLookback int = 5
 
-	defaultP float64 = 3
-	defaultI float64 = 2
-	defaultD float64 = 200
+	defaultP float32 = 3
+	defaultI float32 = 2
+	defaultD float32 = 200
 )
 
 // PID is a temperature controller that implements PID control. It
 // satisfies the control.Strategy interface.
 // https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control
 type PID struct {
-	P                  float64
-	I                  float64
-	D                  float64
+	P                  float32
+	I                  float32
+	D                  float32
 	targetTemperature  control.TargetTemperature
 	heatingElement     *heating_element.HeatingElement
 	temperatureMonitor *temperature.Monitor
@@ -63,7 +63,7 @@ func (c *PID) Run() error {
 
 			rawOut := (c.P*curErr + c.I*(errSum) - c.D*(avgSlope)) / 100
 
-			var out float64
+			var out float32
 			if rawOut <= 0 {
 				out = 0
 			} else if rawOut >= 1 {
@@ -73,12 +73,12 @@ func (c *PID) Run() error {
 			}
 
 			log.Debug("Setting duty factor",
-				zap.Float64("dutyFactor", out),
-				zap.Float64("curErr", curErr),
-				zap.Float64("errSum", errSum),
-				zap.Float64("avgSlope", avgSlope),
-				zap.Float64("curTemperature", sample.Value),
-				zap.Float64("targetTemperature",
+				zap.Float32("dutyFactor", out),
+				zap.Float32("curErr", curErr),
+				zap.Float32("errSum", errSum),
+				zap.Float32("avgSlope", avgSlope),
+				zap.Float32("curTemperature", sample.Value),
+				zap.Float32("targetTemperature",
 					c.GetTargetTemperature().Value),
 			)
 			c.heatingElement.SetDutyFactor(out)
@@ -92,7 +92,7 @@ func (c *PID) GetTargetTemperature() control.TargetTemperature {
 	return c.targetTemperature
 }
 
-func (c *PID) SetTargetTemperature(temperature float64) control.TargetTemperature {
+func (c *PID) SetTargetTemperature(temperature float32) control.TargetTemperature {
 	targetTemperature := control.TargetTemperature{
 		Value: temperature,
 		SetAt: time.Now(),

@@ -11,7 +11,7 @@ import (
 )
 
 type Sample struct {
-	Value      float64
+	Value      float32
 	ObservedAt time.Time
 }
 

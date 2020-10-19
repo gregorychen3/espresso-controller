@@ -219,7 +219,7 @@ proto.espressopb.TemperatureSample.deserializeBinaryFromReader = function(msg, r
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readDouble());
+      var value = /** @type {number} */ (reader.readFloat());
       msg.setValue(value);
       break;
     case 2:
@@ -258,7 +258,7 @@ proto.espressopb.TemperatureSample.serializeBinaryToWriter = function(message, w
   var f = undefined;
   f = message.getValue();
   if (f !== 0.0) {
-    writer.writeDouble(
+    writer.writeFloat(
       1,
       f
     );
@@ -275,7 +275,7 @@ proto.espressopb.TemperatureSample.serializeBinaryToWriter = function(message, w
 
 
 /**
- * optional double value = 1;
+ * optional float value = 1;
  * @return {number}
  */
 proto.espressopb.TemperatureSample.prototype.getValue = function() {
@@ -993,19 +993,19 @@ proto.espressopb.Configuration.deserializeBinaryFromReader = function(msg, reade
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readDouble());
+      var value = /** @type {number} */ (reader.readFloat());
       msg.setTemperature(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readDouble());
+      var value = /** @type {number} */ (reader.readFloat());
       msg.setP(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readDouble());
+      var value = /** @type {number} */ (reader.readFloat());
       msg.setI(value);
       break;
     case 4:
-      var value = /** @type {number} */ (reader.readDouble());
+      var value = /** @type {number} */ (reader.readFloat());
       msg.setD(value);
       break;
     case 5:
@@ -1044,28 +1044,28 @@ proto.espressopb.Configuration.serializeBinaryToWriter = function(message, write
   var f = undefined;
   f = message.getTemperature();
   if (f !== 0.0) {
-    writer.writeDouble(
+    writer.writeFloat(
       1,
       f
     );
   }
   f = message.getP();
   if (f !== 0.0) {
-    writer.writeDouble(
+    writer.writeFloat(
       2,
       f
     );
   }
   f = message.getI();
   if (f !== 0.0) {
-    writer.writeDouble(
+    writer.writeFloat(
       3,
       f
     );
   }
   f = message.getD();
   if (f !== 0.0) {
-    writer.writeDouble(
+    writer.writeFloat(
       4,
       f
     );
@@ -1082,7 +1082,7 @@ proto.espressopb.Configuration.serializeBinaryToWriter = function(message, write
 
 
 /**
- * optional double temperature = 1;
+ * optional float temperature = 1;
  * @return {number}
  */
 proto.espressopb.Configuration.prototype.getTemperature = function() {
@@ -1100,7 +1100,7 @@ proto.espressopb.Configuration.prototype.setTemperature = function(value) {
 
 
 /**
- * optional double p = 2;
+ * optional float p = 2;
  * @return {number}
  */
 proto.espressopb.Configuration.prototype.getP = function() {
@@ -1118,7 +1118,7 @@ proto.espressopb.Configuration.prototype.setP = function(value) {
 
 
 /**
- * optional double i = 3;
+ * optional float i = 3;
  * @return {number}
  */
 proto.espressopb.Configuration.prototype.getI = function() {
@@ -1136,7 +1136,7 @@ proto.espressopb.Configuration.prototype.setI = function(value) {
 
 
 /**
- * optional double d = 4;
+ * optional float d = 4;
  * @return {number}
  */
 proto.espressopb.Configuration.prototype.getD = function() {

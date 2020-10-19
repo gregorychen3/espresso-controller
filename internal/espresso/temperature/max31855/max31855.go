@@ -58,16 +58,16 @@ func (m *Max31855) read32Bits() uint32 {
 	return bits
 }
 
-func bitsToTemperature(bits uint32) float64 {
+func bitsToTemperature(bits uint32) float32 {
 	thermoData := ((bits >> 18) & 0x3FFF)
 	if thermoData&0x2000 != 0 { // two's complement (untested!)
 		withoutResolution := ^thermoData & 0x1FFF
 		withoutResolution = withoutResolution + 1
 		temp := int64(withoutResolution) * (-1)
-		return float64(temp) / 4
+		return float32(temp) / 4
 	} else {
 		withoutResolution := thermoData & 0x1FFF
-		return float64(withoutResolution) / 4
+		return float32(withoutResolution) / 4
 	}
 }
 

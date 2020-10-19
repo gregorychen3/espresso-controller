@@ -7,27 +7,27 @@ import (
 func TestFIFO_Sum(t *testing.T) {
 	tests := []struct {
 		name string
-		data []float64
-		want float64
+		data []float32
+		want float32
 	}{
 		{
 			name: "Sum empty fifo",
-			data: []float64{},
+			data: []float32{},
 			want: 0.0,
 		},
 		{
 			name: "Sum single val fifo",
-			data: []float64{1.2},
+			data: []float32{1.2},
 			want: 1.2,
 		},
 		{
 			name: "Sum multiple val fifo",
-			data: []float64{1.2, 3.4},
+			data: []float32{1.2, 3.4},
 			want: 4.6,
 		},
 		{
 			name: "Sum many vals fifo",
-			data: []float64{1, 2, 3, 4, 5, 6},
+			data: []float32{1, 2, 3, 4, 5, 6},
 			want: 20,
 		},
 	}
@@ -47,22 +47,22 @@ func TestFIFO_Sum(t *testing.T) {
 func TestFIFO_Average(t *testing.T) {
 	tests := []struct {
 		name string
-		data []float64
-		want float64
+		data []float32
+		want float32
 	}{
 		{
 			name: "Average empty fifo",
-			data: []float64{},
+			data: []float32{},
 			want: 0.0,
 		},
 		{
 			name: "Average single val fifo",
-			data: []float64{1.2},
+			data: []float32{1.2},
 			want: 1.2,
 		},
 		{
 			name: "Average multiple val fifo",
-			data: []float64{1.2, 3.4},
+			data: []float32{1.2, 3.4},
 			want: 2.3,
 		},
 	}

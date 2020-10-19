@@ -5,6 +5,6 @@ import (
 )
 
 type TargetTemperature struct {
-	Value float64
+	Value float32
 	SetAt time.Time
 }
