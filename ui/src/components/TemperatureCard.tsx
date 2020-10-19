@@ -26,7 +26,7 @@ export default function TemperatureCard() {
 
   return (
     <>
-      <Title>Boiler Temperature</Title>
+      <Title>Temperature</Title>
       <Typography variant="h4" color="primary">
         {curTemp?.value.toFixed(1) ?? "--"} °C
       </Typography>
@@ -35,7 +35,7 @@ export default function TemperatureCard() {
           as of {curTemp.observedAt.format("HH:mm:ss")} Eastern Time
         </Typography>
       )}
-      <Title>Target Boiler Temperature</Title>
+      <Title>Target Temperature</Title>
       <Typography variant="h4" color="primary">
         {configuration?.targetTemp.value} °C
       </Typography>
