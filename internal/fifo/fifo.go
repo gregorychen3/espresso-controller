@@ -35,6 +35,20 @@ func (f *FIFO) Average() float64 {
 	return f.Sum() / float64(len(f.data))
 }
 
-func (f *FIFO) Size() float64 {
+func (f *FIFO) Size() int {
 	return len(f.data)
+}
+
+func (f *FIFO) First() float64 {
+	if len(f.data) == 0 {
+		return 0
+	}
+	return f.data[0]
+}
+
+func (f *FIFO) Last() float64 {
+	if len(f.data) == 0 {
+		return 0
+	}
+	return f.data[len(f.data)-1]
 }
