@@ -34,3 +34,7 @@ func (f *FIFO) Average() float64 {
 	}
 	return f.Sum() / float64(len(f.data))
 }
+
+func (f *FIFO) Size() float64 {
+	return len(f.data)
+}
