@@ -1,7 +1,8 @@
 # Espresso Controller
 
-Temperature control and monitoring for a Rancilio Silvia or comparable espresso machine.
+PID temperature control and monitoring for a Rancilio Silvia or comparable espresso machine.
 ![dashboard](images/dashboard.png)
+![configuration](images/configuration.png)
 
 ## Table of Contents
 
@@ -16,13 +17,13 @@ Temperature control and monitoring for a Rancilio Silvia or comparable espresso 
 
 ## Tech Stack
 
-The application is contained in a single Go binary implementing:
+The application is a single Go binary implementing:
 
 - gRPC API as defined in [espresso.proto](https://github.com/gregorychen3/espresso-controller/blob/master/pkg/espressopb/espresso.proto),
 - dashboard web app using React and [Material-UI](https://material-ui.com/), and
 - `/metrics` web endpoint for Prometheus scraping
 
-all served on a single port (default 8080) of a Raspberry Pi.
+serving on a single port (default 8080) of a Raspberry Pi.
 
 ## Installation
 
