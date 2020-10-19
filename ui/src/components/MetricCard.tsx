@@ -7,7 +7,7 @@ import { makeStyles, Box } from "@material-ui/core";
 export type Severity = "normal" | "success" | "warning" | "error";
 
 const severityColorMap = {
-  normal: "text.primary",
+  normal: "primary.main",
   success: "success.main",
   warning: "warning.main",
   error: "error.main",
@@ -30,7 +30,7 @@ export default function MetricCard({ name, value, unitLabel, asOf, severity }: P
   return (
     <>
       <Title>{name}</Title>
-      <Typography component="p" variant="h4">
+      <Typography variant="h4">
         <Box color={severityColorMap[severity]}>
           {value} {unitLabel}
         </Box>

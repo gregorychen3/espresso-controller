@@ -27,7 +27,7 @@ export default function TemperatureCard() {
   return (
     <>
       <Title>Boiler Temperature</Title>
-      <Typography component="p" variant="h4">
+      <Typography variant="h4" color="primary">
         {curTemp?.value.toFixed(1) ?? "--"} °C
       </Typography>
       {curTemp && (
@@ -36,7 +36,7 @@ export default function TemperatureCard() {
         </Typography>
       )}
       <Title>Target Boiler Temperature</Title>
-      <Typography component="p" variant="h4">
+      <Typography variant="h4" color="primary">
         {configuration?.targetTemp.value} °C
       </Typography>
       <Typography color="textSecondary" className={classes.temperatureContext}>

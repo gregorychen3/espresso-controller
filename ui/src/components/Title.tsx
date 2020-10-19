@@ -7,7 +7,7 @@ interface Props {
 
 export default function Title({ children }: Props) {
   return (
-    <Typography component="h2" variant="h6" color="primary" gutterBottom>
+    <Typography component="h2" variant="h6" color="textSecondary" gutterBottom>
       {children}
     </Typography>
   );
