@@ -13,10 +13,8 @@ import (
 )
 
 const (
-	min              float64 = 80.0
-	max              float64 = 100.0
-	errSumLookback   int     = 5
-	avgSlopeLookback int     = 5
+	errSumLookback   int = 5
+	avgSlopeLookback int = 5
 
 	defaultP float64 = 3
 	defaultI float64 = 2
