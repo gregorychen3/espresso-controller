@@ -12,8 +12,10 @@ import (
 )
 
 const (
-	min float64 = 80.0
-	max float64 = 100.0
+	min              float64 = 80.0
+	max              float64 = 100.0
+	errSumLookback   int     = 5
+	avgSlopeLookback int     = 5
 )
 
 // PID is a temperature controller that implements PID control. It
@@ -31,8 +33,9 @@ type PID struct {
 
 func NewPid(heatingElem *heating_element.HeatingElement, sampler *temperature.Monitor) (*PID, error) {
 	return &PID{
-		P:                  0,
-		D:                  0,
+		P:                  3,
+		I:                  1.1,
+		D:                  50,
 		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},
 		heatingElement:     heatingElem,
 		temperatureMonitor: sampler,
@@ -43,18 +46,18 @@ func (c *PID) Run() error {
 	go func() {
 		subId, subCh := c.temperatureMonitor.Subscribe()
 		c.temperatureSubId = subId
-		prev10Errs := []float64{0.0}
+		prevErrs := []float64{0.0}
 
 		for sample := range subCh {
 			curErr := c.targetTemperature.Value - sample.Value
 
 			prevErr := 0.0
-			if len(prev10Errs) > 0 {
-				prevErr = prev10Errs[len(prev10Errs)-1]
+			if len(prevErrs) > 0 {
+				prevErr = prevErrs[len(prevErrs)-1]
 			}
 
 			errSum := curErr
-			for _, e := range prev10Errs {
+			for _, e := range prevErrs {
 				errSum += e
 			}
 
@@ -70,19 +73,19 @@ func (c *PID) Run() error {
 			}
 
 			log.Debug("Setting duty factor",
+				zap.Float64("dutyFactor", out),
 				zap.Float64("prevErr", prevErr),
 				zap.Float64("curErr", curErr),
-				zap.Float64("dutyFactor", out),
 				zap.Float64("curTemperature", sample.Value),
 				zap.Float64("targetTemperature",
 					c.GetTargetTemperature().Value),
 			)
 			c.heatingElement.SetDutyFactor(out)
 
-			if (len(prev10Errs)) < 10 {
-				prev10Errs = append(prev10Errs, curErr)
+			if (len(prevErrs)) < errSumLookback {
+				prevErrs = append(prevErrs, curErr)
 			} else {
-				prev10Errs = append(prev10Errs[1:], curErr)
+				prevErrs = append(prevErrs[1:], curErr)
 			}
 		}
 	}()
