@@ -36,7 +36,7 @@ func NewPid(heatingElem *heating_element.HeatingElement, sampler *temperature.Mo
 	return &PID{
 		P:                  3,
 		I:                  2,
-		D:                  50,
+		D:                  60,
 		targetTemperature:  control.TargetTemperature{Value: 93, SetAt: time.Now()},
 		heatingElement:     heatingElem,
 		temperatureMonitor: sampler,
@@ -72,6 +72,7 @@ func (c *PID) Run() error {
 
 			log.Debug("Setting duty factor",
 				zap.Float64("dutyFactor", out),
+				zap.Float64("curErr", curErr),
 				zap.Float64("errSum", errSum),
 				zap.Float64("avgSlope", avgSlope),
 				zap.Float64("curTemperature", sample.Value),
