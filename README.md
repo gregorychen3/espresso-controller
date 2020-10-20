@@ -48,21 +48,29 @@ Rewire it like this (default gpio pin numbers shown):
 ### Raspi Setup
 
 1. Follow the Raspberry Pi [Getting Started Guide](https://projects.raspberrypi.org/en/projects/raspberry-pi-getting-started). Be sure to connect it to a wifi network.
-2. Take note of the Raspberry Pi's private ip address.
+1. Ensure wifi power saving mode is off.
+
+   ```console
+   pi@raspberrypi:~ $ sudo iw wlan0 set power_save off
+   pi@raspberrypi:~ $ iw wlan0 get power_save
+   Power save: off
+   ```
+
+1. Take note of the Raspberry Pi's private ip address.
 
    ```console
    pi@raspberrypi:~ $ hostname -I
    192.168.1.124
    ```
 
-3. Download the application and copy it to the Raspberry Pi.
+1. Download the application and copy it to the Raspberry Pi.
 
    ```console
    [~]$ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.1.1/espresso
    [~]$ scp ./espresso pi@<ip_addr_from_step_2>:
    ```
 
-4. Start the application (run `./espresso --help` for configuration options)
+1. Start the application (run `./espresso --help` for configuration options)
 
    ```console
    pi@raspberrypi:~ $ ./espresso -v
