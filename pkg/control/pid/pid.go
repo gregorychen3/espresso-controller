@@ -18,7 +18,7 @@ const (
 
 	defaultP float32 = 3
 	defaultI float32 = 4
-	defaultD float32 = 400
+	defaultD float32 = 350
 )
 
 // PID is a temperature controller that implements PID control. It
