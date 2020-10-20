@@ -28,7 +28,7 @@ export default function TemperatureCard() {
     <>
       <Title>Temperature</Title>
       <Typography variant="h4" color="primary">
-        {curTemp?.value.toFixed(1) ?? "--"} °C
+        {curTemp?.value.toFixed(2) ?? "--"} °C
       </Typography>
       {curTemp && (
         <Typography color="textSecondary" className={classes.temperatureContext}>
