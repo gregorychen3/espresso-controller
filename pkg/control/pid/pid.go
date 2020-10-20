@@ -17,8 +17,8 @@ const (
 	avgSlopeLookback int = 5
 
 	defaultP float32 = 3
-	defaultI float32 = 2
-	defaultD float32 = 200
+	defaultI float32 = 4
+	defaultD float32 = 400
 )
 
 // PID is a temperature controller that implements PID control. It

@@ -32,7 +32,7 @@ export default function TemperatureCard() {
       </Typography>
       {curTemp && (
         <Typography color="textSecondary" className={classes.temperatureContext}>
-          as of {curTemp.observedAt.format("HH:mm:ss")} Eastern Time
+          as of {curTemp.observedAt.format("HH:mm:ss")}
         </Typography>
       )}
       <Title>Target Temperature</Title>
