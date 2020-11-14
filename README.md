@@ -32,7 +32,7 @@ serving on a single port (default 8080) of a Raspberry Pi.
 - Espresso machine, e.g., [Rancilio Silvia](https://www.ranciliogroupna.com/silvia)
 - Raspberry Pi
 - [Solid state relay](https://www.amazon.com/dp/B00HV974KC/ref=cm_sw_em_r_mt_dp_U_9WTYEbEA0TNGG)
-- [Type K thermocouple](https://www.amazon.com/dp/B07MMLY3PZ/ref=cm_sw_em_r_mt_dp_U_OXTYEb0AVQZWD)
+- [Type K thermocouple](https://www.amazon.com/gp/product/B01NBM7SBK)
 - [MAX31855 thermocouple amplifier](https://www.adafruit.com/product/269)
 - [Male blade connectors](https://en.wikipedia.org/wiki/FASTON_terminal#/media/File:Faston_Style_Terminals_Male.jpg)
 - Electrical wire
