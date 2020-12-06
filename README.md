@@ -36,7 +36,6 @@ serving on a single port (default 8080) of a Raspberry Pi.
 - [MAX31855 thermocouple amplifier](https://www.adafruit.com/product/269)
 - [Male blade connectors](https://en.wikipedia.org/wiki/FASTON_terminal#/media/File:Faston_Style_Terminals_Male.jpg)
 - Electrical wire
-- Thermal tape
 
 ### Wiring
 
