@@ -105,6 +105,10 @@ Rewire it like this (default gpio pin numbers shown):
 
 Finally, visit `http://<ip_addr_from_step_2>:8080` using a web browser. Control and monitor the system from the dashboard there.
 
+### Finished Installation
+
+![finished installation](images/finished_installation.jpg)
+
 ## Credits
 
 Logo icon made by [catkuro](https://www.flaticon.com/authors/catkuro) from [flaticon.com](https://www.flaticon.com) and converted to ASCII art using [asciiart.club](https://asciiart.club).
