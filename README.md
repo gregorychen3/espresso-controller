@@ -66,7 +66,7 @@ Rewire it like this (default gpio pin numbers shown):
 
    ```console
    [~]$ ssh pi@<ip_addr_from_step_2>
-   [pi@raspberrypi:~]$ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.2.1/espresso
+   [pi@raspberrypi:~]$ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.2.2/espresso
    [pi@raspberrypi:~]$ chmod +x espresso
    ```
 
