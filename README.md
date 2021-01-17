@@ -62,18 +62,12 @@ Rewire it like this (default gpio pin numbers shown):
    192.168.1.124
    ```
 
-1. Download the application to the Raspberry Pi.
+1. Download the application and start it.
 
    ```console
-   [me@home:~]$ ssh pi@<ip_addr_from_step_2>
-   [pi@raspberrypi:~]$ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.2.2/espresso
-   [pi@raspberrypi:~]$ chmod +x espresso
-   ```
-
-1. Start the application (run `./espresso --help` for configuration options)
-
-   ```console
-   [pi@raspberrypi:~]$ ./espresso -v
+   pi@raspberrypi:~ $ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.2.2/espresso
+   pi@raspberrypi:~ $ chmod +x espresso
+   pi@raspberrypi:~ $ ./espresso -v
 
         ╓▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
        █▀─╓▄         ┌▄▄┌         ▄▄ ╙█
@@ -103,8 +97,8 @@ Rewire it like this (default gpio pin numbers shown):
    Or, start as a background process and leave it running.
 
    ```console
-   [pi@raspberrypi:~]$ ./espresso &
-   [pi@raspberrypi:~]$ exit
+   pi@raspberrypi:~ $ ./espresso &
+   pi@raspberrypi:~ $ exit
    ```
 
 ### Control and monitor
