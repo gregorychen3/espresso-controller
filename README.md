@@ -6,7 +6,7 @@ PID temperature control and monitoring for a Rancilio Silvia or comparable espre
 
 ## Table of Contents
 
-- [Tech Stack](#tech-stack)
+- [Tech](#tech-stack)
 - [Requirements](#requirements)
 - [Installation](#installation)
   - [Requirements](#requirements)
@@ -62,17 +62,18 @@ Rewire it like this (default gpio pin numbers shown):
    192.168.1.124
    ```
 
-1. Download the application and copy it to the Raspberry Pi.
+1. Download the application to the Raspberry Pi.
 
    ```console
-   [~]$ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.1.1/espresso
-   [~]$ scp ./espresso pi@<ip_addr_from_step_2>:
+   [~]$ ssh pi@<ip_addr_from_step_2>
+   [pi@raspberrypi:~]$ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.2.1/espresso
+   [pi@raspberrypi:~]$ chmod +x espresso
    ```
 
 1. Start the application (run `./espresso --help` for configuration options)
 
    ```console
-   pi@raspberrypi:~ $ ./espresso -v
+   [pi@raspberrypi:~]$ ./espresso -v
 
         ╓▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
        █▀─╓▄         ┌▄▄┌         ▄▄ ╙█
@@ -97,6 +98,13 @@ Rewire it like this (default gpio pin numbers shown):
 
    2020-05-24T16:45:27.372-0400	INFO	espresso/server.go:115	Initializing gRPC server	{"port": 8080}
    2020-05-24T16:45:27.372-0400	INFO	espresso/server.go:123	Initializing gRPC web server	{"port": 8080}
+   ```
+
+   Or, start as a background process and leave it running.
+
+   ```console
+   [pi@raspberrypi:~]$ ./espresso &
+   [pi@raspberrypi:~]$ exit
    ```
 
 ### Control and monitor
