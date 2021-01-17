@@ -13,7 +13,7 @@ PID temperature control and monitoring for a Rancilio Silvia or comparable espre
   - [Wiring](#wiring)
   - [Raspi Setup](#raspi-setup)
   - [Control and monitor](#control-and-monitor)
-  - [Finished!](#finished-installation)
+  - [Finished](#finished)
 - [Credits](#credits)
 
 ## Tech Stack
@@ -106,7 +106,7 @@ Rewire it like this (default gpio pin numbers shown):
 
 Finally, visit `http://<ip_addr_from_step_2>:8080` using a web browser. Control and monitor the system from the dashboard there.
 
-### Finished!
+### Finished
 
 ![finished installation](images/finished_installation.jpg)
 
