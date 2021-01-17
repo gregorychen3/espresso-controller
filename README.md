@@ -65,7 +65,7 @@ Rewire it like this (default gpio pin numbers shown):
 1. Download the application to the Raspberry Pi.
 
    ```console
-   [~]$ ssh pi@<ip_addr_from_step_2>
+   [me@home:~]$ ssh pi@<ip_addr_from_step_2>
    [pi@raspberrypi:~]$ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.2.2/espresso
    [pi@raspberrypi:~]$ chmod +x espresso
    ```
