@@ -13,6 +13,7 @@ PID temperature control and monitoring for a Rancilio Silvia or comparable espre
   - [Wiring](#wiring)
   - [Raspi Setup](#raspi-setup)
   - [Control and monitor](#control-and-monitor)
+  - [Finished Installation](#finished-installation)
 - [Credits](#credits)
 
 ## Tech Stack
