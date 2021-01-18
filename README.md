@@ -31,14 +31,12 @@ serving on a single port (default 8080) of a Raspberry Pi.
 ### Requirements
 
 - Espresso machine, e.g., [Rancilio Silvia](https://www.ranciliogroupna.com/silvia)
-- Raspberry Pi 4 (not Pi Zero W\*)
+- Raspberry Pi 4. Will not work well on Raspberry Pi Zero W. The Pi Zero W, having a single processor, will experience performance issues because it will not handle the necessary concurrency well (needs to measure temperature, toggle heating elements, and serve the UI static files / requests).
 - [Solid state relay](https://www.amazon.com/dp/B00HV974KC/ref=cm_sw_em_r_mt_dp_U_9WTYEbEA0TNGG)
 - [Type K thermocouple](https://www.amazon.com/gp/product/B01NBM7SBK)
 - [MAX31855 thermocouple amplifier](https://www.adafruit.com/product/269)
 - [Male blade connectors](https://en.wikipedia.org/wiki/FASTON_terminal#/media/File:Faston_Style_Terminals_Male.jpg)
 - Electrical wire
-
-* Testing this project on the Pi Zero W showed performance issues. The Pi Zero W, having only a single processor, does not handle the necessary concurrency well (needs to measure temperature, toggle heating elements, and serve the UI static files / requests), and is not recommended for use with this project.
 
 ### Wiring
 
