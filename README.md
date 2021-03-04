@@ -45,6 +45,9 @@ Here is the original circuit diagram from the [manual](https://www.ranciliogroup
 Rewire it like this (default gpio pin numbers shown):
 ![modified](images/circuit_diagram_modified.png)
 
+#### Note on Thermocouple Placement
+The thermocouple should be attached securely to the outer wall of the boiler. On the Rancilio Silvia, a convenient way to accomplish this is to loosen the screw holding down the factory thermostat to the boiler. Then, the thermocouple can be slipped into the gap between the boiler and thermostat.
+
 ### Raspi Setup
 
 1. Follow the Raspberry Pi [Getting Started Guide](https://projects.raspberrypi.org/en/projects/raspberry-pi-getting-started). Be sure to connect it to a wifi network.
