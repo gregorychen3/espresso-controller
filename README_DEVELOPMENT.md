@@ -1,15 +1,8 @@
 # Development
 
-The espresso program is a GRPC server (Golang) and UI (Typescript) in a single binary, `espresso`.
+The `espresso` program is a GRPC server (Golang) and UI (Typescript) in a single binary.
 
-## Makefile Targets
-- build
-- build-ui
-- build-pi
-- install
-- proto
-
-## Development Workflow
+## Workflow
 
 The file `pkg/espressopb/espresso.proto` defines the GRPC service and message types used for communication between the UI and backend. If modifying this file, re-run grpc codegen using `make proto`.
 
