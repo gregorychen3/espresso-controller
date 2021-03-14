@@ -14,6 +14,7 @@ PID temperature control and monitoring for a Rancilio Silvia or comparable espre
   - [Raspi Setup](#raspi-setup)
   - [Control and monitor](#control-and-monitor)
   - [Finished](#finished)
+- [Contributing](#contributing)
 - [Credits](#credits)
 
 ## Tech Stack
@@ -112,6 +113,10 @@ Finally, visit `http://<ip_addr_from_step_2>:8080` using a web browser. Control 
 ### Finished
 
 ![finished installation](images/finished_installation.jpg)
+
+## Contributing
+
+See the [development README](README_DEVELOPMENT.md)
 
 ## Credits
 
