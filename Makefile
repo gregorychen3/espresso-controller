@@ -29,5 +29,5 @@ proto:
 		fi \
 	done
 
-.PHONY: build install
+.PHONY: build build.ui build.pi install proto
 
