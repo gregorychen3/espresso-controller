@@ -116,7 +116,7 @@ Finally, visit `http://<ip_addr_from_step_2>:8080` using a web browser. Control 
 
 ## Contributing
 
-See the [development README](README_DEVELOPMENT.md)
+See the [development README](README_DEVELOPMENT.md).
 
 ## Credits
 
