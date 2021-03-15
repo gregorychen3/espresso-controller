@@ -13,8 +13,8 @@ const NumberField = (props: FieldAttributes<any>) => (
 
 const validationSchema = Yup.object().shape({
   targetTemp: Yup.number()
-    .min(0, "Must be in range [0, 100] °C")
-    .max(100, "Must be in range [0, 100] °C")
+    .min(0, "Must be in range [0, 140] °C")
+    .max(140, "Must be in range [0, 140] °C")
     .required("Required"),
   p: Yup.number().min(0, "Must be > 0").required("Required"),
   i: Yup.number().min(0, "Must be > 0").required("Required"),
