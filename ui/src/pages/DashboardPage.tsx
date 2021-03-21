@@ -9,9 +9,9 @@ import ConfigurationDialog from "../components/ConfigurationDialog";
 import MetricCard, { Severity } from "../components/MetricCard";
 import TemperatureCard from "../components/TemperatureCard";
 import TemperatureChart from "../components/TemperatureChart";
-import { GetConfigurationRequest, TemperatureStreamRequest } from "../proto/pkg/espressopb/espresso_pb";
+import { GetConfigurationRequest, WatchBoilerTemperatureRequest } from "../proto/pkg/espressopb/espresso_pb";
 import { showConfigDialog } from "../redux/selectors";
-import { endBoilerTemperatureStream, startBoilerTemperatureStream } from "../redux/boilerTemperatureSlice";
+import { endBoilerTemperatureStream, watchBoilerTemperature } from "../redux/boilerTemperatureSlice";
 import { getConfiguration } from "../redux/configurationSlice";
 
 const metricsRefreshIntervalMillis = 8000;
@@ -43,7 +43,7 @@ export default () => {
   // Boiler temperature
   // ------------------
   useEffect(() => {
-    d(startBoilerTemperatureStream(new TemperatureStreamRequest()));
+    d(watchBoilerTemperature(new WatchBoilerTemperatureRequest()));
     return () => {
       d(endBoilerTemperatureStream());
     };
