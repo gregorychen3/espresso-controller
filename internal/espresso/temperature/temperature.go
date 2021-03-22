@@ -20,7 +20,8 @@ type Sampler interface {
 }
 
 type Monitor struct {
-	subscriptions map[uuid.UUID]chan *Sample
+	subscriptionsMu sync.RWMutex
+	subscriptions   map[uuid.UUID]chan *Sample
 
 	sampler              Sampler
 	temperatureHistoryMu sync.RWMutex
@@ -49,9 +50,11 @@ func (m *Monitor) Run() {
 			m.temperatureHistory = append(m.temperatureHistory, sample)
 			m.temperatureHistoryMu.Unlock()
 
+			m.subscriptionsMu.RLock()
 			for _, ch := range m.subscriptions {
 				ch <- sample
 			}
+			m.subscriptionsMu.RUnlock()
 
 			time.Sleep(time.Second)
 		}
@@ -75,13 +78,20 @@ func (m *Monitor) Run() {
 }
 
 func (m *Monitor) Subscribe() (uuid.UUID, chan *Sample) {
+	m.subscriptionsMu.Lock()
+	defer m.subscriptionsMu.Unlock()
+
 	subId := uuid.New()
 	subscriptionCh := make(chan *Sample)
 	m.subscriptions[subId] = subscriptionCh
+
 	return subId, subscriptionCh
 }
 
 func (m *Monitor) Unsubscribe(subId uuid.UUID) {
+	m.subscriptionsMu.Lock()
+	defer m.subscriptionsMu.Unlock()
+
 	delete(m.subscriptions, subId)
 }
 
