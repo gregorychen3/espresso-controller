@@ -476,7 +476,7 @@ proto.espressopb.WatchBoilerTemperatureResponse.deserializeBinaryFromReader = fu
     }
     var field = reader.getFieldNumber();
     switch (field) {
-    case 2:
+    case 1:
       var value = new proto.espressopb.TemperatureSample;
       reader.readMessage(value,proto.espressopb.TemperatureSample.deserializeBinaryFromReader);
       msg.setSample(value);
@@ -513,7 +513,7 @@ proto.espressopb.WatchBoilerTemperatureResponse.serializeBinaryToWriter = functi
   f = message.getSample();
   if (f != null) {
     writer.writeMessage(
-      2,
+      1,
       f,
       proto.espressopb.TemperatureSample.serializeBinaryToWriter
     );
@@ -522,12 +522,12 @@ proto.espressopb.WatchBoilerTemperatureResponse.serializeBinaryToWriter = functi
 
 
 /**
- * optional TemperatureSample sample = 2;
+ * optional TemperatureSample sample = 1;
  * @return {?proto.espressopb.TemperatureSample}
  */
 proto.espressopb.WatchBoilerTemperatureResponse.prototype.getSample = function() {
   return /** @type{?proto.espressopb.TemperatureSample} */ (
-    jspb.Message.getWrapperField(this, proto.espressopb.TemperatureSample, 2));
+    jspb.Message.getWrapperField(this, proto.espressopb.TemperatureSample, 1));
 };
 
 
@@ -536,7 +536,7 @@ proto.espressopb.WatchBoilerTemperatureResponse.prototype.getSample = function()
  * @return {!proto.espressopb.WatchBoilerTemperatureResponse} returns this
 */
 proto.espressopb.WatchBoilerTemperatureResponse.prototype.setSample = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
+  return jspb.Message.setWrapperField(this, 1, value);
 };
 
 
@@ -554,7 +554,7 @@ proto.espressopb.WatchBoilerTemperatureResponse.prototype.clearSample = function
  * @return {boolean}
  */
 proto.espressopb.WatchBoilerTemperatureResponse.prototype.hasSample = function() {
-  return jspb.Message.getField(this, 2) != null;
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
