@@ -18,7 +18,7 @@ message TemperatureSample {
 message WatchBoilerTemperatureRequest {}
 
 message WatchBoilerTemperatureResponse {
-    TemperatureSample sample = 2;
+    TemperatureSample sample = 1;
 }
 
 message GetConfigurationRequest {}
