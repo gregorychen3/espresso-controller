@@ -1,12 +1,15 @@
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import format from "date-fns/format";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurTemp } from "../redux/boilerTemperatureSlice";
 import { selectConfiguration } from "../redux/configurationSlice";
 import { setConfigureDialogVisibility } from "../redux/uiSlice";
 import Title from "./Title";
+
+const dateFormat = "HH:mm:ss";
 
 const useStyles = makeStyles({
   temperatureContext: {
@@ -32,7 +35,7 @@ export default function TemperatureCard() {
       </Typography>
       {curTemp && (
         <Typography color="textSecondary" className={classes.temperatureContext}>
-          as of {curTemp.observedAt.format("HH:mm:ss")}
+          as of {format(curTemp.observedAt, dateFormat)}
         </Typography>
       )}
       <Title>Target Temperature</Title>
@@ -40,7 +43,7 @@ export default function TemperatureCard() {
         {configuration?.targetTemp.value} °C
       </Typography>
       <Typography color="textSecondary" className={classes.temperatureContext}>
-        set {configuration?.targetTemp.setAt.fromNow()}
+        set at {configuration?.targetTemp.setAt && format(configuration?.targetTemp.setAt, dateFormat)}
       </Typography>
       <div>
         <div className={classes.setTargetTempButton}>

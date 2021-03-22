@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import moment from "moment";
 import { toast } from "react-toastify";
 import { RootState } from ".";
 import { createUnaryGrpcThunk } from "../createUnaryGrpcThunk";
@@ -18,7 +17,7 @@ export const setConfiguration = createUnaryGrpcThunk(Espresso.SetConfiguration);
 
 interface ConfigurationSlice {
   configuration?: {
-    targetTemp: { value: number; setAt: moment.Moment };
+    targetTemp: { value: number; setAt: Date };
     p: number;
     i: number;
     d: number;
@@ -51,7 +50,7 @@ const configurationSlice = createSlice({
         return;
       }
       state.configuration = {
-        targetTemp: { value, setAt: moment(setAt) },
+        targetTemp: { value, setAt },
         p: action.payload.getP(),
         i: action.payload.getI(),
         d: action.payload.getD(),
@@ -74,7 +73,7 @@ const configurationSlice = createSlice({
         return;
       }
       state.configuration = {
-        targetTemp: { value, setAt: moment(setAt) },
+        targetTemp: { value, setAt },
         p: action.payload.getP(),
         i: action.payload.getI(),
         d: action.payload.getD(),
