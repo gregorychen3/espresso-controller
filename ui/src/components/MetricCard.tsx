@@ -1,8 +1,10 @@
 import { Box, makeStyles } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import moment from "moment";
+import format from "date-fns/format";
 import React from "react";
 import Title from "./Title";
+
+const dateFormat = "HH:mm:ss";
 
 export type Severity = "normal" | "success" | "warning" | "error";
 
@@ -21,7 +23,7 @@ interface Props {
   name: string;
   value: string | number;
   unitLabel: string;
-  asOf?: moment.Moment;
+  asOf?: Date;
   severity: Severity;
 }
 export default function MetricCard({ name, value, unitLabel, asOf, severity }: Props) {
@@ -37,7 +39,7 @@ export default function MetricCard({ name, value, unitLabel, asOf, severity }: P
       </Typography>
       {asOf && (
         <Typography color="textSecondary" className={classes.context}>
-          as of {asOf.format("HH:mm:ss")}
+          as of {asOf && format(asOf, dateFormat)}
         </Typography>
       )}
     </>

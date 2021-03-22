@@ -1,7 +1,6 @@
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-import moment from "moment";
 import parsePromText, { Metric } from "parse-prometheus-text-format";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -52,7 +51,7 @@ export default () => {
   //
   // System metrics
   // --------------
-  const [metricsRefreshedAt, setMetricsRefreshedAt] = useState<moment.Moment | undefined>();
+  const [metricsRefreshedAt, setMetricsRefreshedAt] = useState<Date | undefined>();
   const [cpuUtilization, setCpuUtilization] = useState<number | undefined>();
   const [memUtilization, setMemUtilization] = useState<number | undefined>();
   const [cpuTemperature, setCpuTemperature] = useState<number | undefined>();
@@ -64,7 +63,7 @@ export default () => {
       return { ...acc, [cur.name]: cur };
     }, {});
 
-    setMetricsRefreshedAt(moment());
+    setMetricsRefreshedAt(new Date());
     setCpuUtilization(100 * parseFloat(metricsMap.espresso_raspi_cpu_utilization_ratio.metrics[0].value));
     setMemUtilization(100 * parseFloat(metricsMap.espresso_raspi_mem_utilization_ratio.metrics[0].value));
     setCpuTemperature(parseFloat(metricsMap.espresso_raspi_cpu_temperature.metrics[0].value));

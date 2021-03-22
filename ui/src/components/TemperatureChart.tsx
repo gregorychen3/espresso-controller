@@ -1,16 +1,19 @@
 import { useTheme } from "@material-ui/core/styles";
+import format from "date-fns/format";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Label, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { selectTempHistory } from "../redux/boilerTemperatureSlice";
 import { selectPIDConfig } from "../redux/configurationSlice";
 
+const dateFormat = "HH:mm";
+
 export default function TemperatureChart() {
   const theme = useTheme();
 
   const samples = useSelector(selectTempHistory);
   const data = samples.map((s) => ({
-    time: s.observedAt.format("HH:mm"),
+    time: format(s.observedAt, dateFormat),
     temp: s.value,
   }));
 

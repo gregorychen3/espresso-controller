@@ -1,5 +1,4 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
-import moment from "moment";
 import { toast } from "react-toastify";
 import { RootState } from ".";
 import { WatchBoilerTemperatureRequest, WatchBoilerTemperatureResponse } from "../proto/pkg/espressopb/espresso_pb";
@@ -52,7 +51,7 @@ const boilerTemperatureSlice = createSlice({
       state.history = state.history.slice(-(maxNumSamples - 1));
       state.history.push({
         value: sample.getValue(),
-        observedAt: moment(observedAt.toDate()),
+        observedAt: observedAt.toDate(),
       });
     },
     endBoilerTemperatureStream: (state) => {
