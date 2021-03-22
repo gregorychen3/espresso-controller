@@ -1,8 +1,8 @@
+import { Box, makeStyles } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import moment from "moment";
 import React from "react";
 import Title from "./Title";
-import moment from "moment";
-import { makeStyles, Box } from "@material-ui/core";
 
 export type Severity = "normal" | "success" | "warning" | "error";
 

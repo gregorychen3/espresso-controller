@@ -9,10 +9,10 @@ import ConfigurationDialog from "../components/ConfigurationDialog";
 import MetricCard, { Severity } from "../components/MetricCard";
 import TemperatureCard from "../components/TemperatureCard";
 import TemperatureChart from "../components/TemperatureChart";
-import { GetConfigurationRequest, WatchBoilerTemperatureRequest } from "../proto/pkg/espressopb/espresso_pb";
-import { showConfigDialog } from "../redux/selectors";
+import { GetPIDConfigRequest, WatchBoilerTemperatureRequest } from "../proto/pkg/espressopb/espresso_pb";
 import { endBoilerTemperatureStream, watchBoilerTemperature } from "../redux/boilerTemperatureSlice";
-import { getConfiguration } from "../redux/configurationSlice";
+import { getPIDConfig } from "../redux/configurationSlice";
+import { showConfigDialog } from "../redux/selectors";
 
 const metricsRefreshIntervalMillis = 8000;
 
@@ -79,7 +79,7 @@ export default () => {
   }, []);
 
   useEffect(() => {
-    d(getConfiguration({ request: new GetConfigurationRequest() }));
+    d(getPIDConfig({ request: new GetPIDConfigRequest() }));
   }, [d]);
 
   const getRaspiTemperatureSeverity = (raspiTemperature: number): Severity => {

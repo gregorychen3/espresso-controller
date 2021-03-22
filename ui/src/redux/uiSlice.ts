@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { setConfiguration } from "./configurationSlice";
+import { setPIDConfig } from "./configurationSlice";
 
 export const uiSlice = createSlice({
   name: "ui",
@@ -10,7 +10,7 @@ export const uiSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(setConfiguration.fulfilled, (state) => {
+    builder.addCase(setPIDConfig.fulfilled, (state) => {
       state.configureDialogVisibility = false;
     });
   },

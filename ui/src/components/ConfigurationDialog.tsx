@@ -1,14 +1,14 @@
+import { IconButton, makeStyles } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
-import InfoIcon from "@material-ui/icons/Info";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import InfoIcon from "@material-ui/icons/Info";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setConfigureDialogVisibility } from "../redux/uiSlice";
-import ConfigurationForm from "./ConfigurationForm";
-import { IconButton, makeStyles } from "@material-ui/core";
+import PidConfigForm from "./PidConfigForm";
 
 const useStyles = makeStyles((theme) => ({
   info: {
@@ -36,7 +36,7 @@ export default function ConfigurationDialog() {
         </IconButton>
       </DialogTitle>
       <DialogContent>
-        <ConfigurationForm />
+        <PidConfigForm />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">

@@ -9,15 +9,15 @@ import { Espresso } from "../proto/pkg/espressopb/espresso_pb_service";
 // THUNKS
 // ------
 
-export const getConfiguration = createUnaryGrpcThunk(Espresso.GetConfiguration);
-export const setConfiguration = createUnaryGrpcThunk(Espresso.SetConfiguration);
+export const getPIDConfig = createUnaryGrpcThunk(Espresso.GetPIDConfig);
+export const setPIDConfig = createUnaryGrpcThunk(Espresso.SetPIDConfig);
 
 //
 // SLICE
 // -----
 
-interface ConfigurationSlice {
-  configuration?: {
+interface PIDConfigSlice {
+  pidConfig?: {
     targetTemp: { value: number; setAt: moment.Moment };
     p: number;
     i: number;
@@ -26,7 +26,7 @@ interface ConfigurationSlice {
   isFetching: boolean;
 }
 
-const initialState: ConfigurationSlice = {
+const initialState: PIDConfigSlice = {
   isFetching: false,
 };
 
@@ -36,13 +36,13 @@ const configurationSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     // GetConfiguration
-    builder.addCase(getConfiguration.pending, (state) => {
+    builder.addCase(getPIDConfig.pending, (state) => {
       state.isFetching = true;
     });
-    builder.addCase(getConfiguration.rejected, (state) => {
+    builder.addCase(getPIDConfig.rejected, (state) => {
       state.isFetching = false;
     });
-    builder.addCase(getConfiguration.fulfilled, (state, action) => {
+    builder.addCase(getPIDConfig.fulfilled, (state, action) => {
       state.isFetching = false;
       const value = action.payload.getTemperature();
       const setAt = action.payload.getSetAt()?.toDate();
@@ -50,7 +50,7 @@ const configurationSlice = createSlice({
         console.warn("Target temperature response missing setAt time");
         return;
       }
-      state.configuration = {
+      state.pidConfig = {
         targetTemp: { value, setAt: moment(setAt) },
         p: action.payload.getP(),
         i: action.payload.getI(),
@@ -59,13 +59,13 @@ const configurationSlice = createSlice({
     });
 
     // SetConfiguration
-    builder.addCase(setConfiguration.pending, (state) => {
+    builder.addCase(setPIDConfig.pending, (state) => {
       state.isFetching = true;
     });
-    builder.addCase(setConfiguration.rejected, (state) => {
+    builder.addCase(setPIDConfig.rejected, (state) => {
       state.isFetching = false;
     });
-    builder.addCase(setConfiguration.fulfilled, (state, action) => {
+    builder.addCase(setPIDConfig.fulfilled, (state, action) => {
       state.isFetching = false;
       const value = action.payload.getTemperature();
       const setAt = action.payload.getSetAt()?.toDate();
@@ -73,7 +73,7 @@ const configurationSlice = createSlice({
         console.warn("Target temperature response missing setAt time");
         return;
       }
-      state.configuration = {
+      state.pidConfig = {
         targetTemp: { value, setAt: moment(setAt) },
         p: action.payload.getP(),
         i: action.payload.getI(),
@@ -90,5 +90,5 @@ export default configurationSlice.reducer;
 // SELECTORS
 // ---------
 
-export const selectConfiguration = (state: RootState) => state.configuration.configuration;
+export const selectPIDConfig = (state: RootState) => state.configuration.pidConfig;
 export const selectFetchingTargetTemp = (state: RootState) => state.configuration.isFetching;

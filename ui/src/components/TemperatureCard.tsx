@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurTemp } from "../redux/boilerTemperatureSlice";
-import { selectConfiguration } from "../redux/configurationSlice";
+import { selectPIDConfig } from "../redux/configurationSlice";
 import { setConfigureDialogVisibility } from "../redux/uiSlice";
 import Title from "./Title";
 
@@ -20,7 +20,7 @@ export default function TemperatureCard() {
   const classes = useStyles();
 
   const curTemp = useSelector(selectCurTemp);
-  const configuration = useSelector(selectConfiguration);
+  const configuration = useSelector(selectPIDConfig);
 
   const handleConfigureClicked = () => d(setConfigureDialogVisibility(true));
 

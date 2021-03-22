@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Label, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { selectTempHistory } from "../redux/boilerTemperatureSlice";
-import { selectConfiguration } from "../redux/configurationSlice";
+import { selectPIDConfig } from "../redux/configurationSlice";
 
 export default function TemperatureChart() {
   const theme = useTheme();
@@ -14,7 +14,7 @@ export default function TemperatureChart() {
     temp: s.value,
   }));
 
-  const targetTemp = useSelector(selectConfiguration)?.targetTemp;
+  const targetTemp = useSelector(selectPIDConfig)?.targetTemp;
 
   return (
     <ResponsiveContainer>

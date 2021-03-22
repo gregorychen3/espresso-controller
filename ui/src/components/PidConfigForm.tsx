@@ -4,8 +4,8 @@ import { TextField } from "formik-material-ui";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-import { Configuration } from "../proto/pkg/espressopb/espresso_pb";
-import { selectConfiguration, setConfiguration } from "../redux/configurationSlice";
+import { PIDConfig } from "../proto/pkg/espressopb/espresso_pb";
+import { selectPIDConfig, setPIDConfig } from "../redux/configurationSlice";
 
 const NumberField = (props: FieldAttributes<any>) => (
   <Field component={TextField} margin="dense" type="number" fullWidth {...props} />
@@ -28,9 +28,9 @@ interface Values {
   d: number | "";
 }
 
-export default function ConfigurationForm() {
+export default function PidConfigForm() {
   const d = useDispatch();
-  const configuration = useSelector(selectConfiguration);
+  const configuration = useSelector(selectPIDConfig);
   const initialValues: Values = configuration
     ? { targetTemp: configuration.targetTemp.value, p: configuration.p, i: configuration.i, d: configuration.d }
     : { targetTemp: "", p: "", i: "", d: "" };
@@ -41,12 +41,12 @@ export default function ConfigurationForm() {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
-        const req = new Configuration();
+        const req = new PIDConfig();
         req.setTemperature(values.targetTemp as number);
         req.setP(values.p as number);
         req.setI(values.i as number);
         req.setD(values.d as number);
-        d(setConfiguration({ request: req }));
+        d(setPIDConfig({ request: req }));
         setSubmitting(false);
       }}
     >
