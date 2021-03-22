@@ -20,22 +20,22 @@ Espresso.WatchBoilerTemperature = {
   responseType: pkg_espressopb_espresso_pb.WatchBoilerTemperatureResponse
 };
 
-Espresso.GetConfiguration = {
-  methodName: "GetConfiguration",
+Espresso.GetPIDConfig = {
+  methodName: "GetPIDConfig",
   service: Espresso,
   requestStream: false,
   responseStream: false,
-  requestType: pkg_espressopb_espresso_pb.GetConfigurationRequest,
-  responseType: pkg_espressopb_espresso_pb.Configuration
+  requestType: pkg_espressopb_espresso_pb.GetPIDConfigRequest,
+  responseType: pkg_espressopb_espresso_pb.PIDConfig
 };
 
-Espresso.SetConfiguration = {
-  methodName: "SetConfiguration",
+Espresso.SetPIDConfig = {
+  methodName: "SetPIDConfig",
   service: Espresso,
   requestStream: false,
   responseStream: false,
-  requestType: pkg_espressopb_espresso_pb.Configuration,
-  responseType: pkg_espressopb_espresso_pb.Configuration
+  requestType: pkg_espressopb_espresso_pb.PIDConfig,
+  responseType: pkg_espressopb_espresso_pb.PIDConfig
 };
 
 exports.Espresso = Espresso;
@@ -84,11 +84,11 @@ EspressoClient.prototype.watchBoilerTemperature = function watchBoilerTemperatur
   };
 };
 
-EspressoClient.prototype.getConfiguration = function getConfiguration(requestMessage, metadata, callback) {
+EspressoClient.prototype.getPIDConfig = function getPIDConfig(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(Espresso.GetConfiguration, {
+  var client = grpc.unary(Espresso.GetPIDConfig, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -115,11 +115,11 @@ EspressoClient.prototype.getConfiguration = function getConfiguration(requestMes
   };
 };
 
-EspressoClient.prototype.setConfiguration = function setConfiguration(requestMessage, metadata, callback) {
+EspressoClient.prototype.setPIDConfig = function setPIDConfig(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(Espresso.SetConfiguration, {
+  var client = grpc.unary(Espresso.SetPIDConfig, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

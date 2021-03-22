@@ -142,38 +142,38 @@ func (m *WatchBoilerTemperatureResponse) GetSample() *TemperatureSample {
 	return nil
 }
 
-type GetConfigurationRequest struct {
+type GetPIDConfigRequest struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *GetConfigurationRequest) Reset()         { *m = GetConfigurationRequest{} }
-func (m *GetConfigurationRequest) String() string { return proto.CompactTextString(m) }
-func (*GetConfigurationRequest) ProtoMessage()    {}
-func (*GetConfigurationRequest) Descriptor() ([]byte, []int) {
+func (m *GetPIDConfigRequest) Reset()         { *m = GetPIDConfigRequest{} }
+func (m *GetPIDConfigRequest) String() string { return proto.CompactTextString(m) }
+func (*GetPIDConfigRequest) ProtoMessage()    {}
+func (*GetPIDConfigRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_445399412d1702d2, []int{3}
 }
 
-func (m *GetConfigurationRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_GetConfigurationRequest.Unmarshal(m, b)
+func (m *GetPIDConfigRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetPIDConfigRequest.Unmarshal(m, b)
 }
-func (m *GetConfigurationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_GetConfigurationRequest.Marshal(b, m, deterministic)
+func (m *GetPIDConfigRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetPIDConfigRequest.Marshal(b, m, deterministic)
 }
-func (m *GetConfigurationRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetConfigurationRequest.Merge(m, src)
+func (m *GetPIDConfigRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetPIDConfigRequest.Merge(m, src)
 }
-func (m *GetConfigurationRequest) XXX_Size() int {
-	return xxx_messageInfo_GetConfigurationRequest.Size(m)
+func (m *GetPIDConfigRequest) XXX_Size() int {
+	return xxx_messageInfo_GetPIDConfigRequest.Size(m)
 }
-func (m *GetConfigurationRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetConfigurationRequest.DiscardUnknown(m)
+func (m *GetPIDConfigRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetPIDConfigRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_GetConfigurationRequest proto.InternalMessageInfo
+var xxx_messageInfo_GetPIDConfigRequest proto.InternalMessageInfo
 
-type Configuration struct {
+type PIDConfig struct {
 	Temperature          float32              `protobuf:"fixed32,1,opt,name=temperature,proto3" json:"temperature,omitempty"`
 	P                    float32              `protobuf:"fixed32,2,opt,name=p,proto3" json:"p,omitempty"`
 	I                    float32              `protobuf:"fixed32,3,opt,name=i,proto3" json:"i,omitempty"`
@@ -184,60 +184,60 @@ type Configuration struct {
 	XXX_sizecache        int32                `json:"-"`
 }
 
-func (m *Configuration) Reset()         { *m = Configuration{} }
-func (m *Configuration) String() string { return proto.CompactTextString(m) }
-func (*Configuration) ProtoMessage()    {}
-func (*Configuration) Descriptor() ([]byte, []int) {
+func (m *PIDConfig) Reset()         { *m = PIDConfig{} }
+func (m *PIDConfig) String() string { return proto.CompactTextString(m) }
+func (*PIDConfig) ProtoMessage()    {}
+func (*PIDConfig) Descriptor() ([]byte, []int) {
 	return fileDescriptor_445399412d1702d2, []int{4}
 }
 
-func (m *Configuration) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Configuration.Unmarshal(m, b)
+func (m *PIDConfig) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PIDConfig.Unmarshal(m, b)
 }
-func (m *Configuration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Configuration.Marshal(b, m, deterministic)
+func (m *PIDConfig) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PIDConfig.Marshal(b, m, deterministic)
 }
-func (m *Configuration) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Configuration.Merge(m, src)
+func (m *PIDConfig) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PIDConfig.Merge(m, src)
 }
-func (m *Configuration) XXX_Size() int {
-	return xxx_messageInfo_Configuration.Size(m)
+func (m *PIDConfig) XXX_Size() int {
+	return xxx_messageInfo_PIDConfig.Size(m)
 }
-func (m *Configuration) XXX_DiscardUnknown() {
-	xxx_messageInfo_Configuration.DiscardUnknown(m)
+func (m *PIDConfig) XXX_DiscardUnknown() {
+	xxx_messageInfo_PIDConfig.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Configuration proto.InternalMessageInfo
+var xxx_messageInfo_PIDConfig proto.InternalMessageInfo
 
-func (m *Configuration) GetTemperature() float32 {
+func (m *PIDConfig) GetTemperature() float32 {
 	if m != nil {
 		return m.Temperature
 	}
 	return 0
 }
 
-func (m *Configuration) GetP() float32 {
+func (m *PIDConfig) GetP() float32 {
 	if m != nil {
 		return m.P
 	}
 	return 0
 }
 
-func (m *Configuration) GetI() float32 {
+func (m *PIDConfig) GetI() float32 {
 	if m != nil {
 		return m.I
 	}
 	return 0
 }
 
-func (m *Configuration) GetD() float32 {
+func (m *PIDConfig) GetD() float32 {
 	if m != nil {
 		return m.D
 	}
 	return 0
 }
 
-func (m *Configuration) GetSetAt() *timestamp.Timestamp {
+func (m *PIDConfig) GetSetAt() *timestamp.Timestamp {
 	if m != nil {
 		return m.SetAt
 	}
@@ -248,8 +248,8 @@ func init() {
 	proto.RegisterType((*TemperatureSample)(nil), "espressopb.TemperatureSample")
 	proto.RegisterType((*WatchBoilerTemperatureRequest)(nil), "espressopb.WatchBoilerTemperatureRequest")
 	proto.RegisterType((*WatchBoilerTemperatureResponse)(nil), "espressopb.WatchBoilerTemperatureResponse")
-	proto.RegisterType((*GetConfigurationRequest)(nil), "espressopb.GetConfigurationRequest")
-	proto.RegisterType((*Configuration)(nil), "espressopb.Configuration")
+	proto.RegisterType((*GetPIDConfigRequest)(nil), "espressopb.GetPIDConfigRequest")
+	proto.RegisterType((*PIDConfig)(nil), "espressopb.PIDConfig")
 }
 
 func init() {
@@ -258,27 +258,27 @@ func init() {
 
 var fileDescriptor_445399412d1702d2 = []byte{
 	// 337 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x90, 0x41, 0x4f, 0xc2, 0x40,
-	0x14, 0x84, 0xb3, 0x55, 0x88, 0x79, 0x55, 0x83, 0x1b, 0xa3, 0xa5, 0x09, 0x42, 0xea, 0x05, 0x3d,
-	0x14, 0xc5, 0x78, 0xf2, 0x84, 0xc6, 0xe8, 0xb9, 0x90, 0x70, 0x34, 0x5b, 0x79, 0x60, 0x93, 0x96,
-	0x5d, 0x76, 0x5f, 0xf9, 0x19, 0xfe, 0x01, 0xff, 0xac, 0xa1, 0xa5, 0xa1, 0xa0, 0xa0, 0xc7, 0xe9,
-	0x4e, 0x67, 0xde, 0x7c, 0x70, 0x8c, 0x46, 0x69, 0x34, 0x46, 0xfa, 0x4a, 0x4b, 0x92, 0x1c, 0x0a,
-	0xad, 0x42, 0xb7, 0x39, 0x91, 0x72, 0x12, 0x63, 0x27, 0x7b, 0x09, 0xd3, 0x71, 0x87, 0xa2, 0x04,
-	0x0d, 0x89, 0x44, 0xe5, 0x66, 0x6f, 0x0c, 0x27, 0x03, 0x4c, 0x14, 0x6a, 0x41, 0xa9, 0xc6, 0xbe,
-	0x48, 0x54, 0x8c, 0xfc, 0x14, 0x2a, 0x73, 0x11, 0xa7, 0xe8, 0xb0, 0x16, 0x6b, 0x5b, 0x41, 0x2e,
-	0xf8, 0x03, 0xd8, 0x32, 0x34, 0xa8, 0xe7, 0x38, 0x7a, 0x13, 0xe4, 0x58, 0x2d, 0xd6, 0xb6, 0xbb,
-	0xae, 0x9f, 0x37, 0xf8, 0x45, 0x83, 0x3f, 0x28, 0x1a, 0x02, 0x28, 0xec, 0x3d, 0xf2, 0x9a, 0xd0,
-	0x18, 0x0a, 0x7a, 0xff, 0x78, 0x94, 0x51, 0x8c, 0xba, 0x54, 0x19, 0xe0, 0x2c, 0x45, 0x43, 0xde,
-	0x10, 0x2e, 0xb6, 0x19, 0x8c, 0x92, 0x53, 0x83, 0xfc, 0x1e, 0xaa, 0x26, 0xbb, 0x2f, 0x3b, 0xcb,
-	0xee, 0x36, 0xfc, 0xd5, 0x50, 0xff, 0xc7, 0x88, 0x60, 0x69, 0xf6, 0xea, 0x70, 0xfe, 0x82, 0xf4,
-	0x24, 0xa7, 0xe3, 0x68, 0x92, 0x6a, 0x41, 0x91, 0x9c, 0x16, 0x9d, 0x9f, 0x0c, 0x8e, 0xd6, 0x1e,
-	0x78, 0x0b, 0x6c, 0x5a, 0x25, 0x2d, 0xf7, 0x97, 0x3f, 0xf1, 0x43, 0x60, 0x2a, 0xdb, 0x6e, 0x05,
-	0x4c, 0x2d, 0x54, 0xe4, 0xec, 0xe5, 0x2a, 0x5a, 0xa8, 0x91, 0xb3, 0x9f, 0xab, 0x11, 0xbf, 0x85,
-	0xaa, 0x41, 0x5a, 0xa0, 0xaa, 0xfc, 0x89, 0xaa, 0x62, 0x90, 0x7a, 0xd4, 0xfd, 0xb2, 0xe0, 0xe0,
-	0x79, 0x39, 0x8a, 0xcf, 0xe0, 0xec, 0x77, 0x22, 0xfc, 0xaa, 0xbc, 0x7c, 0x27, 0x56, 0xf7, 0xfa,
-	0x3f, 0xd6, 0x1c, 0xf0, 0x0d, 0xe3, 0x01, 0xd4, 0x36, 0x59, 0xf1, 0xcb, 0x72, 0xc2, 0x16, 0x92,
-	0x6e, 0xbd, 0x6c, 0x5a, 0xff, 0xff, 0x15, 0x6a, 0xfd, 0xcd, 0xcc, 0xed, 0xf6, 0x1d, 0x49, 0x61,
-	0x35, 0x03, 0x77, 0xf7, 0x1d, 0x00, 0x00, 0xff, 0xff, 0x8b, 0xa5, 0xcf, 0x97, 0xf1, 0x02, 0x00,
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x90, 0xcf, 0x4f, 0xfa, 0x40,
+	0x10, 0xc5, 0xb3, 0xfd, 0x7e, 0x21, 0x3a, 0x25, 0x26, 0xae, 0x62, 0x9a, 0x26, 0x08, 0xe9, 0x09,
+	0x3d, 0x14, 0xc5, 0x78, 0xd2, 0x0b, 0xfe, 0x8c, 0x37, 0x53, 0x48, 0x38, 0x9a, 0x56, 0x06, 0x6c,
+	0xd2, 0xb2, 0x4b, 0x77, 0xca, 0x3f, 0xe0, 0xcd, 0xbf, 0xda, 0xd0, 0xa5, 0xb2, 0x89, 0x45, 0x3d,
+	0xbe, 0xdd, 0x37, 0xf3, 0xe6, 0x7d, 0x60, 0x0f, 0x95, 0xcc, 0x50, 0x29, 0xe1, 0xcb, 0x4c, 0x90,
+	0xe0, 0x50, 0x6a, 0x19, 0xb9, 0xed, 0x99, 0x10, 0xb3, 0x04, 0x7b, 0xc5, 0x4f, 0x94, 0x4f, 0x7b,
+	0x14, 0xa7, 0xa8, 0x28, 0x4c, 0xa5, 0x36, 0x7b, 0x53, 0xd8, 0x1f, 0x61, 0x2a, 0x31, 0x0b, 0x29,
+	0xcf, 0x70, 0x18, 0xa6, 0x32, 0x41, 0x7e, 0x08, 0xb5, 0x65, 0x98, 0xe4, 0xe8, 0xb0, 0x0e, 0xeb,
+	0x5a, 0x81, 0x16, 0xfc, 0x0a, 0x6c, 0x11, 0x29, 0xcc, 0x96, 0x38, 0x79, 0x09, 0xc9, 0xb1, 0x3a,
+	0xac, 0x6b, 0xf7, 0x5d, 0x5f, 0x27, 0xf8, 0x65, 0x82, 0x3f, 0x2a, 0x13, 0x02, 0x28, 0xed, 0x03,
+	0xf2, 0xda, 0xd0, 0x1a, 0x87, 0xf4, 0xfa, 0x76, 0x23, 0xe2, 0x04, 0x33, 0x23, 0x32, 0xc0, 0x45,
+	0x8e, 0x8a, 0xbc, 0x31, 0x1c, 0x6f, 0x33, 0x28, 0x29, 0xe6, 0x0a, 0xf9, 0x25, 0xd4, 0x55, 0x71,
+	0x5f, 0x71, 0x96, 0xdd, 0x6f, 0xf9, 0x9b, 0xa2, 0xfe, 0xb7, 0x12, 0xc1, 0xda, 0xec, 0x35, 0xe1,
+	0xe0, 0x11, 0xe9, 0xf9, 0xe9, 0xee, 0x56, 0xcc, 0xa7, 0xf1, 0xac, 0xcc, 0xfb, 0x60, 0xb0, 0xfb,
+	0xf5, 0xc8, 0x3b, 0x60, 0xd3, 0x66, 0xc3, 0xba, 0xb7, 0xf9, 0xc4, 0x1b, 0xc0, 0x64, 0xd1, 0xd9,
+	0x0a, 0x98, 0x5c, 0xa9, 0xd8, 0xf9, 0xa7, 0x55, 0xbc, 0x52, 0x13, 0xe7, 0xbf, 0x56, 0x13, 0x7e,
+	0x0e, 0x75, 0x85, 0xb4, 0x42, 0x54, 0xfb, 0x15, 0x51, 0x4d, 0x21, 0x0d, 0xa8, 0xff, 0x6e, 0xc1,
+	0xce, 0xfd, 0xba, 0x0c, 0x5f, 0xc0, 0x51, 0x35, 0x09, 0x7e, 0x62, 0x36, 0xfe, 0x11, 0xa7, 0x7b,
+	0xfa, 0x17, 0xab, 0x06, 0x7b, 0xc6, 0xf8, 0x03, 0x34, 0x4c, 0x46, 0xbc, 0x6d, 0x4e, 0x57, 0xd0,
+	0x73, 0x9b, 0xa6, 0x61, 0x33, 0x77, 0x0d, 0x8d, 0xa1, 0xb9, 0xa7, 0xda, 0xb6, 0x65, 0x3a, 0xaa,
+	0x17, 0x80, 0x2e, 0x3e, 0x03, 0x00, 0x00, 0xff, 0xff, 0x48, 0x7f, 0xd2, 0x0f, 0xd1, 0x02, 0x00,
 	0x00,
 }
 
@@ -295,8 +295,8 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type EspressoClient interface {
 	WatchBoilerTemperature(ctx context.Context, in *WatchBoilerTemperatureRequest, opts ...grpc.CallOption) (Espresso_WatchBoilerTemperatureClient, error)
-	GetConfiguration(ctx context.Context, in *GetConfigurationRequest, opts ...grpc.CallOption) (*Configuration, error)
-	SetConfiguration(ctx context.Context, in *Configuration, opts ...grpc.CallOption) (*Configuration, error)
+	GetPIDConfig(ctx context.Context, in *GetPIDConfigRequest, opts ...grpc.CallOption) (*PIDConfig, error)
+	SetPIDConfig(ctx context.Context, in *PIDConfig, opts ...grpc.CallOption) (*PIDConfig, error)
 }
 
 type espressoClient struct {
@@ -339,18 +339,18 @@ func (x *espressoWatchBoilerTemperatureClient) Recv() (*WatchBoilerTemperatureRe
 	return m, nil
 }
 
-func (c *espressoClient) GetConfiguration(ctx context.Context, in *GetConfigurationRequest, opts ...grpc.CallOption) (*Configuration, error) {
-	out := new(Configuration)
-	err := c.cc.Invoke(ctx, "/espressopb.Espresso/GetConfiguration", in, out, opts...)
+func (c *espressoClient) GetPIDConfig(ctx context.Context, in *GetPIDConfigRequest, opts ...grpc.CallOption) (*PIDConfig, error) {
+	out := new(PIDConfig)
+	err := c.cc.Invoke(ctx, "/espressopb.Espresso/GetPIDConfig", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *espressoClient) SetConfiguration(ctx context.Context, in *Configuration, opts ...grpc.CallOption) (*Configuration, error) {
-	out := new(Configuration)
-	err := c.cc.Invoke(ctx, "/espressopb.Espresso/SetConfiguration", in, out, opts...)
+func (c *espressoClient) SetPIDConfig(ctx context.Context, in *PIDConfig, opts ...grpc.CallOption) (*PIDConfig, error) {
+	out := new(PIDConfig)
+	err := c.cc.Invoke(ctx, "/espressopb.Espresso/SetPIDConfig", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -360,8 +360,8 @@ func (c *espressoClient) SetConfiguration(ctx context.Context, in *Configuration
 // EspressoServer is the server API for Espresso service.
 type EspressoServer interface {
 	WatchBoilerTemperature(*WatchBoilerTemperatureRequest, Espresso_WatchBoilerTemperatureServer) error
-	GetConfiguration(context.Context, *GetConfigurationRequest) (*Configuration, error)
-	SetConfiguration(context.Context, *Configuration) (*Configuration, error)
+	GetPIDConfig(context.Context, *GetPIDConfigRequest) (*PIDConfig, error)
+	SetPIDConfig(context.Context, *PIDConfig) (*PIDConfig, error)
 }
 
 // UnimplementedEspressoServer can be embedded to have forward compatible implementations.
@@ -371,11 +371,11 @@ type UnimplementedEspressoServer struct {
 func (*UnimplementedEspressoServer) WatchBoilerTemperature(req *WatchBoilerTemperatureRequest, srv Espresso_WatchBoilerTemperatureServer) error {
 	return status.Errorf(codes.Unimplemented, "method WatchBoilerTemperature not implemented")
 }
-func (*UnimplementedEspressoServer) GetConfiguration(ctx context.Context, req *GetConfigurationRequest) (*Configuration, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetConfiguration not implemented")
+func (*UnimplementedEspressoServer) GetPIDConfig(ctx context.Context, req *GetPIDConfigRequest) (*PIDConfig, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPIDConfig not implemented")
 }
-func (*UnimplementedEspressoServer) SetConfiguration(ctx context.Context, req *Configuration) (*Configuration, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetConfiguration not implemented")
+func (*UnimplementedEspressoServer) SetPIDConfig(ctx context.Context, req *PIDConfig) (*PIDConfig, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetPIDConfig not implemented")
 }
 
 func RegisterEspressoServer(s *grpc.Server, srv EspressoServer) {
@@ -403,38 +403,38 @@ func (x *espressoWatchBoilerTemperatureServer) Send(m *WatchBoilerTemperatureRes
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Espresso_GetConfiguration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetConfigurationRequest)
+func _Espresso_GetPIDConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPIDConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EspressoServer).GetConfiguration(ctx, in)
+		return srv.(EspressoServer).GetPIDConfig(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/espressopb.Espresso/GetConfiguration",
+		FullMethod: "/espressopb.Espresso/GetPIDConfig",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EspressoServer).GetConfiguration(ctx, req.(*GetConfigurationRequest))
+		return srv.(EspressoServer).GetPIDConfig(ctx, req.(*GetPIDConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Espresso_SetConfiguration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Configuration)
+func _Espresso_SetPIDConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PIDConfig)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EspressoServer).SetConfiguration(ctx, in)
+		return srv.(EspressoServer).SetPIDConfig(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/espressopb.Espresso/SetConfiguration",
+		FullMethod: "/espressopb.Espresso/SetPIDConfig",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EspressoServer).SetConfiguration(ctx, req.(*Configuration))
+		return srv.(EspressoServer).SetPIDConfig(ctx, req.(*PIDConfig))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -444,12 +444,12 @@ var _Espresso_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*EspressoServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetConfiguration",
-			Handler:    _Espresso_GetConfiguration_Handler,
+			MethodName: "GetPIDConfig",
+			Handler:    _Espresso_GetPIDConfig_Handler,
 		},
 		{
-			MethodName: "SetConfiguration",
-			Handler:    _Espresso_SetConfiguration_Handler,
+			MethodName: "SetPIDConfig",
+			Handler:    _Espresso_SetPIDConfig_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

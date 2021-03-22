@@ -68,23 +68,23 @@ export namespace WatchBoilerTemperatureResponse {
   }
 }
 
-export class GetConfigurationRequest extends jspb.Message {
+export class GetPIDConfigRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetConfigurationRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetConfigurationRequest): GetConfigurationRequest.AsObject;
+  toObject(includeInstance?: boolean): GetPIDConfigRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetPIDConfigRequest): GetPIDConfigRequest.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: GetConfigurationRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetConfigurationRequest;
-  static deserializeBinaryFromReader(message: GetConfigurationRequest, reader: jspb.BinaryReader): GetConfigurationRequest;
+  static serializeBinaryToWriter(message: GetPIDConfigRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetPIDConfigRequest;
+  static deserializeBinaryFromReader(message: GetPIDConfigRequest, reader: jspb.BinaryReader): GetPIDConfigRequest;
 }
 
-export namespace GetConfigurationRequest {
+export namespace GetPIDConfigRequest {
   export type AsObject = {
   }
 }
 
-export class Configuration extends jspb.Message {
+export class PIDConfig extends jspb.Message {
   getTemperature(): number;
   setTemperature(value: number): void;
 
@@ -103,16 +103,16 @@ export class Configuration extends jspb.Message {
   setSetAt(value?: google_protobuf_timestamp_pb.Timestamp): void;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): Configuration.AsObject;
-  static toObject(includeInstance: boolean, msg: Configuration): Configuration.AsObject;
+  toObject(includeInstance?: boolean): PIDConfig.AsObject;
+  static toObject(includeInstance: boolean, msg: PIDConfig): PIDConfig.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: Configuration, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): Configuration;
-  static deserializeBinaryFromReader(message: Configuration, reader: jspb.BinaryReader): Configuration;
+  static serializeBinaryToWriter(message: PIDConfig, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): PIDConfig;
+  static deserializeBinaryFromReader(message: PIDConfig, reader: jspb.BinaryReader): PIDConfig;
 }
 
-export namespace Configuration {
+export namespace PIDConfig {
   export type AsObject = {
     temperature: number,
     p: number,

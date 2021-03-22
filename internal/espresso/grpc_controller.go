@@ -88,7 +88,7 @@ func (c *grpcController) WatchBoilerTemperature(
 	return errors.New("temperature monitor stopped publishing")
 }
 
-func (c *grpcController) GetConfiguration(ctx context.Context, req *espressopb.GetConfigurationRequest) (*espressopb.Configuration, error) {
+func (c *grpcController) GetPIDConfig(ctx context.Context, req *espressopb.GetPIDConfigRequest) (*espressopb.PIDConfig, error) {
 	targetTemperature := c.pid.GetTargetTemperature()
 
 	pbTime, err := ptypes.TimestampProto(targetTemperature.SetAt)
@@ -96,7 +96,7 @@ func (c *grpcController) GetConfiguration(ctx context.Context, req *espressopb.G
 		return nil, err
 	}
 
-	return &espressopb.Configuration{
+	return &espressopb.PIDConfig{
 		Temperature: targetTemperature.Value,
 		P:           c.pid.P,
 		I:           c.pid.I,
@@ -105,7 +105,7 @@ func (c *grpcController) GetConfiguration(ctx context.Context, req *espressopb.G
 	}, nil
 }
 
-func (c *grpcController) SetConfiguration(ctx context.Context, req *espressopb.Configuration) (*espressopb.Configuration, error) {
+func (c *grpcController) SetPIDConfig(ctx context.Context, req *espressopb.PIDConfig) (*espressopb.PIDConfig, error) {
 	if req.Temperature < 0 || req.Temperature > 140 {
 		return nil, errors.New("temperature must be in range [0, 140] °C")
 	}
@@ -125,7 +125,7 @@ func (c *grpcController) SetConfiguration(ctx context.Context, req *espressopb.C
 	c.pid.I = req.I
 	c.pid.D = req.D
 
-	return &espressopb.Configuration{
+	return &espressopb.PIDConfig{
 		Temperature: targetTemperature.Value,
 		P:           c.pid.P,
 		I:           c.pid.I,

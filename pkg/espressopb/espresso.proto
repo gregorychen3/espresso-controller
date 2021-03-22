@@ -6,8 +6,8 @@ import "google/protobuf/timestamp.proto";
 
 service Espresso {
   rpc WatchBoilerTemperature(WatchBoilerTemperatureRequest) returns (stream WatchBoilerTemperatureResponse);
-  rpc GetConfiguration (GetConfigurationRequest) returns (Configuration);
-  rpc SetConfiguration (Configuration) returns (Configuration);
+  rpc GetPIDConfig (GetPIDConfigRequest) returns (PIDConfig);
+  rpc SetPIDConfig (PIDConfig) returns (PIDConfig);
 }
 
 message TemperatureSample {
@@ -21,9 +21,9 @@ message WatchBoilerTemperatureResponse {
     TemperatureSample sample = 1;
 }
 
-message GetConfigurationRequest {}
+message GetPIDConfigRequest {}
 
-message Configuration {
+message PIDConfig {
     float temperature = 1;
     float p = 2;
     float i = 3;

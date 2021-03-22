@@ -13,29 +13,29 @@ type EspressoWatchBoilerTemperature = {
   readonly responseType: typeof pkg_espressopb_espresso_pb.WatchBoilerTemperatureResponse;
 };
 
-type EspressoGetConfiguration = {
+type EspressoGetPIDConfig = {
   readonly methodName: string;
   readonly service: typeof Espresso;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof pkg_espressopb_espresso_pb.GetConfigurationRequest;
-  readonly responseType: typeof pkg_espressopb_espresso_pb.Configuration;
+  readonly requestType: typeof pkg_espressopb_espresso_pb.GetPIDConfigRequest;
+  readonly responseType: typeof pkg_espressopb_espresso_pb.PIDConfig;
 };
 
-type EspressoSetConfiguration = {
+type EspressoSetPIDConfig = {
   readonly methodName: string;
   readonly service: typeof Espresso;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof pkg_espressopb_espresso_pb.Configuration;
-  readonly responseType: typeof pkg_espressopb_espresso_pb.Configuration;
+  readonly requestType: typeof pkg_espressopb_espresso_pb.PIDConfig;
+  readonly responseType: typeof pkg_espressopb_espresso_pb.PIDConfig;
 };
 
 export class Espresso {
   static readonly serviceName: string;
   static readonly WatchBoilerTemperature: EspressoWatchBoilerTemperature;
-  static readonly GetConfiguration: EspressoGetConfiguration;
-  static readonly SetConfiguration: EspressoSetConfiguration;
+  static readonly GetPIDConfig: EspressoGetPIDConfig;
+  static readonly SetPIDConfig: EspressoSetPIDConfig;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -71,23 +71,23 @@ export class EspressoClient {
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
   watchBoilerTemperature(requestMessage: pkg_espressopb_espresso_pb.WatchBoilerTemperatureRequest, metadata?: grpc.Metadata): ResponseStream<pkg_espressopb_espresso_pb.WatchBoilerTemperatureResponse>;
-  getConfiguration(
-    requestMessage: pkg_espressopb_espresso_pb.GetConfigurationRequest,
+  getPIDConfig(
+    requestMessage: pkg_espressopb_espresso_pb.GetPIDConfigRequest,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.Configuration|null) => void
+    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.PIDConfig|null) => void
   ): UnaryResponse;
-  getConfiguration(
-    requestMessage: pkg_espressopb_espresso_pb.GetConfigurationRequest,
-    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.Configuration|null) => void
+  getPIDConfig(
+    requestMessage: pkg_espressopb_espresso_pb.GetPIDConfigRequest,
+    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.PIDConfig|null) => void
   ): UnaryResponse;
-  setConfiguration(
-    requestMessage: pkg_espressopb_espresso_pb.Configuration,
+  setPIDConfig(
+    requestMessage: pkg_espressopb_espresso_pb.PIDConfig,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.Configuration|null) => void
+    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.PIDConfig|null) => void
   ): UnaryResponse;
-  setConfiguration(
-    requestMessage: pkg_espressopb_espresso_pb.Configuration,
-    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.Configuration|null) => void
+  setPIDConfig(
+    requestMessage: pkg_espressopb_espresso_pb.PIDConfig,
+    callback: (error: ServiceError|null, responseMessage: pkg_espressopb_espresso_pb.PIDConfig|null) => void
   ): UnaryResponse;
 }
 
