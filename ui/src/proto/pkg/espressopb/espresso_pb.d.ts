@@ -30,76 +30,41 @@ export namespace TemperatureSample {
   }
 }
 
-export class TemperatureHistory extends jspb.Message {
-  clearSamplesList(): void;
-  getSamplesList(): Array<TemperatureSample>;
-  setSamplesList(value: Array<TemperatureSample>): void;
-  addSamples(value?: TemperatureSample, index?: number): TemperatureSample;
-
+export class WatchBoilerTemperatureRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): TemperatureHistory.AsObject;
-  static toObject(includeInstance: boolean, msg: TemperatureHistory): TemperatureHistory.AsObject;
+  toObject(includeInstance?: boolean): WatchBoilerTemperatureRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: WatchBoilerTemperatureRequest): WatchBoilerTemperatureRequest.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: TemperatureHistory, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): TemperatureHistory;
-  static deserializeBinaryFromReader(message: TemperatureHistory, reader: jspb.BinaryReader): TemperatureHistory;
+  static serializeBinaryToWriter(message: WatchBoilerTemperatureRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): WatchBoilerTemperatureRequest;
+  static deserializeBinaryFromReader(message: WatchBoilerTemperatureRequest, reader: jspb.BinaryReader): WatchBoilerTemperatureRequest;
 }
 
-export namespace TemperatureHistory {
-  export type AsObject = {
-    samplesList: Array<TemperatureSample.AsObject>,
-  }
-}
-
-export class TemperatureStreamRequest extends jspb.Message {
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): TemperatureStreamRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: TemperatureStreamRequest): TemperatureStreamRequest.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: TemperatureStreamRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): TemperatureStreamRequest;
-  static deserializeBinaryFromReader(message: TemperatureStreamRequest, reader: jspb.BinaryReader): TemperatureStreamRequest;
-}
-
-export namespace TemperatureStreamRequest {
+export namespace WatchBoilerTemperatureRequest {
   export type AsObject = {
   }
 }
 
-export class TemperatureStreamResponse extends jspb.Message {
-  hasHistory(): boolean;
-  clearHistory(): void;
-  getHistory(): TemperatureHistory | undefined;
-  setHistory(value?: TemperatureHistory): void;
-
+export class WatchBoilerTemperatureResponse extends jspb.Message {
   hasSample(): boolean;
   clearSample(): void;
   getSample(): TemperatureSample | undefined;
   setSample(value?: TemperatureSample): void;
 
-  getDataCase(): TemperatureStreamResponse.DataCase;
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): TemperatureStreamResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: TemperatureStreamResponse): TemperatureStreamResponse.AsObject;
+  toObject(includeInstance?: boolean): WatchBoilerTemperatureResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: WatchBoilerTemperatureResponse): WatchBoilerTemperatureResponse.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: TemperatureStreamResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): TemperatureStreamResponse;
-  static deserializeBinaryFromReader(message: TemperatureStreamResponse, reader: jspb.BinaryReader): TemperatureStreamResponse;
+  static serializeBinaryToWriter(message: WatchBoilerTemperatureResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): WatchBoilerTemperatureResponse;
+  static deserializeBinaryFromReader(message: WatchBoilerTemperatureResponse, reader: jspb.BinaryReader): WatchBoilerTemperatureResponse;
 }
 
-export namespace TemperatureStreamResponse {
+export namespace WatchBoilerTemperatureResponse {
   export type AsObject = {
-    history?: TemperatureHistory.AsObject,
     sample?: TemperatureSample.AsObject,
-  }
-
-  export enum DataCase {
-    DATA_NOT_SET = 0,
-    HISTORY = 1,
-    SAMPLE = 2,
   }
 }
 

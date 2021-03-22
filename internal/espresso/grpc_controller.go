@@ -50,33 +50,25 @@ func newGrpcController(
 	}, nil
 }
 
-func (c *grpcController) BoilerTemperature(req *espressopb.TemperatureStreamRequest, stream espressopb.Espresso_BoilerTemperatureServer) error {
+func (c *grpcController) WatchBoilerTemperature(
+	req *espressopb.WatchBoilerTemperatureRequest,
+	stream espressopb.Espresso_WatchBoilerTemperatureServer,
+) error {
 	grpcStreams.Inc()
 	defer grpcStreams.Dec()
 
 	// the first message sent on the stream is the temperature history
-	var pbSamples []*espressopb.TemperatureSample
 	samples := c.boilerMonitor.GetHistory()
 	for _, s := range samples {
 		pbTime, err := ptypes.TimestampProto(s.ObservedAt)
 		if err != nil {
 			return err
 		}
-		pbSample := espressopb.TemperatureSample{
-			Value:      s.Value,
-			ObservedAt: pbTime,
-		}
-		pbSamples = append(pbSamples, &pbSample)
-	}
+		pbSample := espressopb.TemperatureSample{Value: s.Value, ObservedAt: pbTime}
 
-	if err := stream.Send(&espressopb.TemperatureStreamResponse{
-		Data: &espressopb.TemperatureStreamResponse_History{
-			History: &espressopb.TemperatureHistory{
-				Samples: pbSamples,
-			},
-		},
-	}); err != nil {
-		return err
+		if err := stream.Send(&espressopb.WatchBoilerTemperatureResponse{Sample: &pbSample}); err != nil {
+			return err
+		}
 	}
 
 	// send a current sample every second
@@ -87,13 +79,8 @@ func (c *grpcController) BoilerTemperature(req *espressopb.TemperatureStreamRequ
 		if err != nil {
 			return err
 		}
-		if err := stream.Send(&espressopb.TemperatureStreamResponse{
-			Data: &espressopb.TemperatureStreamResponse_Sample{
-				Sample: &espressopb.TemperatureSample{
-					Value:      sample.Value,
-					ObservedAt: pbTime,
-				},
-			},
+		if err := stream.Send(&espressopb.WatchBoilerTemperatureResponse{
+			Sample: &espressopb.TemperatureSample{Value: sample.Value, ObservedAt: pbTime},
 		}); err != nil {
 			return err
 		}

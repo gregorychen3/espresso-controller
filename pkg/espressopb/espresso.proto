@@ -5,7 +5,7 @@ package espressopb;
 import "google/protobuf/timestamp.proto";
 
 service Espresso {
-  rpc BoilerTemperature(TemperatureStreamRequest) returns (stream TemperatureStreamResponse);
+  rpc WatchBoilerTemperature(WatchBoilerTemperatureRequest) returns (stream WatchBoilerTemperatureResponse);
   rpc GetConfiguration (GetConfigurationRequest) returns (Configuration);
   rpc SetConfiguration (Configuration) returns (Configuration);
 }
@@ -15,16 +15,10 @@ message TemperatureSample {
     google.protobuf.Timestamp observed_at = 2;
 }
 
-message TemperatureHistory {
-    repeated TemperatureSample samples = 1;
-}
+message WatchBoilerTemperatureRequest {}
 
-message TemperatureStreamRequest {}
-message TemperatureStreamResponse {
-    oneof data {
-        TemperatureHistory history = 1;
-        TemperatureSample sample = 2;
-    }
+message WatchBoilerTemperatureResponse {
+    TemperatureSample sample = 1;
 }
 
 message GetConfigurationRequest {}

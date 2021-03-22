@@ -11,13 +11,13 @@ var Espresso = (function () {
   return Espresso;
 }());
 
-Espresso.BoilerTemperature = {
-  methodName: "BoilerTemperature",
+Espresso.WatchBoilerTemperature = {
+  methodName: "WatchBoilerTemperature",
   service: Espresso,
   requestStream: false,
   responseStream: true,
-  requestType: pkg_espressopb_espresso_pb.TemperatureStreamRequest,
-  responseType: pkg_espressopb_espresso_pb.TemperatureStreamResponse
+  requestType: pkg_espressopb_espresso_pb.WatchBoilerTemperatureRequest,
+  responseType: pkg_espressopb_espresso_pb.WatchBoilerTemperatureResponse
 };
 
 Espresso.GetConfiguration = {
@@ -45,13 +45,13 @@ function EspressoClient(serviceHost, options) {
   this.options = options || {};
 }
 
-EspressoClient.prototype.boilerTemperature = function boilerTemperature(requestMessage, metadata) {
+EspressoClient.prototype.watchBoilerTemperature = function watchBoilerTemperature(requestMessage, metadata) {
   var listeners = {
     data: [],
     end: [],
     status: []
   };
-  var client = grpc.invoke(Espresso.BoilerTemperature, {
+  var client = grpc.invoke(Espresso.WatchBoilerTemperature, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

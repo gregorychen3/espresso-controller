@@ -4,13 +4,13 @@
 import * as pkg_espressopb_espresso_pb from "../../pkg/espressopb/espresso_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
-type EspressoBoilerTemperature = {
+type EspressoWatchBoilerTemperature = {
   readonly methodName: string;
   readonly service: typeof Espresso;
   readonly requestStream: false;
   readonly responseStream: true;
-  readonly requestType: typeof pkg_espressopb_espresso_pb.TemperatureStreamRequest;
-  readonly responseType: typeof pkg_espressopb_espresso_pb.TemperatureStreamResponse;
+  readonly requestType: typeof pkg_espressopb_espresso_pb.WatchBoilerTemperatureRequest;
+  readonly responseType: typeof pkg_espressopb_espresso_pb.WatchBoilerTemperatureResponse;
 };
 
 type EspressoGetConfiguration = {
@@ -33,7 +33,7 @@ type EspressoSetConfiguration = {
 
 export class Espresso {
   static readonly serviceName: string;
-  static readonly BoilerTemperature: EspressoBoilerTemperature;
+  static readonly WatchBoilerTemperature: EspressoWatchBoilerTemperature;
   static readonly GetConfiguration: EspressoGetConfiguration;
   static readonly SetConfiguration: EspressoSetConfiguration;
 }
@@ -70,7 +70,7 @@ export class EspressoClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
-  boilerTemperature(requestMessage: pkg_espressopb_espresso_pb.TemperatureStreamRequest, metadata?: grpc.Metadata): ResponseStream<pkg_espressopb_espresso_pb.TemperatureStreamResponse>;
+  watchBoilerTemperature(requestMessage: pkg_espressopb_espresso_pb.WatchBoilerTemperatureRequest, metadata?: grpc.Metadata): ResponseStream<pkg_espressopb_espresso_pb.WatchBoilerTemperatureResponse>;
   getConfiguration(
     requestMessage: pkg_espressopb_espresso_pb.GetConfigurationRequest,
     metadata: grpc.Metadata,
