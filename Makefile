@@ -8,7 +8,6 @@ build:
 
 build.ui:
 	(cd ui && npm i && npm run build)
-	(cd internal/espresso && GO111MODULE=auto packr2)
 
 build.pi:
 	env GOOS=linux GOARCH=arm GOARM=7 go build -o build/espresso ./cmd/espresso
