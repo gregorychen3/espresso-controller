@@ -2,12 +2,14 @@ package espresso
 
 import (
 	"context"
+	"io/fs"
 	"net"
 	"net/http"
 	"time"
 
 	"github.com/gregorychen3/espresso-controller/internal/log"
 	"github.com/gregorychen3/espresso-controller/internal/metrics"
+	"github.com/gregorychen3/espresso-controller/ui"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -17,7 +19,10 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/cors"
-	"github.com/gobuffalo/packr/v2"
+)
+
+const (
+	buildRoot = "build"
 )
 
 // WebMiddleware to handle gRPC calls from browser. It is also able to isolate
@@ -88,13 +93,17 @@ func (s *GRPCWebServer) Listen(listener net.Listener, enableDevLogger bool) erro
 		promhttp.Handler().ServeHTTP(w, req)
 	}))
 
-	box := packr.New("ui", "../../ui/build")
-	indexBytes, err := box.Find("index.html")
+	uiBuild, err := fs.Sub(ui.Build, buildRoot)
+	if err != nil {
+		return errors.Wrap(err, "opening ui build directory")
+	}
+
+	indexBytes, err := fs.ReadFile(uiBuild, "index.html")
 	if err != nil {
 		return errors.Wrap(err, "loading ui html")
 	}
 
-	faviconBytes, err := box.Find("favicon.ico")
+	faviconBytes, err := fs.ReadFile(uiBuild, "favicon.ico")
 	if err != nil {
 		return errors.Wrap(err, "loading favicon.ico")
 	}
@@ -106,7 +115,7 @@ func (s *GRPCWebServer) Listen(listener net.Listener, enableDevLogger bool) erro
 	router.Group(func(r chi.Router) {
 		r.Use(NewGrpcWebMiddleware(grpcweb.WrapServer(s.grpcServer)).Handler)
 
-		r.Get("/static/*", http.FileServer(box).ServeHTTP) // serve static assets from the packr box
+		r.Get("/static/*", http.FileServer(http.FS(uiBuild)).ServeHTTP)
 
 		// respond with index.html for all other routes (react router routes)
 		r.Get("/*", func(writer http.ResponseWriter, request *http.Request) {
