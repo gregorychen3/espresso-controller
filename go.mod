@@ -3,10 +3,11 @@ module github.com/gregorychen3/espresso-controller
 go 1.16
 
 require (
+	github.com/StackExchange/wmi v0.0.0-20210224194228-fe8f1750fd46 // indirect
 	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
 	github.com/go-chi/chi v1.5.4
 	github.com/go-chi/cors v1.1.1
-	github.com/gobuffalo/packr/v2 v2.8.1
+	github.com/go-ole/go-ole v1.2.5 // indirect
 	github.com/golang/protobuf v1.5.1
 	github.com/google/uuid v1.2.0
 	github.com/grpc-ecosystem/go-grpc-middleware v1.2.2
@@ -20,9 +21,12 @@ require (
 	github.com/spf13/viper v1.7.1
 	github.com/stianeikeland/go-rpio/v4 v4.4.0
 	github.com/tklauser/go-sysconf v0.3.5 // indirect
+	github.com/yryz/ds18b20 v0.0.0-20200527154408-4a8f84bb82d4
 	go.uber.org/zap v1.16.0
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
+	golang.org/x/tools v0.0.0-20200308013534-11ec41452d41 // indirect
 	google.golang.org/grpc v1.36.0
+	google.golang.org/grpc/examples v0.0.0-20210323221903-faf4e1c777f0 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 	nhooyr.io/websocket v1.8.6 // indirect
 )
