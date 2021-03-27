@@ -98,30 +98,10 @@ func (s *GRPCWebServer) Listen(listener net.Listener, enableDevLogger bool) erro
 		return errors.Wrap(err, "opening ui build directory")
 	}
 
-	indexBytes, err := fs.ReadFile(uiBuild, "index.html")
-	if err != nil {
-		return errors.Wrap(err, "loading ui html")
-	}
-
-	faviconBytes, err := fs.ReadFile(uiBuild, "favicon.ico")
-	if err != nil {
-		return errors.Wrap(err, "loading favicon.ico")
-	}
-	router.Get("/favicon.ico", func(writer http.ResponseWriter, request *http.Request) {
-		writer.WriteHeader(200)
-		writer.Write(faviconBytes)
-	})
-
 	router.Group(func(r chi.Router) {
 		r.Use(NewGrpcWebMiddleware(grpcweb.WrapServer(s.grpcServer)).Handler)
 
-		r.Get("/static/*", http.FileServer(http.FS(uiBuild)).ServeHTTP)
-
-		// respond with index.html for all other routes (react router routes)
-		r.Get("/*", func(writer http.ResponseWriter, request *http.Request) {
-			writer.WriteHeader(200)
-			writer.Write(indexBytes)
-		})
+		r.Get("/*", http.FileServer(http.FS(uiBuild)).ServeHTTP)
 
 		// matches grpc requests to trigger grpc-web middleware
 		r.Post("/*", func(http.ResponseWriter, *http.Request) {})
