@@ -47,6 +47,7 @@ Rewire it like this (default gpio pin numbers shown):
 ![modified](images/circuit_diagram_modified.png)
 
 #### Note on Thermocouple Placement
+
 The thermocouple should be attached securely to the outer wall of the boiler. On the Rancilio Silvia, a convenient way to accomplish this is to loosen the screw holding down the factory thermostat to the boiler. Then, the thermocouple can be slipped into the gap between the boiler and thermostat.
 
 ### Raspi Setup
@@ -72,6 +73,20 @@ The thermocouple should be attached securely to the outer wall of the boiler. On
    ```console
    pi@raspberrypi:~ $ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.2.3/espresso
    pi@raspberrypi:~ $ chmod +x espresso
+   pi@raspberrypi:~ $ ./espresso --help
+   Control and monitor an espresso machine
+
+   Usage:
+     espresso [flags]
+
+   Flags:
+         --boiler-therm-clk-pin int    The GPIO pin connected to the boiler thermometer's max31855 clock (default 4)
+         --boiler-therm-cs-pin int     The GPIO pin connected to the boiler thermometer's max31855 chip select, aka chip enable (default 3)
+         --boiler-therm-miso-pin int   The GPIO pin connected to the boiler thermometer's max31855 data output (default 2)
+     -h, --help                        help for espresso
+     -p, --port string                 Port on which the espresso server should listen (default "8080")
+     -r, --relay-pin int               The GPIO connected to the relay (default 21)
+     -v, --verbose                     verbose output
    pi@raspberrypi:~ $ ./espresso -v
 
         ╓▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
