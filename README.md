@@ -71,7 +71,7 @@ The thermocouple should be attached securely to the outer wall of the boiler. On
 1. Download the application and start it.
 
    ```console
-   pi@raspberrypi:~ $ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.2.3/espresso
+   pi@raspberrypi:~ $ curl -L -o espresso https://github.com/gregorychen3/espresso-controller/releases/download/v0.2.5/espresso
    pi@raspberrypi:~ $ chmod +x espresso
    pi@raspberrypi:~ $ ./espresso --help
    Control and monitor an espresso machine
