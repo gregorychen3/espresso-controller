@@ -5,6 +5,7 @@ After=multi-user.target
 [Service]
 #Environment="SCRIPT_ARGS=--boiler-therm-clk-pin 23 --boiler-therm-cs-pin 27 --boiler-therm-miso-pin 22 --verbose"
 #Environment ="SCRIPT_ARGS=%I"
+User=pi
 ExecStart=/bin/bash --login -c "/usr/bin/espresso --boiler-therm-clk-pin 23 --boiler-therm-cs-pin 27 --boiler-therm-miso-pin 22 --verbose"
 [Install]
 WantedBy=multi-user.target
