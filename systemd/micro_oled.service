@@ -3,6 +3,8 @@ Description=Sparkfun micro oled service
 After=multi-user.target espresso.service
 
 [Service]
+Restart=on-failure
+RestartSec=5s
 User=pi
 ExecStart=/usr/bin/python3 /home/pi/espresso-controller/pkg/espressopb/grpc_client_micro_oled.py
 
