@@ -1,0 +1,12 @@
+[Unit]
+Description=Espresso PID service
+After=multi-user.target
+
+[Service]
+Restart=on-failure
+RestartSec=5s
+User=pi
+ExecStart=/bin/bash --login -c "/usr/bin/espresso --boiler-therm-clk-pin 23 --boiler-therm-cs-pin 27 --boiler-therm-miso-pin 22 --verbose"
+[Install]
+WantedBy=multi-user.target
+
